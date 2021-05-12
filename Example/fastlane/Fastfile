@@ -1,0 +1,14 @@
+require 'spaceship'
+
+default_platform(:ios)
+
+desc "Sets the header template of the workspace. New swift files will have the header as default."
+lane :setup_xcode_header do |options|
+  userdata = "#{workspace}/xcuserdata/"
+  FileUtils.mkdir userdata unless File.directory? userdata
+  userdata_d = "#{workspace}/xcshareddata/"
+  FileUtils.mkdir userdata_d unless File.directory? userdata_d
+
+  xcode_plist = "#{__dir__}/IDETemplateMacros.plist"
+  FileUtils.cp xcode_plist, userdata_d
+end
