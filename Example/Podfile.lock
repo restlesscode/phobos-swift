@@ -38,17 +38,20 @@ PODS:
     - GoogleUtilities (~> 7.0)
   - PromisesObjC (1.2.12)
   - SwiftFormat/CLI (0.48.0)
+  - SwiftLint (0.43.1)
 
 DEPENDENCIES:
   - PhobosSwiftCore (from `../`)
   - PhobosSwiftCore/Tests (from `../`)
   - SwiftFormat/CLI
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
     - GoogleUtilities
     - PromisesObjC
     - SwiftFormat
+    - SwiftLint
 
 EXTERNAL SOURCES:
   PhobosSwiftCore:
@@ -59,7 +62,8 @@ SPEC CHECKSUMS:
   PhobosSwiftCore: fbdcc8ebb48eb6d833f25ceb979f9a53ddfefb25
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 12d3ea64ec37f09843993c16f835d8392b6b5eb9
+PODFILE CHECKSUM: 7392139016d15a7d1f0b0ab2163daa68576f9648
 
 COCOAPODS: 1.10.1
