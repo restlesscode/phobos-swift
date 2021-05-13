@@ -31,25 +31,27 @@ import Foundation
 public class PBSCore: NSObject {
   private static let infoPath = Constants.kPhobosServiceInfoPlist
 
-  ///
+  /// The singleton `PBSCore` instance.
   public static var shared = PBSCore()
 
+  /// Whether current running in XCTest
   public static var isRunningTest: Bool {
     NSClassFromString("XCTest") != nil
   }
 
-  /// 上次安装时 InternalBuildVersion
+  /// The `InternalBuildVersion` of previous installation
   public private(set) var previousInternalBuildVersion: FBSVersion
 
-  /// 当前 InternalBuildVersion
+  /// The  `InternalBuildVersion` of latest installation
   public var currentInternalBuildVersion: FBSVersion {
     // 在获取当前安装时，InternalBuildVersion
-    FBSVersion.makeVersion(from: info.internalBuildVersion)
+    FBSVersion.makeVersion(from: serviceInfo.internalBuildVersion)
   }
 
   private let appDelegateSwizzler = PhobosSwiftCoreAppDelegateSwizzler()
 
-  public var info: PhobosServiceInfo!
+  /// Phobos-Service-Info Model
+  public var serviceInfo: PhobosServiceInfo!
 
   override private init() {
     previousInternalBuildVersion = FBSVersion.makeVersion(from: UserDefaults.standard.string(forKey: Constants.kInternalBuildVersion))
@@ -82,10 +84,10 @@ public class PBSCore: NSObject {
       fatalError("Data in `\(Self.infoPath)` loaded in error")
     }
 
-    guard let info = data.pbs_model(modelType: PhobosServiceInfo.self, decoderType: .propertyList) else {
+    guard let serviceInfo = data.pbs_model(modelType: PhobosServiceInfo.self, decoderType: .propertyList) else {
       fatalError("Data in `\(Self.infoPath)` loaded in error")
     }
 
-    self.info = info
+    self.serviceInfo = serviceInfo
   }
 }

@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftCoreAppDelegateSwizzler.swift
+//  Test.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,30 +24,34 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+@testable import PhobosSwiftCore
+import Foundation
+import XCTest
 
-class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
-  weak var defaultCore: PBSCore!
-  var interceptorID: GULAppDelegateInterceptorID?
+/// Test the enhanced features of Bundle class is implemented in this extension
+class PBSCoreTest: XCTestCase {
+  let core = PBSCore.shared
 
-  func load(withDefaultCore defaultCore: PBSCore) {
-    self.defaultCore = defaultCore
-    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+  override func setUp() {
+    super.setUp()
   }
 
-  func unload() {
-    if let interceptorID = self.interceptorID {
-      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
+  override func tearDown() {
+    super.tearDown()
+  }
+
+  func testInternalVersionCheck() {
+    let versionCheckExpectation = expectation(description: "version_check")
+
+    core.checkInternalVersion { isUpgraded, previousVersion, currentVersion in
+      XCTAssertTrue(isUpgraded)
+      XCTAssertTrue(previousVersion == FBSVersion(major: 0, minor: 0, patch: 0))
+      XCTAssertTrue(currentVersion == FBSVersion(major: 0, minor: 1, patch: 0))
+      versionCheckExpectation.fulfill()
     }
-  }
-}
 
-// MARK: - UIApplicationDelegate Method
-
-extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
-  func applicationDidEnterBackground(_: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+    waitForExpectations(timeout: 1.0) { error in
+      XCTAssertNil(error)
+    }
   }
 }

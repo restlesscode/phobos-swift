@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftCoreAppDelegateSwizzler.swift
-//  PhobosSwiftCore
+//  Bundle+Test.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,30 +24,24 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+@testable import PhobosSwiftCore
+import Foundation
+import XCTest
 
-class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
-  weak var defaultCore: PBSCore!
-  var interceptorID: GULAppDelegateInterceptorID?
-
-  func load(withDefaultCore defaultCore: PBSCore) {
-    self.defaultCore = defaultCore
-    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+/// Test the enhanced features of Bundle class is implemented in this extension
+class BundleTest: XCTestCase {
+  override func setUp() {
+    super.setUp()
   }
 
-  func unload() {
-    if let interceptorID = self.interceptorID {
-      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
-    }
+  override func tearDown() {
+    super.tearDown()
   }
-}
 
-// MARK: - UIApplicationDelegate Method
+  func testBundle() {
+    let bundle = Bundle.pbs_bundle(with: PhobosSwiftCore.self)
 
-extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
-  func applicationDidEnterBackground(_: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+    XCTAssertNotNil(bundle.bundlePath)
+    XCTAssertNotNil(bundle.resourcePath)
   }
 }
