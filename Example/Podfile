@@ -33,7 +33,7 @@ post_install do |installer|
     
     if not exist_run_script(target, 'Run SwiftFormat Script')
       puts 'Add Run SwiftFormat Script ' % [target.name]
-      add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$SRCROOT"')
+      add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" --indent 2 "$SRCROOT"')
     end
     
     # 调整配置
