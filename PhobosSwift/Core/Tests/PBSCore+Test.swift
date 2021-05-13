@@ -28,7 +28,6 @@
 import Foundation
 import XCTest
 
-/// Test the enhanced features of Bundle class is implemented in this extension
 class PBSCoreTest: XCTestCase {
   let core = PBSCore.shared
 

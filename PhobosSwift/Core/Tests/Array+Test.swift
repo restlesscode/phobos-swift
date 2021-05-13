@@ -1,6 +1,6 @@
 //
 //
-//  Bundle+Test.swift
+//  Array+Test.swift
 //  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -28,7 +28,7 @@
 import Foundation
 import XCTest
 
-class BundleTest: XCTestCase {
+class ArrayTest: XCTestCase {
   override func setUp() {
     super.setUp()
   }
@@ -37,10 +37,10 @@ class BundleTest: XCTestCase {
     super.tearDown()
   }
 
-  func testBundle() {
-    let bundle = Bundle.pbs_bundle(with: PhobosSwiftCore.self)
+  func testArray() {
+    let array: [Any] = ["Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1]
 
-    XCTAssertNotNil(bundle.bundlePath)
-    XCTAssertNotNil(bundle.resourcePath)
+    let chunkedArray = array.pbs_chunked(into: 3)
+    XCTAssertEqual(chunkedArray.count, 4)
   }
 }
