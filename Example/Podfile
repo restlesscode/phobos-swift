@@ -5,7 +5,10 @@ target 'PhobosSwiftExample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Core
-  pod 'PhobosSwiftCore', :path => '../', :inhibit_warnings => false
+  # SwiftFormat
+  pod 'SwiftFormat/CLI', :configurations => ['Debug']
 
+  # Core
+  pod 'PhobosSwiftCore', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  
 end

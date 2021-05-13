@@ -69,20 +69,26 @@ public class PBSCore: NSObject {
         let isUpgraded = currentInternalBuildVersion > previousInternalBuildVersion
         internalBuildVersion(isUpgraded, previousInternalBuildVersion, currentInternalBuildVersion)
   }
-    
+  
   private func loadInfoPlist() {
-    guard let infoPlistPath = Bundle.main.url(forResource: Self.infoPath, withExtension: nil) else {
-      fatalError("File \(Self.infoPath) in main bundle not exist, please add this file to Supporting Files")
+    var bundle = Bundle.main
+    if PBSCore.isRunningTest {
+      bundle = PhobosSwiftCore.bundle
+    }
+    
+    guard let infoPlistPath = bundle.url(forResource: Self.infoPath, withExtension: nil) else {
+      fatalError("File `\(Self.infoPath)` in main bundle not exist, please add this file to Supporting Files")
     }
         
     guard let data = try? Data(contentsOf: infoPlistPath) else {
-      fatalError("Data in \(Self.infoPath) loaded in error")
+      fatalError("Data in `\(Self.infoPath)` loaded in error")
     }
         
     guard let info = data.pbs_model(modelType: PhobosServiceInfo.self, decoderType: .propertyList) else {
-      fatalError("Data in \(Self.infoPath) loaded in error")
+      fatalError("Data in `\(Self.infoPath)` loaded in error")
     }
         
     self.info = info
   }
+    
 }

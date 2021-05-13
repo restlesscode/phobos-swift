@@ -33,7 +33,6 @@ private let kBundleURLSchemes = "CFBundleURLSchemes"
 private let kBundleTypeRole = "CFBundleTypeRole"
 private let kTestAppScheme = "TestAppScheme"
 
-
 ///
 public enum BundleTypeRole: String {
     case editor = "Editor"
@@ -72,7 +71,7 @@ public extension Bundle {
         guard let urlTypes = main.infoDictionary?[kBundleURLTypes] as? [[String: Any]] else {
             return []
         }
-        
+
         var result: [PBSBundleURLScheme] = []
         for urlTypeDictionary in urlTypes {
             guard let urlSchemeNames = urlTypeDictionary[kBundleURLSchemes] as? [String] else { continue }

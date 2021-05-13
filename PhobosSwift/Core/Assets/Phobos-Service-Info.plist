@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Version</key>
+	<string>0.1.0</string>
+	<key>Push</key>
+	<dict>
+		<key>Aliyun</key>
+		<dict>
+			<key>AppKey</key>
+			<string>&lt;Your Aliyun AppKey&gt;</string>
+			<key>AppSecret</key>
+			<string>&lt;Your Aliyun AppSecret&gt;</string>
+		</dict>
+	</dict>
+	<key>Log</key>
+	<dict>
+		<key>MaxFileSize</key>
+		<real>1048576</real>
+		<key>MaxTimeInterval</key>
+		<integer>86400</integer>
+		<key>MaxLogFiles</key>
+		<integer>5</integer>
+		<key>iCloudContainerIdentifier</key>
+		<string>iCloud.codes.restless.phobosswift</string>
+	</dict>
+	<key>InternalBuildVersion</key>
+	<string>0.1.0</string>
+</dict>
+</plist>

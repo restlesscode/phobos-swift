@@ -32,4 +32,5 @@ struct Constants {
 }
 
 public class PhobosSwiftCore: NSObject {
+  static let bundle = Bundle.pbs_bundle(with: PhobosSwiftCore.self)
 }
