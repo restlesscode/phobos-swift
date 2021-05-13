@@ -24,16 +24,15 @@
 //  THE SOFTWARE.
 //
 
-
 import UIKit
 
-public extension Array {
-    /// Divides an array into equal parts according to the `size`
-    ///
-    /// - Parameter size: the size for each part
-    func pbs_chunked(into size: Int) -> [[Element]] {
-        return stride(from: 0, to: count, by: size).map {
-            Array(self[$0 ..< Swift.min($0 + size, count)])
-        }
+extension Array {
+  /// Divides an array into equal parts according to the `size`
+  ///
+  /// - Parameter size: the size for each part
+  public func pbs_chunked(into size: Int) -> [[Element]] {
+    stride(from: 0, to: count, by: size).map {
+      Array(self[$0..<Swift.min($0 + size, count)])
     }
+  }
 }

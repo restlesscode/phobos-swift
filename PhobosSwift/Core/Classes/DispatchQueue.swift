@@ -24,161 +24,150 @@
 //  THE SOFTWARE.
 //
 
-
 import UIKit
 
 ///
 extension DispatchQueue {
-    private static var _onceTracker = [String]()
-    
-    /// 封装了dispatch_once
-    public class func pbs_once(file: String = #file, function: String = #function, line: Int = #line, block:() -> Void) {
-        let token = file + ":" + function + ":" + String(line)
-        DispatchQueue.pbs_once(token: token, block: block)
+  private static var _onceTracker = [String]()
+
+  /// 封装了dispatch_once
+  public class func pbs_once(file: String = #file, function: String = #function, line: Int = #line, block: () -> Void) {
+    let token = file + ":" + function + ":" + String(line)
+    DispatchQueue.pbs_once(token: token, block: block)
+  }
+
+  /// Executes a block of code, associated with a unique token, only once.  The code is thread safe and will
+  /// only execute the code once even in the presence of multithreaded calls.
+  ///
+  /// - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
+  /// - parameter block: Block to execute once
+  public class func pbs_once(token: String, block: () -> Void) {
+    objc_sync_enter(self)
+    defer { objc_sync_exit(self) }
+
+    if _onceTracker.contains(token) {
+      return
     }
-    
-    /// Executes a block of code, associated with a unique token, only once.  The code is thread safe and will
-    /// only execute the code once even in the presence of multithreaded calls.
-    ///
-    /// - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
-    /// - parameter block: Block to execute once
-    public class func pbs_once(token: String, block:() -> Void) {
-        objc_sync_enter(self)
-        defer { objc_sync_exit(self) }
-        
-        
-        if _onceTracker.contains(token) {
-            return
-        }
-        
-        _onceTracker.append(token)
-        block()
-    }
+
+    _onceTracker.append(token)
+    block()
+  }
 }
 
-
-
 public struct Mutex<Base> {
-    
-    /// Base object to extend.
-    public var base: Base
-    /// Creates extensions with base object.
-    ///
-    /// - parameter base: Base object.
-    public init(_ base: Base) {
-        self.base = base
-    }
-    
-    public func nonatomic(_ token: String) -> Self.MutexDispatch {
-        return Self.MutexDispatch(token: token, atomic: false)
-    }
-    
-    public func atomic(_ token: String) -> Self.MutexDispatch {
-        return Self.MutexDispatch(token: token, atomic: false)
-    }
-    
-    public struct MutexDispatch {
-        private let token: String
-        private let atomic: Bool
-        
-        public init(token:String, atomic:Bool) {
-            self.token = token
-            self.atomic = atomic
-        }
-        
-        public var concurrent: Self.MutexQueque {
-            let queue = DispatchQueue(label: token, attributes: .concurrent)
-            return Self.MutexQueque(atomic: self.atomic, queue: queue)
-        }
-        
-        public var serial: Self.MutexQueque {
-            let queue = DispatchQueue(label: token)
-            return Self.MutexQueque(atomic: self.atomic, queue: queue)
-        }
-        
-        public struct MutexQueque {
-            private let queue: DispatchQueue
-            private let atomic: Bool
-            
-            init(atomic: Bool, queue: DispatchQueue) {
-                self.atomic = atomic
-                self.queue = queue
-            }
-            
-            public func async(handler: @escaping () -> Void) {
-                if self.atomic {
-                    queue.async(flags: .barrier, execute: handler)
-                } else {
-                    queue.async(execute: handler)
-                }
-            }
-            
-            public func sync(handler: @escaping () -> Void) {
-                if self.atomic {
-                    queue.sync(flags: .barrier, execute: handler)
-                } else {
-                    queue.sync(execute: handler)
-                }
-            }
-        }
+  /// Base object to extend.
+  public var base: Base
+  /// Creates extensions with base object.
+  ///
+  /// - parameter base: Base object.
+  public init(_ base: Base) {
+    self.base = base
+  }
+
+  public func nonatomic(_ token: String) -> Self.MutexDispatch {
+    Self.MutexDispatch(token: token, atomic: false)
+  }
+
+  public func atomic(_ token: String) -> Self.MutexDispatch {
+    Self.MutexDispatch(token: token, atomic: false)
+  }
+
+  public struct MutexDispatch {
+    private let token: String
+    private let atomic: Bool
+
+    public init(token: String, atomic: Bool) {
+      self.token = token
+      self.atomic = atomic
     }
 
+    public var concurrent: Self.MutexQueque {
+      let queue = DispatchQueue(label: token, attributes: .concurrent)
+      return Self.MutexQueque(atomic: atomic, queue: queue)
+    }
+
+    public var serial: Self.MutexQueque {
+      let queue = DispatchQueue(label: token)
+      return Self.MutexQueque(atomic: atomic, queue: queue)
+    }
+
+    public struct MutexQueque {
+      private let queue: DispatchQueue
+      private let atomic: Bool
+
+      init(atomic: Bool, queue: DispatchQueue) {
+        self.atomic = atomic
+        self.queue = queue
+      }
+
+      public func async(handler: @escaping () -> Void) {
+        if atomic {
+          queue.async(flags: .barrier, execute: handler)
+        } else {
+          queue.async(execute: handler)
+        }
+      }
+
+      public func sync(handler: @escaping () -> Void) {
+        if atomic {
+          queue.sync(flags: .barrier, execute: handler)
+        } else {
+          queue.sync(execute: handler)
+        }
+      }
+    }
+  }
 }
 
 /// A type that has reactive extensions.
 public protocol MutexCompatible {
-    
-    /// Extended type
-    associatedtype MutexBase
-    
-    /// Mutex extensions.
-    static var mux: Mutex<Self.MutexBase>.Type { get set }
-    
-    /// Reactive extensions.
-    var mux: Mutex<Self.MutexBase> { get set }
+  /// Extended type
+  associatedtype MutexBase
+
+  /// Mutex extensions.
+  static var mux: Mutex<Self.MutexBase>.Type { get set }
+
+  /// Reactive extensions.
+  var mux: Mutex<Self.MutexBase> { get set }
 }
 
 extension MutexCompatible {
-    
-    /// Mutex extensions.
-    public static var mux: Mutex<Self>.Type {
-        get {
-            return Mutex<Self>.self
-        }
-        set { }
+  /// Mutex extensions.
+  public static var mux: Mutex<Self>.Type {
+    get {
+      Mutex<Self>.self
     }
-    
-    /// Mutex extensions.
-    public var mux: Mutex<Self> {
-        get {
-            return Mutex(self)
-        }
-        set { }
+    set {}
+  }
+
+  /// Mutex extensions.
+  public var mux: Mutex<Self> {
+    get {
+      Mutex(self)
     }
+    set {}
+  }
 }
 
-extension NSObject: MutexCompatible { }
+extension NSObject: MutexCompatible {}
 
-extension Array: MutexCompatible { }
+extension Array: MutexCompatible {}
 
-extension Dictionary: MutexCompatible { }
+extension Dictionary: MutexCompatible {}
 
-extension String: MutexCompatible { }
+extension String: MutexCompatible {}
 
-extension Double: MutexCompatible { }
+extension Double: MutexCompatible {}
 
-extension Int: MutexCompatible { }
+extension Int: MutexCompatible {}
 
 /// Example
 /*
  *
  let str = "hello"
- 
+
  let token = UUID().uuidString
  str.mux.nonatomic(token).serial.async {
-     
+
  }
  */
-
-
-

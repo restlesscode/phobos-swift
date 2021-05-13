@@ -24,89 +24,86 @@
 //  THE SOFTWARE.
 //
 
-
 import UIKit
 
 /// 正则选择枚举
 public struct RegularExpressionType: OptionSet {
-    
-    public var rawValue: UInt
-    
-    public static let digit = RegularExpressionType(rawValue: 1 << 0)
-    public static let englishLetter = RegularExpressionType(rawValue: 1 << 1)
-    public static let chineseCharacter = RegularExpressionType(rawValue: 1 << 2)
-    public static let email = RegularExpressionType(rawValue: 1 << 3)
-    public static let chineseMobileNumber = RegularExpressionType(rawValue: 1 << 4)
-    public static let punctuation = RegularExpressionType(rawValue: 1 << 5)
+  public var rawValue: UInt
 
-    public init(rawValue: UInt) {
-        self.rawValue = rawValue
+  public static let digit = RegularExpressionType(rawValue: 1 << 0)
+  public static let englishLetter = RegularExpressionType(rawValue: 1 << 1)
+  public static let chineseCharacter = RegularExpressionType(rawValue: 1 << 2)
+  public static let email = RegularExpressionType(rawValue: 1 << 3)
+  public static let chineseMobileNumber = RegularExpressionType(rawValue: 1 << 4)
+  public static let punctuation = RegularExpressionType(rawValue: 1 << 5)
+
+  public init(rawValue: UInt) {
+    self.rawValue = rawValue
+  }
+
+  public var pattern: String {
+    switch self {
+    case .digit:
+      return "[0-9]+"
+    case .englishLetter:
+      return "[A-Za-z]+"
+    case .chineseCharacter:
+      return "[\\u4e00-\\u9fa5]+"
+    case .email:
+      return "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+"
+    case .chineseMobileNumber:
+      return "(1[3-9])\\d{9}"
+    case .punctuation:
+      return "[，。；：“”‘’（）「」【】·～《》,.;:\"\'\\(\\)\\[\\]\\{\\}\\|<>\\-\\+]+"
+    default:
+      return ""
     }
-    
-    public var pattern: String {
-        switch self {
-        case .digit:
-            return "[0-9]+"
-        case .englishLetter:
-            return "[A-Za-z]+"
-        case .chineseCharacter:
-            return "[\\u4e00-\\u9fa5]+"
-        case .email:
-            return "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+"
-        case .chineseMobileNumber:
-            return "(1[3-9])\\d{9}"
-        case .punctuation:
-            return "[，。；：“”‘’（）「」【】·～《》,.;:\"\'\\(\\)\\[\\]\\{\\}\\|<>\\-\\+]+"
-        default:
-            return ""
-        }
-    }
+  }
 }
 
 /// Enhanced features of String class is implemented in this extension
-public extension String {
-    
-    /// 根据options选择适配的正则判断
-    /// - Parameter regexTypes: 多选正则类型
-    /// - Parameter isEmptyAllowed: 是否允许空字符
-    func pbs_isText(ofRegexTypes regexTypes: RegularExpressionType, isEmptyAllowed:Bool = false) -> Bool {
-        // 如果不允许为空，且会空字符
-        if !isEmptyAllowed && self.isEmpty {
-            return false
-        }
-        
-        var result = self
-        
-        if regexTypes.contains(.digit) {
-            result = result.replacingOccurrences(of: RegularExpressionType.digit.pattern, with: "", options: [.regularExpression])
-        }
-        if regexTypes.contains(.englishLetter) {
-            result = result.replacingOccurrences(of: RegularExpressionType.englishLetter.pattern, with: "", options: [.regularExpression])
-        }
-        if regexTypes.contains(.chineseCharacter) {
-            result = result.replacingOccurrences(of: RegularExpressionType.chineseCharacter.pattern, with: "", options: [.regularExpression])
-        }
-        if regexTypes.contains(.email) {
-            result = result.replacingOccurrences(of: RegularExpressionType.email.pattern, with: "", options: [.regularExpression])
-        }
-        if regexTypes.contains(.chineseMobileNumber) {
-            result = result.replacingOccurrences(of: RegularExpressionType.chineseMobileNumber.pattern, with: "", options: [.regularExpression])
-        }
-        if regexTypes.contains(.punctuation) {
-            result = result.replacingOccurrences(of: RegularExpressionType.punctuation.pattern, with: "", options: [.regularExpression])
-        }
+extension String {
+  /// 根据options选择适配的正则判断
+  /// - Parameter regexTypes: 多选正则类型
+  /// - Parameter isEmptyAllowed: 是否允许空字符
+  public func pbs_isText(ofRegexTypes regexTypes: RegularExpressionType, isEmptyAllowed: Bool = false) -> Bool {
+    // 如果不允许为空，且会空字符
+    if !isEmptyAllowed, isEmpty {
+      return false
+    }
 
-        return result.isEmpty
+    var result = self
+
+    if regexTypes.contains(.digit) {
+      result = result.replacingOccurrences(of: RegularExpressionType.digit.pattern, with: "", options: [.regularExpression])
     }
-    
-    /// 是否合法的Password
-    var pbs_isValidPassword: Bool {
-        return !self.isEmpty
+    if regexTypes.contains(.englishLetter) {
+      result = result.replacingOccurrences(of: RegularExpressionType.englishLetter.pattern, with: "", options: [.regularExpression])
     }
-    
-    func match(regular: String) -> Bool {
-        return NSPredicate(format:"SELF MATCHES %@", regular).evaluate(with: self)
+    if regexTypes.contains(.chineseCharacter) {
+      result = result.replacingOccurrences(of: RegularExpressionType.chineseCharacter.pattern, with: "", options: [.regularExpression])
     }
+    if regexTypes.contains(.email) {
+      result = result.replacingOccurrences(of: RegularExpressionType.email.pattern, with: "", options: [.regularExpression])
+    }
+    if regexTypes.contains(.chineseMobileNumber) {
+      result = result.replacingOccurrences(of: RegularExpressionType.chineseMobileNumber.pattern, with: "", options: [.regularExpression])
+    }
+    if regexTypes.contains(.punctuation) {
+      result = result.replacingOccurrences(of: RegularExpressionType.punctuation.pattern, with: "", options: [.regularExpression])
+    }
+
+    return result.isEmpty
+  }
+
+  /// 是否合法的Password
+  public var pbs_isValidPassword: Bool {
+    !isEmpty
+  }
+
+  public func match(regular: String) -> Bool {
+    NSPredicate(format: "SELF MATCHES %@", regular).evaluate(with: self)
+  }
 
 //    /**
 //     根据 正则表达式 截取字符串

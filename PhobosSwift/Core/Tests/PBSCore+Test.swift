@@ -1,7 +1,7 @@
 //
 //
-//  ViewController.swift
-//  PhobosSwiftExample
+//  Test.swift
+//  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,18 +24,33 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import UIKit
+@testable import PhobosSwiftCore
+import Foundation
+import XCTest
 
-class ViewController: UIViewController {
+class PBSCoreTest: XCTestCase {
   let core = PBSCore.shared
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
+  override func setUp() {
+    super.setUp()
+  }
 
-    core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
-      print(needUpgrade, previousVersion.string, currentVersion.string)
+  override func tearDown() {
+    super.tearDown()
+  }
+
+  func testInternalVersionCheck() {
+    let versionCheckExpectation = expectation(description: "version_check")
+
+    core.checkInternalVersion { isUpgraded, previousVersion, currentVersion in
+      XCTAssertTrue(isUpgraded)
+      XCTAssertTrue(previousVersion == FBSVersion(major: 0, minor: 0, patch: 0))
+      XCTAssertTrue(currentVersion == FBSVersion(major: 0, minor: 1, patch: 0))
+      versionCheckExpectation.fulfill()
+    }
+
+    waitForExpectations(timeout: 1.0) { error in
+      XCTAssertNil(error)
     }
   }
 }

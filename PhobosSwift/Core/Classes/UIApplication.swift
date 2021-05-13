@@ -24,53 +24,50 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
 import ObjectiveC
-
+import UIKit
 
 let kSharedApplication = "sharedApplication"
 let kOpenURLSelectorName = "openURL:options:completionHandler:"
 
 /// Enhanced features of Bundle class is implemented in this extension
-public extension UIApplication {
-    
-    /// to check if current running in an app extension or not
-    static var pbs_isAppExtension: Bool {
+extension UIApplication {
+  /// to check if current running in an app extension or not
+  public static var pbs_isAppExtension: Bool {
     #if TARGET_OS_IOS || TARGET_OS_TV
-        // Documented by <a href="https://goo.gl/RRB2Up">Apple</a>
-        let appExtension = Bundle.main.bundlePath.hasSuffix(".appex")
-        return appExtension
+    // Documented by <a href="https://goo.gl/RRB2Up">Apple</a>
+    let appExtension = Bundle.main.bundlePath.hasSuffix(".appex")
+    return appExtension
     #elseif TARGET_OS_OSX
-        return false
+    return false
     #endif
-        return false
+    return false
+  }
+
+  /// 获取 shared application
+  public static var pbs_shared: UIApplication? {
+    let selector = NSSelectorFromString(kSharedApplication)
+    return UIApplication.perform(selector)?.takeUnretainedValue() as? UIApplication
+  }
+
+  /// `keyWindow` 已经被Apple deprecated掉了，这里我们自己获取`keyWindow`
+  public var pbs_keyWindow: UIWindow? {
+    UIApplication.pbs_shared?.windows.first(where: { window in
+      window.isKeyWindow
+    })
+  }
+
+  /// open
+  public func pbs_open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey: Any] = [:], completionHandler completion: ((Bool) -> Void)? = nil) {
+    let selector = NSSelectorFromString(kOpenURLSelectorName)
+    if let method = class_getInstanceMethod(UIApplication.self, selector) {
+      let imp = method_getImplementation(method)
+
+      typealias ClosureType = @convention(c) (AnyObject,
+                                              Selector,
+                                              URL, [UIApplication.OpenExternalURLOptionsKey: Any], ((Bool) -> Void)?) -> Void
+      let openFunc: ClosureType = unsafeBitCast(imp, to: ClosureType.self)
+      openFunc(self, selector, url, options, completion)
     }
-    
-    /// 获取 shared application
-    static var pbs_shared: UIApplication? {
-        let selector = NSSelectorFromString(kSharedApplication)
-        return UIApplication.perform(selector)?.takeUnretainedValue() as? UIApplication
-    }
-    
-    /// `keyWindow` 已经被Apple deprecated掉了，这里我们自己获取`keyWindow`
-    var pbs_keyWindow: UIWindow? {
-        return UIApplication.pbs_shared?.windows.filter {
-            $0.isKeyWindow
-        }.first
-    }
-    
-    /// open
-    func pbs_open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey : Any] = [:], completionHandler completion: ((Bool) -> Void)? = nil) {
-                
-        let selector = NSSelectorFromString(kOpenURLSelectorName)
-        if let method = class_getInstanceMethod(UIApplication.self, selector) {
-            let imp = method_getImplementation(method)
-            
-            typealias ClosureType = @convention(c) (AnyObject,
-                Selector,
-                URL, [UIApplication.OpenExternalURLOptionsKey : Any], ((Bool) -> Void)?) -> Void
-            let openFunc : ClosureType = unsafeBitCast(imp, to: ClosureType.self)
-            openFunc(self, selector, url, options, completion)
-        }
-    }
+  }
 }

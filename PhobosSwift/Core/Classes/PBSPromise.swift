@@ -26,113 +26,106 @@
 
 import UIKit
 
-
 /// protocol PBSPromisableType
-public protocol PBSPromisableType {
-
-}
+public protocol PBSPromisableType {}
 
 /// Extension for  Protocol PBSPromisableType
-public extension PBSPromisableType {
-
-    /// transfer a PBSPromisableType to PBSPromisable
-    func asPromisableable<Element>(executor: (_ resolve:@escaping (Element) -> Void) -> Void) -> PBSPromisable<Element> {
-        return PBSPromisable.create(executor: executor)
-    }
+extension PBSPromisableType {
+  /// transfer a PBSPromisableType to PBSPromisable
+  public func asPromisableable<Element>(executor: (_ resolve: @escaping (Element) -> Void) -> Void) -> PBSPromisable<Element> {
+    PBSPromisable.create(executor: executor)
+  }
 }
-
 
 /// Lightweighted PromiseKit
 public class PBSPromisable<Wrapper> {
-    enum State<T> {
-        case pending
-        case resolved(T)
-    }
-        
-    private var callbacks: [(Wrapper) -> Void] = []
-    
-    private var state: State<Wrapper> = .pending
-    
-    private func resolve(_ element: Wrapper) {
-        updateState(to: .resolved(element))
-    }
-    
-    private init(executor: (_ resolve:@escaping (Wrapper) -> Void) -> Void) {
-        executor(resolve)
-    }
-    
-    ///
-    public static func create(executor: (_ resolve:@escaping (Wrapper) -> Void) -> Void) -> PBSPromisable<Wrapper> {
-        return PBSPromisable.unity(executor: executor)
-    }
-    
-    private static func unity(executor: (_ resolve:@escaping (Wrapper) -> Void) -> Void) -> PBSPromisable<Wrapper> {
-        return PBSPromisable(executor: executor)
-    }
-    
-    /// then
-    ///
-    /// - parameter onResolved: the callback when promise is resolved
-    /// - returns: PBSPromisable
-    @discardableResult
-    public func then<Result>(onResolved: @escaping (Wrapper) -> PBSPromisable<Result>) -> PBSPromisable<Result> {
-        return self.flatMap(onResolved: onResolved)
-    }
-    
-    /// then
-    ///
-    /// - parameter onResolved: the callback when promise is resolved
-    /// - returns: PBSPromisable
-    @discardableResult
-    public func then<Result>(onResolved: @escaping (Wrapper) -> Result) -> PBSPromisable<Result> {
-        return self.map(onResolved: onResolved)
-    }
-    
-    /// then
-    ///
-    /// - parameter onResolved: the callback when promise is resolved
-    public func then(onResolved: @escaping (Wrapper) -> Void) {
-        return self.observe(onResolved: onResolved)
-    }
+  enum State<T> {
+    case pending
+    case resolved(T)
+  }
 
-    /// it is actually map
-    private func map<Result>(onResolved: @escaping (Wrapper) -> Result) -> PBSPromisable<Result> {
-        return flatMap { value -> PBSPromisable<Result> in
-            return PBSPromisable<Result>.unity { resolve in
-                let newValue = onResolved(value)
-                resolve(newValue)
-            }
-        }
+  private var callbacks: [(Wrapper) -> Void] = []
+
+  private var state: State<Wrapper> = .pending
+
+  private func resolve(_ element: Wrapper) {
+    updateState(to: .resolved(element))
+  }
+
+  private init(executor: (_ resolve: @escaping (Wrapper) -> Void) -> Void) {
+    executor(resolve)
+  }
+
+  ///
+  public static func create(executor: (_ resolve: @escaping (Wrapper) -> Void) -> Void) -> PBSPromisable<Wrapper> {
+    PBSPromisable.unity(executor: executor)
+  }
+
+  private static func unity(executor: (_ resolve: @escaping (Wrapper) -> Void) -> Void) -> PBSPromisable<Wrapper> {
+    PBSPromisable(executor: executor)
+  }
+
+  /// then
+  ///
+  /// - parameter onResolved: the callback when promise is resolved
+  /// - returns: PBSPromisable
+  @discardableResult
+  public func then<Result>(onResolved: @escaping (Wrapper) -> PBSPromisable<Result>) -> PBSPromisable<Result> {
+    flatMap(onResolved: onResolved)
+  }
+
+  /// then
+  ///
+  /// - parameter onResolved: the callback when promise is resolved
+  /// - returns: PBSPromisable
+  @discardableResult
+  public func then<Result>(onResolved: @escaping (Wrapper) -> Result) -> PBSPromisable<Result> {
+    map(onResolved: onResolved)
+  }
+
+  /// then
+  ///
+  /// - parameter onResolved: the callback when promise is resolved
+  public func then(onResolved: @escaping (Wrapper) -> Void) {
+    observe(onResolved: onResolved)
+  }
+
+  /// it is actually map
+  private func map<Result>(onResolved: @escaping (Wrapper) -> Result) -> PBSPromisable<Result> {
+    flatMap { value -> PBSPromisable<Result> in
+      PBSPromisable<Result>.unity { resolve in
+        let newValue = onResolved(value)
+        resolve(newValue)
+      }
     }
-    
-    /// it is actually  flatMap
-    private func flatMap<Result>(onResolved: @escaping (Wrapper) -> PBSPromisable<Result>) -> PBSPromisable<Result> {
-        
-        return PBSPromisable<Result>.unity { resolve in
-            observe { element in
-                onResolved(element).observe(onResolved: resolve)
-            }
-        }
+  }
+
+  /// it is actually  flatMap
+  private func flatMap<Result>(onResolved: @escaping (Wrapper) -> PBSPromisable<Result>) -> PBSPromisable<Result> {
+    PBSPromisable<Result>.unity { resolve in
+      observe { element in
+        onResolved(element).observe(onResolved: resolve)
+      }
     }
-    
-    /// it is actually an observe
-    private func observe(onResolved: @escaping (Wrapper) -> Void) {
-        callbacks.append(onResolved)
-        triggerCallbackIfResolved()
+  }
+
+  /// it is actually an observe
+  private func observe(onResolved: @escaping (Wrapper) -> Void) {
+    callbacks.append(onResolved)
+    triggerCallbackIfResolved()
+  }
+
+  private func triggerCallbackIfResolved() {
+    guard case let .resolved(value) = state else { return }
+    callbacks.forEach { callback in
+      callback(value)
     }
-    
-    private func triggerCallbackIfResolved() {
-        guard case let .resolved(value) = state else { return }
-        callbacks.forEach { (callback) in
-            callback(value)
-        }
-        callbacks.removeAll()
-    }
-    
-    private func updateState(to newState: State<Wrapper>) {
-        guard case .pending = state else { return }
-        self.state = newState
-        triggerCallbackIfResolved()
-    }
+    callbacks.removeAll()
+  }
+
+  private func updateState(to newState: State<Wrapper>) {
+    guard case .pending = state else { return }
+    state = newState
+    triggerCallbackIfResolved()
+  }
 }
-

@@ -1,7 +1,7 @@
 //
 //
-//  ViewController.swift
-//  PhobosSwiftExample
+//  Bundle+Test.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,18 +24,23 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import UIKit
+@testable import PhobosSwiftCore
+import Foundation
+import XCTest
 
-class ViewController: UIViewController {
-  let core = PBSCore.shared
+class BundleTest: XCTestCase {
+  override func setUp() {
+    super.setUp()
+  }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
+  override func tearDown() {
+    super.tearDown()
+  }
 
-    core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
-      print(needUpgrade, previousVersion.string, currentVersion.string)
-    }
+  func testBundle() {
+    let bundle = Bundle.pbs_bundle(with: PhobosSwiftCore.self)
+
+    XCTAssertNotNil(bundle.bundlePath)
+    XCTAssertNotNil(bundle.resourcePath)
   }
 }

@@ -27,27 +27,27 @@
 import UIKit
 
 class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
-    weak var defaultCore:PhobosSwiftCore!
-    var interceptorID:GULAppDelegateInterceptorID?
-    
-    func load(withDefaultCore defaultCore:PhobosSwiftCore) {
-        self.defaultCore = defaultCore
-        PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-        interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+  weak var defaultCore: PBSCore!
+  var interceptorID: GULAppDelegateInterceptorID?
+
+  func load(withDefaultCore defaultCore: PBSCore) {
+    self.defaultCore = defaultCore
+    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
+    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+  }
+
+  func unload() {
+    if let interceptorID = self.interceptorID {
+      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
     }
-    
-    func unload() {
-        if let interceptorID = self.interceptorID {
-            PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
-        }
-    }
+  }
 }
 
 // MARK: - UIApplicationDelegate Method
+
 extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        /// 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-        UserDefaults.standard.set(defaultCore.codebaseInfo.internalBuildVersion, forKey: kInternalBuildVersion)
-    }
+  func applicationDidEnterBackground(_: UIApplication) {
+    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
+    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+  }
 }

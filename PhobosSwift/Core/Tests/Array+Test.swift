@@ -1,7 +1,7 @@
 //
 //
-//  ViewController.swift
-//  PhobosSwiftExample
+//  Array+Test.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,18 +24,23 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import UIKit
+@testable import PhobosSwiftCore
+import Foundation
+import XCTest
 
-class ViewController: UIViewController {
-  let core = PBSCore.shared
+class ArrayTest: XCTestCase {
+  override func setUp() {
+    super.setUp()
+  }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
+  override func tearDown() {
+    super.tearDown()
+  }
 
-    core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
-      print(needUpgrade, previousVersion.string, currentVersion.string)
-    }
+  func testArray() {
+    let array: [Any] = ["Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1]
+
+    let chunkedArray = array.pbs_chunked(into: 3)
+    XCTAssertEqual(chunkedArray.count, 4)
   }
 }

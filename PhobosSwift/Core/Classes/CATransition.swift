@@ -26,13 +26,13 @@
 
 import UIKit
 
-public extension CATransition {
-    static var pbs_revealAnimation: CATransition = {
-        let transition = CATransition()
-        transition.type = .reveal
-        transition.subtype = .fromBottom
-        transition.duration = 0.5
-        
-        return transition
-    }()
+extension CATransition {
+  public static var pbs_revealAnimation: CATransition = {
+    let transition = CATransition()
+    transition.type = .reveal
+    transition.subtype = .fromBottom
+    transition.duration = 0.5
+
+    return transition
+  }()
 }
