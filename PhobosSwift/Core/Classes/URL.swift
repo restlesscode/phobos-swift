@@ -29,47 +29,43 @@ import UIKit
 /// URLQueryParameterStringConvertible
 ///
 public protocol URLQueryParameterStringConvertible {
-    
-    /// string of query parameters, ie key1=value1&key2=value2 .etc
-    var queryParameters: String {get}
+  /// string of query parameters, ie key1=value1&key2=value2 .etc
+  var queryParameters: String { get }
 }
 
-extension Dictionary : URLQueryParameterStringConvertible {
-    
-    /// This computed property returns a query parameters string from the given NSDictionary. For
-    /// example, if the input is @{@"day":@"Tuesday", @"month":@"January"}, the output
-    /// string will be @"day=Tuesday&month=January".
-    /// - return The computed parameters string.
-    public var queryParameters: String {
-        var parts: [String] = []
-        for (key, value) in self {
-            let part = String(format: "%@=%@",
-                              String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
-                              String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
-            parts.append(part as String)
-        }
-        return parts.joined(separator: "&")
+extension Dictionary: URLQueryParameterStringConvertible {
+  /// This computed property returns a query parameters string from the given NSDictionary. For
+  /// example, if the input is @{@"day":@"Tuesday", @"month":@"January"}, the output
+  /// string will be @"day=Tuesday&month=January".
+  /// - return The computed parameters string.
+  public var queryParameters: String {
+    var parts: [String] = []
+    for (key, value) in self {
+      let part = String(format: "%@=%@",
+                        String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
+                        String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+      parts.append(part as String)
     }
-    
+    return parts.joined(separator: "&")
+  }
 }
 
 extension URL {
-    
-    /// Creates a new URL by adding the given query parameters.
-    ///
-    /// - parameter parametersDictionary The query parameter dictionary to add.
-    /// - return A new URL.
-    public func pbs_appendingQueryParameters(_ parametersDictionary : [String:String]) -> URL {
-        let URLString : String = String(format: "%@?%@", self.absoluteString, parametersDictionary.queryParameters)
-        return URL(string: URLString)!
-    }
+  /// Creates a new URL by adding the given query parameters.
+  ///
+  /// - parameter parametersDictionary The query parameter dictionary to add.
+  /// - return A new URL.
+  public func pbs_appendingQueryParameters(_ parametersDictionary: [String: String]) -> URL {
+    let URLString = String(format: "%@?%@", absoluteString, parametersDictionary.queryParameters)
+    return URL(string: URLString)!
+  }
 
-    /// 获取url上参数
-    public var pbs_parametersFromQueryString : [String: String]? {
-        guard let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
-        let queryItems = components.queryItems else { return nil }
-        return queryItems.reduce(into: [String: String]()) { (result, item) in
-            result[item.name] = item.value
-        }
+  /// 获取url上参数
+  public var pbs_parametersFromQueryString: [String: String]? {
+    guard let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
+          let queryItems = components.queryItems else { return nil }
+    return queryItems.reduce(into: [String: String]()) { result, item in
+      result[item.name] = item.value
     }
+  }
 }

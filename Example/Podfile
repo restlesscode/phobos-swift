@@ -4,6 +4,7 @@
 target 'PhobosSwiftExample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  inhibit_all_warnings!
 
   # SwiftLint
   pod 'SwiftLint', :configurations => ['Debug']
@@ -24,16 +25,16 @@ post_install do |installer|
   add_release_to_active_compilation_conditions(project)
   
   project.targets.each do |target|
-    puts '----%s----' % [target.name]
+    #puts '----%s----' % [target.name]
     
     if not exist_run_script(target, 'Run SwiftLint Script')
-      puts 'Add Run SwiftLint Script ' % [target.name]
+      puts 'Add Run SwiftLint Script for %s' % [target.name]
       add_run_script(target, 'Run SwiftLint Script', '${PODS_ROOT}/SwiftLint/swiftlint')
     end
     
     if not exist_run_script(target, 'Run SwiftFormat Script')
-      puts 'Add Run SwiftFormat Script ' % [target.name]
-      add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" --indent 2 "$SRCROOT"')
+      puts 'Add Run SwiftFormat Script for %s' % [target.name]
+      add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$SRCROOT"')
     end
     
     # 调整配置
@@ -45,7 +46,27 @@ post_install do |installer|
   # 添加"RELEASE"到"Active Compialtion Conditions"
   add_release_to_active_compilation_conditions(installer.pods_project)
   
+  
+  installer.pods_project.targets.each do |target|
+    #puts '----%s----' % [target.name]
+    
+    if ['PhobosSwiftCore'].include?(target.name)
+      if not exist_run_script(target, 'Run SwiftFormat Script')
+        puts 'Add Run SwiftFormat Script for %s' % [target.name]
+        add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')
+      end
+    end
+    
+    if ['SwiftFormat'].include?(target.name)
+      target.build_configurations.each do |config|
+         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
+    
+  end
+  
 end
+
 
 
 # 判断是否已经添加了"Run SwiftLint Script"

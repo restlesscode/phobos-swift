@@ -27,46 +27,46 @@
 import Foundation
 
 /// 返回相应的目录
-public extension FileManager {
-    /// 返回Libary中的path
-    ///
-    static func pbs_path(inLibrary name: String, withExtension:String) -> URL? {
-        return FileManager.pbs_userLibraryUrl?.appendingPathComponent("\(name).\(withExtension)")
+extension FileManager {
+  /// 返回Libary中的path
+  ///
+  public static func pbs_path(inLibrary name: String, withExtension: String) -> URL? {
+    FileManager.pbs_userLibraryUrl?.appendingPathComponent("\(name).\(withExtension)")
+  }
+
+  /// 返回Documents中的path
+  ///
+  public static func pbs_path(inDocuments name: String, withExtension: String) -> URL? {
+    FileManager.pbs_userDocumentsUrl?.appendingPathComponent("\(name).\(withExtension)")
+  }
+
+  /// 返回MainBundle的path
+  ///
+  public static func pbs_path(inBundle bundle: Bundle = .main, name: String, withExtension: String) -> URL? {
+    bundle.url(forResource: name, withExtension: withExtension)
+  }
+
+  /// documents path
+  public static var pbs_userDocumentsUrl: URL? = {
+    var url: URL?
+    do {
+      url = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    } catch {
+      print(error.localizedDescription)
     }
-    
-    /// 返回Documents中的path
-    ///
-    static func pbs_path(inDocuments name: String, withExtension:String) -> URL? {
-        return FileManager.pbs_userDocumentsUrl?.appendingPathComponent("\(name).\(withExtension)")
+
+    return url
+  }()
+
+  /// get app library path
+  public static var pbs_userLibraryUrl: URL? = {
+    var url: URL?
+    do {
+      url = try FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    } catch {
+      print(error.localizedDescription)
     }
-    
-    /// 返回MainBundle的path
-    ///
-    static func pbs_path(inBundle bundle: Bundle = .main, name: String, withExtension:String) -> URL? {
-        return bundle.url(forResource: name, withExtension: withExtension)
-    }
-    
-    /// documents path
-    static var pbs_userDocumentsUrl: URL? = {
-        var url: URL?
-        do {
-            url = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return url
-    }()
-    
-    /// get app library path
-    static var pbs_userLibraryUrl: URL? = {
-        var url: URL?
-        do {
-            url = try FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return url
-    }()
+
+    return url
+  }()
 }

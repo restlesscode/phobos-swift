@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 import Foundation
 
 /// Version for major.minor.patch
@@ -32,43 +31,43 @@ public struct FBSVersion {
   public var major: Int32 = 0
   public var minor: Int32 = 0
   public var patch: Int32 = 0
-  
+
   public init(major: Int32, minor: Int32, patch: Int32) {
     self.major = major
     self.minor = minor
     self.patch = patch
   }
-  
+
   public static func makeVersion(from version: String?) -> FBSVersion {
     guard let v = version?.split(separator: Character(".")) else {
       return .zero
     }
-    
+
     let major = Int32(v[0]) ?? 0
     let minor = Int32(v[1]) ?? 0
     let patch = Int32(v[2]) ?? 0
-    
+
     return FBSVersion(major: major, minor: minor, patch: patch)
   }
-  
+
   public static var zero = FBSVersion(major: 0, minor: 0, patch: 0)
-  
+
   public var string: String {
-    return "\(major).\(minor).\(patch)"
+    "\(major).\(minor).\(patch)"
   }
 }
 
 /// 对比版本号，判断是否 lhs > rhs 版本号
-public func > (lhs: FBSVersion, rhs: FBSVersion) -> Bool {
-  return lhs.string.compare(rhs.string, options: .numeric) == ComparisonResult.orderedDescending
+public func >(lhs: FBSVersion, rhs: FBSVersion) -> Bool {
+  lhs.string.compare(rhs.string, options: .numeric) == ComparisonResult.orderedDescending
 }
 
 /// 对比版本号，判断是否 lhs < rhs 版本号
-public func < (lhs: FBSVersion, rhs: FBSVersion) -> Bool {
-  return lhs.string.compare(rhs.string, options: .numeric) == ComparisonResult.orderedAscending
+public func <(lhs: FBSVersion, rhs: FBSVersion) -> Bool {
+  lhs.string.compare(rhs.string, options: .numeric) == ComparisonResult.orderedAscending
 }
 
 /// 对比版本号，判断是否 lhs == rhs 版本号
-public func == (lhs: FBSVersion, rhs: FBSVersion) -> Bool {
-  return lhs.string == rhs.string
+public func ==(lhs: FBSVersion, rhs: FBSVersion) -> Bool {
+  lhs.string == rhs.string
 }

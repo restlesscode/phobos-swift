@@ -26,17 +26,16 @@
 
 import Foundation
 
-public extension CGPoint {
+extension CGPoint {
+  /// The distance between two points
+  public func pbs_distance(to point: CGPoint) -> CGFloat {
+    let xDist = x - point.x
+    let yDist = y - point.y
+    return CGFloat(sqrt(xDist * xDist + yDist * yDist))
+  }
 
-    /// The distance between two points
-    func pbs_distance(to point: CGPoint) -> CGFloat {
-        let xDist = x - point.x
-        let yDist = y - point.y
-        return CGFloat(sqrt(xDist * xDist + yDist * yDist))
-    }
-    
-    ///
-    func pbs_offset(x: CGFloat, y: CGFloat) -> CGPoint {
-        return CGPoint(x: self.x + x, y: self.y + y)
-    }
+  ///
+  public func pbs_offset(x: CGFloat, y: CGFloat) -> CGPoint {
+    CGPoint(x: self.x + x, y: self.y + y)
+  }
 }
