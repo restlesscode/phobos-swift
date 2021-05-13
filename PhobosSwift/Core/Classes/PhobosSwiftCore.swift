@@ -26,68 +26,10 @@
 
 import Foundation
 
-let kInternalBuildVersion = "InternalBuildVersion"
+struct Constants {
+  static let kInternalBuildVersion = "InternalBuildVersion"
+  static let kPhobosServiceInfoPlist = "Phobos-Service-Info.plist"
+}
 
-///
-@objcMembers
 public class PhobosSwiftCore: NSObject {
-    public static var codebaseInfoPath = "Phobos-Service-Info.plist"
-    
-    ///
-    public static var shared = PhobosSwiftCore()
-    
-    public static var isRunningTest:Bool {
-        return NSClassFromString("XCTest") != nil
-    }
-    
-    /// 上次安装时 InternalBuildVersion
-    public private(set) var previousInternalBuildVersion:String
-    
-    /// 当前 InternalBuildVersion
-    public var currentInternalBuildVersion:String {
-        /// 在获取当前安装时，InternalBuildVersion
-        return codebaseInfo.internalBuildVersion
-    }
-    
-    private let appDelegateSwizzler = PhobosSwiftCoreAppDelegateSwizzler()
-
-    private override init() {
-        self.previousInternalBuildVersion = UserDefaults.standard.string(forKey: kInternalBuildVersion) ?? "0.0.0"
-
-        super.init()
-        loadInfoPlist()
-        appDelegateSwizzler.load(withDefaultCore: self)
-    }
-    
-    deinit {
-        appDelegateSwizzler.unload()
-    }
-    
-    public var codebaseInfo: CodebaseInfo!
-    
-    public func checkInternalVersion(internalBuildVersion: (
-        _ isUpgraded:Bool,
-        _ previousVersion:String,
-        _ currentVersion:String) -> Void) {
-
-        let isUpgraded = currentInternalBuildVersion.pbs_laterVersionThan(previousInternalBuildVersion)
-        internalBuildVersion(isUpgraded, previousInternalBuildVersion, currentInternalBuildVersion)
-    }
-    
-    private func loadInfoPlist() {
-        guard let infoPlistPath = Bundle.main.url(forResource: Self.codebaseInfoPath, withExtension: nil) else {
-            fatalError("File \(Self.codebaseInfoPath) not exist, please add this file to Supporting Files")
-        }
-        
-        guard let data = try? Data(contentsOf: infoPlistPath) else {
-            fatalError("Data in \(Self.codebaseInfoPath) loaded in error")
-        }
-        
-        guard let codebaseInfo = data.pbs_model(modelType: CodebaseInfo.self, decoderType: .propertyList) else {
-            fatalError("Data in \(Self.codebaseInfoPath) loaded in error")
-        }
-        
-        self.codebaseInfo = codebaseInfo
-    }
-    
 }

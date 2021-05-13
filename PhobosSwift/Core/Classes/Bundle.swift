@@ -88,7 +88,7 @@ public extension Bundle {
     
     ///
     static let pbs_appURLSchemeName: String = {
-         if PhobosSwiftCore.isRunningTest {
+         if PBSCore.isRunningTest {
              return kTestAppScheme
          }
          

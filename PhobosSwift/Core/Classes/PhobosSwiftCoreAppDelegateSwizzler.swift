@@ -27,10 +27,10 @@
 import UIKit
 
 class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
-    weak var defaultCore:PhobosSwiftCore!
+    weak var defaultCore:PBSCore!
     var interceptorID:GULAppDelegateInterceptorID?
     
-    func load(withDefaultCore defaultCore:PhobosSwiftCore) {
+    func load(withDefaultCore defaultCore:PBSCore) {
         self.defaultCore = defaultCore
         PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
         interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
@@ -48,6 +48,6 @@ extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         /// 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-        UserDefaults.standard.set(defaultCore.codebaseInfo.internalBuildVersion, forKey: kInternalBuildVersion)
+        UserDefaults.standard.set(defaultCore.info.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
     }
 }

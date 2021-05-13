@@ -14,6 +14,7 @@
 		A3BE5BA8264BB3330049D097 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BA6264BB3330049D097 /* Main.storyboard */; };
 		A3BE5BAA264BB3340049D097 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BA9264BB3340049D097 /* Assets.xcassets */; };
 		A3BE5BAD264BB3340049D097 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BAB264BB3340049D097 /* LaunchScreen.storyboard */; };
+		A3BE5BB7264CD20E0049D097 /* Phobos-Service-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BB6264CD20E0049D097 /* Phobos-Service-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A3BE5BA9264BB3340049D097 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3BE5BAC264BB3340049D097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3BE5BAE264BB3340049D097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3BE5BB6264CD20E0049D097 /* Phobos-Service-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Phobos-Service-Info.plist"; sourceTree = "<group>"; };
 		D6A53AFCBE80CF7B7EDFF363 /* Pods-PhobosSwiftExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhobosSwiftExample.release.xcconfig"; path = "Target Support Files/Pods-PhobosSwiftExample/Pods-PhobosSwiftExample.release.xcconfig"; sourceTree = "<group>"; };
 		DBC15B467BD015B8C2F42EFD /* Pods_PhobosSwiftExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhobosSwiftExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -87,6 +89,7 @@
 				A3BE5BA9264BB3340049D097 /* Assets.xcassets */,
 				A3BE5BAB264BB3340049D097 /* LaunchScreen.storyboard */,
 				A3BE5BAE264BB3340049D097 /* Info.plist */,
+				A3BE5BB6264CD20E0049D097 /* Phobos-Service-Info.plist */,
 			);
 			path = PhobosSwiftExample;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3BE5BAD264BB3340049D097 /* LaunchScreen.storyboard in Resources */,
+				A3BE5BB7264CD20E0049D097 /* Phobos-Service-Info.plist in Resources */,
 				A3BE5BAA264BB3340049D097 /* Assets.xcassets in Resources */,
 				A3BE5BA8264BB3330049D097 /* Main.storyboard in Resources */,
 			);

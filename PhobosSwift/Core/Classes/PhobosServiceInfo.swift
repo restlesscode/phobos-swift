@@ -82,7 +82,7 @@ public struct Aliyun: Codable {
     }
 }
 
-public struct CodebasePushInfo: Codable {
+public struct PhobosPushInfo: Codable {
     public let defaultServer:DefaultServer?
     public let umeng:UMeng?
     public let firebase:Firebase?
@@ -96,7 +96,7 @@ public struct CodebasePushInfo: Codable {
     }
 }
 
-public struct CodebaseLogInfo: Codable {
+public struct PhobosLogInfo: Codable {
     public let maxFileSize:UInt64
     public let maxTimeInterval:TimeInterval
     public let maxLogFiles:UInt8
@@ -128,19 +128,19 @@ public struct PgyerInfo: Codable {
     }
 }
 
-public struct CodebaseInfo: Codable {
+public struct PhobosServiceInfo: Codable {
     public let plistVersion: String
     public let internalBuildVersion: String
-    public let codebaseLog: CodebaseLogInfo?
-    public let codebasePush: CodebasePushInfo?
+    public let log: PhobosLogInfo?
+    public let push: PhobosPushInfo?
     public let bugly: BuglyInfo?
     public let pgyer: PgyerInfo?
 
     enum CodingKeys: String, CodingKey {
-        case plistVersion = "PlistVersion"
+        case plistVersion = "Version"
         case internalBuildVersion = "InternalBuildVersion"
-        case codebaseLog = "CodebaseLog"
-        case codebasePush = "CodebasePush"
+        case log = "Log"
+        case push = "Push"
         case bugly = "Bugly"
         case pgyer = "Pgyer"
     }

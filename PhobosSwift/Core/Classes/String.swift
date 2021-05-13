@@ -35,10 +35,10 @@ public extension String {
     func pbs_olderVersionThan(_ otherVersion:String) -> Bool {
         return compare(otherVersion, options: .numeric) == ComparisonResult.orderedAscending
     }
-    
+
     /// 对比版本号，判断是否大于otherVersion版本号
     func pbs_laterVersionThan(_ otherVersion:String) -> Bool {
-        
+
         return compare(otherVersion, options: .numeric) == ComparisonResult.orderedDescending
     }
     

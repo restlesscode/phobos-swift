@@ -82,7 +82,7 @@ extension String {
 }
 
 /// Decoder Type enumerator
-public enum CodebaseDecoderType {
+public enum PBSDecoderType {
     /// codebale from plist data object to model
     case propertyList
     /// codebale from json data object to model
@@ -99,7 +99,7 @@ extension Data {
     /// - returns: 要转成的Model对象
     public func pbs_model<T>(
         modelType: T.Type,
-        decoderType:CodebaseDecoderType = .json) -> T? where T:Decodable {
+        decoderType:PBSDecoderType = .json) -> T? where T:Decodable {
         
         do {
             switch decoderType {
@@ -124,7 +124,7 @@ extension Data {
     ///
     /// - returns: 要转成的Model对象
     public func pbs_asModel<ModelType>(
-        decoderType:CodebaseDecoderType = .json) throws -> ModelType where ModelType:Decodable {
+        decoderType: PBSDecoderType = .json) throws -> ModelType where ModelType:Decodable {
         
         switch decoderType {
         case .json:
@@ -137,7 +137,6 @@ extension Data {
             return _model
         }
     }
-    
 }
 
 
