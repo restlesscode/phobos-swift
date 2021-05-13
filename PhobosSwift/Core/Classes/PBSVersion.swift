@@ -1,6 +1,6 @@
 //
 //
-//  FBSVersion.swift
+//  PBSVersion.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -27,7 +27,7 @@
 import Foundation
 
 /// Version for major.minor.patch
-public struct FBSVersion {
+public struct PBSVersion {
   public var major: Int32 = 0
   public var minor: Int32 = 0
   public var patch: Int32 = 0
@@ -38,7 +38,7 @@ public struct FBSVersion {
     self.patch = patch
   }
 
-  public static func makeVersion(from version: String?) -> FBSVersion {
+  public static func makeVersion(from version: String?) -> PBSVersion {
     guard let v = version?.split(separator: Character(".")) else {
       return .zero
     }
@@ -47,10 +47,10 @@ public struct FBSVersion {
     let minor = Int32(v[1]) ?? 0
     let patch = Int32(v[2]) ?? 0
 
-    return FBSVersion(major: major, minor: minor, patch: patch)
+    return PBSVersion(major: major, minor: minor, patch: patch)
   }
 
-  public static var zero = FBSVersion(major: 0, minor: 0, patch: 0)
+  public static var zero = PBSVersion(major: 0, minor: 0, patch: 0)
 
   public var string: String {
     "\(major).\(minor).\(patch)"
@@ -58,16 +58,16 @@ public struct FBSVersion {
 }
 
 /// 对比版本号，判断是否 lhs > rhs 版本号
-public func >(lhs: FBSVersion, rhs: FBSVersion) -> Bool {
+public func >(lhs: PBSVersion, rhs: PBSVersion) -> Bool {
   lhs.string.compare(rhs.string, options: .numeric) == ComparisonResult.orderedDescending
 }
 
 /// 对比版本号，判断是否 lhs < rhs 版本号
-public func <(lhs: FBSVersion, rhs: FBSVersion) -> Bool {
+public func <(lhs: PBSVersion, rhs: PBSVersion) -> Bool {
   lhs.string.compare(rhs.string, options: .numeric) == ComparisonResult.orderedAscending
 }
 
 /// 对比版本号，判断是否 lhs == rhs 版本号
-public func ==(lhs: FBSVersion, rhs: FBSVersion) -> Bool {
+public func ==(lhs: PBSVersion, rhs: PBSVersion) -> Bool {
   lhs.string == rhs.string
 }

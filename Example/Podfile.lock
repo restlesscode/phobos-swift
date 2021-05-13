@@ -32,10 +32,19 @@ PODS:
     - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (7.4.0):
     - GoogleUtilities/Logger
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PhobosSwiftCore (0.1.0):
     - GoogleUtilities (~> 7.0)
   - PhobosSwiftCore/Tests (0.1.0):
     - GoogleUtilities (~> 7.0)
+  - PhobosSwiftLog (0.1.0):
+    - ObjcExceptionBridging (~> 1.0.1)
+    - PhobosSwiftCore (~> 0.1.0)
+  - PhobosSwiftLog/Tests (0.1.0):
+    - ObjcExceptionBridging (~> 1.0.1)
+    - PhobosSwiftCore (~> 0.1.0)
   - PromisesObjC (1.2.12)
   - SwiftFormat/CLI (0.48.0)
   - SwiftLint (0.43.1)
@@ -43,12 +52,15 @@ PODS:
 DEPENDENCIES:
   - PhobosSwiftCore (from `../`)
   - PhobosSwiftCore/Tests (from `../`)
+  - PhobosSwiftLog (from `../`)
+  - PhobosSwiftLog/Tests (from `../`)
   - SwiftFormat/CLI
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - GoogleUtilities
+    - ObjcExceptionBridging
     - PromisesObjC
     - SwiftFormat
     - SwiftLint
@@ -56,14 +68,18 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   PhobosSwiftCore:
     :path: "../"
+  PhobosSwiftLog:
+    :path: "../"
 
 SPEC CHECKSUMS:
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftCore: fbdcc8ebb48eb6d833f25ceb979f9a53ddfefb25
+  PhobosSwiftLog: ba25ca35f6cc72a9f31a1ebd5df9cbcc91bbd4fe
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: b9dc0141424d90abf5341ab593f50ec70d9e7d82
+PODFILE CHECKSUM: ba79c911777ba2f0d17c48005893186345b8a285
 
 COCOAPODS: 1.10.1

@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint PhobosSwiftCore.podspec' to ensure this is a
+# Be sure to run `pod lib lint PhobosSwiftLog.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,7 +7,7 @@
 #
 
 group = "PhobosSwift"
-name = "Core"
+name = "Log"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
@@ -45,15 +45,14 @@ TODO: Add long description of the pod here.
   s.prefix_header_file = false
 
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
-  s.exclude_files = "#{group}/#{name}/Classes/Privatized+third+party+code/SwiftyRSA/SwiftyRSA+ObjC.swift"
 
   s.preserve_paths = [
     "{group}/#{name}/README.md",
     "{group}/#{name}/CHANGELOG.md"
   ]
   
-  # https://github.com/firebase/firebase-ios-sdk/tree/master/GoogleUtilities/AppDelegateSwizzler
-  s.dependency 'GoogleUtilities', '~> 7.0'
+  s.dependency 'ObjcExceptionBridging', '~> 1.0.1'
+  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
 
   if has_resource_bundles
     s.resource_bundles = {
@@ -64,8 +63,6 @@ TODO: Add long description of the pod here.
   if has_public_header_files
     s.public_header_files = "#{group}/#{name}/Classes/**/*.h"
   end
-
-  s.frameworks = 'Security'
   
   if enable_test
     s.test_spec 'Tests' do |test_spec|

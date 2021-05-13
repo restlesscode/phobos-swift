@@ -29,6 +29,7 @@ import Foundation
 struct Constants {
   static let kInternalBuildVersion = "InternalBuildVersion"
   static let kPhobosServiceInfoPlist = "Phobos-Service-Info.plist"
+  static let kXCTest = "XCTest"
 }
 
 public class PhobosSwiftCore: NSObject {

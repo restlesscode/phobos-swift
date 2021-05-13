@@ -36,16 +36,16 @@ public class PBSCore: NSObject {
 
   /// Whether current running in XCTest
   public static var isRunningTest: Bool {
-    NSClassFromString("XCTest") != nil
+    NSClassFromString(Constants.kXCTest) != nil
   }
 
   /// The `InternalBuildVersion` of previous installation
-  public private(set) var previousInternalBuildVersion: FBSVersion
+  public private(set) var previousInternalBuildVersion: PBSVersion
 
   /// The  `InternalBuildVersion` of latest installation
-  public var currentInternalBuildVersion: FBSVersion {
+  public var currentInternalBuildVersion: PBSVersion {
     // 在获取当前安装时，InternalBuildVersion
-    FBSVersion.makeVersion(from: serviceInfo.internalBuildVersion)
+    PBSVersion.makeVersion(from: serviceInfo.internalBuildVersion)
   }
 
   private let appDelegateSwizzler = PhobosSwiftCoreAppDelegateSwizzler()
@@ -54,7 +54,7 @@ public class PBSCore: NSObject {
   public var serviceInfo: PhobosServiceInfo!
 
   override private init() {
-    previousInternalBuildVersion = FBSVersion.makeVersion(from: UserDefaults.standard.string(forKey: Constants.kInternalBuildVersion))
+    previousInternalBuildVersion = PBSVersion.makeVersion(from: UserDefaults.standard.string(forKey: Constants.kInternalBuildVersion))
 
     super.init()
     loadInfoPlist()
@@ -65,7 +65,7 @@ public class PBSCore: NSObject {
     appDelegateSwizzler.unload()
   }
 
-  public func checkInternalVersion(internalBuildVersion: (_ isUpgraded: Bool, _ previousVersion: FBSVersion, _ currentVersion: FBSVersion) -> Void) {
+  public func checkInternalVersion(internalBuildVersion: (_ isUpgraded: Bool, _ previousVersion: PBSVersion, _ currentVersion: PBSVersion) -> Void) {
     let isUpgraded = currentInternalBuildVersion > previousInternalBuildVersion
     internalBuildVersion(isUpgraded, previousInternalBuildVersion, currentInternalBuildVersion)
   }

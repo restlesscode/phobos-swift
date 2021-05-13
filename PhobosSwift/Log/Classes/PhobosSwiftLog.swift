@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftCore
+//  PhobosSwiftLog.swift
+//  PhobosSwiftLog
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,33 +24,6 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftCore
-import Foundation
-import XCTest
+import PhobosSwiftCore
 
-class PBSCoreTest: XCTestCase {
-  let core = PBSCore.shared
-
-  override func setUp() {
-    super.setUp()
-  }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func testInternalVersionCheck() {
-    let versionCheckExpectation = expectation(description: "version_check")
-
-    core.checkInternalVersion { isUpgraded, previousVersion, currentVersion in
-      XCTAssertTrue(isUpgraded)
-      XCTAssertTrue(previousVersion == PBSVersion(major: 0, minor: 0, patch: 0))
-      XCTAssertTrue(currentVersion == PBSVersion(major: 0, minor: 1, patch: 0))
-      versionCheckExpectation.fulfill()
-    }
-
-    waitForExpectations(timeout: 1.0) { error in
-      XCTAssertNil(error)
-    }
-  }
-}
+open class PhobosSwiftLog: NSObject {}

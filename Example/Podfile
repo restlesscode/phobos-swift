@@ -14,7 +14,8 @@ target 'PhobosSwiftExample' do
 
   # Core
   pod 'PhobosSwiftCore', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
-  
+  pod 'PhobosSwiftLog', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+
 end
 
 
@@ -50,7 +51,7 @@ post_install do |installer|
     #puts '----%s----' % [target.name]
     
     # add `Run SwiftFormat Script` for pods
-    if ['PhobosSwiftCore'].include?(target.name)
+    if ['PhobosSwiftCore', 'PhobosSwiftLog'].include?(target.name)
       if not exist_run_script(target, 'Run SwiftFormat Script')
         puts 'Add Run SwiftFormat Script for %s' % [target.name]
         add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')
@@ -58,7 +59,7 @@ post_install do |installer|
     end
     
     # mute warning on `IPHONEOS_DEPLOYMENT_TARGET`
-    if ['SwiftFormat'].include?(target.name)
+    if ['SwiftFormat', 'ObjcExceptionBridging'].include?(target.name)
       target.build_configurations.each do |config|
          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
       end
