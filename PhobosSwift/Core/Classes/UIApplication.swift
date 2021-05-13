@@ -52,9 +52,9 @@ extension UIApplication {
 
   /// `keyWindow` 已经被Apple deprecated掉了，这里我们自己获取`keyWindow`
   public var pbs_keyWindow: UIWindow? {
-    UIApplication.pbs_shared?.windows.filter {
-      $0.isKeyWindow
-    }.first
+    UIApplication.pbs_shared?.windows.first(where: { window in
+      window.isKeyWindow
+    })
   }
 
   /// open

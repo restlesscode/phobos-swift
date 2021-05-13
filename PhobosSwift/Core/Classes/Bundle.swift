@@ -90,9 +90,9 @@ extension Bundle {
       return kTestAppScheme
     }
 
-    let _appURLScheme = Bundle.pbs_externalURLSchemes.filter {
+    let _appURLScheme = Bundle.pbs_externalURLSchemes.first {
       $0.role == .viewer
-    }.first
+    }
 
     guard let appURLScheme = _appURLScheme else {
       fatalError("请在设置中，对AppURLScheme进行设置（需放在URL Types Viewer类型 的第一个位置）")

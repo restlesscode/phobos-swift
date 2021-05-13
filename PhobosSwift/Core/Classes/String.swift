@@ -120,13 +120,10 @@ extension String {
 extension String {
   /// 是否包含中文
   public var pbs_isIncludeChinese: Bool {
-    for ch in unicodeScalars {
-      // 中文字符范围：0x4e00 ~ 0x9fff
-      if ch.value > 0x4E00, ch.value < 0x9FFF {
-        return true
-      }
+    // 中文字符范围：0x4e00 ~ 0x9fff
+    unicodeScalars.contains { ch in
+      ch.value > 0x4E00 && ch.value < 0x9FFF
     }
-    return false
   }
 
   /// 改成拼音
@@ -157,10 +154,8 @@ extension String {
     var headPinyinStr = ""
 
     // 获取所有大写字母
-    for ch in pinyin {
-      if ch <= "Z", ch >= "A" {
-        headPinyinStr.append(ch)
-      }
+    for ch in pinyin where ch <= "Z" && ch >= "A" {
+      headPinyinStr.append(ch)
     }
     return headPinyinStr
   }

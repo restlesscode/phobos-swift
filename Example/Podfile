@@ -46,10 +46,10 @@ post_install do |installer|
   # 添加"RELEASE"到"Active Compialtion Conditions"
   add_release_to_active_compilation_conditions(installer.pods_project)
   
-  
   installer.pods_project.targets.each do |target|
     #puts '----%s----' % [target.name]
     
+    # add `Run SwiftFormat Script` for pods
     if ['PhobosSwiftCore'].include?(target.name)
       if not exist_run_script(target, 'Run SwiftFormat Script')
         puts 'Add Run SwiftFormat Script for %s' % [target.name]
@@ -57,6 +57,7 @@ post_install do |installer|
       end
     end
     
+    # mute warning on `IPHONEOS_DEPLOYMENT_TARGET`
     if ['SwiftFormat'].include?(target.name)
       target.build_configurations.each do |config|
          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'

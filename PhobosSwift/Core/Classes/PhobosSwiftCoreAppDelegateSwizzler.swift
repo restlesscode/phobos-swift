@@ -47,7 +47,7 @@ class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
 
 extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
   func applicationDidEnterBackground(_: UIApplication) {
-    /// 用户退到后台时候，将InternalBuildVersion写会UserDefaults
+    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
     UserDefaults.standard.set(defaultCore.info.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
   }
 }
