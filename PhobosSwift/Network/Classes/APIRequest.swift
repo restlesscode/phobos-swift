@@ -27,6 +27,7 @@
 import Alamofire
 import Foundation
 import PhobosSwiftCore
+import PhobosSwiftLog
 
 extension PBSNetwork {
   public enum APIRequest {
@@ -106,7 +107,9 @@ extension PBSNetwork.APIRequest {
       _session.request(url, method: method, parameters: parameters, encoding: encoding, headers: HTTPHeaders(headers ?? [:]))
         .validate(statusCode: 200..<300)
         .responseDecodable { (response: DataResponse<Wrapper, AFError>) in
-          kLog.info(response)
+
+          PBSLogger.logger.logResponse(payload: response.data)
+
           if let error = response.error {
             return resolve(.failure(error))
           } else {
@@ -168,11 +171,10 @@ extension PBSNetwork.APIRequest {
                        headers: HTTPHeaders(headers ?? [:]))
         .validate(statusCode: 200..<300)
         .responseData(completionHandler: { (response: AFDataResponse<Data>) in
+          PBSLogger.logger.logResponse(payload: response.data)
           if let error = response.error {
-            kLog.error("HTTP Request failed: \(String(describing: response.error))")
             resolve(.failure(error))
           } else {
-            kLog.verbose("HTTP Response Body: \(String(describing: response.value))")
             resolve(.success(response))
           }
         })
@@ -195,11 +197,10 @@ extension PBSNetwork.APIRequest {
                        headers: HTTPHeaders(headers ?? [:]))
         .validate(statusCode: 200..<300)
         .responseJSON { response in
+          PBSLogger.logger.logResponse(payload: response.data)
           if let error = response.error {
-            kLog.error("HTTP Request failed: \(String(describing: response.error))")
             resolve(.failure(error))
           } else {
-            kLog.verbose("HTTP Response Body: \(String(describing: response.value))")
             resolve(.success(response))
           }
         }
@@ -219,11 +220,10 @@ extension PBSNetwork.APIRequest {
       _session.download(url, method: method, parameters: body, encoding: encoding, headers: HTTPHeaders(headers ?? [:]), to: destination)
         .validate(statusCode: 200..<300)
         .responseJSON { response in
+          PBSLogger.logger.logResponse(payload: response.debugDescription.data(using: .utf8))
           if let error = response.error {
-            kLog.error("HTTP Request failed: \(String(describing: response.error))")
             resolve(.failure(error))
           } else {
-            kLog.verbose("HTTP Response Body: \(String(describing: response.value))")
             resolve(.success(response))
           }
         }
@@ -243,11 +243,10 @@ extension PBSNetwork.APIRequest {
       _session.download(url, method: method, parameters: body, encoding: encoding, headers: HTTPHeaders(headers ?? [:]), to: destination)
         .validate(statusCode: 200..<300)
         .responseData { response in
+          PBSLogger.logger.logResponse(payload: response.debugDescription.data(using: .utf8))
           if let error = response.error {
-            kLog.error("HTTP Request failed: \(String(describing: response.error))")
             resolve(.failure(error))
           } else {
-            kLog.verbose("HTTP Response Body: \(String(describing: response.value))")
             resolve(.success(response))
           }
         }

@@ -26,4 +26,9 @@
 
 import PhobosSwiftCore
 
+struct Constants {
+  static let kDefalutLogIdentifier = "codes.restless.pbslog"
+  static let kDocuments = "Documents"
+}
+
 open class PhobosSwiftLog: NSObject {}

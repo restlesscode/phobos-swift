@@ -27,8 +27,6 @@
 import Foundation
 import PhobosSwiftLog
 
-let kLog = PBSLog(identifier: String(describing: PhobosSwiftNetwork.self), level: .verbose)
-
 extension Bundle {
   static var bundle: Bundle {
     Bundle.pbs_bundle(with: PhobosSwiftNetwork.self)
@@ -38,6 +36,14 @@ extension Bundle {
 extension String {
   var localized: String {
     pbs_localized(inBundle: Bundle.bundle)
+  }
+}
+
+extension PBSLogger {
+  static var logger: PBSLogger {
+    let configuration = PBSLogger.Configuration(identifier: String(describing: PhobosSwiftNetwork.self), level: .verbose, mode: .file)
+    let logger = PBSLogger(configuration: configuration)
+    return logger
   }
 }
 

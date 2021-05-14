@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 //
 
+@testable import PhobosSwiftLog
 @testable import PhobosSwiftNetwork
 import Foundation
 import XCTest
@@ -71,6 +72,7 @@ class NetworkTest: XCTestCase {
           "\($0.title) \n \($0.body)"
         }
 
+        PBSLogger.shared.debug(message: titles.first ?? "", context: "Test")
         XCTAssertFalse(titles.isEmpty)
 
         expectation.fulfill()

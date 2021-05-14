@@ -29,7 +29,7 @@ import Foundation
 import XCTest
 
 class PBSLogTest: XCTestCase {
-  let log = PBSLog(identifier: "testIdentifier", level: .debug)
+  let log = PBSLogger(identifier: "testIdentifier", level: .debug)
 
   override func setUp() {
     super.setUp()

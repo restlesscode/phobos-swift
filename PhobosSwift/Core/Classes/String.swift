@@ -29,16 +29,6 @@ import Security
 
 /// Enhanced features of String class is implemented in this extension
 extension String {
-  /// 对比版本号，判断是否小于otherVersion版本号
-  public func pbs_olderVersionThan(_ otherVersion: String) -> Bool {
-    compare(otherVersion, options: .numeric) == ComparisonResult.orderedAscending
-  }
-
-  /// 对比版本号，判断是否大于otherVersion版本号
-  public func pbs_laterVersionThan(_ otherVersion: String) -> Bool {
-    compare(otherVersion, options: .numeric) == ComparisonResult.orderedDescending
-  }
-
   /// 字符串反转
   public var pbs_reversedString: String {
     let reversedCharacters = reversed()

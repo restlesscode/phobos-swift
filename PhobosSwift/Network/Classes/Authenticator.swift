@@ -121,8 +121,8 @@ extension PBSNetwork {
     case loginRequired
   }
 
-  public class CodebaseNetworkManager {
-    public static let shared = CodebaseNetworkManager(session: Session.default)
+  public class NetworkManager {
+    public static let shared = NetworkManager(session: Session.default)
     private let session: Session
     private let authenticator: Authenticator
 

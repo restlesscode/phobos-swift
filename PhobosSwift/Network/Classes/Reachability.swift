@@ -28,6 +28,7 @@ import Alamofire
 import CoreTelephony
 import Foundation
 import PhobosSwiftCore
+import PhobosSwiftLog
 
 /// The enumeration of Network Status
 ///
@@ -107,20 +108,20 @@ extension PBSNetwork {
         if self.reachMgr?.isReachable ?? false {
           switch status {
           case .unknown:
-            kLog.verbose("It is unknown whether the network is reachable")
+            PBSLogger.logger.debug(message: "It is unknown whether the network is reachable", context: "Network")
             handler?(.unknown)
           case .notReachable:
-            kLog.verbose("the noework is not reachable")
+            PBSLogger.logger.debug(message: "The noework is not reachable", context: "Network")
             handler?(.notReachable)
           case .reachable(.ethernetOrWiFi):
-            kLog.verbose("reach via WiFi or ethernet")
+            PBSLogger.logger.debug(message: "Reach via WiFi or ethernet", context: "Network")
             handler?(.wlan)
           case .reachable(.cellular):
-            kLog.verbose("reach via cellular network")
+            PBSLogger.logger.debug(message: "Reach via cellular network", context: "Network")
             handler?(.cellular)
           }
         } else {
-          kLog.verbose("网络不可用")
+          PBSLogger.logger.debug(message: "Network is unreachable", context: "Network")
           handler?(.restrictedByUser)
 
           DispatchQueue.pbs_once {
