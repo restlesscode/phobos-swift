@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Micky
+
+  Created by Theo Chen on 2019/4/8.
+  Copyright © 2019 CocoaPods. All rights reserved.
+*/
+"LANG" = "en";
+
+"CANCEL" = "Cancel";
+"NETWORK_CONNECTIVITY_RESTRICTED" = "Network connection is restricted";
+"SETTING" = "Setting";
+"NETWORK_CHECK_SETTINGS" = "We detect a network restriction, you can check cellular mobile network in Settings";

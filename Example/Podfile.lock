@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.0.5)
   - GoogleUtilities (7.4.0):
     - GoogleUtilities/AppDelegateSwizzler (= 7.4.0)
     - GoogleUtilities/Environment (= 7.4.0)
@@ -45,7 +46,25 @@ PODS:
   - PhobosSwiftLog/Tests (0.1.0):
     - ObjcExceptionBridging (~> 1.0.1)
     - PhobosSwiftCore (~> 0.1.0)
+  - PhobosSwiftNetwork (0.1.0):
+    - Alamofire (~> 5.0.0)
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftNetwork/Tests (0.1.0):
+    - Alamofire (~> 5.0.0)
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
   - PromisesObjC (1.2.12)
+  - RxCocoa (6.1.0):
+    - RxRelay (= 6.1.0)
+    - RxSwift (= 6.1.0)
+  - RxRelay (6.1.0):
+    - RxSwift (= 6.1.0)
+  - RxSwift (6.1.0)
   - SwiftFormat/CLI (0.48.0)
   - SwiftLint (0.43.1)
 
@@ -54,14 +73,20 @@ DEPENDENCIES:
   - PhobosSwiftCore/Tests (from `../`)
   - PhobosSwiftLog (from `../`)
   - PhobosSwiftLog/Tests (from `../`)
+  - PhobosSwiftNetwork (from `../`)
+  - PhobosSwiftNetwork/Tests (from `../`)
   - SwiftFormat/CLI
   - SwiftLint
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - GoogleUtilities
     - ObjcExceptionBridging
     - PromisesObjC
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SwiftFormat
     - SwiftLint
 
@@ -70,16 +95,23 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftLog:
     :path: "../"
+  PhobosSwiftNetwork:
+    :path: "../"
 
 SPEC CHECKSUMS:
+  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftCore: fbdcc8ebb48eb6d833f25ceb979f9a53ddfefb25
   PhobosSwiftLog: ba25ca35f6cc72a9f31a1ebd5df9cbcc91bbd4fe
+  PhobosSwiftNetwork: 7cd0be40dc5ef17914489c183db597aad81b9be0
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
+  RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
+  RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: ba79c911777ba2f0d17c48005893186345b8a285
+PODFILE CHECKSUM: e08ff77430e089afd4daa8b976c0e19ce42d12ef
 
 COCOAPODS: 1.10.1

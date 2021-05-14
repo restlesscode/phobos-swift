@@ -1,7 +1,7 @@
 //
 //
-//  PBSLog+Test.swift
-//  PhobosSwiftLog-Unit-Tests
+//  PBSNetwork.swift
+//  PhobosSwiftNetwork
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,28 +24,6 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftLog
 import Foundation
-import XCTest
 
-class PBSLogTest: XCTestCase {
-  let log = PBSLog(identifier: "testIdentifier", level: .debug)
-
-  override func setUp() {
-    super.setUp()
-    XCTAssertEqual(log.identifier, "testIdentifier")
-    XCTAssertEqual(log.outputLevel, .debug)
-  }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-//  func testLogToFileWhenNotEnabled() {
-//    log.debug("testLogToFileWhenNotEnabled", isToFile: true)
-//  }
-//
-//  func testDonotLogToFileWhenEnabled() {
-//    log.debug("testDonotLogToFileWhenEnabled", isToFile: false)
-//  }
-}
+public class PBSNetwork: NSObject {}

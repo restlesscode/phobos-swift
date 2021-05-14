@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Micky
+
+  Created by Theo Chen on 2019/4/8.
+  Copyright © 2019 CocoaPods. All rights reserved.
+*/
+"LANG" = "zh-Hans";
+
+"CANCEL" = "取消";
+"NETWORK_CONNECTIVITY_RESTRICTED" = "网络连接受限";
+"SETTING" = "设置";
+"NETWORK_CHECK_SETTINGS" = "检测到网络权限可能未开启，您可以在“设置”中检查蜂窝移动网络";

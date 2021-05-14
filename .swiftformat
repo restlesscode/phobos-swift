@@ -4,7 +4,7 @@
 --swiftversion 5.1
 
 # rules
---enable isEmpty
+--disable isEmpty
 --disable andOperator
 --disable wrapMultilineStatementBraces
 

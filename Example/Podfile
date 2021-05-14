@@ -15,6 +15,7 @@ target 'PhobosSwiftExample' do
   # Core
   pod 'PhobosSwiftCore', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   pod 'PhobosSwiftLog', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  pod 'PhobosSwiftNetwork', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
 
 end
 
@@ -51,7 +52,7 @@ post_install do |installer|
     #puts '----%s----' % [target.name]
     
     # add `Run SwiftFormat Script` for pods
-    if ['PhobosSwiftCore', 'PhobosSwiftLog'].include?(target.name)
+    if ['PhobosSwiftCore', 'PhobosSwiftLog', 'PhobosSwiftNetwork'].include?(target.name)
       if not exist_run_script(target, 'Run SwiftFormat Script')
         puts 'Add Run SwiftFormat Script for %s' % [target.name]
         add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')
