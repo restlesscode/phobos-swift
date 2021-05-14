@@ -100,20 +100,6 @@ public struct PhobosPushInfo: Codable {
   }
 }
 
-public struct PhobosLogInfo: Codable {
-  public let maxFileSize: UInt64
-  public let maxTimeInterval: TimeInterval
-  public let maxLogFiles: UInt8
-  public let iCloudContainerIdentifier: String?
-
-  enum CodingKeys: String, CodingKey {
-    case maxFileSize = "MaxFileSize"
-    case maxTimeInterval = "MaxTimeInterval"
-    case maxLogFiles = "MaxLogFiles"
-    case iCloudContainerIdentifier
-  }
-}
-
 public struct BuglyInfo: Codable {
   public let appId: String
 
@@ -135,7 +121,6 @@ public struct PgyerInfo: Codable {
 public struct PhobosServiceInfo: Codable {
   public let plistVersion: String
   public let internalBuildVersion: String
-  public let log: PhobosLogInfo?
   public let push: PhobosPushInfo?
   public let bugly: BuglyInfo?
   public let pgyer: PgyerInfo?
@@ -143,7 +128,6 @@ public struct PhobosServiceInfo: Codable {
   enum CodingKeys: String, CodingKey {
     case plistVersion = "Version"
     case internalBuildVersion = "InternalBuildVersion"
-    case log = "Log"
     case push = "Push"
     case bugly = "Bugly"
     case pgyer = "Pgyer"

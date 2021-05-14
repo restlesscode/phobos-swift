@@ -24,13 +24,21 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftLog
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  var logger: PBSLogger?
+
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    true
+
+    PBSLogger.Configuration.makeConfiguration(identifier: Bundle.main.bundleIdentifier ?? "AppDelegate", level: .verbose, mode: .icloud()) { configuration in
+      self.logger = PBSLogger(configuration: configuration)
+    }
+
+    return true
   }
 
   // MARK: UISceneSession Lifecycle

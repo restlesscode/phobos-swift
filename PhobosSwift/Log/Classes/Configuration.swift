@@ -25,14 +25,33 @@
 //
 
 import Foundation
-import PhobosSwiftCore
 
 extension PBSLogger {
   public struct Configuration {
-    public init(identifier: String, level: Level, mode: Mode) {
-      self.identifier = identifier
-      self.level = level
-      self.mode = mode
+    public static func makeConfiguration(identifier: String, level: Level) -> Configuration {
+      var configuration = Configuration()
+      configuration.identifier = identifier
+      configuration.level = level
+
+      return configuration
+    }
+
+    public static func makeConfiguration(identifier: String, level: Level, mode: Mode, onComplete: @escaping (Configuration) -> Void) {
+      var configuration = Configuration()
+      configuration.identifier = identifier
+      configuration.level = level
+      configuration.mode = mode
+
+      switch mode {
+      case let .icloud(containerIdentifier):
+        DispatchQueue.global(qos: .userInitiated).async {
+          configuration.urlForUbiquityContainerIdentifier = FileManager.default.url(forUbiquityContainerIdentifier: containerIdentifier)
+
+          onComplete(configuration)
+        }
+      default:
+        onComplete(configuration)
+      }
     }
 
     public var identifier: String = Constants.kDefalutLogIdentifier
@@ -70,30 +89,24 @@ extension PBSLogger {
     /// If no path is provided, no file is written
     /// The file is only written for release builds
     ///
-    /// default is ```FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last```
+    /// default is ```AutoRotatingFileDestination.defaultLogFolderURL```
     var logFileFolder: URL? {
       switch mode {
       case .file:
         return AutoRotatingFileDestination.defaultLogFolderURL
       case .icloud:
-        return iCloudDocumentURL
+        guard let url = urlForUbiquityContainerIdentifier else {
+          return nil
+        }
+
+        return url.appendingPathComponent(Constants.kDocuments)
+
       case .memory:
         return AutoRotatingFileDestination.defaultLogFolderURL
       }
     }
 
-    /// iCloudDocument url, only once
-    private var iCloudDocumentURL: URL? = {
-      guard let iCloudContainerIdentifier = PBSCore.shared.serviceInfo.log?.iCloudContainerIdentifier else {
-        return nil
-      }
-
-      guard let url = FileManager.default.url(forUbiquityContainerIdentifier: iCloudContainerIdentifier) else {
-        return nil
-      }
-
-      return url.appendingPathComponent(Constants.kDocuments)
-    }()
+    private var urlForUbiquityContainerIdentifier: URL?
 
     /// The name of the log file
     ///
@@ -131,8 +144,20 @@ extension PBSLogger {
 
 extension PBSLogger.Configuration {
   var fileDestination: AutoRotatingFileDestination {
+    if let path = logFileFolder?.path, let url = logFileFolder?.absoluteURL {
+      if !FileManager.default.fileExists(atPath: path, isDirectory: nil) {
+        do {
+          try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+          // Error handling
+          print(error)
+        }
+      }
+    }
+
     // Create a file log destination
     let filePath = logFileFolder?.appendingPathComponent(logFileName)
+
     let destination = AutoRotatingFileDestination(writeToFile: filePath as Any,
                                                   identifier: identifier + ".autoRotatingFileDestination",
                                                   shouldAppend: shouldAppendLogs,

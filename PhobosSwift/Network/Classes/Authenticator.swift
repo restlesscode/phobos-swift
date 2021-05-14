@@ -149,7 +149,7 @@ extension PBSNetwork {
           }
           return self.authenticator.validToken(forceRefresh: true)
             .flatMap { _ in
-              APIRequest.performRequest(method: method, url: url, body: ["token": self.authenticator.currentToken?.accessToken], headers: headers)
+              APIRequest.performRequest(method: method, url: url, body: ["token": self.authenticator.currentToken?.accessToken ?? ""], headers: headers)
             }
         }
     }

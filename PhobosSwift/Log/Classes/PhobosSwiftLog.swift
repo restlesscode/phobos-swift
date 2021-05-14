@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
+import Foundation
 
 struct Constants {
   static let kDefalutLogIdentifier = "codes.restless.pbslog"

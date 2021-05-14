@@ -14,17 +14,6 @@
 			<string>&lt;Your Aliyun AppSecret&gt;</string>
 		</dict>
 	</dict>
-	<key>Log</key>
-	<dict>
-		<key>MaxFileSize</key>
-		<real>1048576</real>
-		<key>MaxTimeInterval</key>
-		<integer>86400</integer>
-		<key>MaxLogFiles</key>
-		<integer>5</integer>
-		<key>iCloudContainerIdentifier</key>
-		<string>iCloud.codes.restless.phobosswift</string>
-	</dict>
 	<key>InternalBuildVersion</key>
 	<string>0.1.0</string>
 </dict>

@@ -52,7 +52,6 @@ TODO: Add long description of the pod here.
   ]
   
   s.dependency 'ObjcExceptionBridging', '~> 1.0.1'
-  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
 
   if has_resource_bundles
     s.resource_bundles = {

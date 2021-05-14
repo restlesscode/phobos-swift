@@ -51,6 +51,7 @@ extension PBSNetwork.APIRequest: PBSPromisableType {
       _session.request(url, method: method, parameters: parameters, encoding: encoding, headers: HTTPHeaders(headers ?? [:]))
         .validate(statusCode: 200..<300)
         .responseDecodable { (response: DataResponse<Wrapper, AFError>) in
+          PBSLogger.logger.logResponse(payload: response.data)
           if let error = response.error {
             return resolve(.failure(error))
           } else {

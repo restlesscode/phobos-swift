@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
+import Foundation
 
 extension PBSLogger {
   /// Log Mode
@@ -32,7 +32,7 @@ extension PBSLogger {
     /// Log to file
     case file
     /// Log to icloud
-    case icloud
+    case icloud(containerIdentifier: String? = nil)
     /// Log to memory
     case memory
   }
@@ -52,8 +52,6 @@ extension PBSLogger {
 }
 
 public class PBSLogger {
-  public static var shared = PBSLogger(configuration: Configuration(identifier: Constants.kDefalutLogIdentifier, level: .verbose, mode: .file))
-
   private let configuration: Configuration
   private let logger: XCGLogger?
 

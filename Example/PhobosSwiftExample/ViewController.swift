@@ -35,7 +35,8 @@ class ViewController: UIViewController {
     // Do any additional setup after loading the view.
 
     core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
-      print(needUpgrade, previousVersion.string, currentVersion.string)
+
+      (UIApplication.pbs_shared?.delegate as? AppDelegate)?.logger?.debug(message: "\(needUpgrade), \(previousVersion.string), \(currentVersion.string)", context: "Version")
     }
   }
 }

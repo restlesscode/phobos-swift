@@ -15,12 +15,13 @@
 		A3BE5BAA264BB3340049D097 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BA9264BB3340049D097 /* Assets.xcassets */; };
 		A3BE5BAD264BB3340049D097 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BAB264BB3340049D097 /* LaunchScreen.storyboard */; };
 		A3BE5BB7264CD20E0049D097 /* Phobos-Service-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BB6264CD20E0049D097 /* Phobos-Service-Info.plist */; };
+		A3EAB08E264E907400A50916 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3EAB08D264E907400A50916 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		92928386B890B3E0699A0C27 /* Pods-PhobosSwiftExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhobosSwiftExample.debug.xcconfig"; path = "Target Support Files/Pods-PhobosSwiftExample/Pods-PhobosSwiftExample.debug.xcconfig"; sourceTree = "<group>"; };
 		A3BE5B9D264BB3330049D097 /* PhobosSwiftExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhobosSwiftExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A3BE5BA0264BB3330049D097 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A3BE5BA0264BB3330049D097 /* AppDelegate.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; tabWidth = 2; };
 		A3BE5BA2264BB3330049D097 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A3BE5BA4264BB3330049D097 /* ViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		A3BE5BA7264BB3330049D097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -28,6 +29,8 @@
 		A3BE5BAC264BB3340049D097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3BE5BAE264BB3340049D097 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3BE5BB6264CD20E0049D097 /* Phobos-Service-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Phobos-Service-Info.plist"; sourceTree = "<group>"; };
+		A3E63930264E689D00EBEEDD /* PhobosSwiftExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhobosSwiftExample.entitlements; sourceTree = "<group>"; };
+		A3EAB08D264E907400A50916 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D6A53AFCBE80CF7B7EDFF363 /* Pods-PhobosSwiftExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhobosSwiftExample.release.xcconfig"; path = "Target Support Files/Pods-PhobosSwiftExample/Pods-PhobosSwiftExample.release.xcconfig"; sourceTree = "<group>"; };
 		DBC15B467BD015B8C2F42EFD /* Pods_PhobosSwiftExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhobosSwiftExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -38,6 +41,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DC83F115FDA71770DB7BB9C /* Pods_PhobosSwiftExample.framework in Frameworks */,
+				A3EAB08E264E907400A50916 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +51,7 @@
 		5180B55405921B7E38741D00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A3EAB08D264E907400A50916 /* CloudKit.framework */,
 				DBC15B467BD015B8C2F42EFD /* Pods_PhobosSwiftExample.framework */,
 			);
 			name = Frameworks;
@@ -82,6 +87,7 @@
 		A3BE5B9F264BB3330049D097 /* PhobosSwiftExample */ = {
 			isa = PBXGroup;
 			children = (
+				A3E63930264E689D00EBEEDD /* PhobosSwiftExample.entitlements */,
 				A3BE5BA0264BB3330049D097 /* AppDelegate.swift */,
 				A3BE5BA2264BB3330049D097 /* SceneDelegate.swift */,
 				A3BE5BA4264BB3330049D097 /* ViewController.swift */,
@@ -309,6 +315,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -327,12 +334,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -370,6 +379,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -382,6 +392,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -389,6 +400,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -398,17 +410,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PhobosSwiftExample/PhobosSwiftExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 32T9S8EBKN;
 				INFOPLIST_FILE = PhobosSwiftExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.restless.phobosswift.PhobosSwiftExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -418,17 +434,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PhobosSwiftExample/PhobosSwiftExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 32T9S8EBKN;
 				INFOPLIST_FILE = PhobosSwiftExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.restless.phobosswift.PhobosSwiftExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
