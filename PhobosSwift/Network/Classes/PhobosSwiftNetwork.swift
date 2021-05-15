@@ -40,12 +40,7 @@ extension String {
 }
 
 extension PBSLogger {
-  static var logger: PBSLogger {
-    let configuration = PBSLogger.Configuration.makeConfiguration(identifier: Bundle.bundle.bundleIdentifier ?? String(describing: PhobosSwiftNetwork.self), level: .verbose)
-    let logger = PBSLogger(configuration: configuration)
-
-    return logger
-  }
+  static var logger = PBSLogger.shared
 }
 
 class PhobosSwiftNetwork: NSObject {}

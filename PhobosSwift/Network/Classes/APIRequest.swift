@@ -39,18 +39,18 @@ extension PBSNetwork {
 }
 
 extension PBSNetwork.APIRequest: PBSPromisableType {
-  public static func request<Wrapper: Decodable>(_ url: URLConvertible,
-                                                 method: HTTPMethod,
-                                                 parameters: Parameters? = nil,
-                                                 encoding: ParameterEncoding = JSONEncoding.default,
-                                                 headers: Headers? = nil,
-                                                 session: Session? = nil) -> PBSPromisable<Result<Wrapper, Error>> {
+  public static func request<T: Decodable>(_ url: URLConvertible,
+                                           method: HTTPMethod,
+                                           parameters: Parameters? = nil,
+                                           encoding: ParameterEncoding = JSONEncoding.default,
+                                           headers: Headers? = nil,
+                                           session: Session? = nil) -> PBSPromisable<Result<T, Error>> {
     PBSPromisable.create { resolve in
       let _session = session ?? Session.pbs.insecure
 
       _session.request(url, method: method, parameters: parameters, encoding: encoding, headers: HTTPHeaders(headers ?? [:]))
         .validate(statusCode: 200..<300)
-        .responseDecodable { (response: DataResponse<Wrapper, AFError>) in
+        .responseDecodable { (response: DataResponse<T, AFError>) in
           PBSLogger.logger.logResponse(payload: response.data)
           if let error = response.error {
             return resolve(.failure(error))
@@ -67,20 +67,20 @@ extension PBSNetwork.APIRequest: PBSPromisableType {
   }
 
   /// get
-  public static func get<Wrapper>(_ url: URLConvertible,
-                                  parameters: Parameters? = nil,
-                                  encoding: ParameterEncoding = URLEncoding.default,
-                                  headers: Headers? = nil,
-                                  session: Session? = nil) -> PBSPromisable<Result<Wrapper, Error>> where Wrapper: Decodable {
+  public static func get<T>(_ url: URLConvertible,
+                            parameters: Parameters? = nil,
+                            encoding: ParameterEncoding = URLEncoding.default,
+                            headers: Headers? = nil,
+                            session: Session? = nil) -> PBSPromisable<Result<T, Error>> where T: Decodable {
     request(url, method: .get, parameters: parameters, encoding: encoding, headers: headers, session: session)
   }
 
   /// post
-  public static func post<Wrapper>(_ url: URLConvertible,
-                                   parameters: Parameters? = nil,
-                                   encoding: ParameterEncoding = JSONEncoding.default,
-                                   headers: Headers? = nil,
-                                   session: Session? = nil) -> PBSPromisable<Result<Wrapper, Error>> where Wrapper: Decodable {
+  public static func post<T>(_ url: URLConvertible,
+                             parameters: Parameters? = nil,
+                             encoding: ParameterEncoding = JSONEncoding.default,
+                             headers: Headers? = nil,
+                             session: Session? = nil) -> PBSPromisable<Result<T, Error>> where T: Decodable {
     request(url, method: .post, parameters: parameters, encoding: encoding, headers: headers, session: session)
   }
 

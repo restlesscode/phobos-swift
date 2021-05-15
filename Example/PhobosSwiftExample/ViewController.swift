@@ -25,6 +25,7 @@
 //
 
 import PhobosSwiftCore
+import PhobosSwiftLog
 import UIKit
 
 class ViewController: UIViewController {
@@ -36,7 +37,7 @@ class ViewController: UIViewController {
 
     core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
 
-      (UIApplication.pbs_shared?.delegate as? AppDelegate)?.logger?.debug(message: "\(needUpgrade), \(previousVersion.string), \(currentVersion.string)", context: "Version")
+      PBSLogger.shared.debug(message: "\(needUpgrade), \(previousVersion.string), \(currentVersion.string)", context: "Version")
     }
   }
 }

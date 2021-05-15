@@ -150,7 +150,7 @@ extension PBSLogger.Configuration {
           try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         } catch {
           // Error handling
-          print(error)
+          debugPrint(error)
         }
       }
     }
@@ -219,4 +219,8 @@ extension PBSLogger.Configuration {
     destination.showLineNumber = showLineNumbers
     destination.showDate = showDate
   }
+}
+
+extension PBSLogger.Configuration {
+  static var `default` = PBSLogger.Configuration.makeConfiguration(identifier: Bundle.main.bundleIdentifier ?? "PBSLogger", level: .verbose)
 }

@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import PhobosSwiftLog
 
 /// 返回相应的目录
 extension FileManager {
@@ -52,7 +53,7 @@ extension FileManager {
     do {
       url = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     } catch {
-      print(error.localizedDescription)
+      PBSLogger.logger.error(message: error.localizedDescription, context: "Get User Documents Path")
     }
 
     return url
@@ -64,7 +65,7 @@ extension FileManager {
     do {
       url = try FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     } catch {
-      print(error.localizedDescription)
+      PBSLogger.logger.error(message: error.localizedDescription, context: "Get App Library Path")
     }
 
     return url

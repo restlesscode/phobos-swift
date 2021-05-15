@@ -54,6 +54,7 @@ TODO: Add long description of the pod here.
   
   # https://github.com/firebase/firebase-ios-sdk/tree/master/GoogleUtilities/AppDelegateSwizzler
   s.dependency 'GoogleUtilities', '~> 7.0'
+  s.dependency 'PhobosSwiftLog', '~> 0.1.0'
 
   if has_resource_bundles
     s.resource_bundles = {

@@ -38,8 +38,10 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PhobosSwiftCore (0.1.0):
     - GoogleUtilities (~> 7.0)
+    - PhobosSwiftLog (~> 0.1.0)
   - PhobosSwiftCore/Tests (0.1.0):
     - GoogleUtilities (~> 7.0)
+    - PhobosSwiftLog (~> 0.1.0)
   - PhobosSwiftLog (0.1.0):
     - ObjcExceptionBridging (~> 1.0.1)
   - PhobosSwiftLog/Tests (0.1.0):
@@ -100,7 +102,7 @@ SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  PhobosSwiftCore: fbdcc8ebb48eb6d833f25ceb979f9a53ddfefb25
+  PhobosSwiftCore: 8294447d73fd524a5496c0c6b9ad9a43bc098964
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 7cd0be40dc5ef17914489c183db597aad81b9be0
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97

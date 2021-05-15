@@ -29,14 +29,10 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var logger: PBSLogger?
-
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
 
-    PBSLogger.Configuration.makeConfiguration(identifier: Bundle.main.bundleIdentifier ?? "AppDelegate", level: .verbose, mode: .icloud()) { configuration in
-      self.logger = PBSLogger(configuration: configuration)
-    }
+    PBSLogger.configure(identifier: Bundle.main.bundleIdentifier ?? "AAA", level: .verbose, mode: .icloud())
 
     return true
   }

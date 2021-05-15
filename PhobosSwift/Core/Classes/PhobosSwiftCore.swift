@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import PhobosSwiftLog
 
 struct Constants {
   static let kInternalBuildVersion = "InternalBuildVersion"
@@ -32,6 +33,20 @@ struct Constants {
   static let kXCTest = "XCTest"
 }
 
-public class PhobosSwiftCore: NSObject {
-  static let bundle = Bundle.pbs_bundle(with: PhobosSwiftCore.self)
+extension Bundle {
+  static var bundle: Bundle {
+    Bundle.pbs_bundle(with: PhobosSwiftCore.self)
+  }
 }
+
+extension String {
+  var localized: String {
+    pbs_localized(inBundle: Bundle.bundle)
+  }
+}
+
+extension PBSLogger {
+  static var logger = PBSLogger.shared
+}
+
+public class PhobosSwiftCore: NSObject {}

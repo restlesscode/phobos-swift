@@ -55,6 +55,15 @@ public class PBSLogger {
   private let configuration: Configuration
   private let logger: XCGLogger?
 
+  public static var shared = PBSLogger(configuration: Configuration.default)
+
+  /// Set the configuration of shared logger
+  public static func configure(identifier: String, level: Level = .verbose, mode: Mode = .memory) {
+    PBSLogger.Configuration.makeConfiguration(identifier: identifier, level: level, mode: mode, onComplete: {
+      PBSLogger.shared = PBSLogger(configuration: $0)
+    })
+  }
+
   public var logFilePath: URL? {
     configuration.logFilePath
   }

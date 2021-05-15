@@ -73,7 +73,7 @@ public class PBSCore: NSObject {
   private func loadInfoPlist() {
     var bundle = Bundle.main
     if PBSCore.isRunningTest {
-      bundle = PhobosSwiftCore.bundle
+      bundle = Bundle.bundle
     }
 
     guard let infoPlistPath = bundle.url(forResource: Self.infoPath, withExtension: nil) else {

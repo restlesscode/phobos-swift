@@ -24,7 +24,8 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
+import PhobosSwiftLog
 
 /// Enhanced features of JSONSerialization class is implemented in this extension
 extension JSONSerialization {
@@ -41,7 +42,7 @@ extension JSONSerialization {
 
       return jsonStr
     } catch {
-      print("JSONSerialization Error:\(error.localizedDescription)")
+      PBSLogger.logger.error(message: error.localizedDescription, context: "Dict to String")
     }
     return nil
   }
@@ -60,7 +61,7 @@ extension Encodable {
 
       return jsonString
     } catch {
-      print(error.localizedDescription)
+      PBSLogger.logger.error(message: error.localizedDescription, context: "Model to JSON String")
     }
 
     return nil
@@ -108,7 +109,7 @@ extension Data {
         return _model
       }
     } catch {
-      print(error)
+      PBSLogger.logger.error(message: error.localizedDescription, context: "JSON Data to Model")
       return nil
     }
   }
@@ -144,7 +145,7 @@ extension Dictionary {
       let jsonString = String(data: jsonData, encoding: .utf8)
       return jsonString
     } catch {
-      print(error.localizedDescription)
+      PBSLogger.logger.error(message: error.localizedDescription, context: "Dict to JSON String")
     }
 
     return nil
