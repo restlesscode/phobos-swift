@@ -35,7 +35,7 @@ open class AppleSystemLogDestination: BaseQueuedDestination {
   ///
   /// - Returns:  Nothing
   ///
-  override open func write(message: String) {
+  override open func write(logDetails: LogDetails, message: String) {
     NSLog("%@", message)
   }
 }

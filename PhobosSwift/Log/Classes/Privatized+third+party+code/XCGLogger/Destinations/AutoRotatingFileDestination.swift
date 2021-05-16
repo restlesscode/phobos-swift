@@ -277,10 +277,10 @@ open class AutoRotatingFileDestination: FileDestination {
   ///
   /// - Returns:  Nothing
   ///
-  override open func write(message: String) {
+  override open func write(logDetails: LogDetails, message: String) {
     currentLogFileSize += UInt64(message.count)
 
-    super.write(message: message)
+    super.write(logDetails: logDetails, message: message)
 
     if shouldRotate() {
       rotateFile()

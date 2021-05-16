@@ -8,12 +8,15 @@
 //
 
 import Dispatch
+import os.log
 
 // MARK: - ConsoleDestination
 
 /// A standard destination that outputs log details to the console
 open class ConsoleDestination: BaseQueuedDestination {
   // MARK: - Overridden Methods
+
+  static let customOSLog = OSLog(subsystem: Bundle.main.bundleIdentifier ?? String(describing: PhobosSwiftLog.self), category: String(describing: PhobosSwiftLog.self))
 
   /// Print the log to the console.
   ///
@@ -22,7 +25,21 @@ open class ConsoleDestination: BaseQueuedDestination {
   ///
   /// - Returns:  Nothing
   ///
-  override open func write(message: String) {
-    print(message)
+  override open func write(logDetails: LogDetails, message: String) {
+    var type: OSLogType = .default
+    switch logDetails.level {
+    case .debug:
+      type = .debug
+    case .error:
+      type = .error
+    case .severe, .emergency:
+      type = .fault
+    case .verbose, .info, .notice, .warning, .alert:
+      type = .info
+    default:
+      type = .default
+    }
+
+    os_log("%s", log: Self.customOSLog, type: type, message)
   }
 }

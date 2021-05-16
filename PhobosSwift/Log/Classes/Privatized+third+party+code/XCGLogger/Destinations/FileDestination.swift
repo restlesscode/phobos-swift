@@ -228,7 +228,7 @@ open class FileDestination: BaseQueuedDestination {
   ///
   /// - Returns:  Nothing
   ///
-  override open func write(message: String) {
+  override open func write(logDetails: LogDetails, message: String) {
     if let encodedData = "\(message)\n".data(using: String.Encoding.utf8) {
       _try({ [weak self] in
              guard let self = self else { return }

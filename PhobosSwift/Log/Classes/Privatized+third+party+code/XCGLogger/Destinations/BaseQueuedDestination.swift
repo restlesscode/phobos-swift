@@ -44,7 +44,7 @@ open class BaseQueuedDestination: BaseDestination {
       guard !self.shouldExclude(logDetails: &logDetails, message: &message) else { return }
 
       self.applyFormatters(logDetails: &logDetails, message: &message)
-      self.write(message: message)
+      self.write(logDetails: logDetails, message: message)
     }
 
     if let logQueue = logQueue {
@@ -63,7 +63,7 @@ open class BaseQueuedDestination: BaseDestination {
   ///
   /// - Returns:  Nothing
   ///
-  open func write(message: String) {
+  open func write(logDetails: LogDetails, message: String) {
     // Do something with the message in an overridden version of this method
     precondition(false, "Must override this")
   }
