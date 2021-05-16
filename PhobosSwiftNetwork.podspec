@@ -54,6 +54,7 @@ TODO: Add long description of the pod here.
   s.dependency 'Alamofire', '~> 5.0.0'
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
+  s.dependency 'CocoaAsyncSocket', '~> 7.6.5'
   s.dependency 'PhobosSwiftCore', '~> 0.1.0'
   s.dependency 'PhobosSwiftLog', '~> 0.1.0'
 

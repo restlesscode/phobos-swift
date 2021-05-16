@@ -284,7 +284,7 @@ extension NavigatorType {
                    inWindow keyWindow: UIWindow? = nil,
                    transaction: CATransition? = CATransition.pbs_revealAnimation,
                    completion: (() -> Void)? = nil) -> Bool {
-    if let window = keyWindow ?? UIApplication.pbs_shared?.windows.filter({ $0.isKeyWindow }).first {
+    if let window = keyWindow ?? UIApplication.pbs_shared?.windows.first(where: { $0.isKeyWindow }) {
       guard let viewController = self.viewController(for: url, context: context) else { return false }
 
       CATransaction.begin()

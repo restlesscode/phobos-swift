@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.0.5)
+  - CocoaAsyncSocket (7.6.5)
   - GoogleUtilities (7.4.0):
     - GoogleUtilities/AppDelegateSwizzler (= 7.4.0)
     - GoogleUtilities/Environment (= 7.4.0)
@@ -48,12 +49,14 @@ PODS:
     - ObjcExceptionBridging (~> 1.0.1)
   - PhobosSwiftNetwork (0.1.0):
     - Alamofire (~> 5.0.0)
+    - CocoaAsyncSocket (~> 7.6.5)
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftNetwork/Tests (0.1.0):
     - Alamofire (~> 5.0.0)
+    - CocoaAsyncSocket (~> 7.6.5)
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
@@ -89,6 +92,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CocoaAsyncSocket
     - GoogleUtilities
     - ObjcExceptionBridging
     - PromisesObjC
@@ -110,11 +114,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftCore: 8294447d73fd524a5496c0c6b9ad9a43bc098964
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
-  PhobosSwiftNetwork: 7cd0be40dc5ef17914489c183db597aad81b9be0
+  PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
