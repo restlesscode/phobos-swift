@@ -24,7 +24,11 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftCore
 import PhobosSwiftLog
+import PhobosSwiftNetwork
+import PhobosSwiftRouter
+import PhobosSwiftWechat
 import UIKit
 
 @main
@@ -32,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
 
+    let wxResult = PBSWechat.shared.configure(appId: "xxxx", universalLink: "https://xxxx/xxx")
+    print(wxResult)
     PBSLogger.configure(identifier: Bundle.main.bundleIdentifier ?? "AAA", level: .verbose, mode: .icloud())
 
     return true

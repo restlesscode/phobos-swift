@@ -1,3 +1,6 @@
+source 'https://cdn.cocoapods.org/'
+source 'https://gitee.com/tjerwinchen/cocoa-mirror-spec.git'
+
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
@@ -20,6 +23,8 @@ target 'PhobosSwiftExample' do
   pod 'PhobosSwiftNetwork', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Router
   pod 'PhobosSwiftRouter', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Wechat
+  pod 'PhobosSwiftWechat', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
 
 end
 
@@ -56,7 +61,7 @@ post_install do |installer|
     #puts '----%s----' % [target.name]
     
     # add `Run SwiftFormat Script` for pods
-    if ['PhobosSwiftCore', 'PhobosSwiftLog', 'PhobosSwiftNetwork', 'PhobosSwiftRouter'].include?(target.name)
+    if ['PhobosSwiftCore', 'PhobosSwiftLog', 'PhobosSwiftNetwork', 'PhobosSwiftRouter', 'PhobosSwiftWechat'].include?(target.name)
       if not exist_run_script(target, 'Run SwiftFormat Script')
         puts 'Add Run SwiftFormat Script for %s' % [target.name]
         add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')

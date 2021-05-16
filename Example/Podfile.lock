@@ -34,6 +34,7 @@ PODS:
     - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (7.4.0):
     - GoogleUtilities/Logger
+  - MirrorWechatSDK (0.1.5)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
@@ -67,6 +68,14 @@ PODS:
   - PhobosSwiftRouter/Tests (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog
+  - PhobosSwiftWechat (0.1.0):
+    - MirrorWechatSDK
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftWechat/Tests (0.1.0):
+    - MirrorWechatSDK
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
   - PromisesObjC (1.2.12)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
@@ -86,10 +95,14 @@ DEPENDENCIES:
   - PhobosSwiftNetwork/Tests (from `../`)
   - PhobosSwiftRouter (from `../`)
   - PhobosSwiftRouter/Tests (from `../`)
+  - PhobosSwiftWechat (from `../`)
+  - PhobosSwiftWechat/Tests (from `../`)
   - SwiftFormat/CLI
   - SwiftLint
 
 SPEC REPOS:
+  https://gitee.com/tjerwinchen/cocoa-mirror-spec.git:
+    - MirrorWechatSDK
   trunk:
     - Alamofire
     - CocoaAsyncSocket
@@ -111,16 +124,20 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftRouter:
     :path: "../"
+  PhobosSwiftWechat:
+    :path: "../"
 
 SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
+  MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftCore: 8294447d73fd524a5496c0c6b9ad9a43bc098964
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
+  PhobosSwiftWechat: 09ab2d36da3badb1abc0ebe26d4b084db1ef6fac
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
@@ -128,6 +145,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 24b129503302395a137a6ed90aad8381130c6b0d
+PODFILE CHECKSUM: 8d1d54cbb476051730c26e188e61e7c40bf9cd00
 
 COCOAPODS: 1.10.1
