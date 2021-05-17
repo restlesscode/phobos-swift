@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftAuth
+//  CLLocationManager+Ex.swift
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,17 +24,36 @@
 //  THE SOFTWARE.
 //
 
+import CoreLocation
 import Foundation
-import XCTest
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+extension CLLocationManager {
+  /// default LLocationManager
+  public static var `default` = pbs_makeLocationManager(desiredAccuracy: kCLLocationAccuracyBestForNavigation)
+
+  static func pbs_makeLocationManager(desiredAccuracy: CLLocationAccuracy) -> CLLocationManager {
+    let manager = CLLocationManager()
+    manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    return manager
   }
 
-  override func tearDown() {
-    super.tearDown()
+  /// Escalate the authorization is set to when-in-use
+  open func pbs_escalateLocationServiceAuthorization() {
+    // Escalate only when the authorization is set to when-in-use
+    if #available(iOS 14.0, *) {
+      if self.authorizationStatus == .authorizedWhenInUse {
+        self.requestAlwaysAuthorization()
+      }
+    } else {
+      if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+        requestAlwaysAuthorization()
+      }
+    }
   }
 
-  func testCases() {}
+  /// Returns a Boolean value indicating whether location services are enabled on the device.
+  ///
+  public var pbs_isLocationServicesEnabled: Bool {
+    CLLocationManager.locationServicesEnabled()
+  }
 }

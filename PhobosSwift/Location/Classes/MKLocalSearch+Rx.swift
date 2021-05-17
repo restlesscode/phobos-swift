@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftAuth
+//  MKLocalSearch+Rx.swift
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,16 +25,26 @@
 //
 
 import Foundation
-import XCTest
+import MapKit
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+extension MKLocalSearch {
+  /// 通过自然语言进行地址搜索
+  public static func makeNaturalLanguageSearch(keyword: String?, region: MKCoordinateRegion) -> MKLocalSearch {
+    let request = MKLocalSearch.Request()
+    request.naturalLanguageQuery = keyword
+    request.region = region
+
+    return MKLocalSearch(request: request)
   }
 
-  override func tearDown() {
-    super.tearDown()
+  /// 通过自然语言进行地址搜索
+  public static func makeNaturalLanguageSearch(keyword: String?,
+                                               center: CLLocationCoordinate2D,
+                                               latitudinalMeters: CLLocationDistance,
+                                               longitudinalMeters: CLLocationDistance) -> MKLocalSearch {
+    let region = MKCoordinateRegion(center: center,
+                                    latitudinalMeters: latitudinalMeters,
+                                    longitudinalMeters: longitudinalMeters)
+    return Self.makeNaturalLanguageSearch(keyword: keyword, region: region)
   }
-
-  func testCases() {}
 }

@@ -24,10 +24,10 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
 import MirrorWechatSDK
 import RxCocoa
 import RxSwift
-import UIKit
 
 class RxPBSWechatDelegateProxy: DelegateProxy<PBSWechat, PBSWechatDelegate>, DelegateProxyType {
   /// Typed parent object.

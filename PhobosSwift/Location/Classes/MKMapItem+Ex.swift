@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftAuth
+//  MKMapItem+Ex.swift
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,17 +24,15 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import XCTest
+import Contacts
+import CoreLocation
+import Intents
+import MapKit
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+extension MKMapItem {
+  /// 创建自定义的MapItem
+  public static func pbs_makeMapItem(location: CLLocation, name: String) -> MKMapItem {
+    let placemark = CLPlacemark(location: location, name: name, postalAddress: nil)
+    return MKMapItem(placemark: MKPlacemark(placemark: placemark))
   }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func testCases() {}
 }

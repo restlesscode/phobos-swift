@@ -25,6 +25,11 @@ target 'PhobosSwiftExample' do
   pod 'PhobosSwiftRouter', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Wechat
   pod 'PhobosSwiftWechat', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Auth
+  pod 'PhobosSwiftAuth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Log
+  pod 'PhobosSwiftLocation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+
 
 end
 

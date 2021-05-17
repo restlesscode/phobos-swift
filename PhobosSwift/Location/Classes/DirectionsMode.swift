@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftAuth
+//  DirectionsMode.swift
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,17 +24,32 @@
 //  THE SOFTWARE.
 //
 
+import CoreLocation
 import Foundation
-import XCTest
+import MapKit
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+extension PBSLocation {
+  public enum DirectionsMode {
+    case walk
+    case driving
+    case transit
+    case `default`
+
+    public var launchOptions: [String: Any]? {
+      switch self {
+      case .walk:
+        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking,
+                MKLaunchOptionsShowsTrafficKey: 1]
+      case .driving:
+        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,
+                MKLaunchOptionsShowsTrafficKey: 1]
+      case .transit:
+        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit,
+                MKLaunchOptionsShowsTrafficKey: 1]
+      case .default:
+        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault,
+                MKLaunchOptionsShowsTrafficKey: 1]
+      }
+    }
   }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func testCases() {}
 }

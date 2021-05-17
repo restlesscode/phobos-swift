@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Micky
+
+  Created by Theo Chen on 2019/4/8.
+  Copyright © 2019 CocoaPods. All rights reserved.
+*/
+"LANG" = "en";
+
+"SETTINGS" = "Settings";
+"CANCEL" = "Cancel";
+"ALLOW_LOCATION_ACCESS" = "Allow Location Access";
+"ALLOW_LOCATION_ACCESS_MESSAGE" = "We need access to your location. Turn on location access in your device settings.";

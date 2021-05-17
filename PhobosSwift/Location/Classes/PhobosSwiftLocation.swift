@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftAuth
+//  PhobosSwiftLocation.swift
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,16 +25,31 @@
 //
 
 import Foundation
-import XCTest
+import PhobosSwiftLog
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+extension Bundle {
+  static var bundle: Bundle {
+    Bundle.pbs_bundle(with: PhobosSwiftLocation.self)
   }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func testCases() {}
 }
+
+extension String {
+  var localized: String {
+    pbs_localized(inBundle: Bundle.bundle)
+  }
+}
+
+extension PBSLogger {
+  static let logger = PBSLogger.shared
+}
+
+enum Constants {
+  enum Text {
+    static let kSettings = "SETTINGS".localized
+    static let kCancel = "CANCEL".localized
+    static let kAllowLocationAccess = "ALLOW_LOCATION_ACCESS".localized
+    static let kAllowLocationAccessMessage = "ALLOW_LOCATION_ACCESS_MESSAGE".localized
+  }
+}
+
+open class PhobosSwiftLocation: NSObject {}

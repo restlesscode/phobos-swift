@@ -38,12 +38,30 @@ PODS:
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - PhobosSwiftAuth (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftAuth/Tests (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
   - PhobosSwiftCore (0.1.0):
     - GoogleUtilities (~> 7.0)
     - PhobosSwiftLog (~> 0.1.0)
   - PhobosSwiftCore/Tests (0.1.0):
     - GoogleUtilities (~> 7.0)
     - PhobosSwiftLog (~> 0.1.0)
+  - PhobosSwiftLocation (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftLocation/Tests (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
   - PhobosSwiftLog (0.1.0):
     - ObjcExceptionBridging (~> 1.0.1)
   - PhobosSwiftLog/Tests (0.1.0):
@@ -87,8 +105,12 @@ PODS:
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
+  - PhobosSwiftAuth (from `../`)
+  - PhobosSwiftAuth/Tests (from `../`)
   - PhobosSwiftCore (from `../`)
   - PhobosSwiftCore/Tests (from `../`)
+  - PhobosSwiftLocation (from `../`)
+  - PhobosSwiftLocation/Tests (from `../`)
   - PhobosSwiftLog (from `../`)
   - PhobosSwiftLog/Tests (from `../`)
   - PhobosSwiftNetwork (from `../`)
@@ -116,7 +138,11 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
+  PhobosSwiftAuth:
+    :path: "../"
   PhobosSwiftCore:
+    :path: "../"
+  PhobosSwiftLocation:
     :path: "../"
   PhobosSwiftLog:
     :path: "../"
@@ -133,7 +159,9 @@ SPEC CHECKSUMS:
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  PhobosSwiftAuth: bbba013c7e66fee6f3d59988d7bfcee4e79db933
   PhobosSwiftCore: 8294447d73fd524a5496c0c6b9ad9a43bc098964
+  PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
@@ -145,6 +173,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 8d1d54cbb476051730c26e188e61e7c40bf9cd00
+PODFILE CHECKSUM: 817acc5c411f3b936187e906966597a2f4fc9e82
 
 COCOAPODS: 1.10.1

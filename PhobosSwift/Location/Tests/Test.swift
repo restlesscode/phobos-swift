@@ -1,7 +1,7 @@
 //
 //
 //  Test.swift
-//  PhobosSwiftAuth
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //

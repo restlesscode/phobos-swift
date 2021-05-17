@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftAuth
+//  CLGeocoder+Ex.swift
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,17 +24,9 @@
 //  THE SOFTWARE.
 //
 
+import CoreLocation
 import Foundation
-import XCTest
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
-  }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func testCases() {}
+extension CLGeocoder {
+  public static let `default` = CLGeocoder()
 }
