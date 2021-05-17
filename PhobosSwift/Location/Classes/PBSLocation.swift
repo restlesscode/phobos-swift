@@ -48,18 +48,6 @@ open class PBSLocation {
   /// Location Manager
   public var locationManager: CLLocationManager
 
-  open var isUpdatingLocation: Bool = false {
-    didSet {
-      if isUpdatingLocation {
-        if locationManager.pbs_isLocationServicesEnabled {
-          locationManager.startUpdatingLocation()
-        } else {}
-      } else {
-        locationManager.stopUpdatingLocation()
-      }
-    }
-  }
-
   public init(locationManager: CLLocationManager = CLLocationManager.default) {
     self.locationManager = locationManager
 
@@ -89,11 +77,11 @@ open class PBSLocation {
 
       case .authorizedWhenInUse:
         // Enable basic location features
-        self.isUpdatingLocation = true
+        self.locationManager.pbs_updatingLocation(updating: true)
       // enableWhenInUseFeatures()
       case .authorizedAlways:
         // Enable any of your app's location features
-        self.isUpdatingLocation = true
+        self.locationManager.pbs_updatingLocation(updating: true)
       // enableAlwaysFeatures()
       @unknown default:
         break
@@ -116,13 +104,6 @@ open class PBSLocation {
     }.disposed(by: disposeBag)
   }
 
-  /// lazy variable alertCtrl
-  ///
-  /// Should be initialized once
-  static var locationAuthorizationAlertCtrl: UIAlertController = {
-    PBSLocation.makeAlertCtrl(title: Constants.Text.kAllowLocationAccess, message: Constants.Text.kAllowLocationAccessMessage)
-  }()
-
   private static func makeAlertCtrl(title: String, message: String) -> UIAlertController {
     let alertCtrl = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
@@ -143,20 +124,10 @@ open class PBSLocation {
     return alertCtrl
   }
 
-  /// 在默认的地图中打开导航
-  public static func showRouteInBuitinMap(sourceLocation: MKMapItem,
-                                          destLocation: MKMapItem,
-                                          directionsMode: DirectionsMode = .walk) {
-    MKMapItem.openMaps(with: [sourceLocation, destLocation],
-                       launchOptions: directionsMode.launchOptions)
-  }
-
-  /// 在默认的地图中打开导航
-  public static func showRouteInBuitinMap(destLocation: MKMapItem,
-                                          directionsMode: DirectionsMode = .walk) {
-    let sourceLocation = MKMapItem.forCurrentLocation()
-    PBSLocation.showRouteInBuitinMap(sourceLocation: sourceLocation,
-                                     destLocation: destLocation,
-                                     directionsMode: directionsMode)
-  }
+  /// lazy variable alertCtrl
+  ///
+  /// Should be initialized once
+  static var locationAuthorizationAlertCtrl: UIAlertController = {
+    PBSLocation.makeAlertCtrl(title: Constants.Text.kAllowLocationAccess, message: Constants.Text.kAllowLocationAccessMessage)
+  }()
 }

@@ -135,7 +135,7 @@ extension RxCLLocationManagerDelegateProxy: CLLocationManagerDelegate {
   ///
   /// 如果为true，是当在室内、地下、有磁场干扰或者很久没有用指南针时系统发现方向不够准确时自动弹出校准。
   public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
-    true
+    manager.pbs_shouldDisplayHeadingCalibration
   }
 
   /// Invoked when there's a state transition for a monitored region or in response to a request for state via a

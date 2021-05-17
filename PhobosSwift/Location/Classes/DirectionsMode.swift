@@ -28,7 +28,7 @@ import CoreLocation
 import Foundation
 import MapKit
 
-extension PBSLocation {
+extension CLLocationManager {
   public enum DirectionsMode {
     case walk
     case driving

@@ -26,6 +26,13 @@
 
 import CoreLocation
 import Foundation
+import MapKit
+
+extension CLLocationManager {
+  enum AssociatedKeys {
+    static var shouldDisplayHeadingCalibration: UInt8 = 0
+  }
+}
 
 extension CLLocationManager {
   /// default LLocationManager
@@ -34,11 +41,12 @@ extension CLLocationManager {
   static func pbs_makeLocationManager(desiredAccuracy: CLLocationAccuracy) -> CLLocationManager {
     let manager = CLLocationManager()
     manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    manager.pbs_shouldDisplayHeadingCalibration = true
     return manager
   }
 
   /// Escalate the authorization is set to when-in-use
-  open func pbs_escalateLocationServiceAuthorization() {
+  public func pbs_escalateLocationServiceAuthorization() {
     // Escalate only when the authorization is set to when-in-use
     if #available(iOS 14.0, *) {
       if self.authorizationStatus == .authorizedWhenInUse {
@@ -55,5 +63,45 @@ extension CLLocationManager {
   ///
   public var pbs_isLocationServicesEnabled: Bool {
     CLLocationManager.locationServicesEnabled()
+  }
+
+  public var pbs_shouldDisplayHeadingCalibration: Bool {
+    get {
+      guard let value = objc_getAssociatedObject(self, &AssociatedKeys.shouldDisplayHeadingCalibration) as? Bool else {
+        return true
+      }
+      return value
+    }
+    set(newValue) {
+      objc_setAssociatedObject(self, &AssociatedKeys.shouldDisplayHeadingCalibration, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+    }
+  }
+
+  /// starting / stop updating location
+  func pbs_updatingLocation(updating: Bool) {
+    if updating {
+      if pbs_isLocationServicesEnabled {
+        startUpdatingLocation()
+      } else {}
+    } else {
+      stopUpdatingLocation()
+    }
+  }
+
+  /// 在默认的地图中打开导航
+  public static func showRouteInBuitinMap(sourceLocation: MKMapItem,
+                                          destLocation: MKMapItem,
+                                          directionsMode: DirectionsMode = .walk) {
+    MKMapItem.openMaps(with: [sourceLocation, destLocation],
+                       launchOptions: directionsMode.launchOptions)
+  }
+
+  /// 在默认的地图中打开导航
+  public static func showRouteInBuitinMap(destLocation: MKMapItem,
+                                          directionsMode: DirectionsMode = .walk) {
+    let sourceLocation = MKMapItem.forCurrentLocation()
+    Self.showRouteInBuitinMap(sourceLocation: sourceLocation,
+                              destLocation: destLocation,
+                              directionsMode: directionsMode)
   }
 }
