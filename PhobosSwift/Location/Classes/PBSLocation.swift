@@ -36,29 +36,25 @@ import RxSwift
 /// 整个App生命周期，取保只需要一个CodebaseUILocation即可
 open class PBSLocation {
   let disposeBag = DisposeBag()
-  /// 当前位置，可能为空 , 此坐标为标准坐标系（非火星坐标系，不可直接用于Map和API接口调用）
-  public var currentLocation: CLLocation?
 
   /// 如果用户没有授权，是否弹出默认的Alert提示
   public static var enableUnauthorizationAlert: Bool = true
-
-  /// 获取最后一次的定位权限状态
-  public var lastAuthorizationStatus: CLAuthorizationStatus?
 
   /// Location Manager
   public var locationManager: CLLocationManager
 
   public init(locationManager: CLLocationManager = CLLocationManager.default) {
     self.locationManager = locationManager
+  }
 
-    self.locationManager.rx.didChangeAuthorization.subscribe { [weak self] _, status in
+  public func configure() {
+    locationManager.rx.didChangeAuthorization.subscribe { [weak self] _, status in
       guard let self = self else { return }
 
-      self.lastAuthorizationStatus = status
       switch status {
       case .notDetermined:
         // Request when-in-use authorization initially
-        locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
       case .restricted, .denied:
         // Disable location features
         // disableLocationBasedFeatures()
@@ -86,21 +82,6 @@ open class PBSLocation {
       @unknown default:
         break
       }
-    }.disposed(by: disposeBag)
-
-    // Invoked when new locations are available.  Required for delivery of
-    // deferred locations.  If implemented, updates will
-    // not be delivered to locationManager:didUpdateToLocation:fromLocation:
-    //
-    // locations is an array of CLLocation objects in chronological order.
-    self.locationManager.rx.didUpdateLocations.subscribe { [weak self] _, locations in
-      guard let self = self else { return }
-
-      guard let currentLocation = locations.last else {
-        return
-      }
-
-      self.currentLocation = currentLocation
     }.disposed(by: disposeBag)
   }
 

@@ -202,6 +202,7 @@ extension RxCLLocationManagerDelegateProxy: CLLocationManagerDelegate {
   /// Invoked when the authorization status changes for this application.
   @available(iOS, introduced: 4.2, deprecated: 14.0)
   public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    manager._pbs_authorizationStatus = status
     didChangeAuthorizationSubject.onNext((manager, status))
     _forwardToDelegate?.locationManager(manager, didChangeAuthorization: status)
   }

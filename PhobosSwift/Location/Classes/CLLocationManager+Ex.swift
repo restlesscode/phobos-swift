@@ -31,6 +31,7 @@ import MapKit
 extension CLLocationManager {
   enum AssociatedKeys {
     static var shouldDisplayHeadingCalibration: UInt8 = 0
+    static var authorizationStatus: UInt8 = 1
   }
 }
 
@@ -74,6 +75,28 @@ extension CLLocationManager {
     }
     set(newValue) {
       objc_setAssociatedObject(self, &AssociatedKeys.shouldDisplayHeadingCalibration, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+    }
+  }
+
+  /// 获取最后一次的定位权限状态
+  var _pbs_authorizationStatus: CLAuthorizationStatus? {
+    get {
+      guard let value = objc_getAssociatedObject(self, &AssociatedKeys.authorizationStatus) as? CLAuthorizationStatus else {
+        return nil
+      }
+      return value
+    }
+    set(newValue) {
+      objc_setAssociatedObject(self, &AssociatedKeys.authorizationStatus, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
+    }
+  }
+
+  /// The current authorization status for the app.
+  public var pbs_authorizationStatus: CLAuthorizationStatus? {
+    if #available(iOS 14.0, *) {
+      return self.authorizationStatus
+    } else {
+      return _pbs_authorizationStatus
     }
   }
 
