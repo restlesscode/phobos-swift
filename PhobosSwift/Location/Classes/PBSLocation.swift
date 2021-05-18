@@ -26,7 +26,6 @@
 
 import CoreLocation
 import Foundation
-import MapKit
 import PhobosSwiftCore
 import PhobosSwiftLog
 import RxSwift

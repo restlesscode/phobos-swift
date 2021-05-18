@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftLocation.swift
-//  PhobosSwiftLocation
+//  Test.swift
+//  PhobosSwiftPersistence
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,32 +24,46 @@
 //  THE SOFTWARE.
 //
 
+@testable import PhobosSwiftPersistence
 import Foundation
-import PhobosSwiftLog
+import MirrorRealmSwift
+import XCTest
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs_bundle(with: PhobosSwiftLocation.self)
+/// Object representing a single flash card
+@objcMembers class TestEntity: Object {
+  // address dictionary properties
+  dynamic var name: String? // eg. Apple Inc.
+
+  override static func primaryKey() -> String? {
+    "name"
   }
 }
 
-extension String {
-  var localized: String {
-    pbs_localized(inBundle: Bundle.bundle)
+/// Test the enhanced features of Bundle class is implemented in this extension
+class Test: XCTestCase {
+  let testRealm = Realm.pbs_makeRealm(identifier: "test-realm", in: .memory)
+
+  override func setUp() {
+    super.setUp()
+  }
+
+  func test() {
+    do {
+      try testRealm?.write {
+        let testEntity = TestEntity()
+        testEntity.name = "PhobosSwift-Persisitence-Realm"
+        testRealm?.add(testEntity, update: .modified)
+      }
+    } catch {
+      XCTAssertNil(error)
+    }
+
+    let testModels = testRealm?.objects(TestEntity.self)
+
+    XCTAssertEqual("PhobosSwift-Persisitence-Realm", testModels?.first?.name)
+  }
+
+  override func tearDown() {
+    super.tearDown()
   }
 }
-
-extension PBSLogger {
-  static let logger = PBSLogger.shared
-}
-
-enum Constants {
-  enum Text {
-    static let kSettings = "SETTINGS".localized
-    static let kCancel = "CANCEL".localized
-    static let kAllowLocationAccess = "ALLOW_LOCATION_ACCESS".localized
-    static let kAllowLocationAccessMessage = "ALLOW_LOCATION_ACCESS_MESSAGE".localized
-  }
-}
-
-class PhobosSwiftLocation: NSObject {}

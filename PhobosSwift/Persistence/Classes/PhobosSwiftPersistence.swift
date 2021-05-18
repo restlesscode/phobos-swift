@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftLocation.swift
-//  PhobosSwiftLocation
+//  PhobosSwiftPersistence.swift
+//  PhobosSwiftPersistence
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,31 +25,5 @@
 //
 
 import Foundation
-import PhobosSwiftLog
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs_bundle(with: PhobosSwiftLocation.self)
-  }
-}
-
-extension String {
-  var localized: String {
-    pbs_localized(inBundle: Bundle.bundle)
-  }
-}
-
-extension PBSLogger {
-  static let logger = PBSLogger.shared
-}
-
-enum Constants {
-  enum Text {
-    static let kSettings = "SETTINGS".localized
-    static let kCancel = "CANCEL".localized
-    static let kAllowLocationAccess = "ALLOW_LOCATION_ACCESS".localized
-    static let kAllowLocationAccessMessage = "ALLOW_LOCATION_ACCESS_MESSAGE".localized
-  }
-}
-
-class PhobosSwiftLocation: NSObject {}
+class PhobosSwiftPersistence {}

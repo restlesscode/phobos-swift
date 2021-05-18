@@ -34,6 +34,11 @@ PODS:
     - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (7.4.0):
     - GoogleUtilities/Logger
+  - MirrorRealm (0.3.1):
+    - MirrorRealm/Headers (= 0.3.1)
+  - MirrorRealm/Headers (0.3.1)
+  - MirrorRealmSwift (0.3.1):
+    - MirrorRealm (~> 0.3.1)
   - MirrorWechatSDK (0.1.5)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
@@ -80,6 +85,24 @@ PODS:
     - PhobosSwiftLog (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
+  - PhobosSwiftPersistence (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftPersistence/Realm (= 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftPersistence/Realm (0.1.0):
+    - MirrorRealm (~> 0.3.1)
+    - MirrorRealmSwift (~> 0.3.1)
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftPersistence/Tests (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
   - PhobosSwiftRouter (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog
@@ -115,6 +138,9 @@ DEPENDENCIES:
   - PhobosSwiftLog/Tests (from `../`)
   - PhobosSwiftNetwork (from `../`)
   - PhobosSwiftNetwork/Tests (from `../`)
+  - PhobosSwiftPersistence (from `../`)
+  - PhobosSwiftPersistence/Realm (from `../`)
+  - PhobosSwiftPersistence/Tests (from `../`)
   - PhobosSwiftRouter (from `../`)
   - PhobosSwiftRouter/Tests (from `../`)
   - PhobosSwiftWechat (from `../`)
@@ -124,6 +150,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://gitee.com/tjerwinchen/cocoa-mirror-spec.git:
+    - MirrorRealm
+    - MirrorRealmSwift
     - MirrorWechatSDK
   trunk:
     - Alamofire
@@ -148,6 +176,8 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftNetwork:
     :path: "../"
+  PhobosSwiftPersistence:
+    :path: "../"
   PhobosSwiftRouter:
     :path: "../"
   PhobosSwiftWechat:
@@ -157,6 +187,8 @@ SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
+  MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
+  MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftAuth: bbba013c7e66fee6f3d59988d7bfcee4e79db933
@@ -164,6 +196,7 @@ SPEC CHECKSUMS:
   PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
+  PhobosSwiftPersistence: 3f993cf9ff9b27ff96b9776d73aca8b40bfdb3e9
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
   PhobosSwiftWechat: 09ab2d36da3badb1abc0ebe26d4b084db1ef6fac
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
@@ -173,6 +206,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 817acc5c411f3b936187e906966597a2f4fc9e82
+PODFILE CHECKSUM: 90083850f1d8fd187acd6001f17a2a94a5ba5c61
 
 COCOAPODS: 1.10.1

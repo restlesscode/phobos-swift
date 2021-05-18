@@ -30,8 +30,6 @@ private let kBundle = "bundle"
 private let kBundleURLTypes = "CFBundleURLTypes"
 private let kBundleURLSchemes = "CFBundleURLSchemes"
 private let kBundleTypeRole = "CFBundleTypeRole"
-private let kTestAppScheme = "TestAppScheme"
-
 ///
 public enum BundleTypeRole: String {
   case editor = "Editor"
@@ -82,23 +80,5 @@ extension Bundle {
     }
 
     return result
-  }()
-
-  ///
-  public static let pbs_appURLSchemeName: String = {
-    if PBSCore.isRunningTest {
-      return kTestAppScheme
-    }
-
-    let _appURLScheme = Bundle.pbs_externalURLSchemes.first {
-      $0.role == .viewer
-    }
-
-    guard let appURLScheme = _appURLScheme else {
-      fatalError("请在设置中，对AppURLScheme进行设置（需放在URL Types Viewer类型 的第一个位置）")
-    }
-
-    return appURLScheme.name
-
   }()
 }
