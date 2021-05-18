@@ -55,9 +55,7 @@ public enum RealmType {
 extension Realm {
   /// default Realm, document
   ///
-  public static var pbs_default: Realm? {
-    Realm.pbs_makeRealm()
-  }
+  public static var pbs_default: Realm? = Realm.pbs_makeRealm()
 
   /// Realm
   ///
