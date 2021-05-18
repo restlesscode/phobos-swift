@@ -7,6 +7,7 @@
 --disable isEmpty
 --disable andOperator
 --disable wrapMultilineStatementBraces
+--disable enumNamespaces
 
 # format options
 --indent 2
