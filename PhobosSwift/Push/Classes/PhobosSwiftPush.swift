@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftLog.swift
-//  PhobosSwiftLog
+//  PhobosSwiftPush.swift
+//  PhobosSwiftPush
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,10 +25,10 @@
 //
 
 import Foundation
+import PhobosSwiftLog
 
-struct Constants {
-  static let kDefalutLogIdentifier = "codes.restless.pbslog"
-  static let kDocuments = "Documents"
+extension PBSLogger {
+  static let logger = PBSLogger.shared
 }
 
-class PhobosSwiftLog: NSObject {}
+class PhobosSwiftPush {}

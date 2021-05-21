@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftCore.swift
-//  PhobosSwiftCore
+//  AppDelegateSwizzler.swift
+//  PhobosSwiftPush
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,28 +25,37 @@
 //
 
 import Foundation
+import PhobosSwiftCore
 import PhobosSwiftLog
 
-struct Constants {
-  static let kInternalBuildVersion = "InternalBuildVersion"
-  static let kPhobosServiceInfoPlist = "Phobos-Service-Info.plist"
-  static let kXCTest = "XCTest"
-}
+class PBSPushAppDelegateSwizzler: NSObject {
+  weak var defaultPush: PBSPush?
+  var interceptorID: GULAppDelegateInterceptorID?
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs_bundle(with: PhobosSwiftCore.self)
+  func load(withDefaultPush defaultPush: PBSPush) {
+    self.defaultPush = defaultPush
+    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
+    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+  }
+
+  func unload() {
+    if let interceptorID = self.interceptorID {
+      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
+    }
   }
 }
 
-extension String {
-  var localized: String {
-    pbs_localized(inBundle: Bundle.bundle)
+// MARK: - UIApplicationDelegate Method
+
+extension PBSPushAppDelegateSwizzler: UIApplicationDelegate {
+  public func application(_ application: UIApplication,
+                          didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    defaultPush?.onSuccess?(deviceToken)
+    PBSLogger.logger.debug(message: deviceToken.deviceTokenString, context: "Push")
+  }
+
+  public func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    defaultPush?.onError?(error)
+    PBSLogger.logger.error(message: error.localizedDescription, context: "Push")
   }
 }
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-class PhobosSwiftCore: NSObject {}

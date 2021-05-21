@@ -26,4 +26,4 @@
 
 import Foundation
 
-open class PhobosSwiftAuth: NSObject {}
+class PhobosSwiftAuth: NSObject {}

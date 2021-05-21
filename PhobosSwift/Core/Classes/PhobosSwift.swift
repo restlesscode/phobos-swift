@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftLog.swift
-//  PhobosSwiftLog
+//  PhobosSwift.swift
+//  PhobosSwiftPush
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -26,9 +26,44 @@
 
 import Foundation
 
-struct Constants {
-  static let kDefalutLogIdentifier = "codes.restless.pbslog"
-  static let kDocuments = "Documents"
+public struct PhobosSwift<Base> {
+  /// Base object to extend.
+  public let base: Base
+
+  /// Creates extensions with base object.
+  ///
+  /// - parameter base: Base object.
+  public init(_ base: Base) {
+    self.base = base
+  }
 }
 
-class PhobosSwiftLog: NSObject {}
+/// A type that has PhobosSwift extensions.
+public protocol PhobosSwiftCompatible {
+  /// Extended type
+  associatedtype PhobosSwiftBase
+
+  /// PhobosSwift extensions.
+  static var pbs: PhobosSwift<PhobosSwiftBase>.Type { get set }
+
+  /// PhobosSwift extensions.
+  var pbs: PhobosSwift<PhobosSwiftBase> { get set }
+}
+
+extension PhobosSwiftCompatible {
+  /// PhobosSwift extensions.
+  public static var pbs: PhobosSwift<Self>.Type {
+    get { PhobosSwift<Self>.self }
+    // this enables using PhobosSwift to "mutate" base type
+    // swiftlint:disable:next unused_setter_value
+    set {}
+  }
+
+  /// PhobosSwift extensions.
+  public var pbs: PhobosSwift<Self> {
+    get { PhobosSwift(self) }
+    // this enables using PhobosSwift to "mutate" base object
+    // swiftlint:disable:next unused_setter_value
+    set {}
+  }
+}

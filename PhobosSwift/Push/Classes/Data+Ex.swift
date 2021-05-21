@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftLog.swift
-//  PhobosSwiftLog
+//  Data+Ex.swift
+//  PhobosSwiftPush
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -26,9 +26,14 @@
 
 import Foundation
 
-struct Constants {
-  static let kDefalutLogIdentifier = "codes.restless.pbslog"
-  static let kDocuments = "Documents"
-}
+extension Data {
+  public var deviceTokenString: String {
+    let _token = reduce("") {
+      $0 + String(format: "%02x", $1)
+    }
 
-class PhobosSwiftLog: NSObject {}
+    print(_token)
+
+    return _token
+  }
+}

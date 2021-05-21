@@ -103,6 +103,16 @@ PODS:
     - PhobosSwiftLog (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
+  - PhobosSwiftPush (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftPush/Tests (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
   - PhobosSwiftRouter (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog
@@ -141,6 +151,8 @@ DEPENDENCIES:
   - PhobosSwiftPersistence (from `../`)
   - PhobosSwiftPersistence/Realm (from `../`)
   - PhobosSwiftPersistence/Tests (from `../`)
+  - PhobosSwiftPush (from `../`)
+  - PhobosSwiftPush/Tests (from `../`)
   - PhobosSwiftRouter (from `../`)
   - PhobosSwiftRouter/Tests (from `../`)
   - PhobosSwiftWechat (from `../`)
@@ -178,6 +190,8 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftPersistence:
     :path: "../"
+  PhobosSwiftPush:
+    :path: "../"
   PhobosSwiftRouter:
     :path: "../"
   PhobosSwiftWechat:
@@ -197,6 +211,7 @@ SPEC CHECKSUMS:
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
   PhobosSwiftPersistence: 3f993cf9ff9b27ff96b9776d73aca8b40bfdb3e9
+  PhobosSwiftPush: f3ace2618d714528ab9a13dd9ff118f9e2f2337b
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
   PhobosSwiftWechat: 09ab2d36da3badb1abc0ebe26d4b084db1ef6fac
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
@@ -206,6 +221,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 90083850f1d8fd187acd6001f17a2a94a5ba5c61
+PODFILE CHECKSUM: 7357637e1336ee5fb6bde03a58c65b0b3f023bb6
 
 COCOAPODS: 1.10.1
