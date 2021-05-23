@@ -78,6 +78,10 @@ extension String {
   public func pbs_model<T>(modelType: T.Type) -> T? where T: Decodable {
     data(using: .utf8)?.pbs_model(modelType: modelType, decoderType: .json)
   }
+
+  public func pbs_model<T>() -> T? where T: Decodable {
+    pbs_model(modelType: T.self)
+  }
 }
 
 /// Decoder Type enumerator
@@ -95,8 +99,7 @@ extension Data {
   /// - parameter modelType: 要转成的Model的类型
   ///
   /// - returns: 要转成的Model对象
-  public func pbs_model<T>(modelType: T.Type,
-                           decoderType: PBSDecoderType = .json) -> T? where T: Decodable {
+  public func pbs_model<T>(modelType: T.Type, decoderType: PBSDecoderType = .json) -> T? where T: Decodable {
     do {
       switch decoderType {
       case .json:
@@ -114,23 +117,8 @@ extension Data {
     }
   }
 
-  /// 将json data转化成model
-  ///
-  /// - parameter modelType: 要转成的Model的类型
-  ///
-  /// - returns: 要转成的Model对象
-  public func pbs_asModel<ModelType>(
-    decoderType: PBSDecoderType = .json) throws -> ModelType where ModelType: Decodable {
-    switch decoderType {
-    case .json:
-      let decoder = JSONDecoder()
-      let _model = try decoder.decode(ModelType.self, from: self)
-      return _model
-    case .propertyList:
-      let decoder = PropertyListDecoder()
-      let _model = try decoder.decode(ModelType.self, from: self)
-      return _model
-    }
+  public func pbs_model<T>(decoderType: PBSDecoderType = .json) -> T? where T: Decodable {
+    pbs_model(modelType: T.self, decoderType: decoderType)
   }
 }
 
@@ -152,10 +140,17 @@ extension Dictionary {
   }
 
   /// convert dictionary to model
-  public func pbs_model<T>() -> T? where T: Decodable {
-    guard let data = try? JSONSerialization.data(withJSONObject: self, options: .fragmentsAllowed) else {
+  public func pbs_model<T>(modelType: T.Type) -> T? where T: Decodable {
+    do {
+      let data = try JSONSerialization.data(withJSONObject: self, options: .fragmentsAllowed)
+      return try JSONDecoder().decode(modelType, from: data)
+    } catch {
+      PBSLogger.logger.error(message: error.localizedDescription, context: "JSON Data to Model")
       return nil
     }
-    return try? JSONDecoder().decode(T.self, from: data)
+  }
+
+  public func pbs_model<T>() -> T? where T: Decodable {
+    pbs_model(modelType: T.self)
   }
 }
