@@ -29,13 +29,13 @@ import PhobosSwiftLog
 
 extension Bundle {
   static var bundle: Bundle {
-    Bundle.pbs_bundle(with: PhobosSwiftRouter.self)
+    Bundle.pbs.bundle(with: PhobosSwiftRouter.self)
   }
 }
 
 extension String {
   var localized: String {
-    pbs_localized(inBundle: Bundle.bundle)
+    pbs.localized(inBundle: Bundle.bundle)
   }
 }
 

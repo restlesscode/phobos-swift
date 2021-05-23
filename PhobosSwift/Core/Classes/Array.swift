@@ -26,6 +26,8 @@
 
 import UIKit
 
+extension Array: PhobosSwiftCompatible {}
+
 extension Array {
   /// Divides an array into equal parts according to the `size`
   ///

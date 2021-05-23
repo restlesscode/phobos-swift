@@ -35,13 +35,13 @@ struct Constants {
 
 extension Bundle {
   static var bundle: Bundle {
-    Bundle.pbs_bundle(with: PhobosSwiftCore.self)
+    Bundle.pbs.bundle(with: PhobosSwiftCore.self)
   }
 }
 
 extension String {
   var localized: String {
-    pbs_localized(inBundle: Bundle.bundle)
+    pbs.localized(inBundle: Bundle.bundle)
   }
 }
 

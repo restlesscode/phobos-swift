@@ -27,19 +27,20 @@
 import CommonCrypto
 import Security
 
-/// Enhanced features of String class is implemented in this extension
-extension String {
+extension String: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base == String {
   /// 字符串反转
-  public var pbs_reversedString: String {
-    let reversedCharacters = reversed()
+  public var reversedString: String {
+    let reversedCharacters = base.reversed()
 
     return String(reversedCharacters)
   }
 
   /// 字符串包含一系列字符串
-  public func pbs_contains(_ stringList: [String]) -> Bool {
+  public func contains(_ stringList: [String]) -> Bool {
     for str in stringList {
-      if range(of: str) != nil {
+      if base.range(of: str) != nil {
         return true
       }
     }
@@ -48,19 +49,19 @@ extension String {
   }
 
   /// 字符串转浮点数
-  public var pbs_double: Double? {
-    NumberFormatter().number(from: self)?.doubleValue
+  public var double: Double? {
+    NumberFormatter().number(from: base)?.doubleValue
   }
 
   /// 字符串encode成base64
-  public var pbs_base64: String {
-    data(using: .utf8)?.base64EncodedString() ?? ""
+  public var base64: String {
+    base.data(using: .utf8)?.base64EncodedString() ?? ""
   }
 
   /// 字符串encode成md5
-  public var pbs_md5: String {
-    let str = cString(using: String.Encoding.utf8)
-    let strLen = CUnsignedInt(lengthOfBytes(using: String.Encoding.utf8))
+  public var md5: String {
+    let str = base.cString(using: String.Encoding.utf8)
+    let strLen = CUnsignedInt(base.lengthOfBytes(using: String.Encoding.utf8))
     let digestLen = Int(CC_MD5_DIGEST_LENGTH)
     let result = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
     CC_MD5(str!, strLen, result)
@@ -73,26 +74,23 @@ extension String {
   }
 
   /// 字符串encode成sha512
-  public var pbs_sha512: Data {
-    let stringData = data(using: String.Encoding.utf8)!
+  public var sha512: Data {
+    let stringData = base.data(using: String.Encoding.utf8)!
     let result = (stringData as NSData).swiftyRSASHA512()
 
     return result
   }
 
-  /// 转成多语言字符串(main bundle)
-  ///
-  public var pbs_localizedInMainBundle: String {
-    pbs_localized()
-  }
-
   /// 转成多语言字符串
   ///
   /// - parameter bundle 对bundle对象中的多语言字符串，进行转换
-  public func pbs_localized(inBundle bundle: Bundle = Bundle.main, value: String = "", comment: String = "") -> String {
-    NSLocalizedString(self, tableName: nil, bundle: bundle, value: value, comment: comment)
+  public func localized(inBundle bundle: Bundle = Bundle.main, value: String = "", comment: String = "") -> String {
+    NSLocalizedString(base, tableName: nil, bundle: bundle, value: value, comment: comment)
   }
+}
 
+/// Enhanced features of String class is implemented in this extension
+extension String {
   /// 字符串转成整数
   public var pbs_int: Int? {
     NumberFormatter().number(from: self)?.intValue

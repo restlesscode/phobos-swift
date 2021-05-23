@@ -38,7 +38,7 @@ class BundleTest: XCTestCase {
   }
 
   func testBundle() {
-    let bundle = Bundle.pbs_bundle(with: PhobosSwiftCore.self)
+    let bundle = Bundle.pbs.bundle(with: PhobosSwiftCore.self)
 
     XCTAssertNotNil(bundle.bundlePath)
     XCTAssertNotNil(bundle.resourcePath)

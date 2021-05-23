@@ -88,7 +88,7 @@ extension Realm {
       }
 
       let documentsConfig = Realm.Configuration(fileURL: fileUrl,
-                                                encryptionKey: password?.pbs_sha512,
+                                                encryptionKey: password?.pbs.sha512,
                                                 schemaVersion: schemaVersion,
                                                 migrationBlock: migrationBlock,
                                                 objectTypes: objectTypes)
