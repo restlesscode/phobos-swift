@@ -4,16 +4,6 @@
 <dict>
 	<key>Version</key>
 	<string>0.1.0</string>
-	<key>Push</key>
-	<dict>
-		<key>Aliyun</key>
-		<dict>
-			<key>AppKey</key>
-			<string>&lt;Your Aliyun AppKey&gt;</string>
-			<key>AppSecret</key>
-			<string>&lt;Your Aliyun AppSecret&gt;</string>
-		</dict>
-	</dict>
 	<key>InternalBuildVersion</key>
 	<string>0.1.0</string>
 </dict>

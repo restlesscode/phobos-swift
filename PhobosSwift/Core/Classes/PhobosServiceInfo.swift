@@ -73,33 +73,6 @@ public struct Firebase: Codable {
   }
 }
 
-public struct Aliyun: Codable {
-  public let appkey: String?
-  public let appSecret: String?
-  enum CodingKeys: String, CodingKey {
-    case appkey = "AppKey"
-    case appSecret = "AppSecret"
-  }
-
-  var type: PBSPushSDKTypes {
-    .aliyun
-  }
-}
-
-public struct PhobosPushInfo: Codable {
-  public let defaultServer: DefaultServer?
-  public let umeng: UMeng?
-  public let firebase: Firebase?
-  public let aliyun: Aliyun?
-
-  enum CodingKeys: String, CodingKey {
-    case defaultServer = "DefaultServer"
-    case umeng = "UMeng"
-    case firebase = "Firebase"
-    case aliyun = "Aliyun"
-  }
-}
-
 public struct BuglyInfo: Codable {
   public let appId: String
 
@@ -121,15 +94,9 @@ public struct PgyerInfo: Codable {
 public struct PhobosServiceInfo: Codable {
   public let plistVersion: String
   public let internalBuildVersion: String
-  public let push: PhobosPushInfo?
-  public let bugly: BuglyInfo?
-  public let pgyer: PgyerInfo?
 
   enum CodingKeys: String, CodingKey {
     case plistVersion = "Version"
     case internalBuildVersion = "InternalBuildVersion"
-    case push = "Push"
-    case bugly = "Bugly"
-    case pgyer = "Pgyer"
   }
 }
