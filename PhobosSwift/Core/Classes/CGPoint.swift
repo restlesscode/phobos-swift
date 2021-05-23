@@ -26,16 +26,18 @@
 
 import Foundation
 
-extension CGPoint {
+extension CGPoint: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base == CGPoint {
   /// The distance between two points
-  public func pbs_distance(to point: CGPoint) -> CGFloat {
-    let xDist = x - point.x
-    let yDist = y - point.y
+  public func distance(to point: CGPoint) -> CGFloat {
+    let xDist = base.x - point.x
+    let yDist = base.y - point.y
     return CGFloat(sqrt(xDist * xDist + yDist * yDist))
   }
 
   ///
   public func pbs_offset(x: CGFloat, y: CGFloat) -> CGPoint {
-    CGPoint(x: self.x + x, y: self.y + y)
+    CGPoint(x: base.x + x, y: base.y + y)
   }
 }

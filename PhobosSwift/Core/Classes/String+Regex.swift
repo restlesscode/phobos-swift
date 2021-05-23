@@ -62,17 +62,17 @@ public struct RegularExpressionType: OptionSet {
 }
 
 /// Enhanced features of String class is implemented in this extension
-extension String {
+extension PhobosSwift where Base == String {
   /// 根据options选择适配的正则判断
   /// - Parameter regexTypes: 多选正则类型
   /// - Parameter isEmptyAllowed: 是否允许空字符
-  public func pbs_isText(ofRegexTypes regexTypes: RegularExpressionType, isEmptyAllowed: Bool = false) -> Bool {
+  public func isText(ofRegexTypes regexTypes: RegularExpressionType, isEmptyAllowed: Bool = false) -> Bool {
     // 如果不允许为空，且会空字符
-    if !isEmptyAllowed, isEmpty {
+    if !isEmptyAllowed, base.isEmpty {
       return false
     }
 
-    var result = self
+    var result = base
 
     if regexTypes.contains(.digit) {
       result = result.replacingOccurrences(of: RegularExpressionType.digit.pattern, with: "", options: [.regularExpression])
@@ -97,8 +97,8 @@ extension String {
   }
 
   /// 是否合法的Password
-  public var pbs_isValidPassword: Bool {
-    !isEmpty
+  public var isValidPassword: Bool {
+    !base.isEmpty
   }
 
   public func match(regular: String) -> Bool {
