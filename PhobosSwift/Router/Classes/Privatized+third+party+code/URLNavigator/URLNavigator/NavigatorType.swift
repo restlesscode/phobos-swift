@@ -282,7 +282,7 @@ extension NavigatorType {
   public func turn(_ url: URLConvertible,
                    context: Any? = nil,
                    inWindow keyWindow: UIWindow? = nil,
-                   transaction: CATransition? = CATransition.pbs_revealAnimation,
+                   transaction: CATransition? = CATransition.pbs.revealAnimation,
                    completion: (() -> Void)? = nil) -> Bool {
     if let window = keyWindow ?? UIApplication.pbs_shared?.windows.first(where: { $0.isKeyWindow }) {
       guard let viewController = self.viewController(for: url, context: context) else { return false }
