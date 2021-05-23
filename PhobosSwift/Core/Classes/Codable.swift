@@ -150,4 +150,12 @@ extension Dictionary {
 
     return nil
   }
+
+  /// convert dictionary to model
+  public func pbs_model<T>() -> T? where T: Decodable {
+    guard let data = try? JSONSerialization.data(withJSONObject: self, options: .fragmentsAllowed) else {
+      return nil
+    }
+    return try? JSONDecoder().decode(T.self, from: data)
+  }
 }
