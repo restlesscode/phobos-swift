@@ -26,14 +26,16 @@
 
 import Foundation
 import MirrorWechatSDK
+import PhobosSwiftLog
 import PhobosSwiftWechat
 import RxSwift
 
 extension PBSPayment {
-  public class WechatPay: NSObject {
-    public static let shared = WechatPay()
+  public class Wechatpay: NSObject {
     private let disposeBag = DisposeBag()
-    public private(set) var didRecievePayReusltSubject = PublishSubject<Result<Bool, WechatPay.WechatPayError>>()
+
+    public static let shared = Wechatpay()
+    public private(set) var didRecievePayReusltSubject = PublishSubject<Result<Bool, Wechatpay.WechatPayError>>()
     public private(set) var wechatSDK = PBSWechat.shared
 
     override private init() {
@@ -75,10 +77,19 @@ extension PBSPayment {
     public func configure(appId: String, universalLink: String) {
       wechatSDK.configure(appId: appId, universalLink: universalLink)
     }
+
+    public func handleOpen(url: URL) {
+      wechatSDK.handleOpen(url: url)
+    }
+
+    @discardableResult
+    func handleOpenUniversalLink(userActivity: NSUserActivity) -> Bool {
+      wechatSDK.handleOpenUniversalLink(userActivity: userActivity)
+    }
   }
 }
 
-extension PBSPayment.WechatPay {
+extension PBSPayment.Wechatpay {
   public enum WechatPayError: Error {
     case wechatNotInstalled
     case wechatApiNotSupported
@@ -87,8 +98,10 @@ extension PBSPayment.WechatPay {
     var description: String {
       switch self {
       case .wechatNotInstalled:
+        PBSLogger.logger.debug(message: "用户手机未安装微信", context: "Payment")
         return "用户手机未安装微信"
       case .wechatApiNotSupported:
+        PBSLogger.logger.debug(message: "用户手机不支持微信支付", context: "Payment")
         return "用户手机不支持微信支付"
       case let .wechatPayResultError(error):
         return error.description

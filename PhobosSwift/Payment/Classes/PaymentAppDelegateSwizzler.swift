@@ -48,14 +48,14 @@ extension PaymentAppDelegateSwizzler: UIApplicationDelegate {
   func application(_ app: UIApplication,
                    open url: URL,
                    options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    PBSPayment.handlePaymentOpenURL(url: url)
+    PBSPayment.handlePaymentOpen(url: url)
     return true
   }
 
   func application(_ application: UIApplication,
                    continue userActivity: NSUserActivity,
                    restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-    PBSPayment.shared.handleOpenWechatUniversalLink(userActivity: userActivity)
+    PBSPayment.Wechatpay.shared.handleOpenUniversalLink(userActivity: userActivity)
   }
 
   func applicationWillTerminate(_ application: UIApplication) {

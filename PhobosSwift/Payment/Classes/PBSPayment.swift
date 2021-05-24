@@ -39,10 +39,6 @@ extension PBSPayment {
     case aliPay(String)
     /// 微信
     case wechatPay(WechatPayReq)
-    /// 应用内购
-    case inAppPurchase
-    /// 苹果支付
-    case applePay
   }
 
   /// Pay Result code
@@ -55,14 +51,14 @@ extension PBSPayment {
 
   ///
   public enum ResultStatus {
-    case alipay(PBSAlipayPayment.AlipayStatus)
+    case alipay(PBSPayment.Alipay.Status)
     case wechatpay(Bool)
   }
 
   ///
   public enum ResultError: Error {
-    case alipay(PBSAlipayPayment.AlipayError)
-    case wechatpay(PBSPayment.WechatPay.WechatPayError)
+    case alipay(PBSPayment.Alipay.AlipayError)
+    case wechatpay(PBSPayment.Wechatpay.WechatPayError)
   }
 }
 
@@ -71,8 +67,6 @@ public class PBSPayment: NSObject {
 
   public static let shared = PBSPayment()
   public let paymentResult = PublishSubject<Result<ResultStatus, ResultError>>()
-  public let wechatPay = PBSPayment.WechatPay.shared
-  public let aliPay = PBSAlipayPayment.shared
 
   private let appDelegateSwizzler = PaymentAppDelegateSwizzler()
 
@@ -89,16 +83,14 @@ public class PBSPayment: NSObject {
   public func startPay(method: Channel) {
     switch method {
     case let .wechatPay(model):
-      wechatPay.pay(wechatPayReq: model)
+      Wechatpay.shared.pay(wechatPayReq: model)
     case let .aliPay(orderString):
-      aliPay.pay(orderString: orderString)
-    default:
-      break
+      Alipay.shared.pay(orderString: orderString)
     }
   }
 
   private func setupBindings() {
-    wechatPay.didRecievePayReusltSubject.subscribe(onNext: { [weak self] result in
+    Wechatpay.shared.didRecievePayReusltSubject.subscribe(onNext: { [weak self] result in
       guard let self = self else { return }
       switch result {
       case let .success(success):
@@ -109,7 +101,7 @@ public class PBSPayment: NSObject {
 
     }).disposed(by: disposeBag)
 
-    aliPay.didRecievePayReusltSubject
+    Alipay.shared.didRecievePayReusltSubject
       .subscribe(onNext: { [weak self] result in
         guard let self = self else { return }
         switch result {
@@ -122,28 +114,8 @@ public class PBSPayment: NSObject {
       .disposed(by: disposeBag)
   }
 
-  public static func handlePaymentOpenURL(url: URL) {
-    PBSPayment.shared.handleWechatOpen(url: url)
-    PBSPayment.shared.handleAlipayOpenURL(url: url)
-  }
-}
-
-/// handle wechatPay/aliPay url
-extension PBSPayment {
-  /// 处理支付宝通过URL启动App时传递的数据
-  func handleAlipayOpenURL(url: URL) {
-    aliPay.handleAlipayOpenURL(url: url)
-  }
-
-  /// 处理旧版微信通过URL启动App时传递的数据
-  @discardableResult
-  func handleWechatOpen(url: URL) -> Bool {
-    wechatPay.wechatSDK.handleOpen(url: url)
-  }
-
-  /// 处理微信通过Universal Link启动App时传递的数据
-  @discardableResult
-  func handleOpenWechatUniversalLink(userActivity: NSUserActivity) -> Bool {
-    wechatPay.wechatSDK.handleOpenUniversalLink(userActivity: userActivity)
+  public static func handlePaymentOpen(url: URL) {
+    Wechatpay.shared.handleOpen(url: url)
+    Alipay.shared.handleOpenURL(url: url)
   }
 }
