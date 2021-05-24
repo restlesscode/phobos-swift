@@ -38,18 +38,18 @@ class StringTest: XCTestCase {
   }
 
   func testRegex() {
-    XCTAssertTrue("03323@smail.tongji.edu.cn".pbs_isText(ofRegexTypes: .email), "Email regex passed")
-    XCTAssertTrue("theo.chen@me.7zip".pbs_isText(ofRegexTypes: .email), "Email regex passed")
-    XCTAssertTrue("13148469712".pbs_isText(ofRegexTypes: .chineseMobileNumber), "Chinese mobile number regex passed")
-    XCTAssertTrue("18273213211231213213".pbs_isText(ofRegexTypes: .digit), "Digital regex passed")
-    XCTAssertTrue("世上只有妈妈好".pbs_isText(ofRegexTypes: .chineseCharacter), "Chinese regex passed")
-    XCTAssertFalse("世上只 有妈妈 好".pbs_isText(ofRegexTypes: .chineseCharacter), "Chinese with space regex NOT passed")
-    XCTAssertTrue("IloveiOS".pbs_isText(ofRegexTypes: .englishLetter), "English Letters regex passed")
-    XCTAssertFalse("I love iOS".pbs_isText(ofRegexTypes: .englishLetter), "English Letters with space regex NOT passed")
-    XCTAssertTrue("Ilove88912321iOS".pbs_isText(ofRegexTypes: [.englishLetter, .digit]), "English Letters and digits regex passed")
-    XCTAssertTrue("Ilove88912321iOS".pbs_isText(ofRegexTypes: [.englishLetter, .digit]), "English Letters and digits regex passed")
-    XCTAssertTrue("真光路1433弄5号1111室A座".pbs_isText(ofRegexTypes: [.englishLetter, .digit, .chineseCharacter]), "English Letters, Chinese characters and digits regex passed")
-    XCTAssertFalse("真光路1433弄5号1111室A😊座".pbs_isText(ofRegexTypes: [.englishLetter, .digit, .chineseCharacter]), "emoji not passed")
-    XCTAssertTrue("德国保时捷（上海）销售有限公司".pbs_isText(ofRegexTypes: [.chineseCharacter, .englishLetter, .digit, .punctuation]), "Company Title passed")
+    XCTAssertTrue("03323@smail.tongji.edu.cn".pbs.isText(ofRegexTypes: .email), "Email regex passed")
+    XCTAssertTrue("theo.chen@me.7zip".pbs.isText(ofRegexTypes: .email), "Email regex passed")
+    XCTAssertTrue("13148469712".pbs.isText(ofRegexTypes: .chineseMobileNumber), "Chinese mobile number regex passed")
+    XCTAssertTrue("18273213211231213213".pbs.isText(ofRegexTypes: .digit), "Digital regex passed")
+    XCTAssertTrue("世上只有妈妈好".pbs.isText(ofRegexTypes: .chineseCharacter), "Chinese regex passed")
+    XCTAssertFalse("世上只 有妈妈 好".pbs.isText(ofRegexTypes: .chineseCharacter), "Chinese with space regex NOT passed")
+    XCTAssertTrue("IloveiOS".pbs.isText(ofRegexTypes: .englishLetter), "English Letters regex passed")
+    XCTAssertFalse("I love iOS".pbs.isText(ofRegexTypes: .englishLetter), "English Letters with space regex NOT passed")
+    XCTAssertTrue("Ilove88912321iOS".pbs.isText(ofRegexTypes: [.englishLetter, .digit]), "English Letters and digits regex passed")
+    XCTAssertTrue("Ilove88912321iOS".pbs.isText(ofRegexTypes: [.englishLetter, .digit]), "English Letters and digits regex passed")
+    XCTAssertTrue("真光路1433弄5号1111室A座".pbs.isText(ofRegexTypes: [.englishLetter, .digit, .chineseCharacter]), "English Letters, Chinese characters and digits regex passed")
+    XCTAssertFalse("真光路1433弄5号1111室A😊座".pbs.isText(ofRegexTypes: [.englishLetter, .digit, .chineseCharacter]), "emoji not passed")
+    XCTAssertTrue("德国保时捷（上海）销售有限公司".pbs.isText(ofRegexTypes: [.chineseCharacter, .englishLetter, .digit, .punctuation]), "Company Title passed")
   }
 }
