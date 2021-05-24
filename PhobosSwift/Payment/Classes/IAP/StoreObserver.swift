@@ -86,10 +86,10 @@ extension PBSPayment.IAP {
     /// it would be unusual for dozens of different iTunes Store accounts to make purchases on behalf of the same in-game character.
     /// The recommended implementation is to use a one-way hash of the user’s account name to calculate the value for this property.
 
-    func purchase(product: SKProduct, applicationUsername: String?, isAskToBuy: Bool = false) {
+    func purchase(product: SKProduct, applicationUsername: String?, simulatesAskToBuyInSandbox: Bool = false) {
       // Create a payment request.
       let payment = SKMutablePayment(product: product)
-      payment.simulatesAskToBuyInSandbox = isAskToBuy
+      payment.simulatesAskToBuyInSandbox = simulatesAskToBuyInSandbox
       payment.applicationUsername = applicationUsername
 
       // Submit the payment request to the payment queue.
