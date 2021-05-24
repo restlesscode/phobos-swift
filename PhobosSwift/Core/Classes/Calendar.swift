@@ -29,16 +29,22 @@ import Foundation
 extension Calendar: PhobosSwiftCompatible {}
 
 extension PhobosSwift where Base == Calendar {
+  public static func dateComponents(from start: Date, to end: Date) -> DateComponents {
+    let gregorianCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+    let dateComponents = gregorianCalendar.dateComponents([.day], from: start, to: end)
+    return dateComponents
+  }
+
   /// 计算两个时间点之间的「间隔秒数」
   ///
   /// - parameter datetimeStart: 开始时间Data对象
   /// - parameter datetimeEnd: 结束时间Data对象
   ///
   /// - returns: A second or count of seconds.
-  public static func secondDifference(_ datetimeStart: Date, datetimeEnd: Date) -> Int? {
+  public static func secondDifference(from start: Date, to end: Date) -> Int? {
     let gregorianCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
 
-    let dateComponents = gregorianCalendar.dateComponents([.second], from: datetimeStart, to: datetimeEnd)
+    let dateComponents = gregorianCalendar.dateComponents([.second], from: start, to: end)
 
     return dateComponents.second
   }
@@ -49,20 +55,26 @@ extension PhobosSwift where Base == Calendar {
   /// - parameter datetimeEndStr: 结束时间Data对象
   ///
   /// - returns: A second or count of seconds.
-  public static func secondDifference(_ datetimeStartStr: String, datetimeEndStr: String) -> Int? {
+  public static func secondDifference(from start: String, to end: String, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Int? {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    dateFormatter.dateFormat = dateFormat
 
-    if let startDatetime = dateFormatter.date(from: datetimeStartStr) {
-      if let endDatetime = dateFormatter.date(from: datetimeEndStr) {
-        let gregorianCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        let dateComponents = gregorianCalendar.dateComponents([.second], from: startDatetime, to: endDatetime)
-
-        return dateComponents.second
-      }
+    guard let startDatetime = dateFormatter.date(from: start), let endDatetime = dateFormatter.date(from: end) else {
+      return nil
     }
 
-    return nil
+    return secondDifference(from: startDatetime, to: endDatetime)
+  }
+
+  /// 计算两个时间点之间的「间隔天数」
+  ///
+  /// - parameter dateStart: 开始时间String对象
+  /// - parameter dateEnd: 结束时间String对象
+  ///
+  /// - returns: count of days.
+  public static func dayDifference(from start: Date, to end: Date) -> Int? {
+    let dateComponents = Calendar.pbs.dateComponents(from: start, to: end)
+    return dateComponents.day
   }
 
   /// 计算两个时间点之间的「间隔天数」
@@ -71,19 +83,14 @@ extension PhobosSwift where Base == Calendar {
   /// - parameter dateEndStr: 结束时间String对象
   ///
   /// - returns: count of days.
-  public static func dayDifference(_ dateStartStr: String, dateEndStr: String) -> Int? {
+  public static func dayDifference(from start: String, to end: String, dateFormat: String = "yyyy-MM-dd") -> Int? {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    if let startDate = dateFormatter.date(from: dateStartStr) {
-      if let endDate = dateFormatter.date(from: dateEndStr) {
-        let gregorianCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        let dateComponents = gregorianCalendar.dateComponents([.day], from: startDate, to: endDate)
-
-        return dateComponents.day
-      }
+    dateFormatter.dateFormat = dateFormat
+    guard let startDate = dateFormatter.date(from: start), let endDate = dateFormatter.date(from: end) else {
+      return nil
     }
 
-    return nil
+    return dayDifference(from: startDate, to: endDate)
   }
 
   /// Covert a date string from current format to another dateFormat
@@ -93,7 +100,7 @@ extension PhobosSwift where Base == Calendar {
   /// - parameter destDateFormat: 要转换后的Date String Format
   ///
   /// - returns: date string converted
-  public static func changeDateStringToFormat(_ srcDateStr: String, srcDateFormat: String = "yyyy-MM-dd", destDateFormat: String = "EE MMMM d, YYYY") -> String? {
+  public static func changeDateStringToFormat(srcDateStr: String, srcDateFormat: String = "yyyy-MM-dd", destDateFormat: String = "EE MMMM d, YYYY") -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = srcDateFormat
     let date = dateFormatter.date(from: srcDateStr)
@@ -106,7 +113,7 @@ extension PhobosSwift where Base == Calendar {
   /// - parameter dateFormat: date format
   ///
   /// - returns: date converted
-  public static func dateFromString(_ dateStr: String, dateFormat: String = "yyyy-MM-dd") -> Date? {
+  public static func date(from dateStr: String, dateFormat: String = "yyyy-MM-dd") -> Date? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = dateFormat
     return dateFormatter.date(from: dateStr)
@@ -118,7 +125,7 @@ extension PhobosSwift where Base == Calendar {
   /// - parameter dateFormat: 需要的时间格式
   ///
   /// - returns: local date string converted
-  public static func localStringFromTimestamp(_ timestamp: Double, dateFormat: String = "yyyy-MM-dd") -> String {
+  public static func localString(from timestamp: TimeInterval, dateFormat: String = "yyyy-MM-dd") -> String {
     let date = Date(timeIntervalSince1970: timestamp)
     let dateFormatter = DateFormatter()
     dateFormatter.timeZone = NSTimeZone.local
@@ -127,7 +134,7 @@ extension PhobosSwift where Base == Calendar {
   }
 
   /// today of string in a given date format
-  public static func today(_ dateFormat: String = "yyyy-MM-dd", timeZone: TimeZone? = nil) -> String {
+  public static func today(dateFormat: String = "yyyy-MM-dd", timeZone: TimeZone? = nil) -> String {
     let dateFormatter = DateFormatter()
 
     if timeZone != nil {
@@ -135,26 +142,5 @@ extension PhobosSwift where Base == Calendar {
     }
     dateFormatter.dateFormat = dateFormat
     return dateFormatter.string(from: Date())
-  }
-}
-
-/// Enhanced features of String class is implemented in this extension
-extension String {
-  /// Convert UTC Date to Local Date
-  ///
-  /// - Parameter dateFormat: dateFormat String
-  /// - Returns: Locat Data String
-  public func pbs_convertUTCDateToLocalDate(_ dateFormat: String = "yyyy-MM-dd") -> String? {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-    let localTimeZone = NSTimeZone.local
-    dateFormatter.timeZone = localTimeZone
-    let dateFormatted = dateFormatter.date(from: self)
-    dateFormatter.dateFormat = dateFormat
-    guard let date = dateFormatted else {
-      return nil
-    }
-    let dateString = dateFormatter.string(from: date)
-    return dateString
   }
 }

@@ -164,3 +164,24 @@ extension PhobosSwift where Base == String {
     String(pinyinHead.prefix(1))
   }
 }
+
+/// Enhanced features of String class is implemented in this extension
+extension PhobosSwift where Base == String {
+  /// Convert UTC Date to Local Date
+  ///
+  /// - Parameter dateFormat: dateFormat String
+  /// - Returns: Locat Data String
+  public func convertUTCDateToLocalDate(_ dateFormat: String = "yyyy-MM-dd") -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    let localTimeZone = NSTimeZone.local
+    dateFormatter.timeZone = localTimeZone
+    let dateFormatted = dateFormatter.date(from: base)
+    dateFormatter.dateFormat = dateFormat
+    guard let date = dateFormatted else {
+      return nil
+    }
+    let dateString = dateFormatter.string(from: date)
+    return dateString
+  }
+}
