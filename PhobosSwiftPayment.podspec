@@ -53,10 +53,7 @@ TODO: Add long description of the pod here.
   s.dependency 'RxCocoa', '~> 6.1.0'
   s.dependency 'PhobosSwiftCore', '~> 0.1.0'
   s.dependency 'PhobosSwiftLog', '~> 0.1.0'
-
-  s.dependency 'PhobosSwiftWechat', '~> 0.1.0'
   s.dependency 'PhobosSwiftNetwork', '~> 0.1.0'
-  s.dependency 'MirrorAlipaySDK'
 
   s.frameworks = 'Security'
   
@@ -74,13 +71,13 @@ TODO: Add long description of the pod here.
     ss.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
   end
 
-  s.subspec 'WeChat' do |ss|
-    s.source_files = "#{group}/#{name}/Wechat/Classes/**/*.{swift,m,h}"
+  s.subspec 'Wechatpay' do |ss|
+    ss.source_files = "#{group}/#{name}/Wechatpay/Classes/**/*.{swift,m,h}"
     ss.dependency 'PhobosSwiftWechat', '~> 0.1.0'
   end
 
   s.subspec 'Alipay' do |ss|
-    s.source_files = "#{group}/#{name}/Alipay/Classes/**/*.{swift,m,h}"
+    ss.source_files = "#{group}/#{name}/Alipay/Classes/**/*.{swift,m,h}"
     ss.dependency 'MirrorAlipaySDK'
   end
   

@@ -48,7 +48,8 @@ extension PaymentAppDelegateSwizzler: UIApplicationDelegate {
   func application(_ app: UIApplication,
                    open url: URL,
                    options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    PBSPayment.handlePaymentOpen(url: url)
+    PBSPayment.Wechatpay.shared.handleOpen(url: url)
+    PBSPayment.Alipay.shared.handleOpen(url: url)
     return true
   }
 

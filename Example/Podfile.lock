@@ -87,16 +87,26 @@ PODS:
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPayment (0.1.0):
-    - MirrorAlipaySDK
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
     - PhobosSwiftNetwork (~> 0.1.0)
     - PhobosSwiftPayment/Core (= 0.1.0)
-    - PhobosSwiftWechat (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftPayment/Alipay (0.1.0):
+    - MirrorAlipaySDK
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftNetwork (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPayment/Core (0.1.0):
-    - MirrorAlipaySDK
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftPayment/Wechatpay (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
     - PhobosSwiftNetwork (~> 0.1.0)
@@ -167,6 +177,8 @@ DEPENDENCIES:
   - PhobosSwiftNetwork (from `../`)
   - PhobosSwiftNetwork/Tests (from `../`)
   - PhobosSwiftPayment (from `../`)
+  - PhobosSwiftPayment/Alipay (from `../`)
+  - PhobosSwiftPayment/Wechatpay (from `../`)
   - PhobosSwiftPersistence (from `../`)
   - PhobosSwiftPersistence/Realm (from `../`)
   - PhobosSwiftPersistence/Tests (from `../`)
@@ -233,7 +245,7 @@ SPEC CHECKSUMS:
   PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
-  PhobosSwiftPayment: 1eccc4e6c4f1d148320b761a0476768e7ea97095
+  PhobosSwiftPayment: 05faf9f7b73dae5b947d0395bd4eaf3d7d9d48f9
   PhobosSwiftPersistence: 3f993cf9ff9b27ff96b9776d73aca8b40bfdb3e9
   PhobosSwiftPush: f3ace2618d714528ab9a13dd9ff118f9e2f2337b
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
@@ -245,6 +257,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 8883ad848b8db397c28cb24e5097885f381da64a
+PODFILE CHECKSUM: 93db41885770ce7854e8b856d92c1210d6546a85
 
 COCOAPODS: 1.10.1

@@ -58,7 +58,7 @@ extension PBSPayment {
       })
     }
 
-    public func handleOpenURL(url: URL) {
+    public func handleOpen(url: URL) {
       AlipaySDK.defaultService()?.processOrder(withPaymentResult: url, standbyCallback: { resultDict in
         PBSLogger.logger.debug(message: "AlipaySDK-Mobile-ResultDic--\(String(describing: resultDict))", context: "Payment")
         self.processAlipaySDKCallBack(withPayResult: resultDict)

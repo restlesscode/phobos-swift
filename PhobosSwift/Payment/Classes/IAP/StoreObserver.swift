@@ -85,7 +85,7 @@ extension PBSPayment.IAP {
     /// Apple原文建议如下: Use this property to help the store detect irregular activity. For example, in a game,
     /// it would be unusual for dozens of different iTunes Store accounts to make purchases on behalf of the same in-game character.
     /// The recommended implementation is to use a one-way hash of the user’s account name to calculate the value for this property.
-
+    /// - parameter simulatesAskToBuyInSandbox: A Boolean value that produces an “ask to buy” flow for this payment in the sandbox.
     func purchase(product: SKProduct, applicationUsername: String?, simulatesAskToBuyInSandbox: Bool = false) {
       // Create a payment request.
       let payment = SKMutablePayment(product: product)

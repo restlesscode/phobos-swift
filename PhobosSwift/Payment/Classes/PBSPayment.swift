@@ -25,48 +25,9 @@
 //
 
 import Foundation
-import MirrorWechatSDK
-import PhobosSwiftLog
-import PhobosSwiftNetwork
-import PhobosSwiftWechat
-import RxCocoa
-import RxSwift
-
-extension PBSPayment {
-  /// 支付方式
-  public enum Channel {
-    /// 支付宝
-    case aliPay(String)
-    /// 微信
-    case wechatPay(WechatPayReq)
-  }
-
-  /// Pay Result code
-  public struct ResultCode {
-    /// code
-    public var code: Int
-    /// description
-    public var description: String
-  }
-
-  ///
-  public enum ResultStatus {
-    case alipay(PBSPayment.Alipay.Status)
-    case wechatpay(Bool)
-  }
-
-  ///
-  public enum ResultError: Error {
-    case alipay(PBSPayment.Alipay.AlipayError)
-    case wechatpay(PBSPayment.Wechatpay.WechatPayError)
-  }
-}
 
 public class PBSPayment: NSObject {
-  private let disposeBag = DisposeBag()
-
   public static let shared = PBSPayment()
-  public let paymentResult = PublishSubject<Result<ResultStatus, ResultError>>()
 
   private let appDelegateSwizzler = PaymentAppDelegateSwizzler()
 
@@ -77,45 +38,5 @@ public class PBSPayment: NSObject {
 
   deinit {
     appDelegateSwizzler.unload()
-  }
-
-  /// 开始付款
-  public func startPay(method: Channel) {
-    switch method {
-    case let .wechatPay(model):
-      Wechatpay.shared.pay(wechatPayReq: model)
-    case let .aliPay(orderString):
-      Alipay.shared.pay(orderString: orderString)
-    }
-  }
-
-  private func setupBindings() {
-    Wechatpay.shared.didRecievePayReusltSubject.subscribe(onNext: { [weak self] result in
-      guard let self = self else { return }
-      switch result {
-      case let .success(success):
-        self.paymentResult.onNext(.success(.wechatpay(success)))
-      case let .failure(error):
-        self.paymentResult.onNext(.failure(.wechatpay(error)))
-      }
-
-    }).disposed(by: disposeBag)
-
-    Alipay.shared.didRecievePayReusltSubject
-      .subscribe(onNext: { [weak self] result in
-        guard let self = self else { return }
-        switch result {
-        case let .success(success):
-          self.paymentResult.onNext(.success(.alipay(success)))
-        case let .failure(error):
-          self.paymentResult.onNext(.failure(.alipay(error)))
-        }
-      })
-      .disposed(by: disposeBag)
-  }
-
-  public static func handlePaymentOpen(url: URL) {
-    Wechatpay.shared.handleOpen(url: url)
-    Alipay.shared.handleOpenURL(url: url)
   }
 }
