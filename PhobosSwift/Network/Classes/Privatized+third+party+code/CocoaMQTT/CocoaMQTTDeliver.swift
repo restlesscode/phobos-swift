@@ -8,6 +8,7 @@
 
 import Dispatch
 import Foundation
+import PhobosSwiftLog
 
 protocol CocoaMQTTDeliverProtocol: AnyObject {
   var dispatchQueue: DispatchQueue { get set }
@@ -58,7 +59,7 @@ class CocoaMQTTDeliver: NSObject {
   /// return false means the frame is rejected because of the buffer is full
   func add(_ frame: CocoaMQTTFramePublish) -> Bool {
     guard !isQueueFull else {
-      printError("Buffer is full, message(\(String(describing: frame.msgid))) was abandoned.")
+      PBSLogger.logger.error(message: "Buffer is full, message(\(String(describing: frame.msgid))) was abandoned.", context: "MQTT")
       return false
     }
 
@@ -76,8 +77,7 @@ class CocoaMQTTDeliver: NSObject {
     deliverQueue.async { [weak self] in
       guard let wself = self else { return }
       wself.removeFrameFromInflight(withMsgid: msgid)
-      printDebug("Frame \(msgid) send success")
-
+      PBSLogger.logger.debug(message: "Frame \(msgid) send success", context: "MQTT")
       wself.tryTransport()
     }
   }
@@ -115,7 +115,8 @@ extension CocoaMQTTDeliver {
   private func deliver(_ frame: CocoaMQTTFramePublish) {
     let sendfun = { (f: CocoaMQTTFramePublish) in
       guard let delegate = self.delegate else {
-        printError("The deliver delegate is nil!!! the frame will be drop: \(f)")
+        PBSLogger.logger.error(message: "The deliver delegate is nil!!! the frame will be drop: \(f)", context: "MQTT")
+
         return
       }
       delegate.dispatchQueue.async {
@@ -151,7 +152,8 @@ extension CocoaMQTTDeliver {
 
     let sendfun = { (f: CocoaMQTTFramePublish) in
       guard let delegate = self.delegate else {
-        printError("The deliver delegate is nil!!! the frame will be drop: \(f)")
+        PBSLogger.logger.error(message: "The deliver delegate is nil!!! the frame will be drop: \(f)", context: "MQTT")
+
         return
       }
       delegate.dispatchQueue.async {
@@ -166,7 +168,7 @@ extension CocoaMQTTDeliver {
       duplicatedFrame.timestamp = nowTimestamp
       sendfun(duplicatedFrame.frame)
       inflight[idx] = duplicatedFrame
-      printInfo("Re-delivery frame \(duplicatedFrame.frame)")
+      PBSLogger.logger.info(message: "Re-delivery frame \(duplicatedFrame.frame)", context: "MQTT")
     }
   }
 

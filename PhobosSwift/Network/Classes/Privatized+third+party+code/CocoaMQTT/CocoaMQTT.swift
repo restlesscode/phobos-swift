@@ -8,6 +8,7 @@
 
 import CocoaAsyncSocket
 import Foundation
+import PhobosSwiftLog
 
 /**
  * QOS
@@ -231,16 +232,6 @@ public class CocoaMQTT: NSObject, CocoaMQTTClient, CocoaMQTTDeliverProtocol {
   private var autoReconnTimer: CocoaMQTTTimer?
   private var disconnectExpectedly = false
 
-  /// Console log level
-  public var logLevel: CocoaMQTTLoggerLevel {
-    get {
-      CocoaMQTTLogger.logger.minLevel
-    }
-    set {
-      CocoaMQTTLogger.logger.minLevel = newValue
-    }
-  }
-
   /// Enable SSL connection
   public var enableSSL = false
 
@@ -351,7 +342,7 @@ public class CocoaMQTT: NSObject, CocoaMQTTClient, CocoaMQTTDeliverProtocol {
     }
 
     if descr != nil {
-      printDebug("Send \(descr!), msgid: \(msgid)")
+      PBSLogger.logger.debug(message: "Send \(descr!), msgid: \(msgid)", context: "MQTT")
     }
 
     send(CocoaMQTTFramePubAck(type: type, msgid: msgid))
@@ -375,7 +366,7 @@ public class CocoaMQTT: NSObject, CocoaMQTTClient, CocoaMQTTDeliverProtocol {
       connState = .connecting
       return true
     } catch let error as NSError {
-      printError("socket connect error: \(error.description)")
+      PBSLogger.logger.error(message: "socket connect error: \(error.description)", context: "MQTT")
       return false
     }
   }
@@ -398,7 +389,7 @@ public class CocoaMQTT: NSObject, CocoaMQTTClient, CocoaMQTTDeliverProtocol {
 
   /// Send ping request to broker
   public func ping() {
-    printDebug("ping")
+    PBSLogger.logger.debug(message: "ping", context: "MQTT")
     send(CocoaMQTTFramePing(), tag: -0xC0)
     delegate?.mqttDidPing(self)
     didPing(self)
@@ -459,7 +450,7 @@ public class CocoaMQTT: NSObject, CocoaMQTTClient, CocoaMQTTDeliverProtocol {
 
 extension CocoaMQTT: GCDAsyncSocketDelegate {
   public func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
-    printInfo("Connected to \(host) : \(port)")
+    PBSLogger.logger.info(message: "Connected to \(host) : \(port)", context: "MQTT")
 
     #if os(iOS)
     if backgroundOnSocket {
@@ -479,19 +470,18 @@ extension CocoaMQTT: GCDAsyncSocketDelegate {
   }
 
   public func socket(_ sock: GCDAsyncSocket, didReceive trust: SecTrust, completionHandler: @escaping (Bool) -> Swift.Void) {
-    printDebug("didReceiveTrust")
-
+    PBSLogger.logger.debug(message: "didReceiveTrust", context: "MQTT")
     delegate?.mqtt?(self, didReceive: trust, completionHandler: completionHandler)
     didReceiveTrust(self, trust, completionHandler)
   }
 
   public func socketDidSecure(_ sock: GCDAsyncSocket) {
-    printDebug("socketDidSecure")
+    PBSLogger.logger.debug(message: "socketDidSecure", context: "MQTT")
     sendConnectFrame()
   }
 
   public func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-    printDebug("Socket write message with tag: \(tag)")
+    PBSLogger.logger.debug(message: "Socket write message with tag: \(tag)", context: "MQTT")
   }
 
   public func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
@@ -524,7 +514,8 @@ extension CocoaMQTT: GCDAsyncSocketDelegate {
       }
 
       // Start reconnector once socket error occuried
-      printInfo("Try reconnect to server after \(reconectTimeInterval)s")
+      PBSLogger.logger.info(message: "Try reconnect to server after \(reconectTimeInterval)s", context: "MQTT")
+
       autoReconnTimer = CocoaMQTTTimer.after(Double(reconectTimeInterval)) { [weak self] in
         guard let self = self else { return }
         if self.reconectTimeInterval < self.maxAutoReconnectTimeInterval {
@@ -542,7 +533,7 @@ extension CocoaMQTT: GCDAsyncSocketDelegate {
 
 extension CocoaMQTT: CocoaMQTTReaderDelegate {
   func didReceiveConnAck(_ reader: CocoaMQTTReader, connack: UInt8) {
-    printDebug("CONNACK Received: \(connack)")
+    PBSLogger.logger.debug(message: "CONNACK Received: \(connack)", context: "MQTT")
 
     let ack: CocoaMQTTConnAck
     switch connack {
@@ -590,7 +581,7 @@ extension CocoaMQTT: CocoaMQTTReaderDelegate {
   }
 
   func didReceivePublish(_ reader: CocoaMQTTReader, message: CocoaMQTTMessage, id: UInt16) {
-    printInfo("PUBLISH Received from \(message.topic)")
+    PBSLogger.logger.info(message: "PUBLISH Received from \(message.topic)", context: "MQTT")
 
     delegate?.mqtt(self, didReceiveMessage: message, id: id)
     didReceiveMessage(self, message, id)
@@ -603,7 +594,7 @@ extension CocoaMQTT: CocoaMQTTReaderDelegate {
   }
 
   func didReceivePubAck(_ reader: CocoaMQTTReader, msgid: UInt16) {
-    printDebug("PUBACK Received: \(msgid)")
+    PBSLogger.logger.debug(message: "PUBACK Received: \(msgid)", context: "MQTT")
 
     deliver.sendSuccess(withMsgid: msgid)
     delegate?.mqtt(self, didPublishAck: msgid)
@@ -611,19 +602,19 @@ extension CocoaMQTT: CocoaMQTTReaderDelegate {
   }
 
   func didReceivePubRec(_ reader: CocoaMQTTReader, msgid: UInt16) {
-    printDebug("PUBREC Received: \(msgid)")
+    PBSLogger.logger.debug(message: "PUBREC Received: \(msgid)", context: "MQTT")
 
     puback(CocoaMQTTFrameType.pubrel, msgid: msgid)
   }
 
   func didReceivePubRel(_ reader: CocoaMQTTReader, msgid: UInt16) {
-    printDebug("PUBREL Received: \(msgid)")
+    PBSLogger.logger.debug(message: "PUBREL Received: \(msgid)", context: "MQTT")
 
     puback(CocoaMQTTFrameType.pubcomp, msgid: msgid)
   }
 
   func didReceivePubComp(_ reader: CocoaMQTTReader, msgid: UInt16) {
-    printDebug("PUBCOMP Received: \(msgid)")
+    PBSLogger.logger.debug(message: "PUBCOMP Received: \(msgid)", context: "MQTT")
 
     deliver.sendSuccess(withMsgid: msgid)
     delegate?.mqtt?(self, didPublishComplete: msgid)
@@ -631,10 +622,11 @@ extension CocoaMQTT: CocoaMQTTReaderDelegate {
   }
 
   func didReceiveSubAck(_ reader: CocoaMQTTReader, msgid: UInt16) {
-    printDebug("SUBACK Received: \(msgid)")
+    PBSLogger.logger.debug(message: "SUBACK Received: \(msgid)", context: "MQTT")
 
     guard let topicsAndQos = subscriptionsWaitingAck.removeValue(forKey: msgid) else {
-      printWarning("UNEXPECT SUBACK Received: \(msgid)")
+      PBSLogger.logger.warning(message: "UNEXPECT SUBACK Received: \(msgid)", context: "MQTT")
+
       return
     }
 
@@ -650,10 +642,11 @@ extension CocoaMQTT: CocoaMQTTReaderDelegate {
   }
 
   func didReceiveUnsubAck(_ reader: CocoaMQTTReader, msgid: UInt16) {
-    printDebug("UNSUBACK Received: \(msgid)")
+    PBSLogger.logger.debug(message: "UNSUBACK Received: \(msgid)", context: "MQTT")
 
     guard let topic = unsubscriptionsWaitingAck.removeValue(forKey: msgid) else {
-      printWarning("UNEXPECT UNSUBACK Received: \(msgid)")
+      PBSLogger.logger.warning(message: "UNEXPECT UNSUBACK Received: \(msgid)", context: "MQTT")
+
       return
     }
 
@@ -666,7 +659,7 @@ extension CocoaMQTT: CocoaMQTTReaderDelegate {
   }
 
   func didReceivePong(_ reader: CocoaMQTTReader) {
-    printDebug("PONG Received")
+    PBSLogger.logger.debug(message: "PONG Received", context: "MQTT")
 
     delegate?.mqttDidReceivePong(self)
     didReceivePong(self)
@@ -692,7 +685,7 @@ class CocoaMQTTReader {
   }
 
   func headerReady(_ header: UInt8) {
-    printDebug("reader header ready: \(header) ")
+    PBSLogger.logger.debug(message: "reader header ready: \(header) ", context: "MQTT")
 
     self.header = header
     readLength()
@@ -736,7 +729,8 @@ class CocoaMQTTReader {
   private func frameReady() {
     // handle frame
     guard let frameType = CocoaMQTTFrameType(rawValue: UInt8(header & 0xF0)) else {
-      printError("Abort! Received unknown frame type!")
+      PBSLogger.logger.error(message: "Abort! Received unknown frame type!", context: "MQTT")
+
       return
     }
 

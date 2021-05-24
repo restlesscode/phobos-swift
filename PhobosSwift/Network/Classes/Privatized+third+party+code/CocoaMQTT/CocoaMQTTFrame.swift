@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PhobosSwiftLog
 
 /**
  * Encode and Decode big-endian UInt16
@@ -304,7 +305,8 @@ struct CocoaMQTTFramePublish: CocoaMQTTFrame {
   mutating func unpack() {
     // topic
     if data!.count < 2 {
-      printWarning("Invalid format of received message.")
+      PBSLogger.logger.warning(message: "Invalid format of received message.", context: "MQTT")
+
       return
     }
     var msb = data![0]
@@ -313,7 +315,8 @@ struct CocoaMQTTFramePublish: CocoaMQTTFrame {
     var pos = 2 + Int(len)
 
     if data!.count < pos {
-      printWarning("Invalid format of received message.")
+      PBSLogger.logger.warning(message: "Invalid format of received message.", context: "MQTT")
+
       return
     }
 
@@ -324,7 +327,8 @@ struct CocoaMQTTFramePublish: CocoaMQTTFrame {
       msgid = 0
     } else {
       if data!.count < pos + 2 {
-        printWarning("Invalid format of received message.")
+        PBSLogger.logger.warning(message: "Invalid format of received message.", context: "MQTT")
+
         return
       }
       msb = data![pos]
