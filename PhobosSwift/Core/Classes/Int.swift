@@ -26,20 +26,22 @@
 
 import Foundation
 
-extension Int {
-  /// 将数字转成中文
-  public var pbs_toSimplifiedChineseNumber: String {
+extension Int: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base == Int {
+  /// 将数字转成自然语言textual，语言根据用户设置而定
+  public var textualString: String? {
     let formatter = NumberFormatter()
 
     formatter.numberStyle = NumberFormatter.Style(rawValue: UInt(CFNumberFormatterRoundingMode.roundHalfDown.rawValue))!
-    let string = formatter.string(from: NSNumber(value: self))!
+    let string = formatter.string(from: NSNumber(value: base))
 
     return string
   }
 
   /// 将数字转成中文
-  public var pbs_cn: String {
-    if self == 0 {
+  public var cn: String {
+    if base == 0 {
       return "零"
     }
     let zhNumbers = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
@@ -47,16 +49,16 @@ extension Int {
     var cn = ""
     var currentNum = 0
     var beforeNum = 0
-    let intLength = Int(floor(log10(Double(self))))
+    let intLength = Int(floor(log10(Double(base))))
     for index in 0...intLength {
-      currentNum = self / Int(pow(10.0, Double(index))) % 10
+      currentNum = base / Int(pow(10.0, Double(index))) % 10
       if index == 0 {
         if currentNum != 0 {
           cn = zhNumbers[currentNum]
           continue
         }
       } else {
-        beforeNum = self / Int(pow(10.0, Double(index - 1))) % 10
+        beforeNum = base / Int(pow(10.0, Double(index - 1))) % 10
       }
       if [1, 2, 3, 5, 6, 7, 9, 10, 11].contains(index) {
         if currentNum == 1, [1, 5, 9].contains(index), index == intLength { // 处理一开头的含十单位
@@ -78,15 +80,8 @@ extension Int {
     return cn
   }
 
-  /// 将数字转成英语
-  public var pbs_en: String {
-    let enNumbers = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
-
-    return enNumbers[self]
-  }
-
   /// 获取之间的随机数
-  public static func pbs_random(between from: Int, and to: Int) -> Int {
+  public static func random(between from: Int, and to: Int) -> Int {
     let range = UInt32(to - from)
     return Int(arc4random_uniform(range)) + from
   }

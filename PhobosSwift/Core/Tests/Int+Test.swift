@@ -1,7 +1,7 @@
 //
 //
-//  Array.swift
-//  PhobosSwiftCore
+//  Int+Test.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,15 +24,27 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+@testable import PhobosSwiftCore
+import Foundation
+import XCTest
 
-extension Array {
-  /// Divides an array into equal parts according to the `size`
-  ///
-  /// - Parameter size: the size for each part
-  public func pbs_chunked(into size: Int) -> [[Element]] {
-    stride(from: 0, to: count, by: size).map {
-      Array(self[$0..<Swift.min($0 + size, count)])
+class IntTest: XCTestCase {
+  override func setUp() {
+    super.setUp()
+  }
+
+  override func tearDown() {
+    super.tearDown()
+  }
+
+  func test() {
+    let number = 11_111
+
+    XCTAssertEqual(number.pbs.cn, "一万一千一百一十一")
+
+    for _ in 0..<10 {
+      let randomNumber = Int.pbs.random(between: 0, and: 10)
+      XCTAssertTrue(randomNumber >= 0 && randomNumber <= 10)
     }
   }
 }

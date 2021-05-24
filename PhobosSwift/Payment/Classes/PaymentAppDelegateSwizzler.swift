@@ -48,15 +48,24 @@ extension PaymentAppDelegateSwizzler: UIApplicationDelegate {
   func application(_ app: UIApplication,
                    open url: URL,
                    options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    #if canImport(PBSPayment)
     PBSPayment.Wechatpay.shared.handleOpen(url: url)
+    #endif
+
+    #if canImport(PBSPayment)
     PBSPayment.Alipay.shared.handleOpen(url: url)
+    #endif
     return true
   }
 
   func application(_ application: UIApplication,
                    continue userActivity: NSUserActivity,
                    restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-    PBSPayment.Wechatpay.shared.handleOpenUniversalLink(userActivity: userActivity)
+    #if canImport(PBSPayment)
+    return PBSPayment.Wechatpay.shared.handleOpenUniversalLink(userActivity: userActivity)
+    #endif
+
+    return true
   }
 
   func applicationWillTerminate(_ application: UIApplication) {

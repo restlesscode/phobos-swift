@@ -24,20 +24,18 @@
 //  THE SOFTWARE.
 //
 
-/// Enhanced features of Calendar class is implemented in this extension
-extension Calendar {
-  /// 通用时间格式
-  public static let timeStringFormat: String = "yyyy-MM-dd HH:mm:ss"
-  /// 通用日期格式
-  public static let dateStringFormat: String = "yyyy-MM-dd"
+import Foundation
 
+extension Calendar: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base == Calendar {
   /// 计算两个时间点之间的「间隔秒数」
   ///
   /// - parameter datetimeStart: 开始时间Data对象
   /// - parameter datetimeEnd: 结束时间Data对象
   ///
   /// - returns: A second or count of seconds.
-  public static func pbs_secondDifference(_ datetimeStart: Date, datetimeEnd: Date) -> Int? {
+  public static func secondDifference(_ datetimeStart: Date, datetimeEnd: Date) -> Int? {
     let gregorianCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
 
     let dateComponents = gregorianCalendar.dateComponents([.second], from: datetimeStart, to: datetimeEnd)
@@ -51,7 +49,7 @@ extension Calendar {
   /// - parameter datetimeEndStr: 结束时间Data对象
   ///
   /// - returns: A second or count of seconds.
-  public static func pbs_secondDifference(_ datetimeStartStr: String, datetimeEndStr: String) -> Int? {
+  public static func secondDifference(_ datetimeStartStr: String, datetimeEndStr: String) -> Int? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
@@ -73,7 +71,7 @@ extension Calendar {
   /// - parameter dateEndStr: 结束时间String对象
   ///
   /// - returns: count of days.
-  public static func pbs_dayDifference(_ dateStartStr: String, dateEndStr: String) -> Int? {
+  public static func dayDifference(_ dateStartStr: String, dateEndStr: String) -> Int? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
     if let startDate = dateFormatter.date(from: dateStartStr) {
@@ -95,11 +93,11 @@ extension Calendar {
   /// - parameter destDateFormat: 要转换后的Date String Format
   ///
   /// - returns: date string converted
-  public static func pbs_changeDateStringToFormat(_ srcDateStr: String, srcDateFormat: String = "yyyy-MM-dd", destDateFormat: String = "EE MMMM d, YYYY") -> String {
+  public static func changeDateStringToFormat(_ srcDateStr: String, srcDateFormat: String = "yyyy-MM-dd", destDateFormat: String = "EE MMMM d, YYYY") -> String? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = srcDateFormat
     let date = dateFormatter.date(from: srcDateStr)
-    return date!.pbs_string(dateFormat: destDateFormat)
+    return date?.pbs.string(dateFormat: destDateFormat)
   }
 
   /// Covert Date String to Date
@@ -108,10 +106,10 @@ extension Calendar {
   /// - parameter dateFormat: date format
   ///
   /// - returns: date converted
-  public static func pbs_dateFromString(_ dateStr: String, dateFormat: String = "yyyy-MM-dd") -> Date {
+  public static func dateFromString(_ dateStr: String, dateFormat: String = "yyyy-MM-dd") -> Date? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = dateFormat
-    return dateFormatter.date(from: dateStr)!
+    return dateFormatter.date(from: dateStr)
   }
 
   /// Covert Timestamp to String
@@ -120,7 +118,7 @@ extension Calendar {
   /// - parameter dateFormat: 需要的时间格式
   ///
   /// - returns: local date string converted
-  public static func pbs_localStringFromTimestamp(_ timestamp: Double, dateFormat: String = "yyyy-MM-dd") -> String {
+  public static func localStringFromTimestamp(_ timestamp: Double, dateFormat: String = "yyyy-MM-dd") -> String {
     let date = Date(timeIntervalSince1970: timestamp)
     let dateFormatter = DateFormatter()
     dateFormatter.timeZone = NSTimeZone.local
@@ -129,7 +127,7 @@ extension Calendar {
   }
 
   /// today of string in a given date format
-  public static func pbs_today(_ dateFormat: String = "yyyy-MM-dd", timeZone: TimeZone? = nil) -> String {
+  public static func today(_ dateFormat: String = "yyyy-MM-dd", timeZone: TimeZone? = nil) -> String {
     let dateFormatter = DateFormatter()
 
     if timeZone != nil {
@@ -137,72 +135,6 @@ extension Calendar {
     }
     dateFormatter.dateFormat = dateFormat
     return dateFormatter.string(from: Date())
-  }
-}
-
-/// Enhanced features of Date struct is implemented in this extension
-extension Date {
-  /// Covert Date to String format
-  ///
-  /// - parameter dateFormat: date format
-  ///
-  /// - returns: date string converted
-  public func pbs_string(dateFormat: String = "yyyy-MM-dd") -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = dateFormat
-
-    return dateFormatter.string(from: self)
-  }
-
-  /// The begining of a week for a given date
-  ///
-  public var pbs_beginDateOfWeek: Date {
-    let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-
-    // Get the weekday component of the current date
-    let weekdayComponents = gregorian.dateComponents([.weekday], from: self)
-
-    /*
-     Create a date components to represent the number of days to subtract from the current date.
-     The weekday value for Sunday in the Gregorian calendar is 1,
-     so subtract 1 from the number of days to subtract from the date in question.
-     (If today is Sunday, subtract 0 days.)
-     */
-    var componentsToSubtract = DateComponents()
-    componentsToSubtract.day = 0 - (weekdayComponents.weekday! - 1)
-
-    var beginningOfWeek = gregorian.date(byAdding: componentsToSubtract, to: self)!
-
-    /*
-     Optional step:
-     beginningOfWeek now has the same hour, minute, and second as the original date (today).
-     To normalize to midnight, extract the year, month, and day components and create a new date from those components.
-     */
-    let components = gregorian.dateComponents([.year, .month, .day], from: beginningOfWeek)
-
-    beginningOfWeek = gregorian.date(from: components)!
-
-    return beginningOfWeek
-  }
-
-  /// The ending of a week for a given date
-  ///
-  public var pbs_endDateOfWeek: Date {
-    let beginningOfWeek = pbs_beginDateOfWeek
-    return beginningOfWeek.pbs_dateAfterDays(6)
-  }
-
-  /// The date after interval
-  ///
-  public func pbs_dateAfterDays(_ deltaDays: Int) -> Date {
-    let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
-
-    var dayComponent = DateComponents()
-    dayComponent.day = deltaDays
-
-    let newDate: Date = gregorian.date(byAdding: dayComponent, to: self)!
-
-    return newDate
   }
 }
 
