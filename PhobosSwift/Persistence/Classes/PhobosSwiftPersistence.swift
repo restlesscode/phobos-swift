@@ -25,5 +25,10 @@
 //
 
 import Foundation
+import PhobosSwiftLog
+
+extension PBSLogger {
+  static let logger = PBSLogger.shared
+}
 
 class PhobosSwiftPersistence {}

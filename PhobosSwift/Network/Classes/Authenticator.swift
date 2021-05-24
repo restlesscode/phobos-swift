@@ -26,6 +26,7 @@
 
 import Alamofire
 import Foundation
+import PhobosSwiftLog
 import RxCocoa
 import RxSwift
 
@@ -47,24 +48,25 @@ extension PBSNetwork {
       queue.sync { [weak self] in
         // scenario 1: we're already loading a new token
         if let publisher = self?.refreshPublisher {
-          print("正在刷新token")
+          PBSLogger.logger.debug(message: "正在刷新token", context: "Network")
           return publisher
         }
 
         // scenario 2: we don't have a token at all, the user should probably log in
         guard let token = self?.currentToken else {
-          print("没有token, 请登录")
+          PBSLogger.logger.debug(message: "没有token, 请登录", context: "Network")
           return Observable.error(AuthenticationError.loginRequired)
         }
 
         // scenario 3: we already have a valid token and don't want to force a refresh
         if token.isValid, !forceRefresh {
-          print("token有效,继续请求")
+          PBSLogger.logger.debug(message: "token有效,继续请求", context: "Network")
           return Observable.just(token)
         }
 
         // scenario 4: we need a new token
-        print("需要新的token")
+        PBSLogger.logger.debug(message: "需要新的token", context: "Network")
+
         let publisher = refreshToken()
           .share(replay: 1, scope: .whileConnected)
           .do(onNext: { [weak self] token in
@@ -162,7 +164,8 @@ extension PBSNetwork.APIRequest {
                                     body: [String: Any]?,
                                     encoding: ParameterEncoding = URLEncoding.default,
                                     headers: [String: String]?) -> Observable<Response> {
-    print("请求")
+    PBSLogger.logger.debug(message: "请求", context: "Network")
+
     return Observable<Response>.create { observer in
       let endpoint = URL(string: url)!
       PBSNetwork.APIRequest.request(endpoint,

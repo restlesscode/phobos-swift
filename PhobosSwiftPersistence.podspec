@@ -44,8 +44,6 @@ TODO: Add long description of the pod here.
   s.static_framework = false
   s.prefix_header_file = false
 
-  s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
-
   s.preserve_paths = [
     "{group}/#{name}/README.md",
     "{group}/#{name}/CHANGELOG.md"
@@ -55,12 +53,18 @@ TODO: Add long description of the pod here.
   s.dependency 'RxCocoa', '~> 6.1.0'
   s.dependency 'PhobosSwiftCore', '~> 0.1.0'
   s.dependency 'PhobosSwiftLog', '~> 0.1.0'
+  
+  s.subspec 'Core' do |ss|
+    ss.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
+  end
 
   s.subspec 'Realm' do |ss|
     ss.source_files = "#{group}/#{name}/Realm/Classes/**/*.{swift,m,h}"
     ss.dependency 'MirrorRealmSwift', '~> 0.3.1'
     ss.dependency 'MirrorRealm', '~> 0.3.1'
   end
+  
+  s.default_subspec = 'Core'
 
   if has_resource_bundles
     s.resource_bundles = {

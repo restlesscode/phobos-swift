@@ -32,10 +32,6 @@ import PhobosSwiftLog
 let kAppGroupId = "AppGroupId"
 let kRealm = "realm"
 
-extension PBSLogger {
-  static let logger = PBSLogger.shared
-}
-
 /// Realm 数据库的类型
 public enum RealmType {
   /// app buudle 中拖入的realm文件
@@ -71,11 +67,11 @@ extension Realm {
     do {
       switch type {
       case .document:
-        fileUrl = FileManager.pbs_path(inDocuments: realmIdentifier, withExtension: kRealm)
+        fileUrl = FileManager.pbs.path(inDocuments: realmIdentifier, withExtension: kRealm)
       case .library:
-        fileUrl = FileManager.pbs_path(inLibrary: realmIdentifier, withExtension: kRealm)
+        fileUrl = FileManager.pbs.path(inLibrary: realmIdentifier, withExtension: kRealm)
       case .appBundle:
-        fileUrl = FileManager.pbs_path(inBundle: Bundle.main, name: realmIdentifier, withExtension: kRealm)
+        fileUrl = FileManager.pbs.path(inBundle: Bundle.main, name: realmIdentifier, withExtension: kRealm)
       case .appGroup:
         if let appGroupId = Bundle.main.object(forInfoDictionaryKey: kAppGroupId) as? String {
           fileUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier:

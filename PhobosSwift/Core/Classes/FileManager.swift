@@ -27,28 +27,29 @@
 import Foundation
 import PhobosSwiftLog
 
-/// 返回相应的目录
-extension FileManager {
+extension FileManager: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base: FileManager {
   /// 返回Libary中的path
   ///
-  public static func pbs_path(inLibrary name: String, withExtension: String) -> URL? {
-    FileManager.pbs_userLibraryUrl?.appendingPathComponent("\(name).\(withExtension)")
+  public static func path(inLibrary name: String, withExtension: String) -> URL? {
+    FileManager.pbs.userLibraryUrl?.appendingPathComponent("\(name).\(withExtension)")
   }
 
   /// 返回Documents中的path
   ///
-  public static func pbs_path(inDocuments name: String, withExtension: String) -> URL? {
-    FileManager.pbs_userDocumentsUrl?.appendingPathComponent("\(name).\(withExtension)")
+  public static func path(inDocuments name: String, withExtension: String) -> URL? {
+    FileManager.pbs.userDocumentsUrl?.appendingPathComponent("\(name).\(withExtension)")
   }
 
   /// 返回MainBundle的path
   ///
-  public static func pbs_path(inBundle bundle: Bundle = .main, name: String, withExtension: String) -> URL? {
+  public static func path(inBundle bundle: Bundle = .main, name: String, withExtension: String) -> URL? {
     bundle.url(forResource: name, withExtension: withExtension)
   }
 
   /// documents path
-  public static var pbs_userDocumentsUrl: URL? = {
+  public static var userDocumentsUrl: URL? {
     var url: URL?
     do {
       url = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
@@ -57,10 +58,10 @@ extension FileManager {
     }
 
     return url
-  }()
+  }
 
   /// get app library path
-  public static var pbs_userLibraryUrl: URL? = {
+  public static var userLibraryUrl: URL? {
     var url: URL?
     do {
       url = try FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
@@ -69,5 +70,5 @@ extension FileManager {
     }
 
     return url
-  }()
+  }
 }

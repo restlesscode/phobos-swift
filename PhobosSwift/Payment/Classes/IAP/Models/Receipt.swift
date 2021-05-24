@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import PhobosSwiftLog
 
 extension PBSPayment.IAP {
   /// App 内购买项目收据字段
@@ -90,7 +91,7 @@ extension PBSPayment.IAP.Receipt {
   /// 如果两者不匹配，则验证失败。
   private var isBundleValidated: Bool {
     if let bundleIdentifier = Bundle.main.bundleIdentifier {
-      // bbu_Print("check bundleId: \(bundle_id) == \(bundleIdentifier)")
+      PBSLogger.logger.debug(message: "check bundleId: \(bundle_id) == \(bundleIdentifier)", context: "IAP")
       return bundle_id == bundleIdentifier
     }
     return false
@@ -99,11 +100,10 @@ extension PBSPayment.IAP.Receipt {
   /// 4. 验证收据中的版本标识符字符串与在 Info.plist 文件中含有您要的 CFBundleShortVersionString值(macOS)或 CFBundleVersion 值(iOS)的硬编码常量相匹配。
   /// 如果两者不匹配，则验证失败。
   private var isAppVersionValidated: Bool {
-    // bbu_Print("check appVersion vs CFBundleShortVersionString: \(application_version) == \(Bundle.main.bbu_bundleShortVersion)")
     let appVersionValidated = application_version == Bundle.main.pbs.bundleShortVersion
-
-    // bbu_Print("check appVersion vs CFBundleVersion: \(application_version) == \(Bundle.main.bbu_bundleVersion)")
     let bundleVersionValidated = application_version == Bundle.main.pbs.bundleVersion
+
+    PBSLogger.logger.debug(message: "check App Version: \(application_version) == \(Bundle.main.pbs.bundleShortVersion ?? "")", context: "IAP")
 
     return appVersionValidated || bundleVersionValidated
   }

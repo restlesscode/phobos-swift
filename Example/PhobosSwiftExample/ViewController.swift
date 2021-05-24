@@ -25,7 +25,14 @@
 //
 
 import PhobosSwiftCore
+import PhobosSwiftLocation
 import PhobosSwiftLog
+import PhobosSwiftNetwork
+import PhobosSwiftPayment
+import PhobosSwiftPersistence
+import PhobosSwiftPush
+import PhobosSwiftRouter
+import PhobosSwiftWechat
 import UIKit
 
 class ViewController: UIViewController {

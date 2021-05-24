@@ -116,7 +116,12 @@ PODS:
   - PhobosSwiftPersistence (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
-    - PhobosSwiftPersistence/Realm (= 0.1.0)
+    - PhobosSwiftPersistence/Core (= 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftPersistence/Core (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPersistence/Realm (0.1.0):
@@ -246,7 +251,7 @@ SPEC CHECKSUMS:
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
   PhobosSwiftPayment: 05faf9f7b73dae5b947d0395bd4eaf3d7d9d48f9
-  PhobosSwiftPersistence: 3f993cf9ff9b27ff96b9776d73aca8b40bfdb3e9
+  PhobosSwiftPersistence: 076f97ba5a45205644fb5f4795d77a13a0a37bb8
   PhobosSwiftPush: f3ace2618d714528ab9a13dd9ff118f9e2f2337b
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
   PhobosSwiftWechat: 09ab2d36da3badb1abc0ebe26d4b084db1ef6fac

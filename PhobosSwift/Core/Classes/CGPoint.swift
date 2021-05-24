@@ -37,7 +37,7 @@ extension PhobosSwift where Base == CGPoint {
   }
 
   ///
-  public func pbs_offset(x: CGFloat, y: CGFloat) -> CGPoint {
+  public func offset(x: CGFloat, y: CGFloat) -> CGPoint {
     CGPoint(x: base.x + x, y: base.y + y)
   }
 }

@@ -41,7 +41,7 @@ class CocoaMQTTLogger: NSObject {
   // logs
   func log(level: CocoaMQTTLoggerLevel, message: String) {
     guard level.rawValue >= minLevel.rawValue else { return }
-    print("CocoaMQTT(\(level)): \(message)")
+    PBSLogger.logger.debug(message: "CocoaMQTT(\(level)): \(message)", context: "Network")
   }
 
   func debug(_ message: String) {
