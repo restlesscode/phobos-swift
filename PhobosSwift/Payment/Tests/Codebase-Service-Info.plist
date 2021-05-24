@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PlistVersion</key>
+	<string>0.1.0</string>
+	<key>CodebasePush</key>
+	<dict>
+		<key>Aliyun</key>
+		<dict>
+			<key>AppKey</key>
+			<string>27856970</string>
+			<key>AppSecret</key>
+			<string>336fdc2769c2aacb588255efb6e39652</string>
+		</dict>
+	</dict>
+	<key>CodebaseLog</key>
+	<dict>
+		<key>MaxFileSize</key>
+		<integer>1048576</integer>
+		<key>MaxTimeInterval</key>
+		<integer>86400</integer>
+		<key>MaxLogFiles</key>
+		<integer>5</integer>
+		<key>iCloudContainerIdentifier</key>
+		<string>iCloud.cn.porsche.app-inhouse</string>
+	</dict>
+	<key>InternalBuildVersion</key>
+	<string>0.1.0</string>
+</dict>
+</plist>

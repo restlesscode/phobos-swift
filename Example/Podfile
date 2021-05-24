@@ -32,8 +32,10 @@ target 'PhobosSwiftExample' do
   # Persistence
   pod 'PhobosSwiftPersistence', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   pod 'PhobosSwiftPersistence/Realm', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
-  # Log
+  # Push
   pod 'PhobosSwiftPush', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Payment
+  pod 'PhobosSwiftPayment', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
 
 end
 

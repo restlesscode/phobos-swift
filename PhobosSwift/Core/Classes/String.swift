@@ -95,7 +95,7 @@ extension PhobosSwift where Base == String {
 
   /// 字符串结尾去空格
   public var trim: String {
-    base.trimmingCharacters(in: [" "])
+    base.trimmingCharacters(in: .whitespaces)
   }
 
   /// 时间转换 transfer to time in format

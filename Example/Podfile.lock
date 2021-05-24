@@ -34,6 +34,7 @@ PODS:
     - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (7.4.0):
     - GoogleUtilities/Logger
+  - MirrorAlipaySDK (0.1.3)
   - MirrorRealm (0.3.1):
     - MirrorRealm/Headers (= 0.3.1)
   - MirrorRealm/Headers (0.3.1)
@@ -83,6 +84,23 @@ PODS:
     - CocoaAsyncSocket (~> 7.6.5)
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftPayment (0.1.0):
+    - MirrorAlipaySDK
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - PhobosSwiftPayment/Core (= 0.1.0)
+    - PhobosSwiftWechat (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxSwift (~> 6.1.0)
+  - PhobosSwiftPayment/Core (0.1.0):
+    - MirrorAlipaySDK
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - PhobosSwiftWechat (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPersistence (0.1.0):
@@ -148,6 +166,7 @@ DEPENDENCIES:
   - PhobosSwiftLog/Tests (from `../`)
   - PhobosSwiftNetwork (from `../`)
   - PhobosSwiftNetwork/Tests (from `../`)
+  - PhobosSwiftPayment (from `../`)
   - PhobosSwiftPersistence (from `../`)
   - PhobosSwiftPersistence/Realm (from `../`)
   - PhobosSwiftPersistence/Tests (from `../`)
@@ -162,6 +181,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://gitee.com/tjerwinchen/cocoa-mirror-spec.git:
+    - MirrorAlipaySDK
     - MirrorRealm
     - MirrorRealmSwift
     - MirrorWechatSDK
@@ -188,6 +208,8 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftNetwork:
     :path: "../"
+  PhobosSwiftPayment:
+    :path: "../"
   PhobosSwiftPersistence:
     :path: "../"
   PhobosSwiftPush:
@@ -201,6 +223,7 @@ SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
+  MirrorAlipaySDK: 6bb2f24ba0fffd7e898d7efe33620a2254704808
   MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
@@ -210,6 +233,7 @@ SPEC CHECKSUMS:
   PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
+  PhobosSwiftPayment: 1eccc4e6c4f1d148320b761a0476768e7ea97095
   PhobosSwiftPersistence: 3f993cf9ff9b27ff96b9776d73aca8b40bfdb3e9
   PhobosSwiftPush: f3ace2618d714528ab9a13dd9ff118f9e2f2337b
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
@@ -221,6 +245,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 7357637e1336ee5fb6bde03a58c65b0b3f023bb6
+PODFILE CHECKSUM: 8883ad848b8db397c28cb24e5097885f381da64a
 
 COCOAPODS: 1.10.1
