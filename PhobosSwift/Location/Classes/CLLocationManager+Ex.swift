@@ -39,9 +39,9 @@ extension CLLocationManager {
 }
 
 extension PhobosSwift where Base: CLLocationManager {
-  static func makeLocationManager(desiredAccuracy: CLLocationAccuracy) -> CLLocationManager {
+  static func makeLocationManager(desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyBestForNavigation) -> CLLocationManager {
     var manager = CLLocationManager()
-    manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    manager.desiredAccuracy = desiredAccuracy
     manager.pbs.shouldDisplayHeadingCalibration = true
     return manager
   }
