@@ -47,20 +47,17 @@ public enum RealmType {
   case memory
 }
 
-/// CodebaseRealm 对Realm的拓展，为了方便调用
-extension Realm {
-  /// default Realm, document
-  ///
-  public static var pbs_default: Realm? = Realm.pbs_makeRealm()
+extension Realm: PhobosSwiftCompatible {}
 
+extension PhobosSwift where Base == Realm {
   /// Realm
   ///
   /// - parameter
-  public static func pbs_makeRealm(schemaVersion: UInt64 = 0, identifier realmIdentifier: String? = nil,
-                                   in type: RealmType = .document,
-                                   objectTypes: [Object.Type]? = nil,
-                                   migrationBlock: MigrationBlock? = nil,
-                                   password: String? = nil) -> Realm? {
+  public static func makeRealm(schemaVersion: UInt64 = 0, identifier realmIdentifier: String? = nil,
+                               in type: RealmType = .document,
+                               objectTypes: [Object.Type]? = nil,
+                               migrationBlock: MigrationBlock? = nil,
+                               password: String? = nil) -> Realm? {
     var fileUrl: URL?
     let realmIdentifier = realmIdentifier ?? Bundle.main.bundleIdentifier ?? "PhobosSwiftPersistenceRealm"
 
@@ -96,4 +93,8 @@ extension Realm {
       return nil
     }
   }
+
+  /// default Realm, document
+  ///
+  public static let `default`: Realm? = Realm.pbs.makeRealm()
 }

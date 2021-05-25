@@ -135,7 +135,7 @@ extension RxCLLocationManagerDelegateProxy: CLLocationManagerDelegate {
   ///
   /// 如果为true，是当在室内、地下、有磁场干扰或者很久没有用指南针时系统发现方向不够准确时自动弹出校准。
   public func locationManagerShouldDisplayHeadingCalibration(_ manager: CLLocationManager) -> Bool {
-    manager.pbs_shouldDisplayHeadingCalibration
+    manager.pbs.shouldDisplayHeadingCalibration
   }
 
   /// Invoked when there's a state transition for a monitored region or in response to a request for state via a
@@ -202,7 +202,8 @@ extension RxCLLocationManagerDelegateProxy: CLLocationManagerDelegate {
   /// Invoked when the authorization status changes for this application.
   @available(iOS, introduced: 4.2, deprecated: 14.0)
   public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    manager._pbs_authorizationStatus = status
+    var _manager = manager
+    _manager.pbs._authorizationStatus = status
     didChangeAuthorizationSubject.onNext((manager, status))
     _forwardToDelegate?.locationManager(manager, didChangeAuthorization: status)
   }

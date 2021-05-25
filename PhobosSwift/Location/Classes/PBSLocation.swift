@@ -42,7 +42,7 @@ open class PBSLocation {
   /// Location Manager
   public var locationManager: CLLocationManager
 
-  public init(locationManager: CLLocationManager = CLLocationManager.default) {
+  public init(locationManager: CLLocationManager = CLLocationManager.pbs.default) {
     self.locationManager = locationManager
   }
 
@@ -72,11 +72,11 @@ open class PBSLocation {
 
       case .authorizedWhenInUse:
         // Enable basic location features
-        self.locationManager.pbs_updatingLocation(updating: true)
+        self.locationManager.pbs.updatingLocation(updating: true)
       // enableWhenInUseFeatures()
       case .authorizedAlways:
         // Enable any of your app's location features
-        self.locationManager.pbs_updatingLocation(updating: true)
+        self.locationManager.pbs.updatingLocation(updating: true)
       // enableAlwaysFeatures()
       @unknown default:
         break

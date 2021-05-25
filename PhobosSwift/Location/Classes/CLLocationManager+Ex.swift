@@ -27,6 +27,9 @@
 import CoreLocation
 import Foundation
 import MapKit
+import PhobosSwiftCore
+
+extension CLLocationManager: PhobosSwiftCompatible {}
 
 extension CLLocationManager {
   enum AssociatedKeys {
@@ -35,96 +38,102 @@ extension CLLocationManager {
   }
 }
 
-extension CLLocationManager {
-  /// default LLocationManager
-  public static var `default` = pbs_makeLocationManager(desiredAccuracy: kCLLocationAccuracyBestForNavigation)
-
-  static func pbs_makeLocationManager(desiredAccuracy: CLLocationAccuracy) -> CLLocationManager {
-    let manager = CLLocationManager()
+extension PhobosSwift where Base: CLLocationManager {
+  static func makeLocationManager(desiredAccuracy: CLLocationAccuracy) -> CLLocationManager {
+    var manager = CLLocationManager()
     manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-    manager.pbs_shouldDisplayHeadingCalibration = true
+    manager.pbs.shouldDisplayHeadingCalibration = true
     return manager
   }
 
   /// Escalate the authorization is set to when-in-use
-  public func pbs_escalateLocationServiceAuthorization() {
+  public func escalateLocationServiceAuthorization() {
     // Escalate only when the authorization is set to when-in-use
     if #available(iOS 14.0, *) {
-      if self.authorizationStatus == .authorizedWhenInUse {
-        self.requestAlwaysAuthorization()
+      if base.authorizationStatus == .authorizedWhenInUse {
+        base.requestAlwaysAuthorization()
       }
     } else {
       if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-        requestAlwaysAuthorization()
+        base.requestAlwaysAuthorization()
       }
     }
   }
 
   /// Returns a Boolean value indicating whether location services are enabled on the device.
   ///
-  public var pbs_isLocationServicesEnabled: Bool {
+  public var isLocationServicesEnabled: Bool {
     CLLocationManager.locationServicesEnabled()
   }
 
-  public var pbs_shouldDisplayHeadingCalibration: Bool {
+  public var shouldDisplayHeadingCalibration: Bool {
     get {
-      guard let value = objc_getAssociatedObject(self, &AssociatedKeys.shouldDisplayHeadingCalibration) as? Bool else {
+      guard let value = objc_getAssociatedObject(self, &CLLocationManager.AssociatedKeys.shouldDisplayHeadingCalibration) as? Bool else {
         return true
       }
       return value
     }
     set(newValue) {
-      objc_setAssociatedObject(self, &AssociatedKeys.shouldDisplayHeadingCalibration, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+      objc_setAssociatedObject(self, &CLLocationManager.AssociatedKeys.shouldDisplayHeadingCalibration, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
     }
   }
 
   /// 获取最后一次的定位权限状态
-  var _pbs_authorizationStatus: CLAuthorizationStatus? {
+  var _authorizationStatus: CLAuthorizationStatus? {
     get {
-      guard let value = objc_getAssociatedObject(self, &AssociatedKeys.authorizationStatus) as? CLAuthorizationStatus else {
+      guard let value = objc_getAssociatedObject(self, &CLLocationManager.AssociatedKeys.authorizationStatus) as? CLAuthorizationStatus else {
         return nil
       }
       return value
     }
     set(newValue) {
-      objc_setAssociatedObject(self, &AssociatedKeys.authorizationStatus, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
+      objc_setAssociatedObject(self, &CLLocationManager.AssociatedKeys.authorizationStatus, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
     }
   }
 
   /// The current authorization status for the app.
-  public var pbs_authorizationStatus: CLAuthorizationStatus? {
+  public var authorizationStatus: CLAuthorizationStatus? {
     if #available(iOS 14.0, *) {
       return self.authorizationStatus
     } else {
-      return _pbs_authorizationStatus
+      return _authorizationStatus
     }
   }
 
   /// starting / stop updating location
-  func pbs_updatingLocation(updating: Bool) {
+  public func updatingLocation(updating: Bool) {
     if updating {
-      if pbs_isLocationServicesEnabled {
-        startUpdatingLocation()
+      if isLocationServicesEnabled {
+        base.startUpdatingLocation()
       } else {}
     } else {
-      stopUpdatingLocation()
+      base.stopUpdatingLocation()
     }
   }
 
   /// 在默认的地图中打开导航
   public static func showRouteInBuitinMap(sourceLocation: MKMapItem,
                                           destLocation: MKMapItem,
-                                          directionsMode: DirectionsMode = .walk) {
+                                          directionsMode: CLLocationManager.DirectionsMode = .walk) {
     MKMapItem.openMaps(with: [sourceLocation, destLocation],
                        launchOptions: directionsMode.launchOptions)
   }
 
   /// 在默认的地图中打开导航
   public static func showRouteInBuitinMap(destLocation: MKMapItem,
-                                          directionsMode: DirectionsMode = .walk) {
+                                          directionsMode: CLLocationManager.DirectionsMode = .walk) {
     let sourceLocation = MKMapItem.forCurrentLocation()
     Self.showRouteInBuitinMap(sourceLocation: sourceLocation,
                               destLocation: destLocation,
                               directionsMode: directionsMode)
   }
+
+  public static var `default`: CLLocationManager {
+    CLLocationManager.default
+  }
+}
+
+extension CLLocationManager {
+  /// default LLocationManager
+  static var `default` = CLLocationManager.pbs.makeLocationManager(desiredAccuracy: kCLLocationAccuracyBestForNavigation)
 }

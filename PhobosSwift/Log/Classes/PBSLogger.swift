@@ -96,19 +96,19 @@ public class PBSLogger {
     logger.logAppDetails()
   }
 
-  public func debug(message: String, context: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+  public func debug(message: String, context: String = "", functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     logger?.debug("[\(context)] " + "🛠 " + message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
-  public func info(message: String, context: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+  public func info(message: String, context: String = "", functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     logger?.info("[\(context)] " + "ℹ️ " + message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
-  public func warning(message: String, context: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+  public func warning(message: String, context: String = "", functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     logger?.warning("[\(context)] " + "⚠️ " + message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
-  public func error(message: String, context: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+  public func error(message: String, context: String = "", functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     logger?.error("[\(context)] " + "❌ " + message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 

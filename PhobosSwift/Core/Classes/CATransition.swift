@@ -31,11 +31,17 @@ extension CATransition: PhobosSwiftCompatible {}
 extension PhobosSwift where Base: CATransition {
   /// Default Reveal Animation
   public static var revealAnimation: CATransition {
+    CATransition.revealAnimation
+  }
+}
+
+extension CATransition {
+  static var revealAnimation: CATransition = {
     let transition = CATransition()
     transition.type = .reveal
     transition.subtype = .fromBottom
     transition.duration = 0.5
 
     return transition
-  }
+  }()
 }

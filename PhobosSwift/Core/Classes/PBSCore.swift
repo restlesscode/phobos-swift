@@ -29,7 +29,7 @@ import Foundation
 ///
 @objcMembers
 public class PBSCore: NSObject {
-  private static let infoPath = Constants.kPhobosServiceInfoPlist
+  public static var infoPath = Constants.kPhobosServiceInfoPlist
 
   /// The singleton `PBSCore` instance.
   public static var shared = PBSCore()
