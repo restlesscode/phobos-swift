@@ -22,7 +22,7 @@
 	<true/>
 	<key>NSUbiquitousContainers</key>
 	<dict>
-		<key>iCloud.codes.restless.phobosswift.PhobosSwiftExample</key>
+		<key>iCloud.codes.restless.phobosswift.example</key>
 		<dict>
 			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
 			<true/>
