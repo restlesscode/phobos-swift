@@ -60,20 +60,18 @@ class RxCLLocationManagerDelegateProxy: DelegateProxy<CLLocationManager, CLLocat
   @available(iOS 13.0, *)
   var didRangeBeaconsSatisfyingBeaconConstraintSubject: PublishSubject<(CLLocationManager, [CLBeacon], CLBeaconIdentityConstraint)> {
     if _didRangeBeaconsSatisfyingBeaconConstraintSubject == nil {
-      return PublishSubject<(CLLocationManager, [CLBeacon], CLBeaconIdentityConstraint)>()
-    } else {
-      return _didRangeBeaconsSatisfyingBeaconConstraintSubject as! PublishSubject<(CLLocationManager, [CLBeacon], CLBeaconIdentityConstraint)>
+      _didRangeBeaconsSatisfyingBeaconConstraintSubject = PublishSubject<(CLLocationManager, [CLBeacon], CLBeaconIdentityConstraint)>()
     }
+    return _didRangeBeaconsSatisfyingBeaconConstraintSubject as! PublishSubject<(CLLocationManager, [CLBeacon], CLBeaconIdentityConstraint)>
   }
 
   private var _didFailRangingForBeaconConstraintSubject: Any?
   @available(iOS 13.0, *)
   var didFailRangingForBeaconConstraintSubject: PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)> {
     if _didRangeBeaconsSatisfyingBeaconConstraintSubject == nil {
-      return PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)>()
-    } else {
-      return _didRangeBeaconsSatisfyingBeaconConstraintSubject as! PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)>
+      _didRangeBeaconsSatisfyingBeaconConstraintSubject = PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)>()
     }
+    return _didRangeBeaconsSatisfyingBeaconConstraintSubject as! PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)>
   }
 
   private(set) var rangingBeaconsDidFailForBeaconRegionSubject = PublishSubject<(CLLocationManager, CLBeaconRegion, Error)>()
@@ -86,20 +84,18 @@ class RxCLLocationManagerDelegateProxy: DelegateProxy<CLLocationManager, CLLocat
   @available(iOS, introduced: 4.2, deprecated: 14.0)
   var didChangeAuthorizationSubject: PublishSubject<(CLLocationManager, CLAuthorizationStatus)> {
     if _didChangeAuthorizationSubject == nil {
-      return PublishSubject<(CLLocationManager, CLAuthorizationStatus)>()
-    } else {
-      return _didChangeAuthorizationSubject as! PublishSubject<(CLLocationManager, CLAuthorizationStatus)>
+      _didChangeAuthorizationSubject = PublishSubject<(CLLocationManager, CLAuthorizationStatus)>()
     }
+    return _didChangeAuthorizationSubject as! PublishSubject<(CLLocationManager, CLAuthorizationStatus)>
   }
 
   private var _locationManagerDidChangeAuthorizationSubject: Any?
   @available(iOS 14.0, *)
   var locationManagerDidChangeAuthorizationSubject: PublishSubject<CLLocationManager> {
     if _locationManagerDidChangeAuthorizationSubject == nil {
-      return PublishSubject<CLLocationManager>()
-    } else {
-      return _locationManagerDidChangeAuthorizationSubject as! PublishSubject<CLLocationManager>
+      _locationManagerDidChangeAuthorizationSubject = PublishSubject<CLLocationManager>()
     }
+    return _locationManagerDidChangeAuthorizationSubject as! PublishSubject<CLLocationManager>
   }
 
   private(set) var didStartMonitoringForRegionSubject = PublishSubject<(CLLocationManager, CLRegion)>()
