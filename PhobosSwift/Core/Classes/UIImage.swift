@@ -73,13 +73,13 @@ extension PhobosSwift where Base: UIImage {
 
   /// 设置水平垂直背景色
   ///
-  public static func cob_applyUpLeftToBottomRightGradientBackground(colorset: [UIColor], size: CGSize) -> UIImage {
+  public static func applyUpLeftToBottomRightGradientBackground(colorset: [UIColor], size: CGSize) -> UIImage {
     UIImage.pbs.applyGradientBackground(colorset: colorset, size: size, startPoint: CGPoint(x: 0.25, y: 0.25), endPoint: CGPoint(x: 1, y: 1))
   }
 
   /// 设置斜线背景色
   ///
-  public static func cob_applyUpRightToBottomLeftGradientBackground(colorset: [UIColor], size: CGSize) -> UIImage {
+  public static func applyUpRightToBottomLeftGradientBackground(colorset: [UIColor], size: CGSize) -> UIImage {
     UIImage.pbs.applyGradientBackground(colorset: colorset, size: size, startPoint: CGPoint(x: 0.75, y: 0.75), endPoint: CGPoint(x: 0, y: 1))
   }
 

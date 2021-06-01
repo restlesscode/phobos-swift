@@ -26,8 +26,6 @@
 
 import Foundation
 
-extension UINavigationBar: PhobosSwiftCompatible {}
-
 extension PhobosSwift where Base: UINavigationBar {
   ///
   public func removeBackBarButtonItemTitle() {

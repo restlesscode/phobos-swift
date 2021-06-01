@@ -26,7 +26,6 @@
 
 import UIKit
 
-extension UITableView: PhobosSwiftCompatible {}
 /// enhanced features for UITableView
 extension PhobosSwift where Base: UITableView {
   /// 滚动到头部
@@ -83,7 +82,7 @@ extension PhobosSwift where Base: UITableView {
   }
 
   ///
-  public var cob_swipeActionStandardButtons: [UIButton] {
+  public var swipeActionStandardButtons: [UIButton] {
     swipeActionPullViews.flatMap { $0.subviews }.filter {
       if let UISwipeActionStandardButtonClass = NSClassFromString("UISwipeActionStandardButton") {
         return $0.isMember(of: UISwipeActionStandardButtonClass)
