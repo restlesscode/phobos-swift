@@ -1,6 +1,6 @@
 //
 //
-//  CIImageFilter.swift
+//  PBSImageFilter.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -26,7 +26,7 @@
 
 import Foundation
 
-public struct CIImageFilter {
+public struct PBSImageFilter {
   public static let cubeFilter = FilterModel(with: .cube)
   static let size = 64
 
@@ -80,7 +80,6 @@ public struct CIImageFilter {
       cubeFilter.setValue(data, forKey: model.dataKey)
       cubeFilter.setValue(ciImage, forKey: kCIInputImageKey)
       return cubeFilter.outputImage
-//            return boomEffect(with: cubeFilter.outputImage)
     }
     return nil
   }
@@ -126,7 +125,7 @@ public struct CIImageFilter {
   }
 }
 
-extension CIImageFilter {
+extension PBSImageFilter {
   public static func RGBToHSV(_ r: Float, g: Float, b: Float) -> (h: Float, s: Float, v: Float) {
     var h: CGFloat = 0
     var s: CGFloat = 0

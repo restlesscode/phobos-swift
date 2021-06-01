@@ -47,7 +47,6 @@ extension UIInterface {
   }
 }
 
-extension UITableViewCell: PhobosSwiftCompatible {}
 ///
 extension PhobosSwift where Base: UITableViewCell {
   /// 当前实现UIInterface的class name string
@@ -56,7 +55,6 @@ extension PhobosSwift where Base: UITableViewCell {
   }
 }
 
-extension UICollectionReusableView: PhobosSwiftCompatible {}
 ///
 extension PhobosSwift where Base: UICollectionReusableView {
   /// 当前实现UIInterface的class name string

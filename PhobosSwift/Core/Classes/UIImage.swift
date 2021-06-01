@@ -135,7 +135,7 @@ extension PhobosSwift where Base: UIImage {
   /// - Parameter tintColor: tint color
   /// - Returns: return tint color image
   public func render(with tintColor: UIColor) -> UIImage? {
-    CIImageFilter.render(image: base, with: tintColor)
+    PBSImageFilter.render(image: base, with: tintColor)
   }
 
   /// add mask image at top layer

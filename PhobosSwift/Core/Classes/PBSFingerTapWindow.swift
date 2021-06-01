@@ -244,7 +244,7 @@ public class PBSFingerTapWindow: UIWindow {
     label.textAlignment = .center
     label.font = UIFont.boldSystemFont(ofSize: 14.0)
     label.isUserInteractionEnabled = false
-//        label.transform = CGAffineTransform(rotationAngle: 120.0/360.0)
+    //        label.transform = CGAffineTransform(rotationAngle: 120.0/360.0)
 
     return label
   }()

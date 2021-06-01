@@ -55,7 +55,7 @@ extension PhobosSwift where Base: UITableView {
   }
 
   /// 对TableView添加可以伸缩的HeaderView
-  public func addStretchableHeaderView<T>(view: T) where T: StretchableTableHeaderViewProtocol, T: UIView {
+  public func addStretchableHeaderView<T>(view: T) where T: PBSStretchableTableHeaderViewProtocol, T: UIView {
     base.addSubview(view)
     base.sendSubviewToBack(view)
     base.contentInset = UIEdgeInsets(top: view.bounds.height, left: 0, bottom: 0, right: 0)

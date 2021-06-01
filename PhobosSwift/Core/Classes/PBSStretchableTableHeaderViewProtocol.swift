@@ -1,6 +1,6 @@
 //
 //
-//  StretchableTableHeaderViewProtocol.swift
+//  PBSStretchableTableHeaderViewProtocol.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -27,13 +27,13 @@
 import UIKit
 
 /// 可升缩的TableViewHeader
-public protocol StretchableTableHeaderViewProtocol {
+public protocol PBSStretchableTableHeaderViewProtocol {
   /// scrollViewDidScroll
   func scrollViewDidScroll(_ scrollView: UIScrollView)
 }
 
 /// 可升缩的TableViewHeader的Extension
-extension StretchableTableHeaderViewProtocol where Self: UIView {
+extension PBSStretchableTableHeaderViewProtocol where Self: UIView {
   /// scrollViewDidScroll默认实现
   public func scrollViewDidScroll(_ scrollView: UIScrollView) {
     /// 下拉
