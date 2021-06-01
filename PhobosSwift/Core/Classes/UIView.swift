@@ -212,14 +212,14 @@ extension PhobosSwift where Base: UIView {
   ///
   public static func makeBottomIndicatorShape(onView view: UIView, radius: CGFloat, indicatorSize: CGSize = CGSize(width: 8, height: 4)) {
     /*
-     * 形状如下：
-     *
-     A/B--------------------C\D
-     |                      |
-     |                      |
-     L\K-------J    G-------F/E
-     \  /
-     I--H
+      * 形状如下：
+      *
+      A/B--------------------C\D
+      |                      |
+      |                      |
+      L\K-------J    G-------F/E
+                 \  /
+                 I--H
      *
      */
 

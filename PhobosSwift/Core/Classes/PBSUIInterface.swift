@@ -1,6 +1,6 @@
 //
 //
-//  UIInterface.swift
+//  PBSUIInterface.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -27,7 +27,7 @@
 import UIKit
 
 /// UIInterface Protocol
-public protocol UIInterface {
+public protocol PBSUIInterface {
   /// 当前实现UIInterface的class name string
   static var id: String { get }
   /// 当前实现UIInterface的xib name string
@@ -35,7 +35,7 @@ public protocol UIInterface {
 }
 
 /// Default features of UIInterface protocol is implemented in this extension
-extension UIInterface {
+extension PBSUIInterface {
   /// 当前实现UIInterface的class name string
   public static var id: String {
     String(describing: Self.self)
