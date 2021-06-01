@@ -105,7 +105,7 @@ extension PhobosSwift where Base: UIColor {
 
 extension UIColor {
   /// 两个UIColor做增量
-  public static func + (lhs: UIColor, rhs: UIColor) -> UIColor {
+  public static func +(lhs: UIColor, rhs: UIColor) -> UIColor {
     UIColor.pbs.color(r255: lhs.pbs.rgb.r255 + rhs.pbs.rgb.r255,
                       g255: lhs.pbs.rgb.g255 + rhs.pbs.rgb.g255,
                       b255: lhs.pbs.rgb.b255 + rhs.pbs.rgb.b255)
