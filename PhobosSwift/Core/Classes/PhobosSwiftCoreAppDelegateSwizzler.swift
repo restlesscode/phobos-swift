@@ -50,4 +50,9 @@ extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
     // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
     UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
   }
+  
+  func applicationWillTerminate(_ application: UIApplication) {
+    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
+    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+  }
 }
