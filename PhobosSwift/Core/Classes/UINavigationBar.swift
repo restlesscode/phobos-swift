@@ -1,6 +1,6 @@
 //
 //
-//  UIInterface.swift
+//  UINavigationBar.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
