@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftCoreAppDelegateSwizzler.swift
+//  UIInterface.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -26,33 +26,39 @@
 
 import UIKit
 
-class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
-  weak var defaultCore: PBSCore!
-  var interceptorID: GULAppDelegateInterceptorID?
+/// UIInterface Protocol
+public protocol UIInterface {
+  /// 当前实现UIInterface的class name string
+  static var id: String { get }
+  /// 当前实现UIInterface的xib name string
+  static var uiNib: UINib { get }
+}
 
-  func load(withDefaultCore defaultCore: PBSCore) {
-    self.defaultCore = defaultCore
-    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+/// Default features of UIInterface protocol is implemented in this extension
+extension UIInterface {
+  /// 当前实现UIInterface的class name string
+  public static var id: String {
+    String(describing: Self.self)
   }
 
-  func unload() {
-    if let interceptorID = self.interceptorID {
-      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
-    }
+  /// 当前实现UIInterface的xib name string
+  public static var uiNib: UINib {
+    UINib(nibName: id, bundle: nil)
   }
 }
 
-// MARK: - UIApplicationDelegate Method
-
-extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
-  func applicationDidEnterBackground(_: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+///
+extension PhobosSwift where Base: UITableViewCell {
+  /// 当前实现UIInterface的class name string
+  public static var reuseIdentifier: String {
+    String(describing: Self.self)
   }
+}
 
-  func applicationWillTerminate(_ application: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+///
+extension PhobosSwift where Base: UICollectionReusableView {
+  /// 当前实现UIInterface的class name string
+  public static var reuseIdentifier: String {
+    String(describing: Self.self)
   }
 }

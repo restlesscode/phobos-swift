@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftCoreAppDelegateSwizzler.swift
+//  UINavigationBar.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,35 +24,23 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
 
-class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
-  weak var defaultCore: PBSCore!
-  var interceptorID: GULAppDelegateInterceptorID?
-
-  func load(withDefaultCore defaultCore: PBSCore) {
-    self.defaultCore = defaultCore
-    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+extension PhobosSwift where Base: UINavigationBar {
+  ///
+  public func removeBackBarButtonItemTitle() {
+    base.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
   }
 
-  func unload() {
-    if let interceptorID = self.interceptorID {
-      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
-    }
-  }
-}
-
-// MARK: - UIApplicationDelegate Method
-
-extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
-  func applicationDidEnterBackground(_: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+  ///
+  public func restoreBackBarButtonItem() {
+    base.topItem?.backBarButtonItem = nil
   }
 
-  func applicationWillTerminate(_ application: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+  ///
+  public func setTransparent(_ isTransparent: Bool) {
+    base.isTranslucent = isTransparent
+    base.setBackgroundImage(isTransparent ? UIImage() : nil, for: .default)
+    base.shadowImage = isTransparent ? UIImage() : nil
   }
 }

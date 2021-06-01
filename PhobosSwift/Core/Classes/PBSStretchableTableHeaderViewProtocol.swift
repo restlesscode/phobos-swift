@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftCoreAppDelegateSwizzler.swift
+//  PBSStretchableTableHeaderViewProtocol.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -26,33 +26,25 @@
 
 import UIKit
 
-class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
-  weak var defaultCore: PBSCore!
-  var interceptorID: GULAppDelegateInterceptorID?
-
-  func load(withDefaultCore defaultCore: PBSCore) {
-    self.defaultCore = defaultCore
-    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
-  }
-
-  func unload() {
-    if let interceptorID = self.interceptorID {
-      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
-    }
-  }
+/// 可升缩的TableViewHeader
+public protocol PBSStretchableTableHeaderViewProtocol {
+  /// scrollViewDidScroll
+  func scrollViewDidScroll(_ scrollView: UIScrollView)
 }
 
-// MARK: - UIApplicationDelegate Method
-
-extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
-  func applicationDidEnterBackground(_: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
-  }
-
-  func applicationWillTerminate(_ application: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+/// 可升缩的TableViewHeader的Extension
+extension PBSStretchableTableHeaderViewProtocol where Self: UIView {
+  /// scrollViewDidScroll默认实现
+  public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    /// 下拉
+    if scrollView.contentOffset.y < -bounds.height {
+      layer.position = CGPoint(x: UIScreen.main.bounds.size.width / 2.0,
+                               y: scrollView.contentOffset.y / 2.0)
+      let zoomScale = scrollView.contentOffset.y / -bounds.height
+      transform = CGAffineTransform(scaleX: zoomScale, y: zoomScale)
+    } else {
+      /// 上拉
+      /// to do nothing
+    }
   }
 }

@@ -54,9 +54,17 @@ PODS:
   - PhobosSwiftCore (0.1.0):
     - GoogleUtilities (~> 7.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxGesture
+    - RxSwift (~> 6.1.0)
+    - SnapKit
   - PhobosSwiftCore/Tests (0.1.0):
     - GoogleUtilities (~> 7.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxGesture
+    - RxSwift (~> 6.1.0)
+    - SnapKit
   - PhobosSwiftLocation (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
@@ -149,9 +157,13 @@ PODS:
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
     - RxSwift (= 6.1.0)
+  - RxGesture (4.0.2):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - RxRelay (6.1.0):
     - RxSwift (= 6.1.0)
   - RxSwift (6.1.0)
+  - SnapKit (5.0.1)
   - SwiftFormat/CLI (0.48.0)
   - SwiftLint (0.43.1)
 
@@ -191,8 +203,10 @@ SPEC REPOS:
     - ObjcExceptionBridging
     - PromisesObjC
     - RxCocoa
+    - RxGesture
     - RxRelay
     - RxSwift
+    - SnapKit
     - SwiftFormat
     - SwiftLint
 
@@ -227,7 +241,7 @@ SPEC CHECKSUMS:
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftAuth: bbba013c7e66fee6f3d59988d7bfcee4e79db933
-  PhobosSwiftCore: 8294447d73fd524a5496c0c6b9ad9a43bc098964
+  PhobosSwiftCore: 4cccf18e92415f06a7a74fa5c91d609f557e1a47
   PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
@@ -238,8 +252,10 @@ SPEC CHECKSUMS:
   PhobosSwiftWechat: 09ab2d36da3badb1abc0ebe26d4b084db1ef6fac
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
+  RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
