@@ -1,7 +1,7 @@
 //
 //
-//  UIInterface.swift
-//  PhobosSwiftCore
+//  PBSSegmentTitleViewDelegate.swift
+//  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -26,39 +26,9 @@
 
 import UIKit
 
-/// UIInterface Protocol
-public protocol UIInterface {
-  /// 当前实现UIInterface的class name string
-  static var id: String { get }
-  /// 当前实现UIInterface的xib name string
-  static var uiNib: UINib { get }
-}
+@objc public protocol PBSSegmentTitleViewDelegate: AnyObject {
+  /// segmentContentView的刷新代理
+  @objc optional var reloader: PBSSegmentContentViewReloadable? { get }
 
-/// Default features of UIInterface protocol is implemented in this extension
-extension UIInterface {
-  /// 当前实现UIInterface的class name string
-  public static var id: String {
-    String(describing: Self.self)
-  }
-
-  /// 当前实现UIInterface的xib name string
-  public static var uiNib: UINib {
-    UINib(nibName: id, bundle: nil)
-  }
-}
-
-///
-extension PhobosSwift where Base: UITableViewCell {
-  /// 当前实现UIInterface的class name string
-  public static var reuseIdentifier: String {
-    String(describing: Self.self)
-  }
-}
-
-///
-extension PhobosSwift where Base: UICollectionReusableView {
-  /// 当前实现UIInterface的class name string
-  public static var reuseIdentifier: String {
-    String(describing: Self.self)
-  }
+  func titleView(_ titleView: PBSSegmentTitleView, currentIndex: Int)
 }
