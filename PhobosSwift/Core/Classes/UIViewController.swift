@@ -24,22 +24,11 @@
 //  THE SOFTWARE.
 //
 
-import RxCocoa
-import RxGesture
-import RxSwift
 import UIKit
 
 extension UIViewController: PhobosSwiftCompatible {}
 /// Enhanced features of UIViewController class is implemented in this extension
 extension PhobosSwift where Base: UIViewController {
-  /// 设置让UIViewController点击任何区域后，force the first responder to resign（关闭键盘）
-  ///
-  public func UIViewControllercloseKeyboardByTouchingAnywhere() -> Disposable {
-    base.view.rx.tapGesture().when(.recognized).subscribe(onNext: { [unowned base] _ in
-      base.view.endEditing(true)
-    })
-  }
-
   /// StatusBar 和 NavigationBar的高度
   public var topbarHeight: CGFloat {
     statusBarHeight + navigationBarHeight

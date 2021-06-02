@@ -51,9 +51,11 @@ TODO: Add long description of the pod here.
     "{group}/#{name}/CHANGELOG.md"
   ]
   
+  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
-  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'RxGesture'
+  s.dependency 'SnapKit'
 
   if has_resource_bundles
     s.resource_bundles = {

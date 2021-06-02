@@ -1,7 +1,7 @@
 //
 //
 //  PBSActivityButton.swift
-//  PhobosSwiftCore
+//  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftCore
 import SnapKit
 import UIKit
 

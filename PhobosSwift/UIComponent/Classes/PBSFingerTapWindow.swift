@@ -1,7 +1,7 @@
 //
 //
 //  PBSFingerTapWindow.swift
-//  PhobosSwiftCore
+//  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
