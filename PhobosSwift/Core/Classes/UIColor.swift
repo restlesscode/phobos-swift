@@ -26,29 +26,38 @@
 
 import UIKit
 
-///
-public struct ColorRGB {
-  ///
-  public var red = 0
-  ///
-  public var green = 0
-  ///
-  public var blue = 0
-  ///
-  public var alpha: CGFloat = 1
-  ///
-  public var r255: CGFloat {
-    CGFloat(red)
+extension UIColor {
+  /// 两个UIColor做增量
+  public static func +(lhs: UIColor, rhs: UIColor) -> UIColor {
+    UIColor.pbs.color(r255: lhs.pbs.rgb.r255 + rhs.pbs.rgb.r255,
+                      g255: lhs.pbs.rgb.g255 + rhs.pbs.rgb.g255,
+                      b255: lhs.pbs.rgb.b255 + rhs.pbs.rgb.b255)
   }
 
   ///
-  public var g255: CGFloat {
-    CGFloat(green)
-  }
+  public struct RGB {
+    ///
+    public var red = 0
+    ///
+    public var green = 0
+    ///
+    public var blue = 0
+    ///
+    public var alpha: CGFloat = 1
+    ///
+    public var r255: CGFloat {
+      CGFloat(red)
+    }
 
-  ///
-  public var b255: CGFloat {
-    CGFloat(blue)
+    ///
+    public var g255: CGFloat {
+      CGFloat(green)
+    }
+
+    ///
+    public var b255: CGFloat {
+      CGFloat(blue)
+    }
   }
 }
 
@@ -57,13 +66,14 @@ extension UIColor: PhobosSwiftCompatible {}
 /// Enhanced features of UIColor class is implemented in this extension
 extension PhobosSwift where Base: UIColor {
   /// Color的RGB Tuple
-  public var rgb: ColorRGB {
+
+  public var rgb: UIColor.RGB {
     var red: CGFloat = 0
     var green: CGFloat = 0
     var blue: CGFloat = 0
     var alpha: CGFloat = 0
     base.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-    return ColorRGB(red: Int(red * 255), green: Int(green * 255), blue: Int(blue * 255), alpha: alpha)
+    return UIColor.RGB(red: Int(red * 255), green: Int(green * 255), blue: Int(blue * 255), alpha: alpha)
   }
 
   /// Inverse Color
@@ -100,15 +110,6 @@ extension PhobosSwift where Base: UIColor {
     } else {
       return base
     }
-  }
-}
-
-extension UIColor {
-  /// 两个UIColor做增量
-  public static func +(lhs: UIColor, rhs: UIColor) -> UIColor {
-    UIColor.pbs.color(r255: lhs.pbs.rgb.r255 + rhs.pbs.rgb.r255,
-                      g255: lhs.pbs.rgb.g255 + rhs.pbs.rgb.g255,
-                      b255: lhs.pbs.rgb.b255 + rhs.pbs.rgb.b255)
   }
 }
 
