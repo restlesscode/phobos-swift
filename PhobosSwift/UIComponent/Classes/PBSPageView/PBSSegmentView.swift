@@ -34,23 +34,23 @@ open class PBSSegmentView: UIView {
   public private(set) var style: PBSSegmentViewStyle
   public private(set) var titles: [String]
   public private(set) var childViewControllers: [UIViewController]
-  
+
   public private(set) lazy var titleView = PBSSegmentTitleView(frame: .zero, style: style, titles: titles, currentIndex: style.startIndex)
-  
+
   public private(set) lazy var contentView = PBSSegmentContentView(frame: .zero,
                                                                    style: style,
                                                                    childViewControllers: childViewControllers,
                                                                    startIndex: style.startIndex)
-  
+
   public init(frame: CGRect, style: PBSSegmentViewStyle, titles: [String], childViewControllers: [UIViewController]) {
     self.style = style
     self.titles = titles
     self.childViewControllers = childViewControllers
     super.init(frame: frame)
-    
+
     setupUI()
   }
-  
+
   @available(*, unavailable)
   public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -64,15 +64,15 @@ extension PBSSegmentView {
       $0.top.left.right.equalTo(0)
       $0.height.equalTo(style.titleViewHeight)
     }
-    
+
     contentView.backgroundColor = style.contentViewBackgroundColor
     addSubview(contentView)
-    
+
     contentView.snp.makeConstraints {
       $0.top.equalTo(titleView.snp.bottom)
       $0.left.right.bottom.equalTo(0)
     }
-    
+
     titleView.delegate = contentView
     contentView.delegate = titleView
   }

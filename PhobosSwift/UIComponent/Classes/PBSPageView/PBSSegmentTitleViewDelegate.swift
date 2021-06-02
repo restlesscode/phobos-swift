@@ -29,6 +29,6 @@ import UIKit
 @objc public protocol PBSSegmentTitleViewDelegate: AnyObject {
   /// segmentContentView的刷新代理
   @objc optional var reloader: PBSSegmentContentViewReloadable? { get }
-  
+
   func titleView(_ titleView: PBSSegmentTitleView, currentIndex: Int)
 }

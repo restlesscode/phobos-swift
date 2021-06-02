@@ -30,7 +30,7 @@ import UIKit
 @objc public protocol PBSSegmentContentViewReloadable: AnyObject {
   /// 如果需要双击标题刷新或者作其他处理，请实现这个方法
   @objc optional func titleViewDidSelectedSameTitle()
-  
+
   /// 如果pageContentView滚动到下一页停下来需要刷新或者作其他处理，请实现这个方法
   @objc optional func contentViewDidEndScroll()
 }

@@ -32,10 +32,10 @@ public struct PBSSegmentViewStyle {
   public static func makeStyle() -> PBSSegmentViewStyle {
     PBSSegmentViewStyle()
   }
-  
+
   /// 标题是否可以滚动
   public var isTitleScrollEnable: Bool = false
-  
+
   /// titleView的一些属性
   public var titleViewHeight: CGFloat = 44
   ///
@@ -48,7 +48,7 @@ public struct PBSSegmentViewStyle {
   public var titleViewBackgroundColor = UIColor.white
   ///
   public var titleMargin: CGFloat = 30
-  
+
   /// 是否显示滚动条
   public var isShowBottomLine: Bool = false
   /// 底线颜色
@@ -62,12 +62,12 @@ public struct PBSSegmentViewStyle {
   public var bottomLineCornerRadius: CGFloat = 0
   /// 滚动条距离底部的距离
   public var bottomLinePadding: CGFloat = 0
-  
+
   /// 是否需要缩放功能
   public var isScaleEnable: Bool = false
   ///
   public var maximumScaleFactor: CGFloat = 1.2
-  
+
   /// 是否需要显示coverView
   public var isShowCoverView: Bool = false
   ///
@@ -80,12 +80,12 @@ public struct PBSSegmentViewStyle {
   public var coverViewHeight: CGFloat = 25
   ///
   public var coverViewRadius: CGFloat = 12
-  
+
   /// contentView是否可以滚动
   public var isContentScrollEnable: Bool = true
   ///
   public var contentViewBackgroundColor = UIColor.clear
-  
+
   /// 默认开始index
   public var startIndex = 0
 }
