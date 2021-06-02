@@ -284,7 +284,7 @@ extension UIView {
 
 extension UIView {
   /// badgeView
-  public var badgeView: PBSBadgeControl {
+  var badgeView: PBSBadgeControl {
     get {
       if let aValue = objc_getAssociatedObject(self, &kBadgeView) as? PBSBadgeControl {
         return aValue
