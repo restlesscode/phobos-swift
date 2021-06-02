@@ -37,11 +37,11 @@ extension UIColor {
   ///
   public struct RGB {
     ///
-    public var red = 0
+    public var red: Int = 0
     ///
-    public var green = 0
+    public var green: Int = 0
     ///
-    public var blue = 0
+    public var blue: Int = 0
     ///
     public var alpha: CGFloat = 1
     ///
@@ -57,6 +57,12 @@ extension UIColor {
     ///
     public var b255: CGFloat {
       CGFloat(blue)
+    }
+
+    public init(red: Int, green: Int, blue: Int, alpha: CGFloat) {
+      self.red = red
+      self.green = green
+      self.blue = blue
     }
   }
 }
