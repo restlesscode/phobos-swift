@@ -54,7 +54,7 @@ public enum BiometricAuthenticationError: Error {
   }
 
   // get error message based on type
-  public func message() -> String {
+  public var message: String {
     let authentication = BioMetricAuthenticator.shared
 
     switch self {
