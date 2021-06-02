@@ -66,6 +66,7 @@ extension UIColor: PhobosSwiftCompatible {}
 /// Enhanced features of UIColor class is implemented in this extension
 extension PhobosSwift where Base: UIColor {
   /// Color的RGB Tuple
+
   public var rgb: UIColor.RGB {
     var red: CGFloat = 0
     var green: CGFloat = 0

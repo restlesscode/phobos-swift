@@ -54,9 +54,17 @@ PODS:
   - PhobosSwiftCore (0.1.0):
     - GoogleUtilities (~> 7.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxGesture
+    - RxSwift (~> 6.1.0)
+    - SnapKit
   - PhobosSwiftCore/Tests (0.1.0):
     - GoogleUtilities (~> 7.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa (~> 6.1.0)
+    - RxGesture
+    - RxSwift (~> 6.1.0)
+    - SnapKit
   - PhobosSwiftLocation (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
@@ -249,7 +257,7 @@ SPEC CHECKSUMS:
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftAuth: bbba013c7e66fee6f3d59988d7bfcee4e79db933
-  PhobosSwiftCore: 8294447d73fd524a5496c0c6b9ad9a43bc098964
+  PhobosSwiftCore: 4cccf18e92415f06a7a74fa5c91d609f557e1a47
   PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
