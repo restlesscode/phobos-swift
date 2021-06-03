@@ -30,7 +30,7 @@ import PhobosSwiftLog
 
 extension Bundle {
   static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PBSTestKnight.self)
+    Bundle.pbs.bundle(with: PhobosSwiftTestKnight.self)
   }
 
   static var bundleName: String {
@@ -63,7 +63,7 @@ extension UIImage {
   }
 }
 
-struct BUResource {
+struct Resource {
   struct Image {
     static let kDebug = UIImage.image(named: "debug")
     static let kStaging = UIImage.image(named: "staging")
@@ -72,7 +72,7 @@ struct BUResource {
   }
 }
 
-struct BUString {
+struct Strings {
   static let kWelcomTitle = "Welcome to Test \n\(Bundle.bundleName)"
   static let kStartTesting = "Start Testing"
   static let kDebug = "Development"
@@ -147,13 +147,13 @@ extension PhobosSwift where Base == UserDefaults {
   }
 
   /// -floatForKey: is similar to -integerForKey:, except that it returns a float, and boolean values will not be converted.
-  public func pbs_tk_float(forKey defaultName: String) -> Float {
+  public func tk_float(forKey defaultName: String) -> Float {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     return base.float(forKey: key)
   }
 
   /// -doubleForKey: is similar to -integerForKey:, except that it returns a double, and boolean values will not be converted.
-  public func pbs_tk_double(forKey defaultName: String) -> Double {
+  public func tk_double(forKey defaultName: String) -> Double {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     return base.double(forKey: key)
   }
@@ -162,7 +162,7 @@ extension PhobosSwift where Base == UserDefaults {
    -boolForKey: is equivalent to -objectForKey:, except that it converts the returned value to a BOOL. If the value is an NSNumber, NO will be returned if the value is 0, YES otherwise. If the value is an NSString, values of "YES" or "1" will return YES, and values of "NO", "0", or any other string will return NO. If the value is absent or can't be converted to a BOOL, NO will be returned.
 
    */
-  public func pbs_tk_bool(forKey defaultName: String) -> Bool {
+  public func tk_bool(forKey defaultName: String) -> Bool {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     return base.bool(forKey: key)
   }
@@ -170,37 +170,37 @@ extension PhobosSwift where Base == UserDefaults {
   /**
    -URLForKey: is equivalent to -objectForKey: except that it converts the returned value to an NSURL. If the value is an NSString path, then it will construct a file URL to that path. If the value is an archived URL from -setURL:forKey: it will be unarchived. If the value is absent or can't be converted to an NSURL, nil will be returned.
    */
-  public func pbs_tk_url(forKey defaultName: String) -> URL? {
+  public func tk_url(forKey defaultName: String) -> URL? {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     return base.url(forKey: key)
   }
 
   /// -setInteger:forKey: is equivalent to -setObject:forKey: except that the value is converted from an NSInteger to an NSNumber.
-  public func pbs_tk_set(_ value: Int, forKey defaultName: String) {
+  public func tk_set(_ value: Int, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     base.set(value, forKey: key)
   }
 
   /// -setFloat:forKey: is equivalent to -setObject:forKey: except that the value is converted from a float to an NSNumber.
-  public func pbs_tk_set(_ value: Float, forKey defaultName: String) {
+  public func tk_set(_ value: Float, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     base.set(value, forKey: key)
   }
 
   /// -setDouble:forKey: is equivalent to -setObject:forKey: except that the value is converted from a double to an NSNumber.
-  public func pbs_tk_set(_ value: Double, forKey defaultName: String) {
+  public func tk_set(_ value: Double, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     base.set(value, forKey: key)
   }
 
   /// -setBool:forKey: is equivalent to -setObject:forKey: except that the value is converted from a BOOL to an NSNumber.
-  public func pbs_tk_set(_ value: Bool, forKey defaultName: String) {
+  public func tk_set(_ value: Bool, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     base.set(value, forKey: key)
   }
 
   /// -setURL:forKey is equivalent to -setObject:forKey: except that the value is archived to an NSData. Use -URLForKey: to retrieve values set this way.
-  public func pbs_tk_set(_ url: URL?, forKey defaultName: String) {
+  public func tk_set(_ url: URL?, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
     base.set(url, forKey: key)
   }
