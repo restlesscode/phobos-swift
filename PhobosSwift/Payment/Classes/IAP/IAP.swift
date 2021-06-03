@@ -60,7 +60,7 @@ extension PBSPayment {
       SKPaymentQueue.default().add(storeObserver)
     }
 
-    /// 配置CodebaseIAP
+    /// 配置IAP
     ///
     /// - parameter itunesConnectSharedSecret:
     /// 可选参数：itunesConnectSharedSecret 可以是"app-specific shared secret" 或 "master shared secret"

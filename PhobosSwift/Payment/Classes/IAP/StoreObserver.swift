@@ -280,7 +280,7 @@ extension PBSPayment.IAP.StoreObserver: SKPaymentTransactionObserver {
     }
 
     /// 如果交易失败了，transaction.error一定有error，但是为了防止万一，如果失败了，
-    /// transaction.error没有error，那么我们返回CodebaseIAPError.unknown
+    /// transaction.error没有error，那么我们返回IAPError(code: .unknown)
     purchaseTransactionSubject.onNext((transaction, .failure(iapError)))
     // ok，This transaction should be finished with failure
     SKPaymentQueue.default().finishTransaction(transaction)
