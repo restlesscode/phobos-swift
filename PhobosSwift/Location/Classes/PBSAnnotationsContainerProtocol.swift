@@ -1,6 +1,6 @@
 //
 //
-//  DirectionsMode.swift
+//  PBSAnnotationsContainerProtocol.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,32 +24,11 @@
 //  THE SOFTWARE.
 //
 
-import CoreLocation
-import Foundation
 import MapKit
+import UIKit
 
-extension CLLocationManager {
-  public enum DirectionsMode {
-    case walk
-    case driving
-    case transit
-    case `default`
-
-    public var launchOptions: [String: Any]? {
-      switch self {
-      case .walk:
-        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking,
-                MKLaunchOptionsShowsTrafficKey: 1]
-      case .driving:
-        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,
-                MKLaunchOptionsShowsTrafficKey: 1]
-      case .transit:
-        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit,
-                MKLaunchOptionsShowsTrafficKey: 1]
-      case .default:
-        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault,
-                MKLaunchOptionsShowsTrafficKey: 1]
-      }
-    }
-  }
+protocol AnnotationsContainer {
+  func add(_ annotation: MKAnnotation) -> Bool
+  func remove(_ annotation: MKAnnotation) -> Bool
+  func annotations(in rect: MKMapRect) -> [MKAnnotation]
 }

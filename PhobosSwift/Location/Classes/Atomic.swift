@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftSplash
+//  Atomic.swift
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,17 +25,19 @@
 //
 
 import Foundation
-import XCTest
 
-/// Test the enhanced features of Bundle class is implemented in this extension
-class MessageBarTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+@propertyWrapper
+class Atomic<Value> {
+  private let queue = DispatchQueue(label: "Atomic serial queue", attributes: .concurrent)
+
+  private var _value: Value
+
+  init(wrappedValue value: Value) {
+    _value = value
   }
 
-  override func tearDown() {
-    super.tearDown()
+  var wrappedValue: Value {
+    get { queue.sync { _value } }
+    set { queue.async(flags: .barrier) { self._value = newValue } }
   }
-
-  func test() {}
 }

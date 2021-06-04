@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftSplash
+//  PBSQuadTree.swift
+//  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,18 +24,26 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import XCTest
+import MapKit
 
-/// Test the enhanced features of Bundle class is implemented in this extension
-class MessageBarTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+public class PBSQuadTree: AnnotationsContainer {
+  let root: PBSQuadTreeNode
+
+  public init(rect: MKMapRect) {
+    root = PBSQuadTreeNode(rect: rect)
   }
 
-  override func tearDown() {
-    super.tearDown()
+  @discardableResult
+  public func add(_ annotation: MKAnnotation) -> Bool {
+    root.add(annotation)
   }
 
-  func test() {}
+  @discardableResult
+  public func remove(_ annotation: MKAnnotation) -> Bool {
+    root.remove(annotation)
+  }
+
+  public func annotations(in rect: MKMapRect) -> [MKAnnotation] {
+    root.annotations(in: rect)
+  }
 }
