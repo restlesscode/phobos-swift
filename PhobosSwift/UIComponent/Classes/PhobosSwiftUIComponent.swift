@@ -24,6 +24,14 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import PhobosSwiftCore
+
+extension UIImage {
+  internal static func image(named name: String) -> UIImage {
+    let bundle = Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+    let emptyImage = UIImage.pbs.makeImage(from: .clear)
+    return UIImage(named: name, in: bundle, compatibleWith: nil) ?? emptyImage
+  }
+}
 
 class PhobosSwiftUIComponent: NSObject {}

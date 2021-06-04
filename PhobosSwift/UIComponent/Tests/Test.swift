@@ -27,7 +27,7 @@
 import Foundation
 import XCTest
 
-class LogTest: XCTestCase {
+class TestCase: XCTestCase {
   override func setUp() {
     super.setUp()
   }
