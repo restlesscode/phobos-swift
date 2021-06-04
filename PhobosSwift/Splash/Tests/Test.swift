@@ -1,7 +1,7 @@
 //
 //
-//  PBSTestKnight.swift
-//  PhobosSwiftTestKnight
+//  Test.swift
+//  PhobosSwiftSplash
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,31 +24,19 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLog
-import UIKit
 
-public class PBSTestKnight: NSObject {
-  public static let shared = PBSTestKnight()
-  public var configuration: PBSTestKnight.Configuration = .release
+import Foundation
+import XCTest
 
-  override private init() {
-    super.init()
-
-    #if DEBUG
-    configuration = .debug
-    #elseif STAGING
-    configuration = .staging
-    #elseif PREPRODUCTION
-    configuration = .preproduction
-    #elseif RELEASE
-    configuration = .release
-    #endif
+/// Test the enhanced features of Bundle class is implemented in this extension
+class MessageBarTest: XCTestCase {
+  override func setUp() {
+    super.setUp()
   }
 
-  public func configure(window: UIWindow?, completed: @escaping () -> Void) {
-    let testKnightViewCtrl = PBSTestKnightViewController()
-    testKnightViewCtrl.completedHandler = completed
-    window?.rootViewController = testKnightViewCtrl
+  override func tearDown() {
+    super.tearDown()
   }
+
+  func test() {}
 }

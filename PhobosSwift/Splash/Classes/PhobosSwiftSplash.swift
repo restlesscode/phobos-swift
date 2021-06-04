@@ -1,7 +1,7 @@
 //
 //
-//  PBSTestKnight.swift
-//  PhobosSwiftTestKnight
+//  PhobosSwiftSplash.swift
+//  PhobosSwiftSplash
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,30 +25,13 @@
 //
 
 import PhobosSwiftCore
-import PhobosSwiftLog
-import UIKit
 
-public class PBSTestKnight: NSObject {
-  public static let shared = PBSTestKnight()
-  public var configuration: PBSTestKnight.Configuration = .release
-
-  override private init() {
-    super.init()
-
-    #if DEBUG
-    configuration = .debug
-    #elseif STAGING
-    configuration = .staging
-    #elseif PREPRODUCTION
-    configuration = .preproduction
-    #elseif RELEASE
-    configuration = .release
-    #endif
-  }
-
-  public func configure(window: UIWindow?, completed: @escaping () -> Void) {
-    let testKnightViewCtrl = PBSTestKnightViewController()
-    testKnightViewCtrl.completedHandler = completed
-    window?.rootViewController = testKnightViewCtrl
+extension UIImage {
+  internal static func image(named name: String) -> UIImage {
+    let bundle = Bundle.pbs.bundle(with: PhobosSwiftSplash.self)
+    let emptyImage = UIImage.pbs.makeImage(from: .clear)
+    return UIImage(named: name, in: bundle, compatibleWith: nil) ?? emptyImage
   }
 }
+
+class PhobosSwiftSplash {}

@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint PhobosSwifTestKnight.podspec' to ensure this is a
+# Be sure to run `pod lib lint PhobosSwiftSplash.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,7 +7,7 @@
 #
 
 group = "PhobosSwift"
-name = "TestKnight"
+name = "Splash"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
@@ -52,10 +52,6 @@ TODO: Add long description of the pod here.
   ]
   
   s.dependency 'PhobosSwiftCore', '~> 0.1.0'
-  s.dependency 'RxSwift', '~> 6.1.0'
-  s.dependency 'RxCocoa', '~> 6.1.0'
-  s.dependency 'RxGesture'
-  s.dependency 'SnapKit'
 
   if has_resource_bundles
     s.resource_bundles = {

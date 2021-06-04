@@ -1,7 +1,7 @@
 //
 //
-//  PBSTestKnight.swift
-//  PhobosSwiftTestKnight
+//  PBSDefaultSplashViewController.swift
+//  PhobosSwiftSplash
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,31 +24,21 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLog
+import SnapKit
 import UIKit
 
-public class PBSTestKnight: NSObject {
-  public static let shared = PBSTestKnight()
-  public var configuration: PBSTestKnight.Configuration = .release
+let kLaunchImage = "launch"
 
-  override private init() {
-    super.init()
+open class PBSDefaultSplashViewController: UIViewController {
+  let imageView = UIImageView(image: UIImage(named: kLaunchImage))
 
-    #if DEBUG
-    configuration = .debug
-    #elseif STAGING
-    configuration = .staging
-    #elseif PREPRODUCTION
-    configuration = .preproduction
-    #elseif RELEASE
-    configuration = .release
-    #endif
-  }
+  override open func viewDidLoad() {
+    super.viewDidLoad()
+    imageView.contentMode = .scaleAspectFill
 
-  public func configure(window: UIWindow?, completed: @escaping () -> Void) {
-    let testKnightViewCtrl = PBSTestKnightViewController()
-    testKnightViewCtrl.completedHandler = completed
-    window?.rootViewController = testKnightViewCtrl
+    view.addSubview(imageView)
+    imageView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
   }
 }
