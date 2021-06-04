@@ -1,7 +1,7 @@
 //
 //
 //  Test.swift
-//  PhobosSwiftSplash
+//  PhobosSwiftAnimation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -27,7 +27,8 @@
 import Foundation
 import XCTest
 
-class TestCase: XCTestCase {
+/// Test the enhanced features of Bundle class is implemented in this extension
+class MessageBarTest: XCTestCase {
   override func setUp() {
     super.setUp()
   }

@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftSplash
+//  UIImage+Ex.swift
+//  PhobosSwiftAnimation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,16 +25,12 @@
 //
 
 import Foundation
-import XCTest
+import PhobosSwiftCore
 
-class TestCase: XCTestCase {
-  override func setUp() {
-    super.setUp()
+extension UIImage {
+  internal static func image(named name: String) -> UIImage {
+    let bundle = Bundle.pbs.bundle(with: PhobosSwiftAnimation.self)
+    let emptyImage = UIImage.pbs.makeImage(from: .clear)
+    return UIImage(named: name, in: bundle, compatibleWith: nil) ?? emptyImage
   }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func test() {}
 }

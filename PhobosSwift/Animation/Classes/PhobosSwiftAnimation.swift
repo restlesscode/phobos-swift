@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftSplash
+//  PhobosSwiftAnimation.swift
+//  PhobosSwiftAnimation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,16 +25,7 @@
 //
 
 import Foundation
-import XCTest
 
-class TestCase: XCTestCase {
-  override func setUp() {
-    super.setUp()
-  }
+let kScreenHeight = UIScreen.main.bounds.height
 
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func test() {}
-}
+public class PhobosSwiftAnimation: NSObject {}
