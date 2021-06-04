@@ -1,6 +1,6 @@
 //
 //
-//  PBSQuadTree.swift
+//  MKMapRect+Ex.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,26 +24,22 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
 import MapKit
+import PhobosSwiftCore
 
-public class PBSQuadTree: AnnotationsContainerProtocol {
-  let root: PBSQuadTreeNode
+extension MKMapRect: PhobosSwiftCompatible {}
 
-  public init(rect: MKMapRect) {
-    root = PBSQuadTreeNode(rect: rect)
+extension PhobosSwift where Base == MKMapRect {
+  public static func makeMapRect(minX: Double, minY: Double, maxX: Double, maxY: Double) -> MKMapRect {
+    MKMapRect(x: minX, y: minY, width: abs(maxX - minX), height: abs(maxY - minY))
   }
 
-  @discardableResult
-  public func add(_ annotation: MKAnnotation) -> Bool {
-    root.add(annotation)
+  public static func makeMapRect(x: Double, y: Double, width: Double, height: Double) -> MKMapRect {
+    MKMapRect(origin: MKMapPoint(x: x, y: y), size: MKMapSize(width: width, height: height))
   }
 
-  @discardableResult
-  public func remove(_ annotation: MKAnnotation) -> Bool {
-    root.remove(annotation)
-  }
-
-  public func annotations(in rect: MKMapRect) -> [MKAnnotation] {
-    root.annotations(in: rect)
+  public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
+    base.contains(MKMapPoint(coordinate))
   }
 }

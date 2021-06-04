@@ -1,6 +1,6 @@
 //
 //
-//  PBSCluster.swift
+//  PBSClusterManager.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -27,43 +27,8 @@
 import CoreLocation
 import MapKit
 
-public protocol ClusterManagerDelegate: AnyObject {
-  /**
-   The size of each cell on the grid (The larger the size, the better the performance) at a given zoom level.
-
-   - Parameters:
-      - zoomLevel: The zoom level of the visible map region.
-
-   - Returns: The cell size at the given zoom level. If you return nil, the cell size will automatically adjust to the zoom level.
-   */
-  func cellSize(for zoomLevel: Double) -> Double?
-
-  /**
-   Whether to cluster the given annotation.
-
-   - Parameters:
-      - annotation: An annotation object. The object must conform to the MKAnnotation protocol.
-
-   - Returns: `true` to clusterize the given annotation.
-   */
-  func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool
-}
-
 ///
-extension ClusterManagerDelegate {
-  ///
-  public func cellSize(for zoomLevel: Double) -> Double? {
-    nil
-  }
-
-  ///
-  public func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool {
-    true
-  }
-}
-
-///
-open class ClusterManager {
+open class PBSClusterManager {
   var tree = PBSQuadTree(rect: .world)
 
   /**
@@ -166,7 +131,7 @@ open class ClusterManager {
   let operationQueue = OperationQueue.serial
   let dispatchQueue = DispatchQueue(label: "com.cluster.concurrentQueue", attributes: .concurrent)
   ///
-  open weak var delegate: ClusterManagerDelegate?
+  open weak var delegate: PBSClusterManagerDelegate?
   ///
   public init() {}
 
@@ -303,7 +268,7 @@ open class ClusterManager {
     let toAdd = after.subtracted(before)
 
     if !shouldRemoveInvisibleAnnotations {
-      let toKeep = toRemove.filter { !visibleMapRect.contains($0.coordinate) }
+      let toKeep = toRemove.filter { !visibleMapRect.pbs.contains($0.coordinate) }
       toRemove.subtract(toKeep)
     }
 

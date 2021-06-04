@@ -27,7 +27,7 @@
 import MapKit
 import UIKit
 
-protocol AnnotationsContainer {
+protocol AnnotationsContainerProtocol {
   func add(_ annotation: MKAnnotation) -> Bool
   func remove(_ annotation: MKAnnotation) -> Bool
   func annotations(in rect: MKMapRect) -> [MKAnnotation]

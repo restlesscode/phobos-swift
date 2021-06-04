@@ -1,6 +1,6 @@
 //
 //
-//  Atomic.swift
+//  PBSClusterManagerDelegate.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -25,19 +25,39 @@
 //
 
 import Foundation
+import MapKit
 
-@propertyWrapper
-class Atomic<Value> {
-  private let queue = DispatchQueue(label: "Atomic serial queue", attributes: .concurrent)
+public protocol PBSClusterManagerDelegate: AnyObject {
+  /**
+   The size of each cell on the grid (The larger the size, the better the performance) at a given zoom level.
 
-  private var _value: Value
+   - Parameters:
+      - zoomLevel: The zoom level of the visible map region.
 
-  init(wrappedValue value: Value) {
-    _value = value
+   - Returns: The cell size at the given zoom level. If you return nil, the cell size will automatically adjust to the zoom level.
+   */
+  func cellSize(for zoomLevel: Double) -> Double?
+
+  /**
+   Whether to cluster the given annotation.
+
+   - Parameters:
+      - annotation: An annotation object. The object must conform to the MKAnnotation protocol.
+
+   - Returns: `true` to clusterize the given annotation.
+   */
+  func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool
+}
+
+///
+extension PBSClusterManagerDelegate {
+  ///
+  public func cellSize(for zoomLevel: Double) -> Double? {
+    nil
   }
 
-  var wrappedValue: Value {
-    get { queue.sync { _value } }
-    set { queue.async(flags: .barrier) { self._value = newValue } }
+  ///
+  public func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool {
+    true
   }
 }

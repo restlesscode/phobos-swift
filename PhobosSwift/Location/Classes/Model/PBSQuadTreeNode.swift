@@ -41,10 +41,10 @@ class PBSQuadTreeNode {
 
     init(parentNode: PBSQuadTreeNode) {
       let mapRect = parentNode.rect
-      northWest = PBSQuadTreeNode(rect: MKMapRect(minX: mapRect.minX, minY: mapRect.minY, maxX: mapRect.midX, maxY: mapRect.midY))
-      northEast = PBSQuadTreeNode(rect: MKMapRect(minX: mapRect.midX, minY: mapRect.minY, maxX: mapRect.maxX, maxY: mapRect.midY))
-      southWest = PBSQuadTreeNode(rect: MKMapRect(minX: mapRect.minX, minY: mapRect.midY, maxX: mapRect.midX, maxY: mapRect.maxY))
-      southEast = PBSQuadTreeNode(rect: MKMapRect(minX: mapRect.midX, minY: mapRect.midY, maxX: mapRect.maxX, maxY: mapRect.maxY))
+      northWest = PBSQuadTreeNode(rect: MKMapRect.pbs.makeMapRect(minX: mapRect.minX, minY: mapRect.minY, maxX: mapRect.midX, maxY: mapRect.midY))
+      northEast = PBSQuadTreeNode(rect: MKMapRect.pbs.makeMapRect(minX: mapRect.midX, minY: mapRect.minY, maxX: mapRect.maxX, maxY: mapRect.midY))
+      southWest = PBSQuadTreeNode(rect: MKMapRect.pbs.makeMapRect(minX: mapRect.minX, minY: mapRect.midY, maxX: mapRect.midX, maxY: mapRect.maxY))
+      southEast = PBSQuadTreeNode(rect: MKMapRect.pbs.makeMapRect(minX: mapRect.midX, minY: mapRect.midY, maxX: mapRect.maxX, maxY: mapRect.maxY))
     }
 
     struct ChildrenIterator: IteratorProtocol {
@@ -83,10 +83,10 @@ class PBSQuadTreeNode {
   }
 }
 
-extension PBSQuadTreeNode: AnnotationsContainer {
+extension PBSQuadTreeNode: AnnotationsContainerProtocol {
   @discardableResult
   func add(_ annotation: MKAnnotation) -> Bool {
-    guard rect.contains(annotation.coordinate) else { return false }
+    guard rect.pbs.contains(annotation.coordinate) else { return false }
 
     switch type {
     case .leaf:
@@ -108,7 +108,7 @@ extension PBSQuadTreeNode: AnnotationsContainer {
 
   @discardableResult
   func remove(_ annotation: MKAnnotation) -> Bool {
-    guard rect.contains(annotation.coordinate) else { return false }
+    guard rect.pbs.contains(annotation.coordinate) else { return false }
 
     _ = annotations.map { $0.coordinate }.firstIndex(of: annotation.coordinate).map { annotations.remove(at: $0) }
 
@@ -139,7 +139,7 @@ extension PBSQuadTreeNode: AnnotationsContainer {
 
     var result = [MKAnnotation]()
 
-    for annotation in annotations where rect.contains(annotation.coordinate) {
+    for annotation in annotations where rect.pbs.contains(annotation.coordinate) {
       result.append(annotation)
     }
 
