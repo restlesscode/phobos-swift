@@ -11,7 +11,7 @@ name = "UIComponent"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
-has_resource_bundles = false
+has_resource_bundles = true
 enable_test = true
 
 

@@ -27,8 +27,8 @@
 import Foundation
 import XCTest
 
-/// Test the enhanced features of Bundle class is implemented in this extension
-class MessageBarTest: XCTestCase {
+class TestCase: XCTestCase {
+  
   override func setUp() {
     super.setUp()
   }
