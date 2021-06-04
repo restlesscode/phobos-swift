@@ -40,6 +40,8 @@ target 'PhobosSwiftExample' do
   pod 'PhobosSwiftUIComponent', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # TestKnight
   pod 'PhobosSwiftTestKnight', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Splash
+  pod 'PhobosSwiftSplash', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   #pod 'PhobosSwiftPayment/Wechatpay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
   #pod 'PhobosSwiftPayment/Alipay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
 
