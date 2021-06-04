@@ -1,6 +1,6 @@
 //
 //
-//  DirectionsMode.swift
+//  PBSQuadTree.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,32 +24,26 @@
 //  THE SOFTWARE.
 //
 
-import CoreLocation
-import Foundation
 import MapKit
 
-extension CLLocationManager {
-  public enum DirectionsMode {
-    case walk
-    case driving
-    case transit
-    case `default`
+public class PBSQuadTree: AnnotationsContainerProtocol {
+  let root: PBSQuadTreeNode
 
-    public var launchOptions: [String: Any]? {
-      switch self {
-      case .walk:
-        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking,
-                MKLaunchOptionsShowsTrafficKey: 1]
-      case .driving:
-        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,
-                MKLaunchOptionsShowsTrafficKey: 1]
-      case .transit:
-        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit,
-                MKLaunchOptionsShowsTrafficKey: 1]
-      case .default:
-        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault,
-                MKLaunchOptionsShowsTrafficKey: 1]
-      }
-    }
+  public init(rect: MKMapRect) {
+    root = PBSQuadTreeNode(rect: rect)
+  }
+
+  @discardableResult
+  public func add(_ annotation: MKAnnotation) -> Bool {
+    root.add(annotation)
+  }
+
+  @discardableResult
+  public func remove(_ annotation: MKAnnotation) -> Bool {
+    root.remove(annotation)
+  }
+
+  public func annotations(in rect: MKMapRect) -> [MKAnnotation] {
+    root.annotations(in: rect)
   }
 }
