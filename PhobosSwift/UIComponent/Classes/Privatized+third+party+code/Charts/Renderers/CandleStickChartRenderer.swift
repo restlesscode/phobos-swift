@@ -214,8 +214,8 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer {
       let axElement = createAccessibleElement(withIndex: j,
                                               container: dataProvider,
                                               dataSet: dataSet) { element in
-        element.accessibilityLabel = "\(doesContainMultipleDataSets ? "\(dataSet.label ?? "Dataset")" : "") " + "\(xPos) - \(accessibilityMovementDescription). low: \(low), high: \(high), opening: \(open), closing: \(close)"
-        element.accessibilityFrame = accessibilityRect
+          element.accessibilityLabel = "\(doesContainMultipleDataSets ? "\(dataSet.label ?? "Dataset")" : "") " + "\(xPos) - \(accessibilityMovementDescription). low: \(low), high: \(high), opening: \(open), closing: \(close)"
+          element.accessibilityFrame = accessibilityRect
       }
 
       accessibleChartElements.append(axElement)

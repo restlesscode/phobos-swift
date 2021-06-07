@@ -25,22 +25,29 @@
 //
 
 @testable import PhobosSwiftCore
-import Foundation
-import XCTest
+import Nimble
+import Quick
 
-class ArrayTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class ArrayTest: QuickSpec {
+  override func spec() {
+    testChunked()
   }
 
-  override func tearDown() {
-    super.tearDown()
-  }
+  func testChunked() {
+    describe("Given 有一个长度为7的数组, 拆分size为3") {
+      let array: [String] = ["Tom1", "Jack2", "Tom3", "Jack4", "Tom5", "Jack6", "Tom7"]
+      let expectSize = 3
+      let expectArray: [[String]] = [["Tom1", "Jack2", "Tom3"],
+                                     ["Jack4", "Tom5", "Jack6"],
+                                     ["Tom7"]]
 
-  func testArray() {
-    let array: [Any] = ["Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1]
+      context("When 调用Array.pbs_chunked方法") {
+        let chunkedArray = array.pbs_chunked(into: expectSize)
 
-    let chunkedArray = array.pbs_chunked(into: 3)
-    XCTAssertEqual(chunkedArray.count, 4)
+        it("Then 返回数组与期望数组一致") {
+          expect(chunkedArray).to(equal(expectArray))
+        }
+      }
+    }
   }
 }

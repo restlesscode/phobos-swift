@@ -40,6 +40,7 @@ PODS:
   - MirrorRealmSwift (0.3.1):
     - MirrorRealm (~> 0.3.1)
   - MirrorWechatSDK (0.1.5)
+  - Nimble (9.2.0)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
@@ -60,7 +61,9 @@ PODS:
     - SnapKit
   - PhobosSwiftCore/Tests (0.1.0):
     - GoogleUtilities (~> 7.0)
+    - Nimble
     - PhobosSwiftLog (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxGesture
     - RxSwift (~> 6.1.0)
@@ -182,6 +185,7 @@ PODS:
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PromisesObjC (1.2.12)
+  - Quick (4.0.0)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
     - RxSwift (= 6.1.0)
@@ -234,8 +238,10 @@ SPEC REPOS:
     - Alamofire
     - CocoaAsyncSocket
     - GoogleUtilities
+    - Nimble
     - ObjcExceptionBridging
     - PromisesObjC
+    - Quick
     - RxCocoa
     - RxGesture
     - RxRelay
@@ -279,9 +285,10 @@ SPEC CHECKSUMS:
   MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
+  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftAuth: bbba013c7e66fee6f3d59988d7bfcee4e79db933
-  PhobosSwiftCore: 4cccf18e92415f06a7a74fa5c91d609f557e1a47
+  PhobosSwiftCore: 43039b63bbfe760b0c4a0ae35c767cd9d0d8ec1f
   PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
   PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
@@ -294,6 +301,7 @@ SPEC CHECKSUMS:
   PhobosSwiftUIComponent: f4aa8d4d350b6e20e3147905e05808f07189f841
   PhobosSwiftWechat: 09ab2d36da3badb1abc0ebe26d4b084db1ef6fac
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
