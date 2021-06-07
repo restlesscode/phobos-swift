@@ -51,7 +51,7 @@ TODO: Add long description of the pod here.
     "{group}/#{name}/CHANGELOG.md"
   ]
   
-  s.dependency 'Alamofire', '~> 5.0.0'
+  s.dependency 'Alamofire', '~> 5.1.0'
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
   s.dependency 'CocoaAsyncSocket', '~> 7.6.5'

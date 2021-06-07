@@ -1,5 +1,7 @@
 PODS:
-  - Alamofire (5.0.5)
+  - Alamofire (5.1.0)
+  - AlamofireImage (4.1.0):
+    - Alamofire (~> 5.1)
   - CocoaAsyncSocket (7.6.5)
   - GoogleUtilities (7.4.0):
     - GoogleUtilities/AppDelegateSwizzler (= 7.4.0)
@@ -80,14 +82,14 @@ PODS:
   - PhobosSwiftLog/Tests (0.1.0):
     - ObjcExceptionBridging (~> 1.0.1)
   - PhobosSwiftNetwork (0.1.0):
-    - Alamofire (~> 5.0.0)
+    - Alamofire (~> 5.1.0)
     - CocoaAsyncSocket (~> 7.6.5)
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftNetwork/Tests (0.1.0):
-    - Alamofire (~> 5.0.0)
+    - Alamofire (~> 5.1.0)
     - CocoaAsyncSocket (~> 7.6.5)
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
@@ -162,13 +164,19 @@ PODS:
     - RxSwift (~> 6.1.0)
     - SnapKit
   - PhobosSwiftUIComponent (0.1.0):
+    - AlamofireImage (~> 4.1)
     - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - PhobosSwiftRouter (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxGesture
     - RxSwift (~> 6.1.0)
     - SnapKit
   - PhobosSwiftUIComponent/Tests (0.1.0):
+    - AlamofireImage (~> 4.1)
     - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - PhobosSwiftRouter (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxGesture
     - RxSwift (~> 6.1.0)
@@ -232,6 +240,7 @@ SPEC REPOS:
     - MirrorWechatSDK
   trunk:
     - Alamofire
+    - AlamofireImage
     - CocoaAsyncSocket
     - GoogleUtilities
     - ObjcExceptionBridging
@@ -273,7 +282,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
   MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
@@ -284,14 +294,14 @@ SPEC CHECKSUMS:
   PhobosSwiftCore: 4cccf18e92415f06a7a74fa5c91d609f557e1a47
   PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
   PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
-  PhobosSwiftNetwork: 056bdad79f7bd582ac95f989a0edc45fb5b3243f
+  PhobosSwiftNetwork: 6b70eda70fc0264577ae228c32def2d5d1876bfe
   PhobosSwiftPayment: 05faf9f7b73dae5b947d0395bd4eaf3d7d9d48f9
   PhobosSwiftPersistence: 076f97ba5a45205644fb5f4795d77a13a0a37bb8
   PhobosSwiftPush: f3ace2618d714528ab9a13dd9ff118f9e2f2337b
   PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
   PhobosSwiftSplash: 487b324e113497488674ce9fe257f3499a2dde05
   PhobosSwiftTestKnight: 81adc3e7a9df979e50a75332cc04c2c505fadee5
-  PhobosSwiftUIComponent: f4aa8d4d350b6e20e3147905e05808f07189f841
+  PhobosSwiftUIComponent: 8a06ea4e3bbcab9c7ddfc61a5ff4345e1efa5859
   PhobosSwiftWechat: 09ab2d36da3badb1abc0ebe26d4b084db1ef6fac
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
