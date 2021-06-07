@@ -26,14 +26,16 @@
 
 import Foundation
 import MapKit
+import PhobosSwiftCore
 
-extension MKLocalSearch {
+extension MKLocalSearch: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base: MKLocalSearch {
   /// 通过自然语言进行地址搜索
   public static func makeNaturalLanguageSearch(keyword: String?, region: MKCoordinateRegion) -> MKLocalSearch {
     let request = MKLocalSearch.Request()
     request.naturalLanguageQuery = keyword
     request.region = region
-
     return MKLocalSearch(request: request)
   }
 
@@ -45,6 +47,6 @@ extension MKLocalSearch {
     let region = MKCoordinateRegion(center: center,
                                     latitudinalMeters: latitudinalMeters,
                                     longitudinalMeters: longitudinalMeters)
-    return Self.makeNaturalLanguageSearch(keyword: keyword, region: region)
+    return MKLocalSearch.pbs.makeNaturalLanguageSearch(keyword: keyword, region: region)
   }
 }
