@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 import PhobosSwiftCore
 import RxCocoa
 import RxSwift
@@ -36,7 +35,7 @@ extension PBSArticleBigCardCell {
     case yellow
     case sliver
     case red
-
+    
     var actionButtonTintColor: UIColor {
       switch self {
       case .brown:
@@ -47,7 +46,7 @@ extension PBSArticleBigCardCell {
         return UIColor.white
       }
     }
-
+    
     var actionButtonBackgroundColor: UIColor {
       switch self {
       case .brown, .sliver, .yellow:
@@ -56,7 +55,7 @@ extension PBSArticleBigCardCell {
         return UIColor.pbs.color(R: 190, G: 37, B: 67)
       }
     }
-
+    
     var gradientBackgroundColorSet: [UIColor] {
       switch self {
       case .brown:
@@ -69,7 +68,7 @@ extension PBSArticleBigCardCell {
         return [UIColor.pbs.color(R: 186, G: 172, B: 102), UIColor.pbs.color(R: 180, G: 155, B: 92)]
       }
     }
-
+    
     var tagTextColor: UIColor {
       switch self {
       case .brown, .red, .yellow:
@@ -78,7 +77,7 @@ extension PBSArticleBigCardCell {
         return .black
       }
     }
-
+    
     var titleTextColor: UIColor {
       switch self {
       case .brown, .red, .yellow:
@@ -87,7 +86,7 @@ extension PBSArticleBigCardCell {
         return .black
       }
     }
-
+    
     var subtitleTextColor: UIColor {
       switch self {
       case .brown, .red, .yellow:

@@ -46,7 +46,7 @@ public struct PBSArticleViewModel {
   public var url = BehaviorRelay<URL?>(value: nil)
   /// Article body
   public var body = BehaviorRelay<String?>(value: nil)
-
+  
   ///
   public init(model: PBSArticleModel) {
     title.accept(model.title)
@@ -62,7 +62,7 @@ public struct PBSArticleViewModel {
 
 extension PBSArticleViewModel {
   static let kTitle = "In this tutorial, you’ll get hands-on experience with UICollectionView by creating your own grid-based photo browsing app."
-
+  
   static var demoViewModel: PBSArticleViewModel {
     let model = PBSArticleModel(title: kTitle,
                                 subtitle: "您感兴趣的文章可能都在这里，我们根据您的浏览行为和选择做出推荐",

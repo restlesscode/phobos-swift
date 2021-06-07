@@ -40,7 +40,7 @@ struct ANFStyle: Codable {
   let type: String
   let url: String
   let fillMode: String
-
+  
   enum CodingKeys: String, CodingKey {
     case type
     case url = "URL"
@@ -58,7 +58,7 @@ enum ANFLayoutType: Codable {
   case some(String)
   /// 具体的Layoutt
   case detail(ANFLayout)
-
+  
   init(from decoder: Decoder) throws {
     do {
       let container = try decoder.singleValueContainer()
@@ -71,12 +71,12 @@ enum ANFLayoutType: Codable {
       let layout = ANFLayout(columnStart: columnStart, columnSpan: columnSpan)
       self = .detail(layout)
     }
-
+    
     DispatchQueue.global().async {}
-
+    
     DispatchQueue.global(qos: .background).async {}
   }
-
+  
   func encode(to encoder: Encoder) throws {
     switch self {
     case let .some(layoutName):
@@ -88,7 +88,7 @@ enum ANFLayoutType: Codable {
       try container.encode(layout.columnSpan, forKey: .columnSpan)
     }
   }
-
+  
   private enum CodingKeys: String, CodingKey {
     case columnStart
     case columnSpan
@@ -106,9 +106,9 @@ struct AppleNewsFormatModel: Codable {
   let title: String
   let language: String
   let subtitle: String
-
+  
   let components: [ANFComponent]
-
+  
   static var demoModel: AppleNewsFormatModel? {
     demoStr.pbs_model(modelType: AppleNewsFormatModel.self)
   }

@@ -37,60 +37,60 @@ class PBSArticleBigCardECell: PBSArticleBigCardCell {
   class var coverImageSize: CGSize {
     let width: CGFloat = UIScreen.main.bounds.width - 36.0
     let height: CGFloat = width / 339.0 * 256
-
+    
     return CGSize(width: width, height: height)
   }
-
+  
   class var itemSize: CGSize {
     let width: CGFloat = UIScreen.main.bounds.width - kSpacing * 2.0
     let height: CGFloat = width / 339.0 * 436
-
+    
     return CGSize(width: width, height: height)
   }
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     style = .brown
-
+    
     makeSubviews()
     makeStyles()
   }
-
+  
   @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   func makeSubviews() {
     mainView.snp.makeConstraints {
       $0.left.right.top.bottom.equalTo(0)
     }
-
+    
     coverImageView.snp.makeConstraints {
       $0.top.left.right.equalTo(0.0)
       $0.height.equalTo(Self.coverImageSize.height)
       $0.bottom.equalTo(tagLabel.snp.top).offset(-8)
     }
-
+    
     tagLabel.snp.makeConstraints {
       $0.top.equalTo(coverImageView.snp.bottom).offset(8)
       $0.left.equalTo(kSpacing)
       $0.right.equalTo(-kSpacing)
       $0.bottom.equalTo(titleLabel.snp.top).offset(-8)
     }
-
+    
     titleLabel.snp.makeConstraints {
       $0.left.equalTo(kSpacing)
       $0.right.equalTo(-kSpacing)
       $0.bottom.equalTo(subtitleLabel.snp.top).offset(-8)
     }
-
+    
     subtitleLabel.snp.makeConstraints {
       $0.left.equalTo(kSpacing)
       $0.right.equalTo(-kSpacing)
       $0.bottom.lessThanOrEqualToSuperview()
     }
-
+    
     actionBtn.snp.makeConstraints {
       $0.left.equalTo(kSpacing)
       $0.top.greaterThanOrEqualTo(subtitleLabel.snp.bottom)
@@ -98,20 +98,20 @@ class PBSArticleBigCardECell: PBSArticleBigCardCell {
       $0.height.equalTo(55)
     }
   }
-
+  
   func makeStyles() {
     mainView.frame = CGRect(origin: .zero, size: Self.itemSize)
     mainView.layer.cornerRadius = 8.0
     mainView.pbs.addShadow(radius: 8.0)
-
+    
     tagLabel.font = Styles.Font.articleTag
-
+    
     titleLabel.font = Styles.Font.articleLargeTitle
-
+    
     subtitleLabel.numberOfLines = 4
     subtitleLabel.lineBreakMode = .byWordWrapping
     subtitleLabel.font = Styles.Font.articleMediumTitle
-
+    
     actionBtn.titleLabel?.font = Styles.Font.moreActionTitle
   }
 }
@@ -119,12 +119,12 @@ class PBSArticleBigCardECell: PBSArticleBigCardCell {
 extension PBSArticleBigCardECell: PBSArticleCellProtocol {
   func render(theme: PBSArticleSectionTheme, model: PBSArticleViewModel) {
     applyStyle(theme: theme)
-
+    
     model.coverImageUrl.bind(to: coverImageView.rx.imageUrl).disposed(by: disposeBag)
     model.tag.bind(to: tagLabel.rx.text).disposed(by: disposeBag)
     model.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
     model.subtitle.bind(to: subtitleLabel.rx.text).disposed(by: disposeBag)
-
+    
     actionBtn.setTitle("Read the collection ▶︎", for: .normal)
   }
 }

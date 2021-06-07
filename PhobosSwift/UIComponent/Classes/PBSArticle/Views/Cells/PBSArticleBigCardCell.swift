@@ -35,7 +35,7 @@ protocol PBSArticleCellProtocol: AnyObject {
 
 class PBSArticleBigCardCell: UICollectionViewCell {
   var disposeBag = DisposeBag()
-
+  
   var style: PBSArticleBigCardCell.Style = .brown {
     didSet {
       mainView.pbs.applyHorizontalGradientBackground(colorset: style.gradientBackgroundColorSet, cornerRadius: 8.0)
@@ -45,14 +45,14 @@ class PBSArticleBigCardCell: UICollectionViewCell {
       actionBtn.tintColor = style.actionButtonTintColor
     }
   }
-
+  
   lazy var mainView: UIView = {
     let view = UIView()
     contentView.addSubview(view)
-
+    
     return view
   }()
-
+  
   lazy var coverImageView: UIImageView = {
     let imageView = UIImageView(image: Resource.Image.kImageArticlePlaceHolder)
     mainView.addSubview(imageView)
@@ -62,63 +62,63 @@ class PBSArticleBigCardCell: UICollectionViewCell {
       imageView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
     imageView.layer.masksToBounds = true
-
+    
     return imageView
   }()
-
+  
   lazy var tagLabel: UILabel = {
     let label = UILabel(frame: .zero)
     mainView.addSubview(label)
     label.font = Styles.Font.articleTag
-
+    
     return label
   }()
-
+  
   lazy var titleLabel: UILabel = {
     let label = UILabel(frame: .zero)
     mainView.addSubview(label)
     label.font = Styles.Font.articleLargeTitle
-
+    
     return label
   }()
-
+  
   lazy var subtitleLabel: UILabel = {
     let label = UILabel(frame: .zero)
     mainView.addSubview(label)
     label.numberOfLines = 4
     label.lineBreakMode = .byWordWrapping
     label.font = Styles.Font.articleMediumTitle
-
+    
     return label
   }()
-
+  
   lazy var actionBtn: UIButton = {
     let button = UIButton(type: .system)
     mainView.addSubview(button)
     button.titleLabel?.font = Styles.Font.moreActionTitle
-
+    
     return button
   }()
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
-
+  
   @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   override func prepareForReuse() {
     super.prepareForReuse()
-
+    
     disposeBag = DisposeBag()
   }
-
+  
   func applyStyle(theme: PBSArticleSectionTheme) {
     let style = BehaviorRelay<PBSArticleBigCardCell.Style>(value: .brown)
     style.bind(to: rx.style).disposed(by: disposeBag)
-
+    
     switch theme {
     case .green:
       style.accept(.brown)

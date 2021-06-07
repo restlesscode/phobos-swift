@@ -290,19 +290,19 @@ SPEC CHECKSUMS:
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  PhobosSwiftAuth: bbba013c7e66fee6f3d59988d7bfcee4e79db933
-  PhobosSwiftCore: 4cccf18e92415f06a7a74fa5c91d609f557e1a47
-  PhobosSwiftLocation: 163dbfcfc2e6b9deb320995b918eec40b9fb89be
-  PhobosSwiftLog: 66dce365dafe126a87a8ab3d3388552bd91f20c7
-  PhobosSwiftNetwork: 6b70eda70fc0264577ae228c32def2d5d1876bfe
-  PhobosSwiftPayment: 05faf9f7b73dae5b947d0395bd4eaf3d7d9d48f9
-  PhobosSwiftPersistence: 076f97ba5a45205644fb5f4795d77a13a0a37bb8
-  PhobosSwiftPush: f3ace2618d714528ab9a13dd9ff118f9e2f2337b
-  PhobosSwiftRouter: 398466db64503fcab3a0bd3f80ad29c2dfb409c9
-  PhobosSwiftSplash: 487b324e113497488674ce9fe257f3499a2dde05
-  PhobosSwiftTestKnight: 81adc3e7a9df979e50a75332cc04c2c505fadee5
-  PhobosSwiftUIComponent: 8a06ea4e3bbcab9c7ddfc61a5ff4345e1efa5859
-  PhobosSwiftWechat: 09ab2d36da3badb1abc0ebe26d4b084db1ef6fac
+  PhobosSwiftAuth: 81d06436d83e6f85e19e0803ec021f1f8b9ac95e
+  PhobosSwiftCore: a63451a066f445d637292419de3df0576222f61b
+  PhobosSwiftLocation: c48a2f45e8f7bbca8e347258ddf21c1ab8fc0cac
+  PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
+  PhobosSwiftNetwork: 97c4b84133fb5c7e863207ea89bdcc4c0437c20d
+  PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
+  PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
+  PhobosSwiftPush: a17dd5265d86a125c7afa74749f27655dca805c1
+  PhobosSwiftRouter: 64687cb9c6afa21113399b4f3a07b8ddc5cb028d
+  PhobosSwiftSplash: 74a07d1556875c5e23cf6ef57ae78bf58b80cd1c
+  PhobosSwiftTestKnight: 2e4ad8cd41bd7bd3dc5b9c90f0da470a2c2a9d9d
+  PhobosSwiftUIComponent: cff4c50f4addaabb96a12f2583a20f01a8197bb7
+  PhobosSwiftWechat: 2039b3c5e4725e62308eaadc45a14ae092bac263
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f

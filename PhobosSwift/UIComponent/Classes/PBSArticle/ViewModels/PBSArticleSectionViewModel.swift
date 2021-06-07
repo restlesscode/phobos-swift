@@ -37,7 +37,7 @@ public struct PBSArticleSectionViewModel {
   public var subtitle = BehaviorRelay<String>(value: "")
   /// Section's article list
   public var articleViewModels: [PBSArticleViewModel] = []
-
+  
   ///
   public init(title: String,
               subtitle: String,
@@ -53,7 +53,7 @@ extension PBSArticleSectionViewModel {
     let articleViewModels = (0..<numberOfArticles).compactMap { _ in
       PBSArticleViewModel.demoViewModel
     }
-
+    
     return PBSArticleSectionViewModel(title: "For You",
                                       subtitle: "您感兴趣的文章可能都在这里，我们根据您的浏览行为和选择做出推荐",
                                       articleViewModels: articleViewModels)

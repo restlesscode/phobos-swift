@@ -558,7 +558,7 @@ open class LineChartRenderer: LineRadarRenderer {
                                                 container: chart,
                                                 dataSet: dataSet,
                                                 dataSetIndex: i) { element in
-            element.accessibilityFrame = accessibilityRect
+              element.accessibilityFrame = accessibilityRect
           }
 
           accessibilityOrderedElements[i].append(element)

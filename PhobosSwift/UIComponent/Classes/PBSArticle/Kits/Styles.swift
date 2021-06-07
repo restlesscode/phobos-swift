@@ -40,7 +40,7 @@ struct Styles {
     static var moreActionTitle = UIFont.systemFont(ofSize: 14.0, weight: .black)
     static var moreActionTitleX = UIFont.systemFont(ofSize: 12.0, weight: .semibold)
   }
-
+  
   struct Color {
     static var sectionTitleGreen = UIColor.pbs.color(hex: 0x5CC08C)
     static var sectionTitleRed = UIColor.pbs.color(R: 222, G: 21, B: 18)
@@ -53,7 +53,7 @@ struct Styles {
     static var sectionTitleBlue = UIColor.pbs.color(R: 52, G: 84, B: 147)
     static var sectionTitlePurple = UIColor.pbs.color(R: 105, G: 86, B: 179)
     static var sectionTitleBlack = UIColor.black
-
+    
     static var sectionSubtitleGray = UIColor.pbs.color(hex: 0x8A8A8E)
     static var articleTagGreen = UIColor.pbs.color(hex: 0x5CC08C)
     static var articleTitleBlack: UIColor {
@@ -63,7 +63,7 @@ struct Styles {
         return UIColor.black
       }
     }
-
+    
     static var articleTitleGray = UIColor.pbs.color(hex: 0x87878B)
     static var articleSeporatorGray = UIColor.pbs.color(hex: 0xD0D3D6)
   }

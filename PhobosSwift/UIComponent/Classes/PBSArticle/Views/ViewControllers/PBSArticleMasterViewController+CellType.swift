@@ -48,7 +48,7 @@ extension UIArticleKit.DecorationView.CellType {
       return PBSArticleBigCardSCell.pbs.reuseIdentifier
     }
   }
-
+  
   var itemSize: CGSize {
     switch self {
     case .card:

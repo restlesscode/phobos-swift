@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -33,71 +32,50 @@ import WebKit
 
 open class PBSArticleDetailViewController: UIViewController {
   let disposeBag = DisposeBag()
-
-//    lazy var navigationBar: UINavigationBar = {
-//        let _navigationBar = UINavigationBar(frame: .zero)
-//        view.addSubview(_navigationBar)
-//
-//        return _navigationBar
-//    }()
-
+  
   let layout = UICollectionViewFlowLayout()
-
+  
   let layoutManager = NSLayoutManager()
-
-//    let container: NSTextContainer = {
-//        let containerSize = CGSize(width: self.view.bounds.width, height: .greatestFiniteMagnitude)
-//        (size: containerSize)
-//        container.widthTracksTextView = true
-//    }()
-
+  
   lazy var colletionView: UICollectionView = {
     let _collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     view.addSubview(_collectionView)
     _collectionView.backgroundColor = .white
-
+    
     return _collectionView
   }()
-
+  
   lazy var textView: UITextView = {
     let _textView = UITextView(frame: .zero, textContainer: nil)
     view.addSubview(_textView)
-
+    
     return _textView
   }()
-
+  
   lazy var webView: WKWebView = {
     let configuration = WKWebViewConfiguration()
     let _webView = WKWebView(frame: .zero, configuration: configuration)
     view.addSubview(_webView)
-
+    
     return _webView
   }()
-
+  
   var articleViewModel: PBSArticleViewModel!
-
+  
   let textStorage = PBSGhostHtmlTextStorage()
-
+  
   override open func viewDidLoad() {
     super.viewDidLoad()
-
-    // self.navigationController?.navigationBar.isHidden = true
-
     makeSubviews()
-
-//        navigationBar.backgroundColor = .red
-//        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-
     view.backgroundColor = UIColor.pbs.systemBackground
-
     textView.isEditable = false
-
+    
     let url = URL(fileURLWithPath: "article_template.html", relativeTo: Bundle.bundle.resourceURL)
     if let data = try? Data(contentsOf: url) {
       if let htmlTemplate = String(data: data, encoding: .utf8) {
         let cssContent = ["\(loadWebResource(fileName: "screen.css") ?? "")",
                           "\(loadWebResource(fileName: "prism-okaidia.min.css") ?? "")"].joined(separator: "\nre")
-
+        
         let jsContent = ["\(loadWebResource(fileName: "prism.min.js") ?? "")"].joined(separator: "\nre")
         let body = String(format: htmlTemplate,
                           cssContent,
@@ -105,49 +83,25 @@ open class PBSArticleDetailViewController: UIViewController {
                           articleViewModel.title.value,
                           articleViewModel.body.value ?? "",
                           jsContent)
-
-//                self.textView.attributedText = try? NSAttributedString(data: body.data(using: .unicode)!,
-//                options: [.documentType: NSAttributedString.DocumentType.html],
-//                documentAttributes: nil)
-//
         webView.loadHTMLString(body, baseURL: nil)
         webView.uiDelegate = self
       }
     }
   }
-
+  
   func loadWebResource(fileName: String) -> String? {
     let url = URL(fileURLWithPath: fileName, relativeTo: Bundle.bundle.resourceURL)
     guard let data = try? Data(contentsOf: url) else { return nil }
-
+    
     return String(data: data, encoding: .utf8)
   }
-
+  
   func makeSubviews() {
-//        navigationBar.snp.makeConstraints {
-//            $0.left.right.equalTo(0)
-//            $0.top.equalTo(0)
-//            $0.height.equalTo(80)
-//        }
-
-//        colletionView.snp.makeConstraints {
-//            $0.left.right.equalTo(0)
-//            $0.bottom.equalTo(0)
-//            $0.top.equalTo(navigationBar.snp.bottom)
-//        }
-
-//        textView.snp.makeConstraints {
-//            $0.left.right.equalTo(0)
-//            $0.bottom.equalTo(0)
-//            $0.top.equalTo(self.topLayoutGuide.snp.bottom)
-//            //$0.top.equalTo(navigationBar.snp.bottom)
-//        }
-
+    
     webView.snp.makeConstraints {
       $0.left.right.equalTo(0)
       $0.bottom.equalTo(0)
       $0.top.equalTo(self.topLayoutGuide.snp.bottom)
-      // $0.top.equalTo(navigationBar.snp.bottom)
     }
   }
 }

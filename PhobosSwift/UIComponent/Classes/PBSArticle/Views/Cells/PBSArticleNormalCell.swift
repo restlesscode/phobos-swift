@@ -31,38 +31,38 @@ import UIKit
 
 class PBSArticleNormalCell: UICollectionViewCell {
   var disposeBag = DisposeBag()
-
+  
   static var itemSize: CGSize {
     let width: CGFloat = UIScreen.main.bounds.width - 36.0
     let height: CGFloat = width / 339.0 * 119.0
-
+    
     return CGSize(width: width, height: height)
   }
-
+  
   override func prepareForReuse() {
     super.prepareForReuse()
     disposeBag = DisposeBag()
   }
-
+  
   lazy var coverImageView: UIImageView = {
     let imageView = UIImageView(image: Resource.Image.kImageArticlePlaceHolder)
     self.contentView.addSubview(imageView)
     imageView.contentMode = .scaleAspectFill
     imageView.layer.masksToBounds = true
     imageView.layer.cornerRadius = 4.0
-
+    
     return imageView
   }()
-
+  
   lazy var tagLabel: UILabel = {
     let label = UILabel(frame: .zero)
     self.contentView.addSubview(label)
     label.font = Styles.Font.articleTag
     label.textColor = Styles.Color.articleTitleBlack
-
+    
     return label
   }()
-
+  
   lazy var titleLabel: UILabel = {
     let label = UILabel(frame: .zero)
     self.contentView.addSubview(label)
@@ -70,53 +70,53 @@ class PBSArticleNormalCell: UICollectionViewCell {
     label.lineBreakMode = .byWordWrapping
     label.font = Styles.Font.articleTitle
     label.textColor = Styles.Color.articleTitleBlack
-
+    
     return label
   }()
-
+  
   lazy var timeLabel: UILabel = {
     let label = UILabel(frame: .zero)
     self.contentView.addSubview(label)
     label.numberOfLines = 1
     label.font = Styles.Font.articleSmallTitle
     label.textColor = Styles.Color.articleTitleGray
-
+    
     return label
   }()
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
-
+    
     makeSubviews()
   }
-
+  
   @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   func makeSubviews() {
     layer.cornerRadius = 4.0
     layer.masksToBounds = true
-
+    
     coverImageView.snp.makeConstraints {
       $0.top.right.bottom.equalTo(0)
       $0.width.equalTo(PBSArticleNormalCell.itemSize.height)
     }
-
+    
     tagLabel.snp.makeConstraints {
       $0.top.left.equalTo(0)
       $0.right.equalTo(coverImageView.snp.left)
       $0.height.equalTo(22.0)
     }
-
+    
     titleLabel.snp.makeConstraints {
       $0.top.equalTo(tagLabel.snp.bottom)
       $0.left.equalTo(0)
       $0.right.equalTo(coverImageView.snp.left).offset(-8.0)
       $0.bottom.lessThanOrEqualTo(timeLabel.snp.top)
     }
-
+    
     timeLabel.snp.makeConstraints {
       $0.left.right.bottom.equalTo(0)
       $0.height.equalTo(22)

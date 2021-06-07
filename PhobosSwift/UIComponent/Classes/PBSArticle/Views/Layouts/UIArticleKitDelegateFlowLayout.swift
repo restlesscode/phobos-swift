@@ -28,10 +28,10 @@ import UIKit
 
 public protocol UIArticleKitFlowLayoutDelegate: AnyObject {
   func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, colorSetInSection section: Int) -> (first: UIColor, last: UIColor)
-
+  
   func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, cellTypeOfIndexPath indexPath: IndexPath) -> UIArticleKit.DecorationView.CellType
-
+  
   func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, indexInTpyeGroup indexPath: IndexPath) -> Int
-
+  
   func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, themeInSection section: Int) -> PBSArticleSectionTheme
 }

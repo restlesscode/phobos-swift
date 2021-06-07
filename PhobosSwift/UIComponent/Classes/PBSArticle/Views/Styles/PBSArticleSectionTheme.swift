@@ -53,7 +53,7 @@ public enum PBSArticleSectionTheme {
   case purple
   ///
   case normal
-
+  
   var titleTextColor: UIColor {
     switch self {
     case .green:
