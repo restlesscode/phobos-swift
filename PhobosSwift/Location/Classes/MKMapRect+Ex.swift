@@ -1,6 +1,6 @@
 //
 //
-//  MKMapItem+Ex.swift
+//  MKMapRect+Ex.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,17 +24,22 @@
 //  THE SOFTWARE.
 //
 
-import Contacts
-import CoreLocation
-import Intents
+import Foundation
 import MapKit
 import PhobosSwiftCore
 
-extension MKMapItem: PhobosSwiftCompatible {}
+extension MKMapRect: PhobosSwiftCompatible {}
 
-extension PhobosSwift where Base == MKMapItem {
-  /// 创建自定义的MapItem
-  public static func makeMapItem(location: CLLocation, name: String) -> MKMapItem {
-    MKMapItem(placemark: MKPlacemark(placemark: CLPlacemark(location: location, name: name, postalAddress: nil)))
+extension PhobosSwift where Base == MKMapRect {
+  public static func makeMapRect(minX: Double, minY: Double, maxX: Double, maxY: Double) -> MKMapRect {
+    MKMapRect(x: minX, y: minY, width: abs(maxX - minX), height: abs(maxY - minY))
+  }
+
+  public static func makeMapRect(x: Double, y: Double, width: Double, height: Double) -> MKMapRect {
+    MKMapRect(origin: MKMapPoint(x: x, y: y), size: MKMapSize(width: width, height: height))
+  }
+
+  public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
+    base.contains(MKMapPoint(coordinate))
   }
 }

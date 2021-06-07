@@ -137,3 +137,29 @@ extension CLLocationManager {
   /// default LLocationManager
   static var `default` = CLLocationManager.pbs.makeLocationManager(desiredAccuracy: kCLLocationAccuracyBestForNavigation)
 }
+
+extension CLLocationManager {
+  public enum DirectionsMode {
+    case walk
+    case driving
+    case transit
+    case `default`
+
+    public var launchOptions: [String: Any]? {
+      switch self {
+      case .walk:
+        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking,
+                MKLaunchOptionsShowsTrafficKey: 1]
+      case .driving:
+        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,
+                MKLaunchOptionsShowsTrafficKey: 1]
+      case .transit:
+        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeTransit,
+                MKLaunchOptionsShowsTrafficKey: 1]
+      case .default:
+        return [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDefault,
+                MKLaunchOptionsShowsTrafficKey: 1]
+      }
+    }
+  }
+}

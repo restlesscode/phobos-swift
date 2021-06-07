@@ -1,6 +1,6 @@
 //
 //
-//  MKMapItem+Ex.swift
+//  MKLocalSearch+Rx.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,17 +24,29 @@
 //  THE SOFTWARE.
 //
 
-import Contacts
-import CoreLocation
-import Intents
+import Foundation
 import MapKit
 import PhobosSwiftCore
 
-extension MKMapItem: PhobosSwiftCompatible {}
+extension MKLocalSearch: PhobosSwiftCompatible {}
 
-extension PhobosSwift where Base == MKMapItem {
-  /// 创建自定义的MapItem
-  public static func makeMapItem(location: CLLocation, name: String) -> MKMapItem {
-    MKMapItem(placemark: MKPlacemark(placemark: CLPlacemark(location: location, name: name, postalAddress: nil)))
+extension PhobosSwift where Base: MKLocalSearch {
+  /// 通过自然语言进行地址搜索
+  public static func makeNaturalLanguageSearch(keyword: String?, region: MKCoordinateRegion) -> MKLocalSearch {
+    let request = MKLocalSearch.Request()
+    request.naturalLanguageQuery = keyword
+    request.region = region
+    return MKLocalSearch(request: request)
+  }
+
+  /// 通过自然语言进行地址搜索
+  public static func makeNaturalLanguageSearch(keyword: String?,
+                                               center: CLLocationCoordinate2D,
+                                               latitudinalMeters: CLLocationDistance,
+                                               longitudinalMeters: CLLocationDistance) -> MKLocalSearch {
+    let region = MKCoordinateRegion(center: center,
+                                    latitudinalMeters: latitudinalMeters,
+                                    longitudinalMeters: longitudinalMeters)
+    return MKLocalSearch.pbs.makeNaturalLanguageSearch(keyword: keyword, region: region)
   }
 }

@@ -1,6 +1,6 @@
 //
 //
-//  MKMapItem+Ex.swift
+//  PBSClusterManagerDelegate.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,17 +24,40 @@
 //  THE SOFTWARE.
 //
 
-import Contacts
-import CoreLocation
-import Intents
+import Foundation
 import MapKit
-import PhobosSwiftCore
 
-extension MKMapItem: PhobosSwiftCompatible {}
+public protocol PBSClusterManagerDelegate: AnyObject {
+  /**
+   The size of each cell on the grid (The larger the size, the better the performance) at a given zoom level.
 
-extension PhobosSwift where Base == MKMapItem {
-  /// 创建自定义的MapItem
-  public static func makeMapItem(location: CLLocation, name: String) -> MKMapItem {
-    MKMapItem(placemark: MKPlacemark(placemark: CLPlacemark(location: location, name: name, postalAddress: nil)))
+   - Parameters:
+      - zoomLevel: The zoom level of the visible map region.
+
+   - Returns: The cell size at the given zoom level. If you return nil, the cell size will automatically adjust to the zoom level.
+   */
+  func cellSize(for zoomLevel: Double) -> Double?
+
+  /**
+   Whether to cluster the given annotation.
+
+   - Parameters:
+      - annotation: An annotation object. The object must conform to the MKAnnotation protocol.
+
+   - Returns: `true` to clusterize the given annotation.
+   */
+  func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool
+}
+
+///
+extension PBSClusterManagerDelegate {
+  ///
+  public func cellSize(for zoomLevel: Double) -> Double? {
+    nil
+  }
+
+  ///
+  public func shouldClusterAnnotation(_ annotation: MKAnnotation) -> Bool {
+    true
   }
 }

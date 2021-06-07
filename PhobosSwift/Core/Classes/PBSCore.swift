@@ -48,7 +48,7 @@ public class PBSCore: NSObject {
     PBSVersion.makeVersion(from: serviceInfo.internalBuildVersion)
   }
 
-  private let appDelegateSwizzler = PhobosSwiftCoreAppDelegateSwizzler()
+  private let appDelegateSwizzler = PBSCoreAppDelegateSwizzler()
 
   /// Phobos-Service-Info Model
   public var serviceInfo: PhobosServiceInfo!

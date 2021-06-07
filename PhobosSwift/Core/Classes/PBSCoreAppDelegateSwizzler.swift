@@ -26,7 +26,7 @@
 
 import UIKit
 
-class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
+class PBSCoreAppDelegateSwizzler: NSObject {
   weak var defaultCore: PBSCore!
   var interceptorID: GULAppDelegateInterceptorID?
 
@@ -45,7 +45,7 @@ class PhobosSwiftCoreAppDelegateSwizzler: NSObject {
 
 // MARK: - UIApplicationDelegate Method
 
-extension PhobosSwiftCoreAppDelegateSwizzler: UIApplicationDelegate {
+extension PBSCoreAppDelegateSwizzler: UIApplicationDelegate {
   func applicationDidEnterBackground(_: UIApplication) {
     // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
     UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
