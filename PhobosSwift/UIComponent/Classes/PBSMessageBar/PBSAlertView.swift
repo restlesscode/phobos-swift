@@ -49,7 +49,6 @@ public class PBSAlertViewWindow: UIWindow {
 
   public func showAlert(show: Bool) {
     Self.shared.isHidden = !show
-    
   }
 
   override private init(frame: CGRect) {
@@ -233,4 +232,3 @@ public struct PBSAlertManager {
   ///
   public static let shared = PBSAlertManager()
 }
-
