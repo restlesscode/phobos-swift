@@ -28,7 +28,6 @@ import Foundation
 import XCTest
 
 class TestCase: XCTestCase {
-  
   override func setUp() {
     super.setUp()
   }
