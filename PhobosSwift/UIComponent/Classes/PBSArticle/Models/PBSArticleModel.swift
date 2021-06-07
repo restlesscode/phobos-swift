@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
+//  PBSArticleModel.swift
 //  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,30 +24,33 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLog
+import UIKit
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+public struct PBSArticleModel: Codable {
+  var title: String
+  var subtitle: String
+  var tag: String
+  var time: String
+  var timestamp: Int?
+  var coverImageUrl: URL?
+  var url: URL?
+  var body: String?
+
+  public init(title: String,
+              subtitle: String,
+              tag: String,
+              time: String,
+              timestamp: Int?,
+              coverImageUrl: URL?,
+              url: URL?,
+              body: String?) {
+    self.title = title
+    self.subtitle = subtitle
+    self.tag = tag
+    self.time = time
+    self.timestamp = timestamp
+    self.coverImageUrl = coverImageUrl
+    self.url = url
+    self.body = body
   }
 }
-
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}

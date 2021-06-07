@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
+//  Resource.swift
 //  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,30 +24,22 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLog
+import Foundation
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+struct Resource {
+  struct Image {
+    static let kImageArticlePlaceHolder = UIImage.image(named: "news_placeholder")
+  }
+
+  struct Strings {
+    static let kMoreAbout = "MORE_ABOUT".localized
+  }
+
+  struct Constants {
+    static let kGhostAPIKey = "2f82d8a27bcef0162be3bd04ad"
+  }
+
+  struct API {
+    static let kGhostUrl = "https://note.u-inn.cn/ghost/api/v2/content/posts/"
   }
 }
-
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}

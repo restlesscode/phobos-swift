@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
+//  PBSArticleSectionViewModel.swift
 //  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,30 +24,38 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLog
+import RxCocoa
+import RxSwift
+import UIKit
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+/// The standard ViewModel for Article Section
+///
+public struct PBSArticleSectionViewModel {
+  /// Section Title
+  public var title = BehaviorRelay<String>(value: "")
+  /// Section Subtitle
+  public var subtitle = BehaviorRelay<String>(value: "")
+  /// Section's article list
+  public var articleViewModels: [PBSArticleViewModel] = []
+
+  ///
+  public init(title: String,
+              subtitle: String,
+              articleViewModels: [PBSArticleViewModel]) {
+    self.title.accept(title)
+    self.subtitle.accept(subtitle)
+    self.articleViewModels = articleViewModels
   }
 }
 
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
+extension PBSArticleSectionViewModel {
+  static func demoViewModel(numberOfArticles: Int) -> PBSArticleSectionViewModel {
+    let articleViewModels = (0..<numberOfArticles).compactMap { _ in
+      PBSArticleViewModel.demoViewModel
+    }
+
+    return PBSArticleSectionViewModel(title: "For You",
+                                      subtitle: "您感兴趣的文章可能都在这里，我们根据您的浏览行为和选择做出推荐",
+                                      articleViewModels: articleViewModels)
   }
 }
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}

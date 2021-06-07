@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
+//  PBSArticleSectionTheme.swift
 //  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -25,29 +25,59 @@
 //
 
 import PhobosSwiftCore
-import PhobosSwiftLog
+import RxCocoa
+import RxSwift
+import UIKit
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+/// Article Section Theme
+public enum PBSArticleSectionTheme {
+  ///
+  case green
+  ///
+  case red
+  ///
+  case cherry
+  ///
+  case yellow
+  ///
+  case gold
+  ///
+  case orange
+  ///
+  case brown
+  ///
+  case indigo
+  ///
+  case blue
+  ///
+  case purple
+  ///
+  case normal
+
+  var titleTextColor: UIColor {
+    switch self {
+    case .green:
+      return Styles.Color.sectionTitleGreen
+    case .red:
+      return Styles.Color.sectionTitleRed
+    case .cherry:
+      return Styles.Color.sectionTitleCherry
+    case .yellow:
+      return Styles.Color.sectionTitleYellow
+    case .gold:
+      return Styles.Color.sectionTitleGold
+    case .orange:
+      return Styles.Color.sectionTitleOrange
+    case .brown:
+      return Styles.Color.sectionTitleBrown
+    case .indigo:
+      return Styles.Color.sectionTitleIndigo
+    case .blue:
+      return Styles.Color.sectionTitleBlue
+    case .purple:
+      return Styles.Color.sectionTitlePurple
+    case .normal:
+      return Styles.Color.sectionTitleBlack
+    }
   }
 }
-
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}

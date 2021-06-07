@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
+//  PhobosSwiftArticle.swift
 //  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,30 +24,6 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLog
+import Foundation
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
-  }
-}
-
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}
+public class PhobosSwiftArticle: NSObject {}

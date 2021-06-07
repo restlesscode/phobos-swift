@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
+//  UIArticleKitDelegateFlowLayout.swift
 //  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,30 +24,14 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLog
+import UIKit
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
-  }
+public protocol UIArticleKitFlowLayoutDelegate: AnyObject {
+  func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, colorSetInSection section: Int) -> (first: UIColor, last: UIColor)
+
+  func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, cellTypeOfIndexPath indexPath: IndexPath) -> UIArticleKit.DecorationView.CellType
+
+  func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, indexInTpyeGroup indexPath: IndexPath) -> Int
+
+  func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, themeInSection section: Int) -> PBSArticleSectionTheme
 }
-
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}

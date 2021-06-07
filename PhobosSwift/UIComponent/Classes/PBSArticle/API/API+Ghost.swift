@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
+//  API+Ghost.swift
 //  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,30 +24,39 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLog
+import Alamofire
+import PhobosSwiftNetwork
+import RxSwift
+import UIKit
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+///
+public struct PBSArticleRequest {
+  ///
+  public static func getGhostPosts() -> Observable<[PBSGhostPostResponse.Post]> {
+    Observable.create { observable in
+
+      let parameters: PBSNetwork.APIRequest.Parameters = ["key": Resource.Constants.kGhostAPIKey,
+                                                          "include": "tags,authors"]
+
+      let headers: PBSNetwork.APIRequest.Headers = [:]
+
+      PBSNetwork.APIRequest.get(Resource.API.kGhostUrl,
+                                parameters: parameters,
+                                encoding: URLEncoding.default,
+                                headers: headers).then { (response: Result<PBSGhostPostResponse, Error>) -> Result<[PBSGhostPostResponse.Post], Error> in
+
+        switch response {
+        case let .success(response):
+          observable.onNext(response.posts)
+          observable.onCompleted()
+          return Result.success(response.posts)
+        case let .failure(error):
+          observable.onError(error)
+          return Result.failure(error)
+        }
+      }
+
+      return Disposables.create()
+    }
   }
 }
-
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}
