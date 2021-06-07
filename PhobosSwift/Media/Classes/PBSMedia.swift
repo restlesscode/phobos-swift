@@ -34,7 +34,6 @@ import Photos
 ///
 /// 整个App生命周期，确保保只需要一个PBSMedia即可
 public class PBSMedia: NSObject {
-
   override private init() {
     super.init()
   }
@@ -151,6 +150,8 @@ public class PBSMedia: NSObject {
           }
         }
       }
+    case .limited:
+      fatalError("Not support yet")
     @unknown default:
       fatalError("Not support yet")
     }

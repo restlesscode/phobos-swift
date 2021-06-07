@@ -264,9 +264,7 @@ class PBSFingerTapOverlayWindow: UIWindow {
   // UIKit tries to get the rootViewController from the overlay window. Use the Fingertips window instead. This fixes
   // issues with status bar behavior, as otherwise the overlay window would control the status bar.
   func rootViewController() -> UIViewController? {
-    let mainWindow = UIApplication.pbs_shared?.windows.filter { window -> Bool in
-      window is PBSFingerTapWindow
-    }.first
+    let mainWindow = UIApplication.pbs_shared?.windows.first(where: { $0 is PBSFingerTapWindow })
     return mainWindow?.rootViewController ?? super.rootViewController
   }
 }

@@ -99,7 +99,7 @@ extension PhobosSwift where Base == CLLocationCoordinate2D {
   }
 
   /// 根据两点经纬度计算两点距离
-  public func pbs_distance(from coordinate: CLLocationCoordinate2D) -> Double {
+  public func distance(from coordinate: CLLocationCoordinate2D) -> Double {
     CLLocation(latitude: base.latitude,
                longitude: base.longitude).distance(
       from: CLLocation(latitude: coordinate.latitude,
