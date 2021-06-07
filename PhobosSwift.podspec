@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint PhobosSwiftLog.podspec' to ensure this is a
+# Be sure to run `pod lib lint PhobosObjC.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,8 +7,8 @@
 #
 
 group = "PhobosSwift"
-name = "Log"
-pod_name = "#{group}#{name}"
+name = "CocoaPods"
+pod_name = "#{group}"
 
 has_public_header_files = false
 has_resource_bundles = false
@@ -31,11 +31,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/restlesscode/phobos-swift'
+  s.homepage         = 'https://github.com/restlesscode/phobos-objc'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Restless Developer' => 'developer@codebase.codes' }
-  s.source           = { :git => 'https://github.com/restlesscode/phobos-swift.git', :tag => "#{name}-" + s.version.to_s }
+  s.source           = { :git => 'https://github.com/restlesscode/phobos-objc.git', :tag => "#{name}-" + s.version.to_s }
   s.social_media_url = 'https://twitter.com/CodesRestless'
 
   s.ios.deployment_target = '10.0'
@@ -44,29 +44,19 @@ TODO: Add long description of the pod here.
   s.static_framework = false
   s.prefix_header_file = false
 
-  s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
-
   s.preserve_paths = [
-    "{group}/#{name}/README.md",
-    "{group}/#{name}/CHANGELOG.md"
+    "#{group}/README.md",
+    "#{group}/CHANGELOG.md"
   ]
-  
-  s.dependency 'ObjcExceptionBridging', '~> 1.0.1'
 
-  if has_resource_bundles
-    s.resource_bundles = {
-      "#{pod_name}" => ["#{group}/#{name}/Assets/**/*"]
-    }
+  s.default_subspec = 'Core'
+
+  s.subspec 'Core' do |ss|
+    ss.dependency "#{group}Core", '~> 0.1.1'
   end
 
-  if has_public_header_files
-    s.public_header_files = "#{group}/#{name}/Classes/**/*.h"
-  end
-  
-  if enable_test
-    s.test_spec 'Tests' do |test_spec|
-      test_spec.source_files = "#{group}/#{name}/Tests/**/*.{swift,h,m}"
-    end
+  s.subspec 'UIComponent' do |ss|
+    ss.dependency "#{group}UIComponent", '~> 0.1.1'
   end
   
 end
