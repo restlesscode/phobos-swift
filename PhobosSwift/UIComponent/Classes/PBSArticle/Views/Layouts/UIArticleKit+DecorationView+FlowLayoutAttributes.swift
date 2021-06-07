@@ -38,7 +38,7 @@ extension UIArticleKit.DecorationView {
     case footer
     /// cell
     case cell(type: CellType)
-    
+
     var rawValue: String {
       switch self {
       case .header:
@@ -50,7 +50,7 @@ extension UIArticleKit.DecorationView {
       }
     }
   }
-  
+
   public enum CellType: String {
     case card
     case bigCardS
@@ -66,13 +66,13 @@ extension UIArticleKit.DecorationView {
 extension UIArticleKit.DecorationView {
   public class FlowLayoutAttributes: UICollectionViewLayoutAttributes {
     var numberOfRows = 0
-    
+
     var rowIndex = 0
-    
+
     var colorSet: (first: UIColor, last: UIColor) = (.white, .black)
-    
+
     var kind: UIArticleKit.DecorationView.Kind!
-    
+
     public convenience init(forDecorationViewOfKind kind: UIArticleKit.DecorationView.Kind,
                             with indexPath: IndexPath,
                             rowIndex: Int,

@@ -32,22 +32,22 @@ import UIKit
 
 open class PBSArticleSectionHeader: UICollectionReusableView {
   var disposeBag = DisposeBag()
-  
+
   var theme: PBSArticleSectionTheme = .normal {
     didSet {
       titleLabel.textColor = theme.titleTextColor
     }
   }
-  
+
   lazy var titleLabel: UILabel = {
     let label = UILabel(frame: .zero)
     self.addSubview(label)
     label.numberOfLines = 1
     label.font = Styles.Font.sectionTitle
-    
+
     return label
   }()
-  
+
   lazy var subtitleLabel: UILabel = {
     let label = UILabel(frame: .zero)
     self.addSubview(label)
@@ -55,56 +55,56 @@ open class PBSArticleSectionHeader: UICollectionReusableView {
     label.lineBreakMode = .byWordWrapping
     label.font = Styles.Font.sectionSubtitle
     label.textColor = Styles.Color.sectionSubtitleGray
-    
+
     return label
   }()
-  
+
   override public init(frame: CGRect) {
     super.init(frame: frame)
-    
+
     makeSubviews()
     makeStyles()
   }
-  
+
   @available(*, unavailable)
   public required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override open func prepareForReuse() {
     super.prepareForReuse()
-    
+
     disposeBag = DisposeBag()
   }
-  
+
   func makeSubviews() {
     titleLabel.snp.makeConstraints {
       $0.left.right.equalTo(0)
       $0.centerY.equalToSuperview()
       $0.bottom.equalTo(subtitleLabel.snp.top)
     }
-    
+
     subtitleLabel.snp.makeConstraints {
       $0.left.right.equalTo(0)
       $0.bottom.equalTo(-8)
       $0.top.equalTo(titleLabel.snp.bottom)
     }
   }
-  
+
   func remakeTitle(with sectionViewModel: PBSArticleSectionViewModel) {
     titleLabel.snp.remakeConstraints {
       $0.bottom.equalTo(subtitleLabel.snp.top)
     }
   }
-  
+
   func makeStyles() {}
-  
+
   public func render(theme: PBSArticleSectionTheme, sectionViewModel: PBSArticleSectionViewModel) {
     BehaviorRelay(value: theme).bind(to: rx.theme).disposed(by: disposeBag)
-    
+
     sectionViewModel.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
     sectionViewModel.subtitle.bind(to: subtitleLabel.rx.text).disposed(by: disposeBag)
-    
+
     remakeTitle(with: sectionViewModel)
   }
 }

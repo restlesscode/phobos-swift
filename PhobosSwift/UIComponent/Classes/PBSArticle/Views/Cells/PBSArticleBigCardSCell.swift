@@ -35,75 +35,75 @@ class PBSArticleBigCardSCell: PBSArticleBigCardCell {
   static var itemSize: CGSize {
     let width: CGFloat = UIScreen.main.bounds.width - 36.0
     let height: CGFloat = width / 339.0 * 445
-    
+
     return CGSize(width: width, height: height)
   }
-  
+
   static var coverImageSize: CGSize {
     let width: CGFloat = UIScreen.main.bounds.width - 36.0
     let height: CGFloat = width / 339.0 * 256
-    
+
     return CGSize(width: width, height: height)
   }
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     style = .sliver
-    
+
     makeSubviews()
     makeStyles()
   }
-  
+
   @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   func makeSubviews() {
     mainView.snp.makeConstraints {
       $0.left.right.top.bottom.equalTo(0)
     }
-    
+
     coverImageView.snp.makeConstraints {
       $0.top.left.right.equalTo(0.0)
       $0.height.equalTo(Self.coverImageSize.height)
       $0.bottom.equalTo(tagLabel.snp.top).offset(-8)
     }
-    
+
     tagLabel.snp.makeConstraints {
       $0.top.equalTo(coverImageView.snp.bottom).offset(8)
       $0.left.equalTo(18)
       $0.right.equalTo(-18)
       $0.height.equalTo(44)
     }
-    
+
     titleLabel.snp.makeConstraints {
       $0.top.equalTo(tagLabel.snp.bottom)
       $0.left.equalTo(18)
       $0.right.equalTo(-18)
       $0.bottom.lessThanOrEqualTo(actionBtn.snp.top)
     }
-    
+
     actionBtn.snp.makeConstraints {
       $0.centerX.equalToSuperview()
       $0.bottom.lessThanOrEqualTo(-16)
       $0.height.equalTo(22)
     }
   }
-  
+
   func makeStyles() {
     mainView.frame = CGRect(origin: .zero, size: Self.itemSize)
     mainView.layer.cornerRadius = 8.0
     mainView.pbs.addShadow(radius: 8.0)
-    
+
     tagLabel.font = Styles.Font.articleTagS
     tagLabel.textAlignment = .center
-    
+
     titleLabel.font = Styles.Font.articleLargeTitle
     titleLabel.numberOfLines = 3
     titleLabel.lineBreakMode = .byWordWrapping
     titleLabel.textAlignment = .center
-    
+
     actionBtn.titleLabel?.font = Styles.Font.moreActionTitle
   }
 }
@@ -111,11 +111,11 @@ class PBSArticleBigCardSCell: PBSArticleBigCardCell {
 extension PBSArticleBigCardSCell: PBSArticleCellProtocol {
   func render(theme: PBSArticleSectionTheme, model: PBSArticleViewModel) {
     applyStyle(theme: theme)
-    
+
     model.coverImageUrl.bind(to: coverImageView.rx.imageUrl).disposed(by: disposeBag)
     model.tag.bind(to: tagLabel.rx.text).disposed(by: disposeBag)
     model.title.bind(to: titleLabel.rx.text).disposed(by: disposeBag)
-    
+
     actionBtn.setTitle("  Read the collection ▶︎  ", for: .normal)
   }
 }

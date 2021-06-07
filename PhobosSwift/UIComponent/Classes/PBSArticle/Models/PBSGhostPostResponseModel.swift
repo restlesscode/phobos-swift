@@ -53,25 +53,25 @@ extension PBSGhostPostResponse {
     // Code Injection
     public let codeinjectionHead: String?
     public let codeinjectionFoot: String?
-    
+
     public let createdAt: String
     public let updatedAt: String
     public let publishedAt: String
-    
+
     public let primaryTag: Tag?
     public let excerpt: String
     public let customExcerpt: String?
-    
+
     public let ogImage: URL?
     public let ogTitle: String?
     public let ogDescription: String?
-    
+
     public let customTemplate: String?
     public let primaryAuthor: Author?
     public let url: URL
     public let tags: [Tag]?
     public let authors: [Author]?
-    
+
     enum CodingKeys: String, CodingKey {
       case id
       case uuid
@@ -85,26 +85,26 @@ extension PBSGhostPostResponse {
       case metaTitle = "meta_title"
       case metaDescription = "meta_description"
       case canonicalUrl = "canonical_url"
-      
+
       case twitterImage = "twitter_image"
       case twitterTitle = "twitter_title"
       case twitterDescription = "twitter_description"
-      
+
       case codeinjectionHead = "codeinjection_head"
       case codeinjectionFoot = "codeinjection_foot"
-      
+
       case createdAt = "created_at"
       case updatedAt = "updated_at"
       case publishedAt = "published_at"
-      
+
       case primaryTag = "primary_tag"
       case excerpt
       case customExcerpt = "custom_excerpt"
-      
+
       case ogImage = "og_image"
       case ogTitle = "og_title"
       case ogDescription = "og_description"
-      
+
       case customTemplate = "custom_template"
       case primaryAuthor = "primary_author"
       case url
@@ -112,7 +112,7 @@ extension PBSGhostPostResponse {
       case authors
     }
   }
-  
+
   public struct Meta: Codable {
     let pagination: Pagination
   }
@@ -142,7 +142,7 @@ extension PBSGhostPostResponse {
     public let metaTitle: String?
     public let metaDescription: String?
     public let url: URL
-    
+
     enum CodingKeys: String, CodingKey {
       case id
       case name
@@ -159,7 +159,7 @@ extension PBSGhostPostResponse {
       case url
     }
   }
-  
+
   public struct Tag: Codable {
     public let id: String
     public let name: String
@@ -170,7 +170,7 @@ extension PBSGhostPostResponse {
     public let metaTitle: String?
     public let metaDescription: String?
     public let url: URL
-    
+
     enum CodingKeys: String, CodingKey {
       case id
       case name

@@ -35,7 +35,7 @@ public struct PBSArticleModel: Codable {
   var coverImageUrl: URL?
   var url: URL?
   var body: String?
-  
+
   public init(title: String,
               subtitle: String,
               tag: String,

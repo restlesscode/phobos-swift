@@ -34,28 +34,28 @@ public struct PBSArticleRequest {
   ///
   public static func getGhostPosts() -> Observable<[PBSGhostPostResponse.Post]> {
     Observable.create { observable in
-      
+
       let parameters: PBSNetwork.APIRequest.Parameters = ["key": Resource.Constants.kGhostAPIKey,
                                                           "include": "tags,authors"]
-      
+
       let headers: PBSNetwork.APIRequest.Headers = [:]
-      
+
       PBSNetwork.APIRequest.get(Resource.API.kGhostUrl,
                                 parameters: parameters,
                                 encoding: URLEncoding.default,
                                 headers: headers).then { (response: Result<PBSGhostPostResponse, Error>) -> Result<[PBSGhostPostResponse.Post], Error> in
-                                  
-                                  switch response {
-                                  case let .success(response):
-                                    observable.onNext(response.posts)
-                                    observable.onCompleted()
-                                    return Result.success(response.posts)
-                                  case let .failure(error):
-                                    observable.onError(error)
-                                    return Result.failure(error)
-                                  }
-                                }
-      
+
+        switch response {
+        case let .success(response):
+          observable.onNext(response.posts)
+          observable.onCompleted()
+          return Result.success(response.posts)
+        case let .failure(error):
+          observable.onError(error)
+          return Result.failure(error)
+        }
+      }
+
       return Disposables.create()
     }
   }

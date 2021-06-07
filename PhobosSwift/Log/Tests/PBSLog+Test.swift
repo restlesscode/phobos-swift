@@ -30,14 +30,14 @@ import XCTest
 
 class PBSLogTest: XCTestCase {
   let log = PBSLogger.shared
-  
+
   override func setUp() {
     super.setUp()
   }
-  
+
   override func tearDown() {
     super.tearDown()
   }
-  
+
   func test() {}
 }

@@ -32,13 +32,13 @@ extension UIArticleKit {
   public class DecorationView: UICollectionReusableView {
     override public func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
       super.apply(layoutAttributes)
-      
+
       guard let layoutAttributes = layoutAttributes as? UIArticleKit.DecorationView.FlowLayoutAttributes else { return }
-      
+
       let deltaR = (layoutAttributes.colorSet.last.pbs.rgb.r255 - layoutAttributes.colorSet.first.pbs.rgb.r255) / CGFloat(layoutAttributes.numberOfRows)
       let deltaG = (layoutAttributes.colorSet.last.pbs.rgb.g255 - layoutAttributes.colorSet.first.pbs.rgb.g255) / CGFloat(layoutAttributes.numberOfRows)
       let deltaB = (layoutAttributes.colorSet.last.pbs.rgb.b255 - layoutAttributes.colorSet.first.pbs.rgb.b255) / CGFloat(layoutAttributes.numberOfRows)
-      
+
       switch layoutAttributes.kind {
       case .header:
         backgroundColor = layoutAttributes.colorSet.first
@@ -51,7 +51,7 @@ extension UIArticleKit {
                                                          layoutAttributes.colorSet.first + UIColor.pbs.color(r255: deltaR * CGFloat(layoutAttributes.rowIndex + 1),
                                                                                                              g255: deltaG * CGFloat(layoutAttributes.rowIndex + 1),
                                                                                                              b255: deltaB * CGFloat(layoutAttributes.rowIndex + 1)))
-        
+
         pbs.applyVerticalGradientBackground(colorset: [colorSet.first, colorSet.last],
                                             gradientLayerFrame: layoutAttributes.bounds)
       case .none:

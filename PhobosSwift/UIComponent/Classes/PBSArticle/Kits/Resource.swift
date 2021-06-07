@@ -30,15 +30,15 @@ struct Resource {
   struct Image {
     static let kImageArticlePlaceHolder = UIImage.image(named: "news_placeholder")
   }
-  
+
   struct Strings {
     static let kMoreAbout = "MORE_ABOUT".localized
   }
-  
+
   struct Constants {
     static let kGhostAPIKey = "2f82d8a27bcef0162be3bd04ad"
   }
-  
+
   struct API {
     static let kGhostUrl = "https://note.u-inn.cn/ghost/api/v2/content/posts/"
   }

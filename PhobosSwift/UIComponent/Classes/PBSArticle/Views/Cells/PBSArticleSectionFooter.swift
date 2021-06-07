@@ -31,38 +31,38 @@ import UIKit
 
 open class PBSArticleSectionFooter: UICollectionReusableView {
   var disposeBag = DisposeBag()
-  
+
   lazy var moreActionBtn: UIButton = {
     let button = UIButton(type: .system)
     addSubview(button)
     return button
   }()
-  
+
   lazy var seporateLine: UIView = {
     let view = UIView(frame: .zero)
     addSubview(view)
-    
+
     view.backgroundColor = Styles.Color.articleSeporatorGray
-    
+
     return view
   }()
-  
+
   override public init(frame: CGRect) {
     super.init(frame: frame)
-    
+
     makeSubviews()
   }
-  
+
   @available(*, unavailable)
   public required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override public func prepareForReuse() {
     super.prepareForReuse()
     disposeBag = DisposeBag()
   }
-  
+
   func makeSubviews() {
     seporateLine.snp.makeConstraints {
       $0.top.equalTo(18)
@@ -70,23 +70,23 @@ open class PBSArticleSectionFooter: UICollectionReusableView {
       $0.right.equalTo(0)
       $0.height.equalTo(0.5)
     }
-    
+
     moreActionBtn.snp.makeConstraints {
       $0.centerY.equalToSuperview().offset(9)
       $0.right.equalToSuperview()
     }
   }
-  
+
   func render(theme: PBSArticleSectionTheme, sectionViewModel: PBSArticleSectionViewModel) {
     let text = NSMutableAttributedString(string: Resource.Strings.kMoreAbout,
                                          attributes: [NSAttributedString.Key.foregroundColor: Styles.Color.articleTitleGray,
                                                       NSAttributedString.Key.font: Styles.Font.sectionFooterTitle])
-    
+
     text.append(
       NSAttributedString(string: "\(sectionViewModel.title.value) ▶︎".uppercased(),
                          attributes: [NSAttributedString.Key.foregroundColor: theme.titleTextColor,
                                       NSAttributedString.Key.font: Styles.Font.sectionFooterTitle]))
-    
+
     BehaviorRelay<NSAttributedString>(value: text).bind(to: moreActionBtn.rx.attributedTitle()).disposed(by: disposeBag)
   }
 }
