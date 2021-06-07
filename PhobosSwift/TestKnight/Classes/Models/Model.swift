@@ -28,54 +28,55 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-///
-public enum PBSTestKnightConfiguration {
-  ///
-  case debug
-  ///
-  case staging
-  ///
-  case preproduction
-  ///
-  case release
-  ///
-  public var name: String {
-    switch self {
-    case .debug:
-      return BUString.kDebug
-    case .staging:
-      return BUString.kStaging
-    case .preproduction:
-      return BUString.kPreproduction
-    case .release:
-      return BUString.kRelease
+extension PBSTestKnight {
+  public enum Configuration {
+    ///
+    case debug
+    ///
+    case staging
+    ///
+    case preproduction
+    ///
+    case release
+    ///
+    public var name: String {
+      switch self {
+      case .debug:
+        return Strings.kDebug
+      case .staging:
+        return Strings.kStaging
+      case .preproduction:
+        return Strings.kPreproduction
+      case .release:
+        return Strings.kRelease
+      }
     }
-  }
 
-  ///
-  public var description: String {
-    switch self {
-    case .debug:
-      return BUString.kDebugDescription
-    case .staging:
-      return BUString.kStagingDescription
-    case .preproduction:
-      return BUString.kPreproductionDescription
-    case .release:
-      return BUString.kReleaseDescription
+    ///
+    public var description: String {
+      switch self {
+      case .debug:
+        return Strings.kDebugDescription
+      case .staging:
+        return Strings.kStagingDescription
+      case .preproduction:
+        return Strings.kPreproductionDescription
+      case .release:
+        return Strings.kReleaseDescription
+      }
     }
   }
 }
 
 struct PBSTestKnightModel {
-  var type: PBSTestKnightConfiguration = .debug
+  var type: PBSTestKnight.Configuration = .debug
   var title: String
   var description: String
   var icon: UIImage
 }
 
 struct PBSTestKnightViewModel {
-  var configuration = BehaviorRelay<PBSTestKnightConfiguration>(value: .release)
+  var configuration = BehaviorRelay<PBSTestKnight.Configuration>(value: .release)
   var title = BehaviorRelay<String>(value: "")
   var description = BehaviorRelay<String>(value: "")
   var icon = BehaviorRelay<UIImage?>(value: nil)

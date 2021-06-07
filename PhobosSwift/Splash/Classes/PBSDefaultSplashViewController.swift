@@ -1,7 +1,7 @@
 //
 //
-//  MKLocalSearch+Rx.swift
-//  PhobosSwiftLocation
+//  PBSDefaultSplashViewController.swift
+//  PhobosSwiftSplash
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,27 +24,21 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import MapKit
+import SnapKit
+import UIKit
 
-extension MKLocalSearch {
-  /// 通过自然语言进行地址搜索
-  public static func makeNaturalLanguageSearch(keyword: String?, region: MKCoordinateRegion) -> MKLocalSearch {
-    let request = MKLocalSearch.Request()
-    request.naturalLanguageQuery = keyword
-    request.region = region
+let kLaunchImage = "launch"
 
-    return MKLocalSearch(request: request)
-  }
+open class PBSDefaultSplashViewController: UIViewController {
+  let imageView = UIImageView(image: UIImage(named: kLaunchImage))
 
-  /// 通过自然语言进行地址搜索
-  public static func makeNaturalLanguageSearch(keyword: String?,
-                                               center: CLLocationCoordinate2D,
-                                               latitudinalMeters: CLLocationDistance,
-                                               longitudinalMeters: CLLocationDistance) -> MKLocalSearch {
-    let region = MKCoordinateRegion(center: center,
-                                    latitudinalMeters: latitudinalMeters,
-                                    longitudinalMeters: longitudinalMeters)
-    return Self.makeNaturalLanguageSearch(keyword: keyword, region: region)
+  override open func viewDidLoad() {
+    super.viewDidLoad()
+    imageView.contentMode = .scaleAspectFill
+
+    view.addSubview(imageView)
+    imageView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
   }
 }

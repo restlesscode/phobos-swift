@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint PhobosSwiftAuth.podspec' to ensure this is a
+# Be sure to run `pod lib lint PhobosSwiftUIComponent.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -11,7 +11,7 @@ name = "UIComponent"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
-has_resource_bundles = false
+has_resource_bundles = true
 enable_test = true
 
 

@@ -29,9 +29,8 @@ import PhobosSwiftLog
 import UIKit
 
 public class PBSTestKnight: NSObject {
-  
   public static let shared = PBSTestKnight()
-  public var configuration: PBSTestKnightConfiguration = .release
+  public var configuration: PBSTestKnight.Configuration = .release
 
   override private init() {
     super.init()

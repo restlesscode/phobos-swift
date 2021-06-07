@@ -95,10 +95,10 @@ public class PBSTestKnightViewController: UIViewController {
     return button
   }()
 
-  var viewModels: [PBSTestKnightViewModel] = [PBSTestKnightViewModel(model: PBSTestKnightModel(type: .debug, title: PBSTestKnightConfiguration.debug.name, description: PBSTestKnightConfiguration.debug.description, icon: BUResource.Image.kDebug)),
-                                              PBSTestKnightViewModel(model: PBSTestKnightModel(type: .staging, title: PBSTestKnightConfiguration.staging.name, description: PBSTestKnightConfiguration.staging.description, icon: BUResource.Image.kStaging)),
-                                              PBSTestKnightViewModel(model: PBSTestKnightModel(type: .preproduction, title: PBSTestKnightConfiguration.preproduction.name, description: PBSTestKnightConfiguration.preproduction.description, icon: BUResource.Image.kPreproduction)),
-                                              PBSTestKnightViewModel(model: PBSTestKnightModel(type: .release, title: PBSTestKnightConfiguration.release.name, description: PBSTestKnightConfiguration.release.description, icon: BUResource.Image.kRelease))]
+  var viewModels: [PBSTestKnightViewModel] = [PBSTestKnightViewModel(model: PBSTestKnightModel(type: .debug, title: PBSTestKnight.Configuration.debug.name, description: PBSTestKnight.Configuration.debug.description, icon: Resource.Image.kDebug)),
+                                              PBSTestKnightViewModel(model: PBSTestKnightModel(type: .staging, title: PBSTestKnight.Configuration.staging.name, description: PBSTestKnight.Configuration.staging.description, icon: Resource.Image.kStaging)),
+                                              PBSTestKnightViewModel(model: PBSTestKnightModel(type: .preproduction, title: PBSTestKnight.Configuration.preproduction.name, description: PBSTestKnight.Configuration.preproduction.description, icon: Resource.Image.kPreproduction)),
+                                              PBSTestKnightViewModel(model: PBSTestKnightModel(type: .release, title: PBSTestKnight.Configuration.release.name, description: PBSTestKnight.Configuration.release.description, icon: Resource.Image.kRelease))]
 
   override public func viewDidLoad() {
     super.viewDidLoad()
@@ -118,10 +118,10 @@ public class PBSTestKnightViewController: UIViewController {
   }
 
   func makeSubviews() {
-    titleLabel.text = BUString.kWelcomTitle
+    titleLabel.text = Strings.kWelcomTitle
     view.backgroundColor = .pbs.systemBackground
     tableView.backgroundColor = .pbs.systemBackground
-    startTestingButton.setTitle(BUString.kStartTesting, for: .normal)
+    startTestingButton.setTitle(Strings.kStartTesting, for: .normal)
   }
 
   func makeRxEvents() {
