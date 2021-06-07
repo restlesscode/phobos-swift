@@ -145,3 +145,12 @@ class PBSArticleBigCardCell: UICollectionViewCell {
     }
   }
 }
+
+extension Reactive where Base: PBSArticleBigCardCell {
+  /// Bindable sink for `textColor` property.
+  internal var style: Binder<PBSArticleBigCardCell.Style> {
+    Binder(base) { cell, style in
+      cell.style = style
+    }
+  }
+}

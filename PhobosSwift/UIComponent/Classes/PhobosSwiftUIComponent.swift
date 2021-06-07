@@ -24,7 +24,10 @@
 //  THE SOFTWARE.
 //
 
+import AlamofireImage
 import PhobosSwiftLog
+import RxCocoa
+import RxSwift
 
 extension Bundle {
   static var bundle: Bundle {
@@ -46,6 +49,19 @@ extension UIImage {
   internal static func image(named name: String) -> UIImage {
     let emptyImage = UIImage.pbs.makeImage(from: .clear)
     return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
+  }
+}
+
+extension Reactive where Base: UIImageView {
+  /// Bindable sink for `imageUrl` property.
+  internal var imageUrl: Binder<URL?> {
+    Binder(base) { imageView, url in
+      if let url = url {
+        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
+      } else {
+        imageView.image = Resource.Image.kImageArticlePlaceHolder
+      }
+    }
   }
 }
 
