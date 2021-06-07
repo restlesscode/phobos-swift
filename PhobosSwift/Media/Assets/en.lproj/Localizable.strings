@@ -24,9 +24,10 @@
 //  THE SOFTWARE.
 //
 
-"LANG" = "zh-Hans";
+"LANG" = "en";
 
-"SETTINGS" = "设置";
-"CANCEL" = "取消";
-"ALLOW_LOCATION_ACCESS" = "请打开地理位置的访问权限";
-"ALLOW_LOCATION_ACCESS_MESSAGE" = "我们的某些功能需要访问地理位置，请在设置中打开地理位置的访问权限";
+"SETTINGS" = "Settings";
+"ALLOW_CAMERA_ACCESS" = "Allow Camera Access";
+"ALLOW_CAMERA_ACCESS_MESSAGE" = "We need access to your camera. Turn on camera access in your device settings.";
+"ALLOW_PHOTO_ACCESS" = "Allow Photo Access";
+"ALLOW_PHOTO_ACCESS_MESSAGE" = "We need access to your photo. Turn on photo access in your device settings.";

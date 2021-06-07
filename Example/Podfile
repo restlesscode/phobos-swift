@@ -32,6 +32,8 @@ target 'PhobosSwiftExample' do
   # Persistence
   pod 'PhobosSwiftPersistence', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   pod 'PhobosSwiftPersistence/Realm', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
+  # Media
+  pod 'PhobosSwiftMedia', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Push
   pod 'PhobosSwiftPush', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Payment
@@ -40,6 +42,8 @@ target 'PhobosSwiftExample' do
   pod 'PhobosSwiftUIComponent', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # TestKnight
   pod 'PhobosSwiftTestKnight', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Animation
+  pod 'PhobosSwiftAnimation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Splash
   pod 'PhobosSwiftSplash', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   #pod 'PhobosSwiftPayment/Wechatpay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']

@@ -1,6 +1,6 @@
 //
 //
-//  Localizable.strings
+//  PhobosSwiftMedia.swift
 //  PhobosSwiftMedia
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,9 +24,27 @@
 //  THE SOFTWARE.
 //
 
-"LANG" = "zh-Hans";
+import Foundation
+import PhobosSwiftCore
 
-"SETTINGS" = "设置";
-"CANCEL" = "取消";
-"ALLOW_LOCATION_ACCESS" = "请打开地理位置的访问权限";
-"ALLOW_LOCATION_ACCESS_MESSAGE" = "我们的某些功能需要访问地理位置，请在设置中打开地理位置的访问权限";
+extension Bundle {
+  static var bundle: Bundle {
+    Bundle.pbs.bundle(with: PhobosSwiftMedia.self)
+  }
+}
+
+extension String {
+  var localized: String {
+    pbs.localized(inBundle: Bundle.bundle)
+  }
+}
+
+struct BUString {
+  static let kSettings = "SETTINGS".localized
+  static let kAllowCameraAccess = "ALLOW_CAMERA_ACCESS".localized
+  static let kAllowCameraAccessMessage = "ALLOW_CAMERA_ACCESS_MESSAGE".localized
+  static let kAllowPhotoAccess = "ALLOW_PHOTO_ACCESS".localized
+  static let kAllowPhotoAccessMessage = "ALLOW_PHOTO_ACCESS_MESSAGE".localized
+}
+
+class PhobosSwiftMedia: NSObject {}
