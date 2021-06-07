@@ -47,8 +47,8 @@ TODO: Add long description of the pod here.
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
 
   s.preserve_paths = [
-    "{group}/#{name}/README.md",
-    "{group}/#{name}/CHANGELOG.md"
+    "#{group}/#{name}/README.md",
+    "#{group}/#{name}/CHANGELOG.md"
   ]
   
   s.dependency 'Alamofire', '~> 5.1.0'

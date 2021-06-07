@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
+
 import PhobosSwiftLog
 
 extension Bundle {

@@ -1,6 +1,6 @@
 //
 //
-//  MKLocalSearch+Rx.swift
+//  PBSQuadTree.swift
 //  PhobosSwiftLocation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,27 +24,26 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import MapKit
 
-extension MKLocalSearch {
-  /// 通过自然语言进行地址搜索
-  public static func makeNaturalLanguageSearch(keyword: String?, region: MKCoordinateRegion) -> MKLocalSearch {
-    let request = MKLocalSearch.Request()
-    request.naturalLanguageQuery = keyword
-    request.region = region
+public class PBSQuadTree: AnnotationsContainerProtocol {
+  let root: PBSQuadTreeNode
 
-    return MKLocalSearch(request: request)
+  public init(rect: MKMapRect) {
+    root = PBSQuadTreeNode(rect: rect)
   }
 
-  /// 通过自然语言进行地址搜索
-  public static func makeNaturalLanguageSearch(keyword: String?,
-                                               center: CLLocationCoordinate2D,
-                                               latitudinalMeters: CLLocationDistance,
-                                               longitudinalMeters: CLLocationDistance) -> MKLocalSearch {
-    let region = MKCoordinateRegion(center: center,
-                                    latitudinalMeters: latitudinalMeters,
-                                    longitudinalMeters: longitudinalMeters)
-    return Self.makeNaturalLanguageSearch(keyword: keyword, region: region)
+  @discardableResult
+  public func add(_ annotation: MKAnnotation) -> Bool {
+    root.add(annotation)
+  }
+
+  @discardableResult
+  public func remove(_ annotation: MKAnnotation) -> Bool {
+    root.remove(annotation)
+  }
+
+  public func annotations(in rect: MKMapRect) -> [MKAnnotation] {
+    root.annotations(in: rect)
   }
 }

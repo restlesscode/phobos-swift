@@ -28,11 +28,13 @@ import Contacts
 import CoreLocation
 import Intents
 import MapKit
+import PhobosSwiftCore
 
-extension MKMapItem {
+extension MKMapItem: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base == MKMapItem {
   /// 创建自定义的MapItem
-  public static func pbs_makeMapItem(location: CLLocation, name: String) -> MKMapItem {
-    let placemark = CLPlacemark(location: location, name: name, postalAddress: nil)
-    return MKMapItem(placemark: MKPlacemark(placemark: placemark))
+  public static func makeMapItem(location: CLLocation, name: String) -> MKMapItem {
+    MKMapItem(placemark: MKPlacemark(placemark: CLPlacemark(location: location, name: name, postalAddress: nil)))
   }
 }
