@@ -25,22 +25,24 @@
 //
 
 @testable import PhobosSwiftCore
-import Foundation
-import XCTest
+import Nimble
+import Quick
 
-class BundleTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
-  }
-
-  override func tearDown() {
-    super.tearDown()
+class BundleTest: QuickSpec {
+  override func spec() {
+    testBundle()
   }
 
   func testBundle() {
-    let bundle = Bundle.pbs.bundle(with: PhobosSwiftCore.self)
+    describe("Given 已知本模块Class：PhobosSwiftCore") {
+      context("When 调用Bundle.pbs.bundle获取本模块Bundle") {
+        let bundle = Bundle.pbs.bundle(with: PhobosSwiftCore.self)
 
-    XCTAssertNotNil(bundle.bundlePath)
-    XCTAssertNotNil(bundle.resourcePath)
+        it("Then bundle.bundlePath及bundle.resourcePath不为空") {
+          expect(bundle.bundlePath).toNot(beNil())
+          expect(bundle.resourcePath).toNot(beNil())
+        }
+      }
+    }
   }
 }
