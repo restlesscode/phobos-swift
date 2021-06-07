@@ -50,8 +50,9 @@ TODO: Add long description of the pod here.
   ]
 
   s.default_subspec = 'Core'
-
+  
   s.subspec 'Core' do |ss|
+    ss.dependency "#{group}Log", '~> 0.1.1'
     ss.dependency "#{group}Core", '~> 0.1.1'
   end
 
