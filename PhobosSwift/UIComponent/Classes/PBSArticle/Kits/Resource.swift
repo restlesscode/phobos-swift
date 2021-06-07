@@ -1,7 +1,7 @@
 //
 //
-//  PBSLog+Test.swift
-//  PhobosSwiftLog-Unit-Tests
+//  Resource.swift
+//  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,20 +24,22 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftLog
 import Foundation
-import XCTest
 
-class PBSLogTest: XCTestCase {
-  let log = PBSLogger.shared
-
-  override func setUp() {
-    super.setUp()
+struct Resource {
+  struct Image {
+    static let kImageArticlePlaceHolder = UIImage.image(named: "news_placeholder")
   }
 
-  override func tearDown() {
-    super.tearDown()
+  struct Strings {
+    static let kMoreAbout = "MORE_ABOUT".localized
   }
 
-  func test() {}
+  struct Constants {
+    static let kGhostAPIKey = "2f82d8a27bcef0162be3bd04ad"
+  }
+
+  struct API {
+    static let kGhostUrl = "https://note.u-inn.cn/ghost/api/v2/content/posts/"
+  }
 }

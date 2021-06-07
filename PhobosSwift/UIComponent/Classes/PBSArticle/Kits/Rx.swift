@@ -1,7 +1,7 @@
 //
 //
-//  PBSLog+Test.swift
-//  PhobosSwiftLog-Unit-Tests
+//  Rx.swift
+//  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,20 +24,29 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftLog
+import AlamofireImage
 import Foundation
-import XCTest
+import RxCocoa
+import RxSwift
 
-class PBSLogTest: XCTestCase {
-  let log = PBSLogger.shared
-
-  override func setUp() {
-    super.setUp()
+extension Reactive where Base: UIImageView {
+  /// Bindable sink for `imageUrl` property.
+  internal var imageUrl: Binder<URL?> {
+    Binder(base) { imageView, url in
+      if let url = url {
+        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
+      } else {
+        imageView.image = Resource.Image.kImageArticlePlaceHolder
+      }
+    }
   }
+}
 
-  override func tearDown() {
-    super.tearDown()
+extension Reactive where Base: PBSArticleBigCardCell {
+  /// Bindable sink for `textColor` property.
+  internal var style: Binder<PBSArticleBigCardCell.Style> {
+    Binder(base) { cell, style in
+      cell.style = style
+    }
   }
-
-  func test() {}
 }

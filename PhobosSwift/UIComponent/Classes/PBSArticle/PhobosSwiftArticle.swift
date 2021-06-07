@@ -1,7 +1,7 @@
 //
 //
-//  PBSLog+Test.swift
-//  PhobosSwiftLog-Unit-Tests
+//  PhobosSwiftArticle.swift
+//  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,20 +24,6 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftLog
 import Foundation
-import XCTest
 
-class PBSLogTest: XCTestCase {
-  let log = PBSLogger.shared
-
-  override func setUp() {
-    super.setUp()
-  }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func test() {}
-}
+public class PhobosSwiftArticle: NSObject {}

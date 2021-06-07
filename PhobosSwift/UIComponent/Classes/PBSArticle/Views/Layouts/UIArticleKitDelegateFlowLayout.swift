@@ -1,7 +1,7 @@
 //
 //
-//  PBSLog+Test.swift
-//  PhobosSwiftLog-Unit-Tests
+//  UIArticleKitDelegateFlowLayout.swift
+//  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,20 +24,14 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftLog
-import Foundation
-import XCTest
+import UIKit
 
-class PBSLogTest: XCTestCase {
-  let log = PBSLogger.shared
+public protocol UIArticleKitFlowLayoutDelegate: AnyObject {
+  func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, colorSetInSection section: Int) -> (first: UIColor, last: UIColor)
 
-  override func setUp() {
-    super.setUp()
-  }
+  func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, cellTypeOfIndexPath indexPath: IndexPath) -> UIArticleKit.DecorationView.CellType
 
-  override func tearDown() {
-    super.tearDown()
-  }
+  func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, indexInTpyeGroup indexPath: IndexPath) -> Int
 
-  func test() {}
+  func flowLayout(_ collectionViewLayout: UIArticleKit.ViewFlowLayout, themeInSection section: Int) -> PBSArticleSectionTheme
 }

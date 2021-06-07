@@ -1,7 +1,7 @@
 //
 //
-//  PBSLog+Test.swift
-//  PhobosSwiftLog-Unit-Tests
+//  PBSArticleSectionTheme.swift
+//  PhobosSwiftUIComponent
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,20 +24,60 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftLog
-import Foundation
-import XCTest
+import PhobosSwiftCore
+import RxCocoa
+import RxSwift
+import UIKit
 
-class PBSLogTest: XCTestCase {
-  let log = PBSLogger.shared
+/// Article Section Theme
+public enum PBSArticleSectionTheme {
+  ///
+  case green
+  ///
+  case red
+  ///
+  case cherry
+  ///
+  case yellow
+  ///
+  case gold
+  ///
+  case orange
+  ///
+  case brown
+  ///
+  case indigo
+  ///
+  case blue
+  ///
+  case purple
+  ///
+  case normal
 
-  override func setUp() {
-    super.setUp()
+  var titleTextColor: UIColor {
+    switch self {
+    case .green:
+      return Styles.Color.sectionTitleGreen
+    case .red:
+      return Styles.Color.sectionTitleRed
+    case .cherry:
+      return Styles.Color.sectionTitleCherry
+    case .yellow:
+      return Styles.Color.sectionTitleYellow
+    case .gold:
+      return Styles.Color.sectionTitleGold
+    case .orange:
+      return Styles.Color.sectionTitleOrange
+    case .brown:
+      return Styles.Color.sectionTitleBrown
+    case .indigo:
+      return Styles.Color.sectionTitleIndigo
+    case .blue:
+      return Styles.Color.sectionTitleBlue
+    case .purple:
+      return Styles.Color.sectionTitlePurple
+    case .normal:
+      return Styles.Color.sectionTitleBlack
+    }
   }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func test() {}
 }
