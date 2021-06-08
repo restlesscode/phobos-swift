@@ -29,6 +29,8 @@ target 'PhobosSwiftExample' do
   pod 'PhobosSwiftAuth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Groth
   pod 'PhobosSwiftGrowth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Slideout
+  pod 'PhobosSwiftSlideout', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Log
   pod 'PhobosSwiftLocation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Persistence
