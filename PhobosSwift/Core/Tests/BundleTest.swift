@@ -1,6 +1,6 @@
 //
 //
-//  Array+Test.swift
+//  Bundle+Test.swift
 //  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -25,22 +25,24 @@
 //
 
 @testable import PhobosSwiftCore
-import Foundation
-import XCTest
+import Nimble
+import Quick
 
-class ArrayTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class BundleTest: QuickSpec {
+  override func spec() {
+    testBundleInit()
   }
 
-  override func tearDown() {
-    super.tearDown()
-  }
+  func testBundleInit() {
+    describe("Given 已知本模块Class：PhobosSwiftCore") {
+      context("When 调用Bundle.pbs.bundle获取本模块Bundle") {
+        let bundle = Bundle.pbs.bundle(with: PhobosSwiftCore.self)
 
-  func testArray() {
-    let array: [Any] = ["Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1]
-
-    let chunkedArray = array.pbs_chunked(into: 3)
-    XCTAssertEqual(chunkedArray.count, 4)
+        it("Then 返回bundle的 bundlePath及resourcePath不为空") {
+          expect(bundle.bundlePath).toNot(beNil())
+          expect(bundle.resourcePath).toNot(beNil())
+        }
+      }
+    }
   }
 }

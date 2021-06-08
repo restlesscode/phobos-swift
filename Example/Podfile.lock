@@ -64,6 +64,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - Nimble (9.2.0)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
@@ -90,7 +91,9 @@ PODS:
     - SnapKit
   - PhobosSwiftCore/Tests (0.1.0):
     - GoogleUtilities (~> 7.0)
+    - Nimble
     - PhobosSwiftLog (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxGesture
     - RxSwift (~> 6.1.0)
@@ -248,6 +251,7 @@ PODS:
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PromisesObjC (1.2.12)
+  - Quick (4.0.0)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
     - RxSwift (= 6.1.0)
@@ -313,8 +317,10 @@ SPEC REPOS:
     - GoogleUserMessagingPlatform
     - GoogleUtilities
     - nanopb
+    - Nimble
     - ObjcExceptionBridging
     - PromisesObjC
+    - Quick
     - RxCocoa
     - RxGesture
     - RxRelay
@@ -373,10 +379,11 @@ SPEC CHECKSUMS:
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
   PhobosSwiftAuth: 81d06436d83e6f85e19e0803ec021f1f8b9ac95e
-  PhobosSwiftCore: a63451a066f445d637292419de3df0576222f61b
+  PhobosSwiftCore: ea96d6578b5f42b2d31f84173cf783d811bbe0d6
   PhobosSwiftGrowth: 6aa7db2c5fccc834d43c3b38e1b8fa0c8c7ff8bc
   PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
   PhobosSwiftLocation: c48a2f45e8f7bbca8e347258ddf21c1ab8fc0cac
@@ -392,6 +399,7 @@ SPEC CHECKSUMS:
   PhobosSwiftUIComponent: cff4c50f4addaabb96a12f2583a20f01a8197bb7
   PhobosSwiftWechat: 2039b3c5e4725e62308eaadc45a14ae092bac263
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
