@@ -32,11 +32,12 @@ import PhobosSwiftCore
 extension CLLocationCoordinate2D: PhobosSwiftCompatible {}
 
 extension PhobosSwift where Base == CLLocationCoordinate2D {
+  
   /// A = 6378245.0
-  public static let A = 6_378_245.0
-
+  static let A = 6_378_245.0
+  
   /// EE = 0.00669342162296594323
-  public static let EE = 0.00669342162296594323
+  static let EE = 0.00669342162296594323
 
   /// 标准坐标和火星坐标的误差
   public var GCJ02Offset: CLLocationCoordinate2D {

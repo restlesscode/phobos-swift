@@ -95,6 +95,20 @@ PODS:
     - RxGesture
     - RxSwift (~> 6.1.0)
     - SnapKit
+  - PhobosSwiftGrowth (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa
+    - RxGesture
+    - RxSwift
+    - SnapKit
+  - PhobosSwiftGrowth/Tests (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+    - RxCocoa
+    - RxGesture
+    - RxSwift
+    - SnapKit
   - PhobosSwiftHades (0.1.0):
     - MirrorGoogleMobileAds
     - PhobosSwiftCore (~> 0.1.0)
@@ -185,6 +199,12 @@ PODS:
   - PhobosSwiftRouter/Tests (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog
+  - PhobosSwiftSlideout (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftUIComponent (~> 0.1.0)
+  - PhobosSwiftSlideout/Tests (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftUIComponent (~> 0.1.0)
   - PhobosSwiftSplash (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
   - PhobosSwiftSplash/Tests (0.1.0):
@@ -249,6 +269,8 @@ DEPENDENCIES:
   - PhobosSwiftAuth/Tests (from `../`)
   - PhobosSwiftCore (from `../`)
   - PhobosSwiftCore/Tests (from `../`)
+  - PhobosSwiftGrowth (from `../`)
+  - PhobosSwiftGrowth/Tests (from `../`)
   - PhobosSwiftHades (from `../`)
   - PhobosSwiftHades/Tests (from `../`)
   - PhobosSwiftLocation (from `../`)
@@ -265,6 +287,8 @@ DEPENDENCIES:
   - PhobosSwiftPush/Tests (from `../`)
   - PhobosSwiftRouter (from `../`)
   - PhobosSwiftRouter/Tests (from `../`)
+  - PhobosSwiftSlideout (from `../`)
+  - PhobosSwiftSlideout/Tests (from `../`)
   - PhobosSwiftSplash (from `../`)
   - PhobosSwiftSplash/Tests (from `../`)
   - PhobosSwiftTestKnight (from `../`)
@@ -308,6 +332,8 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftCore:
     :path: "../"
+  PhobosSwiftGrowth:
+    :path: "../"
   PhobosSwiftHades:
     :path: "../"
   PhobosSwiftLocation:
@@ -323,6 +349,8 @@ EXTERNAL SOURCES:
   PhobosSwiftPush:
     :path: "../"
   PhobosSwiftRouter:
+    :path: "../"
+  PhobosSwiftSlideout:
     :path: "../"
   PhobosSwiftSplash:
     :path: "../"
@@ -349,6 +377,7 @@ SPEC CHECKSUMS:
   PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
   PhobosSwiftAuth: 81d06436d83e6f85e19e0803ec021f1f8b9ac95e
   PhobosSwiftCore: a63451a066f445d637292419de3df0576222f61b
+  PhobosSwiftGrowth: 6aa7db2c5fccc834d43c3b38e1b8fa0c8c7ff8bc
   PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
   PhobosSwiftLocation: c48a2f45e8f7bbca8e347258ddf21c1ab8fc0cac
   PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
@@ -357,6 +386,7 @@ SPEC CHECKSUMS:
   PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
   PhobosSwiftPush: a17dd5265d86a125c7afa74749f27655dca805c1
   PhobosSwiftRouter: 64687cb9c6afa21113399b4f3a07b8ddc5cb028d
+  PhobosSwiftSlideout: 2db0aa4d94acb06b8cfc1a32b891bdcf07a68557
   PhobosSwiftSplash: 74a07d1556875c5e23cf6ef57ae78bf58b80cd1c
   PhobosSwiftTestKnight: 2e4ad8cd41bd7bd3dc5b9c90f0da470a2c2a9d9d
   PhobosSwiftUIComponent: cff4c50f4addaabb96a12f2583a20f01a8197bb7
@@ -370,6 +400,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 9414429a1648413a6b88cff4cdd42e865b7aaeda
+PODFILE CHECKSUM: c10276a6ad21cc153235f57fe38b5d04bdbb5d4b
 
 COCOAPODS: 1.10.1
