@@ -85,13 +85,13 @@ struct Strings {
   static let kReleaseDescription = "Current enviornment will be connected to `Production`"
 }
 
-extension PhobosSwift where Base == UserDefaults {
+extension UserDefaults {
   /**
    -objectForKey: will search the receiver's search list for a default with the key 'defaultName' and return it. If another process has changed defaults in the search list, NSUserDefaults will automatically update to the latest values. If the key in question has been marked as ubiquitous via a Defaults Configuration File, the latest value may not be immediately available, and the registered value will be returned instead.
    */
   public func tk_object(forKey defaultName: String) -> Any? {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.object(forKey: key)
+    return object(forKey: key)
   }
 
   /**
@@ -99,43 +99,43 @@ extension PhobosSwift where Base == UserDefaults {
    */
   public func tk_set(_ value: Any?, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    base.set(value, forKey: key)
+    set(value, forKey: key)
   }
 
   /// -removeObjectForKey: is equivalent to -[... setObject:nil forKey:defaultName]
   public func tk_removeObject(forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    base.removeObject(forKey: key)
+    removeObject(forKey: key)
   }
 
   /// -stringForKey: is equivalent to -objectForKey:, except that it will convert NSNumber values to their NSString representation. If a non-string non-number value is found, nil will be returned.
-  func tk_string(forKey defaultName: String) -> String? {
+  public func tk_string(forKey defaultName: String) -> String? {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.string(forKey: key)
+    return string(forKey: key)
   }
 
   /// -arrayForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray.
   public func tk_array(forKey defaultName: String) -> [Any]? {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.array(forKey: key)
+    return array(forKey: key)
   }
 
   /// -dictionaryForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSDictionary.
   public func tk_dictionary(forKey defaultName: String) -> [String: Any]? {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.dictionary(forKey: key)
+    return dictionary(forKey: key)
   }
 
   /// -dataForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSData.
   public func tk_data(forKey defaultName: String) -> Data? {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.data(forKey: key)
+    return data(forKey: key)
   }
 
   /// -stringForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray<NSString *>. Note that unlike -stringForKey:, NSNumbers are not converted to NSStrings.
   public func tk_stringArray(forKey defaultName: String) -> [String]? {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.stringArray(forKey: key)
+    return stringArray(forKey: key)
   }
 
   /**
@@ -143,19 +143,19 @@ extension PhobosSwift where Base == UserDefaults {
    */
   public func tk_integer(forKey defaultName: String) -> Int {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.integer(forKey: key)
+    return integer(forKey: key)
   }
 
   /// -floatForKey: is similar to -integerForKey:, except that it returns a float, and boolean values will not be converted.
   public func tk_float(forKey defaultName: String) -> Float {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.float(forKey: key)
+    return float(forKey: key)
   }
 
   /// -doubleForKey: is similar to -integerForKey:, except that it returns a double, and boolean values will not be converted.
   public func tk_double(forKey defaultName: String) -> Double {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.double(forKey: key)
+    return double(forKey: key)
   }
 
   /**
@@ -164,7 +164,7 @@ extension PhobosSwift where Base == UserDefaults {
    */
   public func tk_bool(forKey defaultName: String) -> Bool {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.bool(forKey: key)
+    return bool(forKey: key)
   }
 
   /**
@@ -172,37 +172,37 @@ extension PhobosSwift where Base == UserDefaults {
    */
   public func tk_url(forKey defaultName: String) -> URL? {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    return base.url(forKey: key)
+    return url(forKey: key)
   }
 
   /// -setInteger:forKey: is equivalent to -setObject:forKey: except that the value is converted from an NSInteger to an NSNumber.
   public func tk_set(_ value: Int, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    base.set(value, forKey: key)
+    set(value, forKey: key)
   }
 
   /// -setFloat:forKey: is equivalent to -setObject:forKey: except that the value is converted from a float to an NSNumber.
   public func tk_set(_ value: Float, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    base.set(value, forKey: key)
+    set(value, forKey: key)
   }
 
   /// -setDouble:forKey: is equivalent to -setObject:forKey: except that the value is converted from a double to an NSNumber.
   public func tk_set(_ value: Double, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    base.set(value, forKey: key)
+    set(value, forKey: key)
   }
 
   /// -setBool:forKey: is equivalent to -setObject:forKey: except that the value is converted from a BOOL to an NSNumber.
   public func tk_set(_ value: Bool, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    base.set(value, forKey: key)
+    set(value, forKey: key)
   }
 
   /// -setURL:forKey is equivalent to -setObject:forKey: except that the value is archived to an NSData. Use -URLForKey: to retrieve values set this way.
   public func tk_set(_ url: URL?, forKey defaultName: String) {
     let key = "\(PBSTestKnight.shared.configuration.name).\(defaultName)"
-    base.set(url, forKey: key)
+    set(url, forKey: key)
   }
 }
 

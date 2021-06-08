@@ -124,7 +124,7 @@ extension PBSNetwork {
           PBSLogger.logger.debug(message: "Network is unreachable", context: "Network")
           handler?(.restrictedByUser)
 
-          DispatchQueue.pbs_once {
+          DispatchQueue.pbs.once {
             if self.enableAlert {
               if self.alertCtrl.presentingViewController == nil && !self.alertCtrl.isBeingPresented {
                 DispatchQueue.main.async {
