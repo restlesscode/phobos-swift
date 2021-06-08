@@ -121,7 +121,7 @@ class FloatingPanelCore: NSObject, UIGestureRecognizerDelegate {
       switch (from, to) {
       case let (.hidden, to):
         animator = vc.animatorForPresenting(to: to)
-      case let (_, .hidden):
+      case (_, .hidden):
         let animationVector = CGVector(dx: abs(removalVector.dx), dy: abs(removalVector.dy))
         animator = vc.animatorForDismissing(with: animationVector)
       default:

@@ -47,19 +47,25 @@ TODO: Add long description of the pod here.
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
 
   s.preserve_paths = [
-    "{group}/#{name}/README.md",
-    "{group}/#{name}/CHANGELOG.md"
+    "#{group}/#{name}/README.md",
+    "#{group}/#{name}/CHANGELOG.md"
   ]
   
   s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'PhobosSwiftRouter', '~> 0.1.0'
+  s.dependency 'PhobosSwiftNetwork', '~> 0.1.0'
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
   s.dependency 'RxGesture'
   s.dependency 'SnapKit'
+  s.dependency 'AlamofireImage', '~> 4.1'
 
   if has_resource_bundles
     s.resource_bundles = {
-      "#{pod_name}" => ["#{group}/#{name}/Assets/**/*"]
+      "#{pod_name}" => [
+        "#{group}/#{name}/Assets/*/*",
+        "#{group}/#{name}/Assets/*.xcassets"
+      ]
     }
   end
 

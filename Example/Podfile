@@ -27,11 +27,17 @@ target 'PhobosSwiftExample' do
   pod 'PhobosSwiftWechat', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Auth
   pod 'PhobosSwiftAuth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Groth
+  pod 'PhobosSwiftGrowth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Slideout
+  pod 'PhobosSwiftSlideout', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Log
   pod 'PhobosSwiftLocation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Persistence
   pod 'PhobosSwiftPersistence', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   pod 'PhobosSwiftPersistence/Realm', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
+  # Media
+  #pod 'PhobosSwiftMedia', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Push
   pod 'PhobosSwiftPush', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Payment
@@ -40,8 +46,14 @@ target 'PhobosSwiftExample' do
   pod 'PhobosSwiftUIComponent', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # TestKnight
   pod 'PhobosSwiftTestKnight', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Animation
+  pod 'PhobosSwiftAnimation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Splash
   pod 'PhobosSwiftSplash', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Hades
+  pod 'PhobosSwiftHades', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  
+  pod 'MirrorGoogleMobileAds', :path => '../../mirror-google-mobile-ads-sdk/'
   #pod 'PhobosSwiftPayment/Wechatpay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
   #pod 'PhobosSwiftPayment/Alipay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
 
