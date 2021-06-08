@@ -74,9 +74,7 @@ public struct PBSIconFontFamilyModel: Codable {
     guard let glyphs = glyphs else {
       return nil
     }
-    let glyph = glyphs.filter {
-      $0.name == key
-    }.first
+    let glyph = glyphs.first(where: { $0.name == key })
     return glyph
   }
 }

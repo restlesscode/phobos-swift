@@ -423,6 +423,6 @@ public class FloatingPanelSurfaceView: UIView {
   }
 
   func hasStackView() -> Bool {
-    contentView?.subviews.reduce(false) { $0 || ($1 is UIStackView) } ?? false
+    contentView?.subviews.contains(where: { $0 is UIStackView }) ?? false
   }
 }
