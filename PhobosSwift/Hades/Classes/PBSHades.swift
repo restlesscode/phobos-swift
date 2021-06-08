@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
-//  PhobosSwiftUIComponent
+//  PBSHades.swift
+//  PhobosSwiftHades
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,45 +24,45 @@
 //  THE SOFTWARE.
 //
 
-import AlamofireImage
+import GoogleMobileAds
 import PhobosSwiftLog
-import RxCocoa
-import RxSwift
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+/// PBSHades
+public class PBSHades: NSObject {
+  /// PBSAdProvider
+  public enum PBSAdProvider {
+    ///
+    case google
+    ///
+    case baidu
+    ///
+    case facebook
+    ///
+    case tencent
+    ///
+    case twitter
   }
-}
 
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
+  ///
+  public static let shared = PBSHades()
+
+  override private init() {
+    super.init()
   }
-}
 
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
+  /// add Ad configuration
+  public static func configuration(adProviders: [PBSAdProvider]) {
+    guard !adProviders.isEmpty else {
+      fatalError("Ad provider should not be empty")
+    }
 
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
+    PBSLogger.logger.debug(message: "Google Mobile Ads SDK version: \(GADMobileAds.sharedInstance().sdkVersion)")
 
-extension Reactive where Base: UIImageView {
-  /// Bindable sink for `imageUrl` property.
-  internal var imageUrl: Binder<URL?> {
-    Binder(base) { imageView, url in
-      if let url = url {
-        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
-      } else {
-        imageView.image = Resource.Image.kImageArticlePlaceHolder
-      }
+    if adProviders.contains(.google) {
+      // Initialize Google Mobile Ads SDK
+      GADMobileAds.sharedInstance().start(completionHandler: nil)
+      // use sample device id for simulators
+//     GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["058548c9e87505f2788186e0642ca839" ] // Sample device ID
     }
   }
 }
-
-class PhobosSwiftUIComponent: NSObject {}

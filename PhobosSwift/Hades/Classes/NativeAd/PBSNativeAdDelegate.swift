@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
-//  PhobosSwiftUIComponent
+//  PBSNativeAdDelegate.swift
+//  PhobosSwiftHades
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,45 +24,30 @@
 //  THE SOFTWARE.
 //
 
-import AlamofireImage
-import PhobosSwiftLog
-import RxCocoa
-import RxSwift
+import Foundation
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
-  }
+///
+@objc public protocol PBSNativeAdLoaderDelegate {
+  ///
+  func adLoaderDidFailToReceiveAdWithError(_ error: Error)
+  ///
+  @objc optional func adLoaderDidFinishLoading()
+  ///
+  func adLoaderDidReceive(_ nativeAd: PBSNativeAd)
 }
 
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
+///
+@objc public protocol PBSNativeAdDelegate {
+  ///
+  func nativeAdDidRecordImpression(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdDidRecordClick(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdWillPresentScreen(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdWillDismissScreen(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdDidDismissScreen(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdIsMuted(_ nativeAd: PBSNativeAd)
 }
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-extension Reactive where Base: UIImageView {
-  /// Bindable sink for `imageUrl` property.
-  internal var imageUrl: Binder<URL?> {
-    Binder(base) { imageView, url in
-      if let url = url {
-        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
-      } else {
-        imageView.image = Resource.Image.kImageArticlePlaceHolder
-      }
-    }
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}

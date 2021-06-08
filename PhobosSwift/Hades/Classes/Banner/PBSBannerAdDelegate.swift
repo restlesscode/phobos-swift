@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
-//  PhobosSwiftUIComponent
+//  PBSBannerAdDelegate.swift
+//  PhobosSwiftHades
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,45 +24,21 @@
 //  THE SOFTWARE.
 //
 
-import AlamofireImage
-import PhobosSwiftLog
-import RxCocoa
-import RxSwift
+import Foundation
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
-  }
+/// PBSBannerAdDelegate
+///
+@objc public protocol PBSBannerAdDelegate {
+  ///
+  func bannerViewDidReceiveAd(_ banner: PBSBannerAd)
+  ///
+  func bannerView(_ banner: PBSBannerAd, didFailToReceiveAdWithReason reason: String)
+  ///
+  func bannerViewWillPresentScreen(_ banner: PBSBannerAd)
+  ///
+  func bannerViewWillDismissScreen(_ banner: PBSBannerAd)
+  ///
+  func bannerViewDidDismissScreen(_ banner: PBSBannerAd)
+  ///
+  func bannerViewDidRecordImpression(_ banner: PBSBannerAd)
 }
-
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
-
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
-
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-extension Reactive where Base: UIImageView {
-  /// Bindable sink for `imageUrl` property.
-  internal var imageUrl: Binder<URL?> {
-    Binder(base) { imageView, url in
-      if let url = url {
-        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
-      } else {
-        imageView.image = Resource.Image.kImageArticlePlaceHolder
-      }
-    }
-  }
-}
-
-class PhobosSwiftUIComponent: NSObject {}

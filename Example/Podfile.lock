@@ -3,6 +3,20 @@ PODS:
   - AlamofireImage (4.1.0):
     - Alamofire (~> 5.1)
   - CocoaAsyncSocket (7.6.5)
+  - GoogleAppMeasurement (7.11.0):
+    - GoogleAppMeasurement/AdIdSupport (= 7.11.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.0)
+    - GoogleUtilities/Network (~> 7.0)
+    - "GoogleUtilities/NSData+zlib (~> 7.0)"
+    - nanopb (~> 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (7.11.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.0)
+    - GoogleUtilities/Network (~> 7.0)
+    - "GoogleUtilities/NSData+zlib (~> 7.0)"
+    - nanopb (~> 2.30908.0)
+  - GoogleUserMessagingPlatform (1.4.0)
   - GoogleUtilities (7.4.0):
     - GoogleUtilities/AppDelegateSwizzler (= 7.4.0)
     - GoogleUtilities/Environment (= 7.4.0)
@@ -36,12 +50,20 @@ PODS:
     - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (7.4.0):
     - GoogleUtilities/Logger
+  - MirrorGoogleMobileAds (0.1.0):
+    - GoogleAppMeasurement (~> 7.0)
+    - GoogleUserMessagingPlatform (~> 1.1)
   - MirrorRealm (0.3.1):
     - MirrorRealm/Headers (= 0.3.1)
   - MirrorRealm/Headers (0.3.1)
   - MirrorRealmSwift (0.3.1):
     - MirrorRealm (~> 0.3.1)
   - MirrorWechatSDK (0.1.5)
+  - nanopb (2.30908.0):
+    - nanopb/decode (= 2.30908.0)
+    - nanopb/encode (= 2.30908.0)
+  - nanopb/decode (2.30908.0)
+  - nanopb/encode (2.30908.0)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
@@ -87,6 +109,16 @@ PODS:
     - RxGesture
     - RxSwift
     - SnapKit
+  - PhobosSwiftHades (0.1.0):
+    - MirrorGoogleMobileAds
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - PhobosSwiftUIComponent (~> 0.1.0)
+  - PhobosSwiftHades/Tests (0.1.0):
+    - MirrorGoogleMobileAds
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - PhobosSwiftUIComponent (~> 0.1.0)
   - PhobosSwiftLocation (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
@@ -101,12 +133,6 @@ PODS:
     - ObjcExceptionBridging (~> 1.0.1)
   - PhobosSwiftLog/Tests (0.1.0):
     - ObjcExceptionBridging (~> 1.0.1)
-  - PhobosSwiftMedia (0.1.0):
-    - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
-  - PhobosSwiftMedia/Tests (0.1.0):
-    - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
   - PhobosSwiftNetwork (0.1.0):
     - Alamofire (~> 5.1.0)
     - CocoaAsyncSocket (~> 7.6.5)
@@ -236,6 +262,7 @@ PODS:
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
+  - MirrorGoogleMobileAds (from `../../mirror-google-mobile-ads-sdk/`)
   - PhobosSwiftAnimation (from `../`)
   - PhobosSwiftAnimation/Tests (from `../`)
   - PhobosSwiftAuth (from `../`)
@@ -244,12 +271,12 @@ DEPENDENCIES:
   - PhobosSwiftCore/Tests (from `../`)
   - PhobosSwiftGrowth (from `../`)
   - PhobosSwiftGrowth/Tests (from `../`)
+  - PhobosSwiftHades (from `../`)
+  - PhobosSwiftHades/Tests (from `../`)
   - PhobosSwiftLocation (from `../`)
   - PhobosSwiftLocation/Tests (from `../`)
   - PhobosSwiftLog (from `../`)
   - PhobosSwiftLog/Tests (from `../`)
-  - PhobosSwiftMedia (from `../`)
-  - PhobosSwiftMedia/Tests (from `../`)
   - PhobosSwiftNetwork (from `../`)
   - PhobosSwiftNetwork/Tests (from `../`)
   - PhobosSwiftPayment (from `../`)
@@ -282,7 +309,10 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - CocoaAsyncSocket
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
     - GoogleUtilities
+    - nanopb
     - ObjcExceptionBridging
     - PromisesObjC
     - RxCocoa
@@ -294,6 +324,8 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
+  MirrorGoogleMobileAds:
+    :path: "../../mirror-google-mobile-ads-sdk/"
   PhobosSwiftAnimation:
     :path: "../"
   PhobosSwiftAuth:
@@ -302,11 +334,11 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftGrowth:
     :path: "../"
+  PhobosSwiftHades:
+    :path: "../"
   PhobosSwiftLocation:
     :path: "../"
   PhobosSwiftLog:
-    :path: "../"
-  PhobosSwiftMedia:
     :path: "../"
   PhobosSwiftNetwork:
     :path: "../"
@@ -333,18 +365,22 @@ SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  GoogleAppMeasurement: fd19169c3034975cb934e865e5667bfdce59df7f
+  GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
+  MirrorGoogleMobileAds: f207c576fced0bc1dcd6bac897cb274d96ce73ef
   MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
+  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
   PhobosSwiftAuth: 81d06436d83e6f85e19e0803ec021f1f8b9ac95e
   PhobosSwiftCore: a63451a066f445d637292419de3df0576222f61b
   PhobosSwiftGrowth: 6aa7db2c5fccc834d43c3b38e1b8fa0c8c7ff8bc
+  PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
   PhobosSwiftLocation: c48a2f45e8f7bbca8e347258ddf21c1ab8fc0cac
   PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
-  PhobosSwiftMedia: 2bf06116d49a6bb4f1ce3f2f40010aaa5c545191
   PhobosSwiftNetwork: 97c4b84133fb5c7e863207ea89bdcc4c0437c20d
   PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
   PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
@@ -364,6 +400,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 5a441a8af4f1e4725c157bcb4481bfb4892ab9b0
+PODFILE CHECKSUM: c10276a6ad21cc153235f57fe38b5d04bdbb5d4b
 
 COCOAPODS: 1.10.1
