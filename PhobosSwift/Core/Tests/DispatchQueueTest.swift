@@ -24,34 +24,49 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftCore
 import Nimble
 import Quick
 
 class DispatchQueueTest: QuickSpec {
-  let queueSpy = DispatchQueueSpy()
-  
   override func spec() {
     testOnceInDispatchQueueNoToken()
+    testOnceInDispatchQueueHasToken()
   }
-  
+
   func testOnceInDispatchQueueNoToken() {
-    describe("") {
-      context("") {
-        it("") {
-          <#code#>
+    describe("Given 没有任何Token，但是在同一行代码中多次触发") {
+      let repeatCount = 5
+      var complyCount = 0
+
+      context("When 执行多次DispatchQueue.pbs.once") {
+        for _ in 0..<repeatCount {
+          DispatchQueue.pbs.once {
+            complyCount += 1
+          }
+        }
+        it("Then 计数器为1") {
+          expect(complyCount).to(equal(1))
         }
       }
     }
   }
-  
-  func testOnceInDispatchQueueHasToken() {
-    
-  }
-}
 
-class DispatchQueueSpy {
-  var transferCountByNoToken = 0
-  var transferCountByHasToken = 0
+  func testOnceInDispatchQueueHasToken() {
+    describe("Given 指定Token，在同一行代码中多次触发") {
+      let repeatCount = 5
+      var complyCount = 0
+
+      context("When 执行多次DispatchQueue.pbs.once") {
+        for _ in 0..<repeatCount {
+          DispatchQueue.pbs.once(token: "Token") {
+            complyCount += 1
+          }
+        }
+        it("Then 计数器为1") {
+          expect(complyCount).to(equal(1))
+        }
+      }
+    }
+  }
 }
