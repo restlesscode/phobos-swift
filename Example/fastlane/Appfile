@@ -1,0 +1,18 @@
+app_identifier(ENV['BUNDLE_IDENTIFIER']) # The bundle identifier of your app
+apple_id(ENV['FASTLANE_USER']) # Your Apple email address
+
+itc_team_id(ENV['ITC_TEAM_ID']) # App Store Connect Team ID
+team_id(ENV['TEAM_ID']) # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
+
+for_platform :ios do
+  #team_id '123' # for all iOS related things
+  #for_lane :inhouse do
+  #  app_identifier(ENV["BUNDLE_IDENTIFIER_ENTERPRISE"])
+  #  itc_team_id(ENV["ITC_TEAM_ID_ENTERPRISE"]) # App Store Connect Team ID for enterprise
+  #	team_id(ENV["TEAM_ID_ENTERPRISE"]) # Developer Portal Team ID for enterprise
+  #end
+
+end

@@ -45,8 +45,8 @@ TODO: Add long description of the pod here.
   s.prefix_header_file = false
 
   s.preserve_paths = [
-    "{group}/#{name}/README.md",
-    "{group}/#{name}/CHANGELOG.md"
+    "#{group}/#{name}/README.md",
+    "#{group}/#{name}/CHANGELOG.md"
   ]
   
   s.dependency 'RxSwift', '~> 6.1.0'
