@@ -256,7 +256,7 @@ open class PieChartRenderer: DataRenderer {
       let axElement = createAccessibleElement(withIndex: j,
                                               container: chart,
                                               dataSet: dataSet) { element in
-        element.accessibilityFrame = path.boundingBoxOfPath
+          element.accessibilityFrame = path.boundingBoxOfPath
       }
 
       accessibleChartElements.append(axElement)
@@ -761,8 +761,8 @@ open class PieChartRenderer: DataRenderer {
       let axElement = createAccessibleElement(withIndex: index,
                                               container: chart,
                                               dataSet: set) { element in
-        element.accessibilityFrame = path.boundingBoxOfPath
-        element.isSelected = true
+          element.accessibilityFrame = path.boundingBoxOfPath
+          element.isSelected = true
       }
 
       highlightedAccessibleElements.append(axElement)

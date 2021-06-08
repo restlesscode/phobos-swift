@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftSlideout
+//  CGPointTest.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,18 +24,41 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import XCTest
+@testable import PhobosSwiftCore
+import Nimble
+import Quick
 
-/// Test the enhanced features of Bundle class is implemented in this extension
-class SlideoutTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class CGPointTest: QuickSpec {
+  override func spec() {
+    testDistance()
+    testOffset()
   }
 
-  override func tearDown() {
-    super.tearDown()
+  func testDistance() {
+    describe("Given 当前点为(x: 100, y: 100), 目标点为(x: 120, y: 120)") {
+      let nowPoint = CGPoint(x: 100, y: 100)
+      let objPoint = CGPoint(x: 120, y: 120)
+
+      context("When 调用CGPoint.pbs.distance") {
+        let distance = nowPoint.pbs.distance(to: objPoint)
+        it("Then 返回的距离为28.284271247461902") {
+          expect(distance).to(equal(28.284271247461902))
+        }
+      }
+    }
   }
 
-  func test() {}
+  func testOffset() {
+    describe("Given 当前点为(x: 100, y: 100), 偏移量为(x: 120, y: 120)") {
+      let nowPoint = CGPoint(x: 100, y: 100)
+      let offset = UIOffset(horizontal: 120, vertical: 120)
+
+      context("When 调用CGPoint.pbs.offset") {
+        let resultPoint = nowPoint.pbs.offset(x: offset.horizontal, y: offset.vertical)
+        it("Then 返回的Point为(x: 220, y: 220)") {
+          expect(resultPoint).to(equal(CGPoint(x: 220, y: 220)))
+        }
+      }
+    }
+  }
 }

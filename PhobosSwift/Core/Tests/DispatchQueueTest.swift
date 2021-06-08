@@ -1,6 +1,6 @@
 //
 //
-//  Calendar+Test.swift
+//  DispatchQueueTest.swift
 //  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -25,23 +25,48 @@
 //
 
 @testable import PhobosSwiftCore
-import Foundation
-import XCTest
+import Nimble
+import Quick
 
-class CalendarTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class DispatchQueueTest: QuickSpec {
+  override func spec() {
+    testOnceInDispatchQueueNoToken()
+    testOnceInDispatchQueueHasToken()
   }
 
-  override func tearDown() {
-    super.tearDown()
+  func testOnceInDispatchQueueNoToken() {
+    describe("Given 没有任何Token，但是在同一行代码中多次触发") {
+      let repeatCount = 5
+      var complyCount = 0
+
+      context("When 执行多次DispatchQueue.pbs.once") {
+        for _ in 0..<repeatCount {
+          DispatchQueue.pbs.once {
+            complyCount += 1
+          }
+        }
+        it("Then 计数器为1") {
+          expect(complyCount).to(equal(1))
+        }
+      }
+    }
   }
 
-  func test() {
-    var secondsDiff = Calendar.pbs.secondDifference(from: Date(), to: Date(timeIntervalSinceNow: 3600))
-    XCTAssertEqual(secondsDiff, 3600)
+  func testOnceInDispatchQueueHasToken() {
+    describe("Given 指定Token，在同一行代码中多次触发") {
+      let repeatCount = 5
+      var complyCount = 0
 
-    secondsDiff = Calendar.pbs.secondDifference(from: "2021-10-10 01:01:01", to: "2021-10-11 01:01:01")
-    XCTAssertEqual(secondsDiff, 3600 * 24)
+      context("When 执行多次DispatchQueue.pbs.once") {
+        for _ in 0..<repeatCount {
+          DispatchQueue.pbs.once(token: "Token") {
+            complyCount += 1
+          }
+        }
+        it("Then 计数器为1") {
+          expect(complyCount).to(equal(1))
+        }
+      }
+    }
   }
 }
