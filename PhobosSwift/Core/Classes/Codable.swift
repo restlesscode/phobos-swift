@@ -27,15 +27,16 @@
 import Foundation
 import PhobosSwiftLog
 
+extension JSONSerialization: PhobosSwiftCompatible {}
+
 /// Enhanced features of JSONSerialization class is implemented in this extension
-extension JSONSerialization {
+extension PhobosSwift where Base: JSONSerialization {
   /// 将Dictionary转化成JSON string
   ///
   /// - parameter dict: 要转成Json String的字典对象.
   ///
   /// - returns: JSON String （如果是失败，则为空）
-  @objc(stringFromDictionary:)
-  public static func pbs_string(fromDictionary dict: [AnyHashable: Any]?) -> String? {
+  public static func jsonString(fromDictionary dict: [AnyHashable: Any]?) -> String? {
     do {
       let jsonData = try JSONSerialization.data(withJSONObject: dict ?? [], options: .prettyPrinted)
       let jsonStr = String(data: jsonData, encoding: .utf8)
@@ -69,18 +70,14 @@ extension Encodable {
 }
 
 /// Enhanced features of String class is implemented in this extension
-extension String {
+extension PhobosSwift where Base == String {
   /// 将json string转化成model
   ///
   /// - parameter modelType: 要转成的Model的类型
   ///
   /// - returns: 要转成的Model对象
-  public func pbs_model<T>(modelType: T.Type) -> T? where T: Decodable {
-    data(using: .utf8)?.pbs_model(modelType: modelType, decoderType: .json)
-  }
-
-  public func pbs_model<T>() -> T? where T: Decodable {
-    pbs_model(modelType: T.self)
+  public func model<T: Decodable>() -> T? {
+    base.data(using: .utf8)?.pbs.model(decoderType: .json)
   }
 }
 
@@ -92,23 +89,23 @@ public enum PBSDecoderType {
   case json
 }
 
+extension Data: PhobosSwiftCompatible {}
+
 /// Enhanced features of Data class is implemented in this extension
-extension Data {
+extension PhobosSwift where Base == Data {
   /// 将json data转化成model
   ///
-  /// - parameter modelType: 要转成的Model的类型
-  ///
   /// - returns: 要转成的Model对象
-  public func pbs_model<T>(modelType: T.Type, decoderType: PBSDecoderType = .json) -> T? where T: Decodable {
+  public func model<T: Decodable>(decoderType: PBSDecoderType = .json) -> T? {
     do {
       switch decoderType {
       case .json:
         let decoder = JSONDecoder()
-        let _model = try decoder.decode(modelType, from: self)
+        let _model = try decoder.decode(T.self, from: base)
         return _model
       case .propertyList:
         let decoder = PropertyListDecoder()
-        let _model = try decoder.decode(modelType, from: self)
+        let _model = try decoder.decode(T.self, from: base)
         return _model
       }
     } catch {
@@ -116,20 +113,18 @@ extension Data {
       return nil
     }
   }
-
-  public func pbs_model<T>(decoderType: PBSDecoderType = .json) -> T? where T: Decodable {
-    pbs_model(modelType: T.self, decoderType: decoderType)
-  }
 }
 
+extension Dictionary: PhobosSwiftCompatible {}
+
 /// Enhanced features of Dictionary class is implemented in this extension
-extension Dictionary {
+extension PhobosSwift where Base == [AnyHashable: Any] {
   /// 将字典对象转化成JSON stirng
   ///
   /// - returns: JSON String （如果是失败，则为空）
-  public var pbs_jsonString: String? {
+  public var jsonString: String? {
     do {
-      let jsonData = try JSONSerialization.data(withJSONObject: self, options: [])
+      let jsonData = try JSONSerialization.data(withJSONObject: base, options: [])
       let jsonString = String(data: jsonData, encoding: .utf8)
       return jsonString
     } catch {
@@ -140,17 +135,13 @@ extension Dictionary {
   }
 
   /// convert dictionary to model
-  public func pbs_model<T>(modelType: T.Type) -> T? where T: Decodable {
+  public func model<T: Decodable>() -> T? {
     do {
-      let data = try JSONSerialization.data(withJSONObject: self, options: .fragmentsAllowed)
-      return try JSONDecoder().decode(modelType, from: data)
+      let data = try JSONSerialization.data(withJSONObject: base, options: .fragmentsAllowed)
+      return try JSONDecoder().decode(T.self, from: data)
     } catch {
       PBSLogger.logger.error(message: error.localizedDescription, context: "JSON Data to Model")
       return nil
     }
-  }
-
-  public func pbs_model<T>() -> T? where T: Decodable {
-    pbs_model(modelType: T.self)
   }
 }
