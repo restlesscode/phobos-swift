@@ -110,7 +110,7 @@ struct AppleNewsFormatModel: Codable {
   let components: [ANFComponent]
 
   static var demoModel: AppleNewsFormatModel? {
-    demoStr.pbs_model(modelType: AppleNewsFormatModel.self)
+    demoStr.pbs.model()
   }
 }
 
