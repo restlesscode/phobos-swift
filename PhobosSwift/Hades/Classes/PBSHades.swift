@@ -27,22 +27,22 @@
 import GoogleMobileAds
 import PhobosSwiftLog
 
-/// PBSAdProvider
-public enum PBSAdProvider {
-  ///
-  case google
-  ///
-  case baidu
-  ///
-  case facebook
-  ///
-  case tencent
-  ///
-  case twitter
-}
-
 /// PBSHades
 public class PBSHades: NSObject {
+  /// PBSAdProvider
+  public enum PBSAdProvider {
+    ///
+    case google
+    ///
+    case baidu
+    ///
+    case facebook
+    ///
+    case tencent
+    ///
+    case twitter
+  }
+
   ///
   public static let shared = PBSHades()
 

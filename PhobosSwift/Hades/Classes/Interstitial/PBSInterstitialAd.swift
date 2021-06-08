@@ -32,11 +32,11 @@ import RxSwift
 ///
 public class PBSInterstitialAd: PBSFullScreenPresentingAd {
   internal var interstitialAd: GADInterstitialAd?
-  internal var adProvider: PBSAdProvider!
+  internal var adProvider: PBSHades.PBSAdProvider!
   ///
   public private(set) var adUnitID: String!
   ///
-  public init(with adProvider: PBSAdProvider, adUnitID: String) {
+  public init(with adProvider: PBSHades.PBSAdProvider, adUnitID: String) {
     self.adProvider = adProvider
     self.adUnitID = adUnitID
   }

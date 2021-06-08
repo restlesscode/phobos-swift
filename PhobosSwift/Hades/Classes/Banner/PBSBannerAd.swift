@@ -28,43 +28,6 @@ import GoogleMobileAds
 import PhobosSwiftLog
 import SnapKit
 
-/// PBSBannerType
-public enum PBSBannerType {
-  /// GADBanner
-  case google(BannerSize)
-  /// BaiduBanner
-  case baidu(BannerSize)
-
-  /// BannerSize
-  public enum BannerSize {
-    /// 自适应,推荐
-    case adaptive
-    /// 标准类型
-    case normal
-    /// 中等类型
-    case medium
-    /// 大型
-    case large
-    /// 适用于iPad
-    case max
-  }
-
-  var size: CGSize {
-    switch self {
-    case .google(.normal):
-      return CGSize(width: 320, height: 50)
-    case .google(.medium):
-      return CGSize(width: 320, height: 100)
-    case .google(.large):
-      return CGSize(width: 300, height: 250)
-    case .google(.max):
-      return CGSize(width: 468, height: 60)
-    default:
-      return .zero
-    }
-  }
-}
-
 /// PBSBannerAdProtocol
 public protocol PBSBannerAdProtocol {
   /// 创建一个BannerView
@@ -72,10 +35,47 @@ public protocol PBSBannerAdProtocol {
   ///   - bannerType: banner广告的类型和大小
   ///   - rootViewController: The root view controller is most commonly the view
   /// controller displaying the banner, only for GADBannerView.
-  func createBannerView(bannerType: PBSBannerType, rootViewController: UIViewController?) -> UIView
+  func createBannerView(bannerType: PBSBannerAd.PBSBannerType, rootViewController: UIViewController?) -> UIView
 }
 
 public class PBSBannerAd: NSObject, PBSBannerAdProtocol {
+  /// PBSBannerType
+  public enum PBSBannerType {
+    /// GADBanner
+    case google(BannerSize)
+    /// BaiduBanner
+    case baidu(BannerSize)
+
+    /// BannerSize
+    public enum BannerSize {
+      /// 自适应,推荐
+      case adaptive
+      /// 标准类型
+      case normal
+      /// 中等类型
+      case medium
+      /// 大型
+      case large
+      /// 适用于iPad
+      case max
+    }
+
+    var size: CGSize {
+      switch self {
+      case .google(.normal):
+        return CGSize(width: 320, height: 50)
+      case .google(.medium):
+        return CGSize(width: 320, height: 100)
+      case .google(.large):
+        return CGSize(width: 300, height: 250)
+      case .google(.max):
+        return CGSize(width: 468, height: 60)
+      default:
+        return .zero
+      }
+    }
+  }
+
   lazy var gADBannerView: GADBannerView = {
     let bannerView = GADBannerView()
     return bannerView

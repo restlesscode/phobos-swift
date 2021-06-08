@@ -30,20 +30,20 @@ import PhobosSwiftLog
 import PhobosSwiftUIComponent
 import SnapKit
 
-/// PBSNativeAdType
-public enum PBSNativeAdType {
-  /// customized Ad
-  case advanced
-  /// small template
-  case smallTemplate
-  /// medium template
-  case mediumTemplate
-  /// native video Ad
-  case video
-}
-
 /// PBSNativeAd
 public class PBSNativeAd: NSObject {
+  /// PBSNativeAdType
+  public enum PBSNativeAdType {
+    /// customized Ad
+    case advanced
+    /// small template
+    case smallTemplate
+    /// medium template
+    case mediumTemplate
+    /// native video Ad
+    case video
+  }
+
   weak var adLoaderDelegate: PBSNativeAdLoaderDelegate?
 
   weak var delegate: PBSNativeAdDelegate?
@@ -86,12 +86,12 @@ public class PBSNativeAd: NSObject {
   }()
 
   /// PBSAdProvider
-  public private(set) var adProvider: PBSAdProvider!
+  public private(set) var adProvider: PBSHades.PBSAdProvider!
 
   /// PBSNativeAdType
   public private(set) var adType: PBSNativeAdType!
 
-  public init(with adProvider: PBSAdProvider, adType: PBSNativeAdType? = .advanced) {
+  public init(with adProvider: PBSHades.PBSAdProvider, adType: PBSNativeAdType? = .advanced) {
     self.adProvider = adProvider
     self.adType = adType
     super.init()
