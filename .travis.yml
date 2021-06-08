@@ -1,0 +1,41 @@
+os: osx
+osx_image: xcode12.3
+language: swift
+cache:
+  bundler: true
+  cocoapods: true
+  directories:
+    # Built-in support for ccache doesn't seem to pick this up
+    - $HOME/.ccache
+
+# install dependencies
+install:
+  - bundle install
+
+stages:
+  - build_debug
+  - lint_core
+
+jobs:
+  include:
+    # The order of builds matters (even though they are run in parallel):
+    # Travis will schedule them in the same order they are listed here.
+
+    - stage: lint_core
+      script:
+        - bundle exec fastlane ios lint --env Core
+      on:
+        branch: master
+
+    - stage: build_debug
+      before_script: "cd Example"
+      script:
+        - bundle exec pod update --verbose
+        - bundle exec fastlane ios build configuration:Debug skip_archive:true --env ci
+      on:
+        branch: develop
+
+branches:
+  only:
+    - master
+    - develop

@@ -1,7 +1,7 @@
 //
 //
-//  Localizable.strings
-//  PhobosSwiftMedia
+//  UIImage+Ex.swift
+//  PhobosSwiftAnimation
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,9 +24,13 @@
 //  THE SOFTWARE.
 //
 
-"LANG" = "zh-Hans";
+import Foundation
+import PhobosSwiftCore
 
-"SETTINGS" = "设置";
-"CANCEL" = "取消";
-"ALLOW_LOCATION_ACCESS" = "请打开地理位置的访问权限";
-"ALLOW_LOCATION_ACCESS_MESSAGE" = "我们的某些功能需要访问地理位置，请在设置中打开地理位置的访问权限";
+extension UIImage {
+  internal static func image(named name: String) -> UIImage {
+    let bundle = Bundle.pbs.bundle(with: PhobosSwiftAnimation.self)
+    let emptyImage = UIImage.pbs.makeImage(from: .clear)
+    return UIImage(named: name, in: bundle, compatibleWith: nil) ?? emptyImage
+  }
+}

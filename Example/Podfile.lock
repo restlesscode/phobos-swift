@@ -45,6 +45,12 @@ PODS:
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - PhobosSwiftAnimation (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+  - PhobosSwiftAnimation/Tests (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
   - PhobosSwiftAuth (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
@@ -204,6 +210,8 @@ PODS:
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
+  - PhobosSwiftAnimation (from `../`)
+  - PhobosSwiftAnimation/Tests (from `../`)
   - PhobosSwiftAuth (from `../`)
   - PhobosSwiftAuth/Tests (from `../`)
   - PhobosSwiftCore (from `../`)
@@ -254,6 +262,8 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
+  PhobosSwiftAnimation:
+    :path: "../"
   PhobosSwiftAuth:
     :path: "../"
   PhobosSwiftCore:
@@ -290,6 +300,7 @@ SPEC CHECKSUMS:
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
   PhobosSwiftAuth: 81d06436d83e6f85e19e0803ec021f1f8b9ac95e
   PhobosSwiftCore: a63451a066f445d637292419de3df0576222f61b
   PhobosSwiftLocation: c48a2f45e8f7bbca8e347258ddf21c1ab8fc0cac
@@ -312,6 +323,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: de09991f6f21bd854334a7266165b5635168cf3f
+PODFILE CHECKSUM: e168c0cedba0d19cd4fb6f181abed8b6232bbb0d
 
 COCOAPODS: 1.10.1
