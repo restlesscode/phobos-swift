@@ -29,11 +29,12 @@ import PhobosSwiftCore
 import PhobosSwiftUIComponent
 import SnapKit
 
-public class ADMobNativeAdView: GADNativeAdView {
+///
+public class PBSADMobNativeAdView: GADNativeAdView {
   public lazy var adLabel: UILabel = {
     let label = UILabel(frame: .zero)
     label.text = "Ad"
-    label.backgroundColor = UIColor(red: 255 / 255.0, green: 204 / 255.0, blue: 102 / 255.0, alpha: 1)
+    label.backgroundColor = UIColor.pbs.color(R: 255, G: 204, B: 102, alpha: 1)
     label.textColor = UIColor.white
     label.font = UIFont.systemFont(ofSize: 11, weight: .semibold)
     return label
@@ -110,25 +111,25 @@ public class ADMobNativeAdView: GADNativeAdView {
   }
 }
 
-extension ADMobNativeAdView {
+extension PBSADMobNativeAdView {
   func setupSmallTemplateUI() {
     layer.borderWidth = 1.0
-    layer.borderColor = UIColor(red: 224 / 255.0, green: 224 / 255.0, blue: 224 / 255.0, alpha: 1).cgColor
+    layer.borderColor = UIColor.pbs.color(R: 224, G: 224, B: 224).cgColor
 
     _headlineView.font = UIFont.systemFont(ofSize: 15, weight: .bold)
 
-    adLabel.textColor = UIColor(red: 140 / 255.0, green: 164 / 255.0, blue: 131 / 255.0, alpha: 1)
+    adLabel.textColor = UIColor.pbs.color(R: 140, G: 164, B: 131)
     adLabel.textAlignment = .center
     adLabel.font = UIFont.systemFont(ofSize: 12)
     adLabel.backgroundColor = UIColor.white
-    adLabel.layer.borderColor = UIColor(red: 140 / 255.0, green: 164 / 255.0, blue: 131 / 255.0, alpha: 1).cgColor
+    adLabel.layer.borderColor = UIColor.pbs.color(R: 140, G: 164, B: 131).cgColor
     adLabel.layer.borderWidth = 1.0
     adLabel.layer.cornerRadius = 3.0
 
     _advertiserView.font = UIFont.systemFont(ofSize: 12)
     _advertiserView.textColor = UIColor.lightGray
 
-    _callToActionView.backgroundColor = UIColor(red: 54 / 255.0, green: 155 / 255.0, blue: 254 / 255.0, alpha: 1)
+    _callToActionView.backgroundColor = UIColor.pbs.color(R: 54, G: 155, B: 254)
     _callToActionView.layer.cornerRadius = 3
     _callToActionView.layer.masksToBounds = true
     _callToActionView.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -166,15 +167,15 @@ extension ADMobNativeAdView {
 
   func setupMediumTemplateUI() {
     layer.borderWidth = 1.0
-    layer.borderColor = UIColor(red: 224 / 255.0, green: 224 / 255.0, blue: 224 / 255.0, alpha: 1).cgColor
+    layer.borderColor = UIColor.pbs.color(R: 224, G: 224, B: 224).cgColor
 
     _headlineView.font = UIFont.systemFont(ofSize: 17, weight: .bold)
 
-    adLabel.textColor = UIColor(red: 140 / 255.0, green: 164 / 255.0, blue: 131 / 255.0, alpha: 1)
+    adLabel.textColor = UIColor.pbs.color(R: 140, G: 164, B: 131)
     adLabel.textAlignment = .center
     adLabel.font = UIFont.systemFont(ofSize: 15)
     adLabel.backgroundColor = UIColor.white
-    adLabel.layer.borderColor = UIColor(red: 140 / 255.0, green: 164 / 255.0, blue: 131 / 255.0, alpha: 1).cgColor
+    adLabel.layer.borderColor = UIColor.pbs.color(R: 140, G: 164, B: 131).cgColor
     adLabel.layer.borderWidth = 1.0
     adLabel.layer.cornerRadius = 3.0
 
@@ -185,7 +186,7 @@ extension ADMobNativeAdView {
     _bodyView.textColor = UIColor.lightGray
     _bodyView.numberOfLines = 0
 
-    _callToActionView.backgroundColor = UIColor(red: 54 / 255.0, green: 155 / 255.0, blue: 254 / 255.0, alpha: 1)
+    _callToActionView.backgroundColor = UIColor.pbs.color(R: 54, G: 155, B: 254)
     _callToActionView.layer.cornerRadius = 5
     _callToActionView.layer.masksToBounds = true
     _callToActionView.titleLabel?.font = UIFont.systemFont(ofSize: 15)

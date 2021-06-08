@@ -81,8 +81,8 @@ public class PBSNativeAd: NSObject {
 
   public var index: Int = 0
 
-  lazy var gADNativeAdView: ADMobNativeAdView = {
-    ADMobNativeAdView(frame: .zero)
+  lazy var gADNativeAdView: PBSADMobNativeAdView = {
+    PBSADMobNativeAdView(frame: .zero)
   }()
 
   /// PBSAdProvider

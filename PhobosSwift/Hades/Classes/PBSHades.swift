@@ -50,7 +50,7 @@ public class PBSHades: NSObject {
     super.init()
   }
 
-  /// add ad configuration
+  /// add Ad configuration
   public static func configuration(adProviders: [PBSAdProvider]) {
     guard !adProviders.isEmpty else {
       fatalError("Ad provider should not be empty")
@@ -61,8 +61,8 @@ public class PBSHades: NSObject {
     if adProviders.contains(.google) {
       // Initialize Google Mobile Ads SDK
       GADMobileAds.sharedInstance().start(completionHandler: nil)
-//            GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers =
-//                [ "058548c9e87505f2788186e0642ca839" ] // Sample device ID
+      // use sample device id for simulators
+//     GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["058548c9e87505f2788186e0642ca839" ] // Sample device ID
     }
   }
 }

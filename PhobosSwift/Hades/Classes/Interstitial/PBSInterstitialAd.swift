@@ -29,11 +29,13 @@ import PhobosSwiftLog
 import RxCocoa
 import RxSwift
 
+///
 public class PBSInterstitialAd: PBSFullScreenPresentingAd {
   internal var interstitialAd: GADInterstitialAd?
   internal var adProvider: PBSAdProvider!
+  ///
   public private(set) var adUnitID: String!
-
+  ///
   public init(with adProvider: PBSAdProvider, adUnitID: String) {
     self.adProvider = adProvider
     self.adUnitID = adUnitID
@@ -59,6 +61,7 @@ public class PBSInterstitialAd: PBSFullScreenPresentingAd {
     }
   }
 
+  ///
   public func pbs_showInterstitialAdWith(from rootViewController: UIViewController) {
     switch adProvider {
     case .google:

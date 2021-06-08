@@ -29,17 +29,20 @@ import PhobosSwiftLog
 import RxCocoa
 import RxSwift
 
+///
 public class PBSAppOpenAd: PBSFullScreenPresentingAd {
   internal var appOpenAd: GADAppOpenAd?
   internal var adProvider: PBSAdProvider!
   internal var lastLoadTime: Date?
+  ///
   public private(set) var adUnitID: String!
-
+  ///
   public init(with adProvider: PBSAdProvider, adUnitID: String) {
     self.adProvider = adProvider
     self.adUnitID = adUnitID
   }
 
+  ///
   public func pbs_loadAppOpenAd(with orientation: UIInterfaceOrientation) {
     switch adProvider {
     case .google:
@@ -62,6 +65,7 @@ public class PBSAppOpenAd: PBSFullScreenPresentingAd {
     }
   }
 
+  ///
   public func pbs_showAppOpenAdWith(from rootViewController: UIViewController, timerInterval hours: Int) {
     switch adProvider {
     case .google:

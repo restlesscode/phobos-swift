@@ -28,17 +28,19 @@ import GoogleMobileAds
 import PhobosSwiftLog
 import RxCocoa
 import RxSwift
-
+///
 public class PBSRewardedAd: PBSFullScreenPresentingAd {
   internal var rewardedAd: GADRewardedAd?
   internal var adProvider: PBSAdProvider!
+  ///
   public private(set) var adUnitID: String!
-
+  ///
   public init(with adProvider: PBSAdProvider, adUnitID: String) {
     self.adProvider = adProvider
     self.adUnitID = adUnitID
   }
 
+  ///
   public func pbs_loadRewardedAd() {
     switch adProvider {
     case .google:
@@ -59,6 +61,7 @@ public class PBSRewardedAd: PBSFullScreenPresentingAd {
     }
   }
 
+  ///
   public func pbs_showRewardedAdWith(from rootViewController: UIViewController) {
     switch adProvider {
     case .google:
