@@ -25,8 +25,8 @@
 //
 
 @testable import PhobosSwiftCore
-import Foundation
-import XCTest
+import Nimble
+import Quick
 
 class IntTest: XCTestCase {
   override func setUp() {
