@@ -57,7 +57,7 @@ open class PBSLocation {
       case .restricted, .denied:
         // Disable location features
         // disableLocationBasedFeatures()
-        DispatchQueue.pbs_once {
+        DispatchQueue.pbs.once {
           if PBSLocation.enableUnauthorizationAlert {
             if PBSLocation.locationAuthorizationAlertCtrl.presentingViewController == nil &&
               !PBSLocation.locationAuthorizationAlertCtrl.isBeingPresented {

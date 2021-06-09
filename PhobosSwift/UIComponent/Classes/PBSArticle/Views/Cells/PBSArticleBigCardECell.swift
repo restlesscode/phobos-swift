@@ -56,10 +56,11 @@ class PBSArticleBigCardECell: PBSArticleBigCardCell {
     makeStyles()
   }
 
-  @available(*, unavailable)
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
+//  @available(*, unavailable)
+//  @available(*, unavailable)
+//  required init?(coder: NSCoder) {
+//    fatalError("init(coder:) has not been implemented")
+//  }
 
   func makeSubviews() {
     mainView.snp.makeConstraints {
