@@ -92,12 +92,12 @@ post_install do |installer|
     #puts '----%s----' % [target.name]
     
     # add `Run SwiftFormat Script` for pods
-    if ['PhobosSwiftCore'].include?(target.name)
-      if not exist_run_script(target, 'Run SwiftFormat Script')
-        puts 'Add Run SwiftFormat Script for %s' % [target.name]
-        add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')
-      end
-    end
+#    if ['PhobosSwiftCore'].include?(target.name)
+#      if not exist_run_script(target, 'Run SwiftFormat Script')
+#        puts 'Add Run SwiftFormat Script for %s' % [target.name]
+#        add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')
+#      end
+#    end
     
     # mute warning on `IPHONEOS_DEPLOYMENT_TARGET`
     if ['SwiftFormat', 'ObjcExceptionBridging'].include?(target.name)
