@@ -26,22 +26,22 @@
 
 import UIKit
 
-/// UIInterface Protocol
+/// PBSUIInterface Protocol
 public protocol PBSUIInterface {
-  /// 当前实现UIInterface的class name string
+  /// 当前实现PBSUIInterface的class name string
   static var id: String { get }
-  /// 当前实现UIInterface的xib name string
+  /// 当前实现PBSUIInterface的xib name string
   static var uiNib: UINib { get }
 }
 
-/// Default features of UIInterface protocol is implemented in this extension
+/// Default features of PBSUIInterface protocol is implemented in this extension
 extension PBSUIInterface {
-  /// 当前实现UIInterface的class name string
+  /// 当前实现PBSUIInterface的class name string
   public static var id: String {
     String(describing: Self.self)
   }
 
-  /// 当前实现UIInterface的xib name string
+  /// 当前实现PBSUIInterface的xib name string
   public static var uiNib: UINib {
     UINib(nibName: id, bundle: nil)
   }
@@ -49,7 +49,7 @@ extension PBSUIInterface {
 
 ///
 extension PhobosSwift where Base: UITableViewCell {
-  /// 当前实现UIInterface的class name string
+  /// 当前实现PBSUIInterface的class name string
   public static var reuseIdentifier: String {
     String(describing: Self.self)
   }
@@ -57,7 +57,7 @@ extension PhobosSwift where Base: UITableViewCell {
 
 ///
 extension PhobosSwift where Base: UICollectionReusableView {
-  /// 当前实现UIInterface的class name string
+  /// 当前实现PBSUIInterface的class name string
   public static var reuseIdentifier: String {
     String(describing: Self.self)
   }
