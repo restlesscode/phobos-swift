@@ -119,8 +119,8 @@ public class PBSTestKnightViewController: UIViewController {
 
   func makeSubviews() {
     titleLabel.text = Strings.kWelcomTitle
-    view.backgroundColor = .pbs.systemBackground
-    tableView.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
+    tableView.backgroundColor = UIColor.pbs.systemBackground
     startTestingButton.setTitle(Strings.kStartTesting, for: .normal)
   }
 
