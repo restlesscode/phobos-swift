@@ -35,135 +35,137 @@ public enum GridCropRectType {
   case random
 }
 
-public class PBSImageCroppingViewController: PBSImageBrowerBaseViewController {
-  var asset: ImageBrowerAsset!
-  var editBlock: ((ImageBrowerAsset) -> Void)?
-  public weak var delegate: PBSImageCroppingViewControllerDelegate?
-  private let KGridLRMargin: CGFloat = 30
-  private let KGridBottomMargin: CGFloat = 20
-  private let KGridTopMargin: CGFloat = 20 + StatusHeight
-  private let KBottomMenuHeight: CGFloat = 100
-  private lazy var zoomView: ImageBrowerImageZoomView = {
-    let imageSize = asset.origin?.size ?? .zero
-    let width = ScreenWidth - KGridLRMargin * 2
-    let height = width * imageSize.height / imageSize.width
-    let zoomView = ImageBrowerImageZoomView(frame: CGRect(x: KGridLRMargin, y: KGridTopMargin, width: width, height: height))
-    zoomView.zoomViewDelegate = self
-    zoomView.center.y = (ScreenHeight - KBottomMenuHeight) / 2
-    return zoomView
-  }()
+extension PBSImageBrower {
+  public class CroppingViewController: BaseViewController {
+    var asset: ImageBrowerAsset!
+    var editBlock: ((ImageBrowerAsset) -> Void)?
+    public weak var delegate: PBSImageCroppingViewControllerDelegate?
+    private let KGridLRMargin: CGFloat = 30
+    private let KGridBottomMargin: CGFloat = 20
+    private let KGridTopMargin: CGFloat = 20 + StatusHeight
+    private let KBottomMenuHeight: CGFloat = 100
+    private lazy var zoomView: ImageBrowerImageZoomView = {
+      let imageSize = asset.origin?.size ?? .zero
+      let width = ScreenWidth - KGridLRMargin * 2
+      let height = width * imageSize.height / imageSize.width
+      let zoomView = ImageBrowerImageZoomView(frame: CGRect(x: KGridLRMargin, y: KGridTopMargin, width: width, height: height))
+      zoomView.zoomViewDelegate = self
+      zoomView.center.y = (ScreenHeight - KBottomMenuHeight) / 2
+      return zoomView
+    }()
 
-  private lazy var maxGridRect: CGRect = {
-    let height = ScreenHeight - KBottomMenuHeight - KGridBottomMargin - KGridTopMargin
-    return CGRect(x: KGridLRMargin, y: KGridTopMargin, width: ScreenWidth - KGridLRMargin * 2, height: height)
-  }()
+    private lazy var maxGridRect: CGRect = {
+      let height = ScreenHeight - KBottomMenuHeight - KGridBottomMargin - KGridTopMargin
+      return CGRect(x: KGridLRMargin, y: KGridTopMargin, width: ScreenWidth - KGridLRMargin * 2, height: height)
+    }()
 
-  private var originalRect = CGRect.zero
-  private var rotateAngle: Int = 0
-  private var imageOrientation: UIImage.Orientation = .up
-  private let rotateBtn: UIButton = {
-    let button = UIButton(frame: CGRect(x: 10, y: ScreenHeight - 150, width: 50, height: 50))
-    button.setImage(baseBundle.image(withName: "editor_rotate"), for: .normal)
+    private var originalRect = CGRect.zero
+    private var rotateAngle: Int = 0
+    private var imageOrientation: UIImage.Orientation = .up
+    private let rotateBtn: UIButton = {
+      let button = UIButton(frame: CGRect(x: 10, y: ScreenHeight - 150, width: 50, height: 50))
+      button.setImage(baseBundle.image(withName: "editor_rotate"), for: .normal)
 
-    return button
-  }()
+      return button
+    }()
 
-  private let cancelButton: UIButton = {
-    let button = UIButton(frame: CGRect(x: 10, y: ScreenHeight - 75, width: 50, height: 50))
-    button.setImage(baseBundle.image(withName: "editor_cancel"), for: .normal)
+    private let cancelButton: UIButton = {
+      let button = UIButton(frame: CGRect(x: 10, y: ScreenHeight - 75, width: 50, height: 50))
+      button.setImage(baseBundle.image(withName: "editor_cancel"), for: .normal)
 
-    return button
-  }()
+      return button
+    }()
 
-  private let sureButton: UIButton = {
-    let button = UIButton(frame: CGRect(x: ScreenWidth - 60, y: ScreenHeight - 75, width: 50, height: 50))
-    button.setImage(baseBundle.image(withName: "editor_sure"), for: .normal)
+    private let sureButton: UIButton = {
+      let button = UIButton(frame: CGRect(x: ScreenWidth - 60, y: ScreenHeight - 75, width: 50, height: 50))
+      button.setImage(baseBundle.image(withName: "editor_sure"), for: .normal)
 
-    return button
-  }()
+      return button
+    }()
 
-  private let reductionButton: UIButton = {
-    let button = UIButton(frame: CGRect(x: ScreenWidth / 2 - 25, y: ScreenHeight - 75, width: 50, height: 50))
-    button.setTitle(PBSImageBrowerStrings.reduction, for: .normal)
-    button.setTitleColor(UIColor.white, for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    return button
-  }()
+    private let reductionButton: UIButton = {
+      let button = UIButton(frame: CGRect(x: ScreenWidth / 2 - 25, y: ScreenHeight - 75, width: 50, height: 50))
+      button.setTitle(PBSImageBrowerStrings.reduction, for: .normal)
+      button.setTitleColor(UIColor.white, for: .normal)
+      button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+      return button
+    }()
 
-  private lazy var gridView: ImageBrowerGridView = {
-    let gridView = ImageBrowerGridView(frame: view.bounds)
-    gridView.delegate = self
-    return gridView
-  }()
+    private lazy var gridView: ImageBrowerGridView = {
+      let gridView = ImageBrowerGridView(frame: view.bounds)
+      gridView.delegate = self
+      return gridView
+    }()
 
-  var cropType: GridCropRectType = .square
+    var cropType: GridCropRectType = .square
 
-  override public var prefersStatusBarHidden: Bool {
-    true
-  }
-
-  public convenience init(image: UIImage?, cropType: GridCropRectType = .square) {
-    self.init()
-    asset = ImageBrowerAsset(thumb: nil, origin: image)
-    self.cropType = cropType
-  }
-
-  override public func viewDidLoad() {
-    super.viewDidLoad()
-
-    // Do any additional setup after loading the view.
-    zoomView.image = asset.origin
-    imageOrientation = asset.origin?.imageOrientation ?? .up
-    let imageSize = asset.origin?.size ?? .zero
-    var newSize = CGSize(width: ScreenWidth - 2 * KGridLRMargin, height: (ScreenWidth - 2 * KGridLRMargin) * imageSize.height / imageSize.width)
-    if newSize.height > maxGridRect.size.height {
-      newSize = CGSize(width: maxGridRect.size.height * imageSize.width / imageSize.height, height: maxGridRect.size.height)
-      zoomView.frame.size = newSize
-      zoomView.frame.origin.y = KGridTopMargin
-      zoomView.center.x = ScreenWidth / 2
-    } else {
-      zoomView.frame.size = newSize
-      zoomView.center = CGPoint(x: ScreenWidth / 2.0, y: (ScreenHeight - KBottomMenuHeight) / 2.0)
+    override public var prefersStatusBarHidden: Bool {
+      true
     }
 
-    view.addSubview(zoomView)
-    zoomView.imageView.frame = zoomView.bounds
-
-    switch cropType {
-    case .square:
-      originalRect = CGRect(x: zoomView.frame.origin.x, y: (zoomView.height() - zoomView.width()) / 2.0 + zoomView.frame.origin.y, width: zoomView.width(), height: zoomView.width())
-    default:
-      originalRect = zoomView.frame
+    public convenience init(image: UIImage?, cropType: GridCropRectType = .square) {
+      self.init()
+      asset = ImageBrowerAsset(thumb: nil, origin: image)
+      self.cropType = cropType
     }
-    gridView.cropType = cropType
-    gridView.setGridRect(originalRect, isMaskLayer: true)
-    gridView.maxGridRect = maxGridRect
 
-    rotateBtn.addTarget(self, action: #selector(rotate), for: .touchUpInside)
-    cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-    sureButton.addTarget(self, action: #selector(sure), for: .touchUpInside)
-    reductionButton.addTarget(self, action: #selector(reduction), for: .touchUpInside)
+    override public func viewDidLoad() {
+      super.viewDidLoad()
 
-    view.addSubview(gridView)
-    view.addSubview(rotateBtn)
-    view.addSubview(cancelButton)
-    view.addSubview(sureButton)
-    view.addSubview(reductionButton)
-    view.backgroundColor = UIColor.black
+      // Do any additional setup after loading the view.
+      zoomView.image = asset.origin
+      imageOrientation = asset.origin?.imageOrientation ?? .up
+      let imageSize = asset.origin?.size ?? .zero
+      var newSize = CGSize(width: ScreenWidth - 2 * KGridLRMargin, height: (ScreenWidth - 2 * KGridLRMargin) * imageSize.height / imageSize.width)
+      if newSize.height > maxGridRect.size.height {
+        newSize = CGSize(width: maxGridRect.size.height * imageSize.width / imageSize.height, height: maxGridRect.size.height)
+        zoomView.frame.size = newSize
+        zoomView.frame.origin.y = KGridTopMargin
+        zoomView.center.x = ScreenWidth / 2
+      } else {
+        zoomView.frame.size = newSize
+        zoomView.center = CGPoint(x: ScreenWidth / 2.0, y: (ScreenHeight - KBottomMenuHeight) / 2.0)
+      }
+
+      view.addSubview(zoomView)
+      zoomView.imageView.frame = zoomView.bounds
+
+      switch cropType {
+      case .square:
+        originalRect = CGRect(x: zoomView.frame.origin.x, y: (zoomView.pbs.height - zoomView.pbs.width) / 2.0 + zoomView.frame.origin.y, width: zoomView.pbs.width, height: zoomView.pbs.width)
+      default:
+        originalRect = zoomView.frame
+      }
+      gridView.cropType = cropType
+      gridView.setGridRect(originalRect, isMaskLayer: true)
+      gridView.maxGridRect = maxGridRect
+
+      rotateBtn.addTarget(self, action: #selector(rotate), for: .touchUpInside)
+      cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+      sureButton.addTarget(self, action: #selector(sure), for: .touchUpInside)
+      reductionButton.addTarget(self, action: #selector(reduction), for: .touchUpInside)
+
+      view.addSubview(gridView)
+      view.addSubview(rotateBtn)
+      view.addSubview(cancelButton)
+      view.addSubview(sureButton)
+      view.addSubview(reductionButton)
+      view.backgroundColor = UIColor.black
+    }
+
+    /*
+     // MARK: - Navigation
+
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Get the new view controller using segue.destination.
+         // Pass the selected object to the new view controller.
+     }
+     */
   }
-
-  /*
-   // MARK: - Navigation
-
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       // Get the new view controller using segue.destination.
-       // Pass the selected object to the new view controller.
-   }
-   */
 }
 
-extension PBSImageCroppingViewController {
+extension PBSImageBrower.CroppingViewController {
   @objc func cancel() {
     dismiss(animated: false, completion: nil)
   }
@@ -171,7 +173,7 @@ extension PBSImageCroppingViewController {
   @objc func sure() {
     dismiss(animated: false, completion: nil)
 
-    guard let clipImage = zoomView.imageView.mpImageByRect(range: rectOfGridOnImageByGridRect(cropRect: gridView.gridRect))?.cgImage else {
+    guard let clipImage = zoomView.imageView.pbs.mpImageByRect(range: rectOfGridOnImageByGridRect(cropRect: gridView.gridRect))?.cgImage else {
       return
     }
     let resultImage = UIImage(cgImage: clipImage, scale: UIScreen.main.scale, orientation: imageOrientation)
@@ -219,13 +221,13 @@ extension PBSImageCroppingViewController {
     let width = zoomView.frame.width
     let height = zoomView.frame.height
     // 计算旋转之后
-    var newSize = CGSize(width: view.width() - 40, height: (view.width() - 40) * height / width)
+    var newSize = CGSize(width: view.pbs.width - 40, height: (view.pbs.width - 40) * height / width)
 
     if newSize.height > gridView.maxGridRect.size.height {
       newSize = CGSize(width: gridView.maxGridRect.size.height * width / height, height: gridView.maxGridRect.size.height)
       zoomView.frame.size = newSize
       zoomView.frame.origin.y = 40
-      zoomView.center.x = view.width() / 2.0
+      zoomView.center.x = view.pbs.width / 2.0
     } else {
       zoomView.frame.size = newSize
       zoomView.center = CGPoint(x: ScreenWidth / 2.0, y: (ScreenHeight - 100) / 2.0)
@@ -257,7 +259,7 @@ extension PBSImageCroppingViewController {
   }
 }
 
-extension PBSImageCroppingViewController {
+extension PBSImageBrower.CroppingViewController {
   // swiftlint:disable cyclomatic_complexity
   func zoomInToRect(gridRect: CGRect) {
     guard !zoomView.isDragging else { return }
@@ -324,7 +326,7 @@ extension PBSImageCroppingViewController {
   }
 }
 
-extension PBSImageCroppingViewController: ImageBrowerGridViewDelegate {
+extension PBSImageBrower.CroppingViewController: ImageBrowerGridViewDelegate {
   func beginResize(gridView: ImageBrowerGridView) {
     var contentOffset = zoomView.contentOffset
     if zoomView.contentOffset.x < 0 {
@@ -371,7 +373,7 @@ extension PBSImageCroppingViewController: ImageBrowerGridViewDelegate {
   }
 }
 
-extension PBSImageCroppingViewController: ImageBrowerImageZoomViewDelegate {
+extension PBSImageBrower.CroppingViewController: ImageBrowerImageZoomViewDelegate {
   func zoomViewDidBeginMoveImage(zoomView: ImageBrowerImageZoomView) {
     gridView.setShowMaskLayer(show: false)
   }

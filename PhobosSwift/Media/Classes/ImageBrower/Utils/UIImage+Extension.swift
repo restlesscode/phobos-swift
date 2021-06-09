@@ -25,24 +25,26 @@
 //
 
 import Foundation
-extension UIImage {
+import PhobosSwiftCore
+
+extension PhobosSwift where Base: UIImage {
   // swiftlint:disable missing_docs
   public func colorAtPoint(_ point: CGPoint) -> UIColor? {
-    guard CGRect(origin: CGPoint(x: 0, y: 0), size: size).contains(point) else {
+    guard CGRect(origin: CGPoint(x: 0, y: 0), size: base.size).contains(point) else {
       return nil
     }
 
     let pointX = trunc(point.x)
     let pointY = trunc(point.y)
 
-    let width = size.width
-    let height = size.height
+    let width = base.size.width
+    let height = base.size.height
     let colorSpace = CGColorSpaceCreateDeviceRGB()
     var pixelData: [UInt8] = [0, 0, 0, 0]
 
     pixelData.withUnsafeMutableBytes { pointer in
       // swiftlint:disable line_length
-      if let context = CGContext(data: pointer.baseAddress, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue), let cgImage = cgImage {
+      if let context = CGContext(data: pointer.baseAddress, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue), let cgImage = base.cgImage {
         context.setBlendMode(.copy)
         context.translateBy(x: -pointX, y: pointY - height)
         context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
@@ -67,7 +69,7 @@ extension UIImage {
   /// - Returns: 返回Image对象
   public func scaleImageWithSize(_ reSize: CGSize) -> UIImage {
     var size = reSize
-    let imageSize = self.size
+    let imageSize = base.size
     if imageSize.width > imageSize.height {
       size.height *= imageSize.height / imageSize.width
     } else {
@@ -78,7 +80,7 @@ extension UIImage {
 //        UIGraphicsBeginImageContextWithOptions(size, true, UIScreen.main.scale)
 
     // 修改图片长和宽
-    draw(in: CGRect(origin: CGPoint.zero, size: size))
+    base.draw(in: CGRect(origin: CGPoint.zero, size: size))
 
     // 生成新图片
     let img_new = UIGraphicsGetImageFromCurrentImageContext()!

@@ -32,7 +32,7 @@ enum ImageBrowerDrawType {
 
 class ImageBrowerDrawView: UIView {
   var lineWidth: CGFloat = 5
-  var lineColor: UIColor = PBSImageBrowerColor.blue
+  var lineColor: UIColor = PBSImageBrower.Color.blue
   var layerArray: [CAShapeLayer] = []
   var lineArray: [UIBezierPath] = []
   var isBegan: Bool = false

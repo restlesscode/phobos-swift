@@ -26,7 +26,7 @@
 
 import UIKit
 
-class ImageBrowerEditorViewController: PBSImageBrowerBaseViewController {
+class ImageBrowerEditorViewController: PBSImageBrower.BaseViewController {
   private lazy var menuView: ImageBrowerEditorMenuView = {
     let height = 100 + BottomSafeAreaHeight
     let view = ImageBrowerEditorMenuView(frame: CGRect(x: 0, y: ScreenHeight - height, width: ScreenHeight, height: height))
@@ -102,14 +102,14 @@ class ImageBrowerEditorViewController: PBSImageBrowerBaseViewController {
     view.brushColor = { [weak self] point -> UIColor in
       guard let self = self else { return UIColor.clear }
       var point = point
-      let width: CGFloat = self.zoomView.imageView?.width() ?? 0
-      let height: CGFloat = self.zoomView.imageView?.height() ?? 0
+      let width: CGFloat = self.zoomView.imageView?.pbs.width ?? 0
+      let height: CGFloat = self.zoomView.imageView?.pbs.height ?? 0
       point.x /= width / (self.asset.origin?.size.width ?? 0)
       point.y /= height / (self.asset.origin?.size.height ?? 0)
       point.x *= self.zoomView.scale
       point.y *= self.zoomView.scale
 
-      return self.asset.origin?.colorAtPoint(point) ?? UIColor.clear
+      return self.asset.origin?.pbs.colorAtPoint(point) ?? UIColor.clear
     }
     view.brushBeganBlock = { [weak self] in
       self?.hidden(isBack: false)
@@ -172,7 +172,7 @@ class ImageBrowerEditorViewController: PBSImageBrowerBaseViewController {
     let image = makeImageWith(view: zoomView.imageView ?? UIImageView())
     DispatchQueue.global().async {
       self.asset.origin = image
-      self.asset.thumb = image?.scaleImageWithSize(CGSize(width: 200, height: 200))
+      self.asset.thumb = image?.pbs.scaleImageWithSize(CGSize(width: 200, height: 200))
       DispatchQueue.main.async {
         self.hidden(isBack: true)
       }
@@ -251,7 +251,7 @@ extension ImageBrowerEditorViewController {
 
 extension ImageBrowerEditorViewController {
   func presentToImageCropping() {
-    let vc = PBSImageCroppingViewController()
+    let vc = PBSImageBrower.CroppingViewController()
     vc.asset = asset
     vc.modalPresentationStyle = .fullScreen
     vc.isPush = false
@@ -334,8 +334,8 @@ extension ImageBrowerEditorViewController {
   func setTextCenter(editorTextView: ImageBrowerEditorTextView) {
     let imageRect = zoomView.mscrollView?.convert(zoomView.imageView?.frame ?? .zero, to: view) ?? .zero
     var center = CGPoint.zero
-    let zoomHeight = zoomView.mscrollView?.height() ?? 0
-    let zoomWidth = zoomView.mscrollView?.width() ?? 0
+    let zoomHeight = zoomView.mscrollView?.pbs.height ?? 0
+    let zoomWidth = zoomView.mscrollView?.pbs.width ?? 0
     center.x = abs(imageRect.origin.x) + zoomWidth / 2
     if imageRect.origin.y >= 0 && imageRect.size.height <= zoomHeight {
       center.y = imageRect.size.height / 2

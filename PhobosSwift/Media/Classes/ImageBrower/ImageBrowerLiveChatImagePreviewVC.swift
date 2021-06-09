@@ -28,7 +28,7 @@ import Photos
 import PhotosUI
 import UIKit
 
-class ImageBrowerLiveChatImagePreviewVC: PBSImageBrowerBaseViewController {
+class ImageBrowerLiveChatImagePreviewVC: PBSImageBrower.BaseViewController {
   private let originalCellId = "originalCellId"
   private let thumbnailCellId = "thumbnailCellId"
   private lazy var originalCollection: UICollectionView = {
@@ -120,7 +120,7 @@ class ImageBrowerLiveChatImagePreviewVC: PBSImageBrowerBaseViewController {
 
 extension ImageBrowerLiveChatImagePreviewVC {
   func UISetUp() {
-    view.backgroundColor = PBSImageBrowerColor.black
+    view.backgroundColor = PBSImageBrower.Color.black
     // Do any additional setup after loading the view.
     view.addSubview(originalCollection)
     originalCollection.contentOffset.x = CGFloat(position) * ScreenWidth
@@ -142,11 +142,11 @@ extension ImageBrowerLiveChatImagePreviewVC {
     navigatorView.addSubview(backButton)
 
     positionLabel = UILabel(frame: CGRect(x: ScreenWidth - 45, y: NavigationBarHeight - 37, width: 30, height: 30))
-    positionLabel.backgroundColor = PBSImageBrowerColor.blue
+    positionLabel.backgroundColor = PBSImageBrower.Color.blue
     positionLabel.textAlignment = .center
     positionLabel.textColor = UIColor.white
     positionLabel.font = UIFont.boldSystemFont(ofSize: 15)
-    positionLabel.corner(radii: 15)
+    positionLabel.pbs.corner(radii: 15)
 
     navigatorView.addSubview(positionLabel)
 
@@ -166,7 +166,7 @@ extension ImageBrowerLiveChatImagePreviewVC {
 
     bottomView.addSubview(thumbnailCollection)
 
-    editButton = UIButton(frame: CGRect(x: 0, y: thumbnailCollection.height(), width: 65, height: 55))
+    editButton = UIButton(frame: CGRect(x: 0, y: thumbnailCollection.pbs.height, width: 65, height: 55))
     editButton.setTitle(PBSImageBrowerStrings.edit, for: .normal)
     editButton.setTitleColor(UIColor.white, for: .normal)
     editButton.addTarget(self, action: #selector(edit), for: .touchUpInside)
@@ -174,12 +174,12 @@ extension ImageBrowerLiveChatImagePreviewVC {
 
     bottomView.addSubview(editButton)
 
-    sendButton = UIButton(frame: CGRect(x: ScreenWidth - 95, y: 11 + thumbnailCollection.height(), width: 80, height: 34))
+    sendButton = UIButton(frame: CGRect(x: ScreenWidth - 95, y: 11 + thumbnailCollection.pbs.height, width: 80, height: 34))
     sendButton.setTitleColor(UIColor.white, for: .normal)
     sendButton.addTarget(self, action: #selector(send), for: .touchUpInside)
     sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-    sendButton.corner(radii: 5)
-    sendButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrowerColor.blue), for: .normal)
+    sendButton.pbs.corner(radii: 5)
+    sendButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrower.Color.blue), for: .normal)
     sendButton.setTitle("\(PBSImageBrowerStrings.send) (\(assets.count))", for: .normal)
 
     bottomView.addSubview(sendButton)
@@ -274,7 +274,7 @@ extension ImageBrowerLiveChatImagePreviewVC: UICollectionViewDelegate, UICollect
 
         isSelectedView = UIView(frame: imageView.frame)
         isSelectedView.layer.borderWidth = 2
-        isSelectedView.layer.borderColor = PBSImageBrowerColor.blue.cgColor
+        isSelectedView.layer.borderColor = PBSImageBrower.Color.blue.cgColor
         isSelectedView.tag = 10_003
 
         cell.addSubview(isSelectedView)

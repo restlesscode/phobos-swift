@@ -28,8 +28,6 @@ import AlamofireImage
 import IQKeyboardManagerSwift
 import UIKit
 
-struct PBSImageBrower {}
-
 struct ImageBrowerEditorText {
   var id: Int = 0
   var font: UIFont!
@@ -39,7 +37,7 @@ struct ImageBrowerEditorText {
   var backGroundColor: UIColor!
 }
 
-class ImageBrowerEditorAddTextVC: PBSImageBrowerBaseViewController {
+class ImageBrowerEditorAddTextVC: PBSImageBrower.BaseViewController {
   var asset: ImageBrowerAsset!
   var oldEditorText: ImageBrowerEditorText?
   var editorBlock: ((ImageBrowerEditorText) -> Void)?
@@ -65,10 +63,10 @@ class ImageBrowerEditorAddTextVC: PBSImageBrowerBaseViewController {
   private let font = UIFont.boldSystemFont(ofSize: 22)
   private lazy var textView: UITextView = {
     let textView = UITextView(frame: CGRect(x: 25, y: NavigationBarHeight + 60, width: ScreenWidth - 50, height: ScreenHeight / 2))
-    textView.tintColor = PBSImageBrowerColor.blue
+    textView.tintColor = PBSImageBrower.Color.blue
     textView.font = font
     textView.backgroundColor = UIColor.clear
-    textView.textColor = PBSImageBrowerColor.blue
+    textView.textColor = PBSImageBrower.Color.blue
     textView.delegate = self
     textView.textContainer.lineFragmentPadding = 0
     textView.textContainerInset = .zero
@@ -87,12 +85,12 @@ class ImageBrowerEditorAddTextVC: PBSImageBrowerBaseViewController {
 
   private lazy var doneButton: UIButton = {
     let doneButton = UIButton(frame: CGRect(x: ScreenWidth - 75, y: StatusHeight + 6, width: 57, height: 32))
-    doneButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrowerColor.blue), for: .normal)
+    doneButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrower.Color.blue), for: .normal)
     doneButton.setTitle(PBSImageBrowerStrings.sure, for: .normal)
     doneButton.setTitleColor(UIColor.white, for: .normal)
     doneButton.addTarget(self, action: #selector(self.done), for: .touchUpInside)
     doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    doneButton.corner(radii: 5)
+    doneButton.pbs.corner(radii: 5)
 
     return doneButton
   }()
@@ -111,7 +109,7 @@ class ImageBrowerEditorAddTextVC: PBSImageBrowerBaseViewController {
   private let colorsViewDefaultY = ScreenHeight - 50 - BottomSafeAreaHeight
 
   private var showTextBackground: Bool = false
-  private var nowSelectedColor: UIColor = PBSImageBrowerColor.blue
+  private var nowSelectedColor: UIColor = PBSImageBrower.Color.blue
   private lazy var textBackgroundView: UIView = {
     let x = textView.frame.origin.x - 10
     let y = textView.frame.origin.y - 10
@@ -169,7 +167,7 @@ class ImageBrowerEditorAddTextVC: PBSImageBrowerBaseViewController {
     editorText.text = textView.text
     if showTextBackground {
       editorText.backGroundColor = nowSelectedColor
-      editorText.color = nowSelectedColor == UIColor.white ? PBSImageBrowerColor.blue : UIColor.white
+      editorText.color = nowSelectedColor == UIColor.white ? PBSImageBrower.Color.blue : UIColor.white
     } else {
       editorText.color = nowSelectedColor
       editorText.backGroundColor = UIColor.white
@@ -222,7 +220,7 @@ extension ImageBrowerEditorAddTextVC {
   func changeTextViewColor() {
     if showTextBackground {
       if nowSelectedColor == UIColor.white {
-        textView.textColor = PBSImageBrowerColor.blue
+        textView.textColor = PBSImageBrower.Color.blue
       } else {
         textView.textColor = UIColor.white
       }

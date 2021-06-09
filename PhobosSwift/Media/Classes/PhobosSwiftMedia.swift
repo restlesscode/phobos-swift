@@ -26,4 +26,4 @@
 
 import UIKit
 
-public class PhobosSwiftMedia: NSObject {}
+class PhobosSwiftMedia: NSObject {}
