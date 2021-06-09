@@ -31,7 +31,7 @@ enum ImageBrowerEditorColorType {
 }
 
 class ImageBrowerEditorColorSelectView: UIView {
-  let colors = [UIColor.white, UIColor.black, PBSImageBrowerColor.blue, PBSImageBrowerColor.warningYellow, PBSImageBrowerColor.successGreen, PBSImageBrowerColor.soulfulBlue, PBSImageBrowerColor.premiumGold]
+  let colors = [UIColor.white, UIColor.black, PBSImageBrower.Color.blue, PBSImageBrower.Color.warningYellow, PBSImageBrower.Color.successGreen, PBSImageBrower.Color.soulfulBlue, PBSImageBrower.Color.premiumGold]
   var selectIndex = 2
 
   var block: ((UIColor) -> Void)?
@@ -124,7 +124,7 @@ class ImageBrowerEditorColorSelectView: UIView {
 
     button.frame.size = button.isSelected ? CGSize(width: 26, height: 26) : CGSize(width: 20, height: 20)
     button.layer.borderWidth = button.isSelected ? 4 : 2
-    button.layer.cornerRadius = button.width() / 2
+    button.layer.cornerRadius = button.pbs.width / 2
   }
 
   @objc func buttonClick(button: UIButton) {

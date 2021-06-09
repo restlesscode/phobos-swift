@@ -47,7 +47,7 @@ struct ImageBrowerAsset {
         block(nil)
         return
       }
-      block(image.scaleImageWithSize(CGSize(width: 1280, height: 1280)))
+      block(image.pbs.scaleImageWithSize(CGSize(width: 1280, height: 1280)))
     }
   }
 
@@ -67,329 +67,331 @@ struct ImageBrowerPHCollection {
   var asstes: [ImageBrowerAsset] = []
 }
 
-public class PBSImageBrowerSelectViewController: PBSImageBrowerBaseViewController {
-  /// StatusBarStyle
-  override public var preferredStatusBarStyle: UIStatusBarStyle {
-    .lightContent
-  }
-
-  private let cellId = "AssetImageCell"
-  private let groupCellId = "MPGroupSelectCell"
-  public var selectBlock: (([UIImage]) -> Void)?
-  private lazy var collectionView: UICollectionView = {
-    let space: CGFloat = 3
-    let oneRowCount: CGFloat = 4
-    let itemSize = (ScreenWidth - space * (oneRowCount + 1)) / oneRowCount
-    let flowLayout = UICollectionViewFlowLayout()
-    flowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
-    flowLayout.sectionInset = UIEdgeInsets(top: space, left: space, bottom: space, right: space)
-    flowLayout.minimumLineSpacing = space // 每个相邻layout的上下
-    flowLayout.minimumInteritemSpacing = space // 每个相邻layout的左右
-    flowLayout.scrollDirection = .vertical
-
-    let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight), collectionViewLayout: flowLayout)
-    collection.delegate = self
-    collection.dataSource = self
-    collection.backgroundColor = UIColor.clear
-    collection.register(ImageBrowerSelectCell.self, forCellWithReuseIdentifier: cellId)
-    collection.showsHorizontalScrollIndicator = false
-    if #available(iOS 11.0, *) {
-      collection.contentInsetAdjustmentBehavior = .never
+extension PBSImageBrower {
+  public class SelectViewController: PBSImageBrower.BaseViewController {
+    /// StatusBarStyle
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
+      .lightContent
     }
-    return collection
-  }()
 
-  private lazy var coverView: UIView = {
-    let view = UIView(frame: CGRect(x: 0, y: NavigationBarHeight, width: ScreenWidth, height: ScreenHeight - NavigationBarHeight))
-    view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-    view.alpha = 0
-    return view
-  }()
+    private let cellId = "AssetImageCell"
+    private let groupCellId = "MPGroupSelectCell"
+    public var selectBlock: (([UIImage]) -> Void)?
+    private lazy var collectionView: UICollectionView = {
+      let space: CGFloat = 3
+      let oneRowCount: CGFloat = 4
+      let itemSize = (ScreenWidth - space * (oneRowCount + 1)) / oneRowCount
+      let flowLayout = UICollectionViewFlowLayout()
+      flowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
+      flowLayout.sectionInset = UIEdgeInsets(top: space, left: space, bottom: space, right: space)
+      flowLayout.minimumLineSpacing = space // 每个相邻layout的上下
+      flowLayout.minimumInteritemSpacing = space // 每个相邻layout的左右
+      flowLayout.scrollDirection = .vertical
 
-  private var groupLabel: UILabel!
-  private var groupArrowView: UIImageView!
-  private var groupView: UIView = {
-    let view = UIView()
-    view.backgroundColor = UIColor.pbs.color(R: 50, G: 54, B: 57)
-    view.layer.cornerRadius = 15
-    view.clipsToBounds = true
+      let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight), collectionViewLayout: flowLayout)
+      collection.delegate = self
+      collection.dataSource = self
+      collection.backgroundColor = UIColor.clear
+      collection.register(ImageBrowerSelectCell.self, forCellWithReuseIdentifier: cellId)
+      collection.showsHorizontalScrollIndicator = false
+      if #available(iOS 11.0, *) {
+        collection.contentInsetAdjustmentBehavior = .never
+      }
+      return collection
+    }()
 
-    return view
-  }()
+    private lazy var coverView: UIView = {
+      let view = UIView(frame: CGRect(x: 0, y: NavigationBarHeight, width: ScreenWidth, height: ScreenHeight - NavigationBarHeight))
+      view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+      view.alpha = 0
+      return view
+    }()
 
-  private var previewButton: UIButton!
-  private var sendButton: UIButton!
-  private var albums: [ImageBrowerPHCollection] = []
-  private var albumShowIndex = 0
-  private var selectIndex: [IndexPath] = []
+    private var groupLabel: UILabel!
+    private var groupArrowView: UIImageView!
+    private var groupView: UIView = {
+      let view = UIView()
+      view.backgroundColor = UIColor.pbs.color(R: 50, G: 54, B: 57)
+      view.layer.cornerRadius = 15
+      view.clipsToBounds = true
 
-  override public func viewDidLoad() {
-    super.viewDidLoad()
-    view.backgroundColor = UIColor.black
-    // Do any additional setup after loading the view.
-    view.addSubview(collectionView)
-    bottomViewInit()
-    view.addSubview(coverView)
-    tableViewSetUp()
-    navigationViewInit()
+      return view
+    }()
 
-    collectionView.contentInset = UIEdgeInsets(top: NavigationBarHeight, left: 0, bottom: BottomSafeAreaHeight + 55, right: 0)
+    private var previewButton: UIButton!
+    private var sendButton: UIButton!
+    private var albums: [ImageBrowerPHCollection] = []
+    private var albumShowIndex = 0
+    private var selectIndex: [IndexPath] = []
 
-    checkAuthorization()
-  }
+    override public func viewDidLoad() {
+      super.viewDidLoad()
+      view.backgroundColor = UIColor.black
+      // Do any additional setup after loading the view.
+      view.addSubview(collectionView)
+      bottomViewInit()
+      view.addSubview(coverView)
+      tableViewSetUp()
+      navigationViewInit()
 
-  func checkAuthorization() {
-    if #available(iOS 14, *) {
-      switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
-      case .notDetermined:
-        PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
-          DispatchQueue.main.async {
-            if status == .authorized {
-              self?.dataInit()
-            } else {
-              self?.noAuthorized()
+      collectionView.contentInset = UIEdgeInsets(top: NavigationBarHeight, left: 0, bottom: BottomSafeAreaHeight + 55, right: 0)
+
+      checkAuthorization()
+    }
+
+    func checkAuthorization() {
+      if #available(iOS 14, *) {
+        switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+        case .notDetermined:
+          PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] status in
+            DispatchQueue.main.async {
+              if status == .authorized {
+                self?.dataInit()
+              } else {
+                self?.noAuthorized()
+              }
             }
           }
+        case .authorized:
+          dataInit()
+        default:
+          noAuthorized()
         }
-      case .authorized:
-        dataInit()
-      default:
-        noAuthorized()
-      }
 
-    } else {
-      // Fallback on earlier versions
-      switch PHPhotoLibrary.authorizationStatus() {
-      case .notDetermined:
-        PHPhotoLibrary.requestAuthorization { [weak self] status in
-          DispatchQueue.main.async {
-            if status == .authorized {
-              self?.dataInit()
-            } else {
-              self?.noAuthorized()
+      } else {
+        // Fallback on earlier versions
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .notDetermined:
+          PHPhotoLibrary.requestAuthorization { [weak self] status in
+            DispatchQueue.main.async {
+              if status == .authorized {
+                self?.dataInit()
+              } else {
+                self?.noAuthorized()
+              }
             }
           }
+        case .authorized:
+          dataInit()
+        default:
+          noAuthorized()
         }
-      case .authorized:
-        dataInit()
-      default:
-        noAuthorized()
       }
     }
-  }
 
-  func noAuthorized() {
-    // swiftlint:disable line_length
-    present(getSettingAlertControl(title: PBSImageBrowerStrings.noPhotoLibraryAccess, message: PBSImageBrowerStrings.sureToSetting, cancelBlock: { [weak self] in self?.cancel() }), animated: true, completion: nil)
-  }
+    func noAuthorized() {
+      // swiftlint:disable line_length
+      present(getSettingAlertControl(title: PBSImageBrowerStrings.noPhotoLibraryAccess, message: PBSImageBrowerStrings.sureToSetting, cancelBlock: { [weak self] in self?.cancel() }), animated: true, completion: nil)
+    }
 
-  func dataInit() {
-    showLoading()
-    DispatchQueue.global().async { [weak self] in
-      guard let self = self else { return }
-      self.getAllAlbumAndPHAsset()
-      self.albums.sort { a, b -> Bool in
-        a.asstes.count > b.asstes.count
-      }
-
-      DispatchQueue.main.async { [weak self] in
+    func dataInit() {
+      showLoading()
+      DispatchQueue.global().async { [weak self] in
         guard let self = self else { return }
-        self.hiddenLoading()
-        self.resetGroupSelectTitle()
-        self.collectionView.reloadData()
-      }
-    }
-  }
-
-  func tableViewSetUp() {
-    let height = ScreenHeight - NavigationBarHeight
-    tableView.frame = CGRect(x: 0, y: -height + NavigationBarHeight, width: view.width(), height: height)
-    tableView.separatorStyle = .singleLine
-    tableView.separatorColor = PBSImageBrowerColor.grey5Grey3
-    tableView.backgroundColor = UIColor.clear
-    tableView.contentInset = .zero
-    tableView.isHidden = true
-    tableView.register(ImageBrowerGroupSelectCell.self, forCellReuseIdentifier: groupCellId)
-    tableView.tableFooterView = UIView()
-
-    view.addSubview(tableView)
-  }
-
-  func navigationViewInit() {
-    let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: ScreenWidth, height: NavigationBarHeight)))
-    let effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-    let effectView = UIVisualEffectView(effect: effect)
-    effectView.frame = view.frame
-
-    view.addSubview(effectView)
-
-    let cancelButton = UIButton(frame: CGRect(x: 0, y: NavigationBarHeight - 44, width: 75, height: 44))
-    cancelButton.setTitle(PBSImageBrowerStrings.cancel, for: .normal)
-    cancelButton.setTitleColor(UIColor.white, for: .normal)
-    cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-    cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-
-    view.addSubview(cancelButton)
-
-    view.addSubview(groupView)
-
-    groupView.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.bottom.equalToSuperview().offset(-7)
-      make.width.greaterThanOrEqualTo(0)
-      make.height.equalTo(30)
-    }
-
-    groupLabel = UILabel()
-    groupLabel.textColor = UIColor.white
-    groupLabel.font = UIFont.systemFont(ofSize: 16)
-
-    groupView.addSubview(groupLabel)
-
-    groupArrowView = UIImageView()
-    groupArrowView.image = baseBundle.image(withName: "arrow_bottom_s")
-    groupArrowView.backgroundColor = PBSImageBrowerColor.grey4
-    groupArrowView.layer.cornerRadius = 10
-    groupArrowView.clipsToBounds = true
-    groupArrowView.contentMode = .center
-
-    groupView.addSubview(groupArrowView)
-
-    groupView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectGroup)))
-
-    groupLabel.snp.makeConstraints { make in
-      make.left.equalTo(10)
-      make.top.bottom.equalToSuperview()
-    }
-
-    groupArrowView.snp.makeConstraints { make in
-      make.left.equalTo(groupLabel.snp.right).offset(5)
-      make.right.equalToSuperview().offset(-10)
-      make.width.height.equalTo(20)
-      make.centerY.equalToSuperview()
-    }
-
-    self.view.addSubview(view)
-  }
-
-  func bottomViewInit() {
-    let height = 55 + BottomSafeAreaHeight
-    let view = UIView(frame: CGRect(x: 0, y: ScreenHeight - height, width: ScreenWidth, height: height))
-    let effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-    let effectView = UIVisualEffectView(effect: effect)
-    effectView.frame = CGRect(origin: .zero, size: view.frame.size)
-
-    view.addSubview(effectView)
-
-    previewButton = UIButton(frame: CGRect(x: 0, y: 0, width: 65, height: 55))
-    previewButton.setTitle(PBSImageBrowerStrings.preview, for: .normal)
-    previewButton.setTitleColor(UIColor.white, for: .normal)
-    previewButton.setTitleColor(PBSImageBrowerColor.grey5Grey3, for: .disabled)
-    previewButton.addTarget(self, action: #selector(preview), for: .touchUpInside)
-    previewButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-    previewButton.isEnabled = false
-
-    view.addSubview(previewButton)
-
-    sendButton = UIButton(frame: CGRect(x: ScreenWidth - 95, y: 11, width: 80, height: 34))
-    sendButton.setTitle(PBSImageBrowerStrings.send, for: .disabled)
-    sendButton.setTitleColor(UIColor.white, for: .normal)
-    sendButton.setTitleColor(PBSImageBrowerColor.grey5Grey3, for: .disabled)
-//        sendButton.backgroundColor = ImageBrowerColor.blue
-    sendButton.addTarget(self, action: #selector(send), for: .touchUpInside)
-    sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-    sendButton.corner(radii: 5)
-    sendButton.isEnabled = false
-    sendButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrowerColor.grey4), for: .disabled)
-    sendButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrowerColor.blue), for: .normal)
-
-    view.addSubview(sendButton)
-
-    self.view.addSubview(view)
-  }
-
-  @objc func cancel() {
-    dismiss(animated: true, completion: nil)
-//        self.navigationController?.popViewController(animated: true)
-  }
-
-  @objc func selectGroup() {
-    if tableView.isHidden {
-      tableView.reloadData()
-      tableView.isHidden = false
-
-      UIView.animate(withDuration: 0.2) {
-        self.coverView.alpha = 1
-        self.tableView.frame.origin.y = NavigationBarHeight
-        self.groupArrowView.transform = CGAffineTransform(rotationAngle: CGFloat(.pi * 180.0 / 180))
-      }
-    } else {
-      UIView.animate(withDuration: 0.2, animations: {
-        self.coverView.alpha = 0
-        self.tableView.frame.origin.y = NavigationBarHeight * 2 - ScreenHeight
-        self.groupArrowView.transform = CGAffineTransform(rotationAngle: 0)
-      }, completion: { over in
-        if over {
-          self.tableView.isHidden = true
+        self.getAllAlbumAndPHAsset()
+        self.albums.sort { a, b -> Bool in
+          a.asstes.count > b.asstes.count
         }
-      })
-    }
-  }
 
-  @objc func preview() {
-    let assets = selectIndex.map { albums[albumShowIndex].asstes[$0.row] }
-
-    let vc = ImageBrowerLiveChatImagePreviewVC()
-    vc.assets = assets
-    vc.selectBlock = selectBlock
-
-    navigationController?.pushViewController(vc, animated: true)
-  }
-
-  @objc func send() {
-    showLoading()
-    let assets = selectIndex.compactMap { indexPath -> ImageBrowerAsset? in
-      albums[albumShowIndex].asstes[indexPath.row]
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.hiddenLoading()
+          self.resetGroupSelectTitle()
+          self.collectionView.reloadData()
+        }
+      }
     }
 
-    var images: [UIImage] = []
-    let group = DispatchGroup()
-    for i in 0..<assets.count {
-      group.enter()
-      DispatchQueue.global().async {
-        assets[i].getOriginImage { image in
-          if let image = image {
-            images.append(image)
+    func tableViewSetUp() {
+      let height = ScreenHeight - NavigationBarHeight
+      tableView.frame = CGRect(x: 0, y: -height + NavigationBarHeight, width: view.pbs.width, height: height)
+      tableView.separatorStyle = .singleLine
+      tableView.separatorColor = PBSImageBrower.Color.grey5Grey3
+      tableView.backgroundColor = UIColor.clear
+      tableView.contentInset = .zero
+      tableView.isHidden = true
+      tableView.register(ImageBrowerGroupSelectCell.self, forCellReuseIdentifier: groupCellId)
+      tableView.tableFooterView = UIView()
+
+      view.addSubview(tableView)
+    }
+
+    func navigationViewInit() {
+      let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: ScreenWidth, height: NavigationBarHeight)))
+      let effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+      let effectView = UIVisualEffectView(effect: effect)
+      effectView.frame = view.frame
+
+      view.addSubview(effectView)
+
+      let cancelButton = UIButton(frame: CGRect(x: 0, y: NavigationBarHeight - 44, width: 75, height: 44))
+      cancelButton.setTitle(PBSImageBrowerStrings.cancel, for: .normal)
+      cancelButton.setTitleColor(UIColor.white, for: .normal)
+      cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+      cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+
+      view.addSubview(cancelButton)
+
+      view.addSubview(groupView)
+
+      groupView.snp.makeConstraints { make in
+        make.centerX.equalToSuperview()
+        make.bottom.equalToSuperview().offset(-7)
+        make.width.greaterThanOrEqualTo(0)
+        make.height.equalTo(30)
+      }
+
+      groupLabel = UILabel()
+      groupLabel.textColor = UIColor.white
+      groupLabel.font = UIFont.systemFont(ofSize: 16)
+
+      groupView.addSubview(groupLabel)
+
+      groupArrowView = UIImageView()
+      groupArrowView.image = baseBundle.image(withName: "arrow_bottom_s")
+      groupArrowView.backgroundColor = PBSImageBrower.Color.grey4
+      groupArrowView.layer.cornerRadius = 10
+      groupArrowView.clipsToBounds = true
+      groupArrowView.contentMode = .center
+
+      groupView.addSubview(groupArrowView)
+
+      groupView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectGroup)))
+
+      groupLabel.snp.makeConstraints { make in
+        make.left.equalTo(10)
+        make.top.bottom.equalToSuperview()
+      }
+
+      groupArrowView.snp.makeConstraints { make in
+        make.left.equalTo(groupLabel.snp.right).offset(5)
+        make.right.equalToSuperview().offset(-10)
+        make.width.height.equalTo(20)
+        make.centerY.equalToSuperview()
+      }
+
+      self.view.addSubview(view)
+    }
+
+    func bottomViewInit() {
+      let height = 55 + BottomSafeAreaHeight
+      let view = UIView(frame: CGRect(x: 0, y: ScreenHeight - height, width: ScreenWidth, height: height))
+      let effect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+      let effectView = UIVisualEffectView(effect: effect)
+      effectView.frame = CGRect(origin: .zero, size: view.frame.size)
+
+      view.addSubview(effectView)
+
+      previewButton = UIButton(frame: CGRect(x: 0, y: 0, width: 65, height: 55))
+      previewButton.setTitle(PBSImageBrowerStrings.preview, for: .normal)
+      previewButton.setTitleColor(UIColor.white, for: .normal)
+      previewButton.setTitleColor(PBSImageBrower.Color.grey5Grey3, for: .disabled)
+      previewButton.addTarget(self, action: #selector(preview), for: .touchUpInside)
+      previewButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+      previewButton.isEnabled = false
+
+      view.addSubview(previewButton)
+
+      sendButton = UIButton(frame: CGRect(x: ScreenWidth - 95, y: 11, width: 80, height: 34))
+      sendButton.setTitle(PBSImageBrowerStrings.send, for: .disabled)
+      sendButton.setTitleColor(UIColor.white, for: .normal)
+      sendButton.setTitleColor(PBSImageBrower.Color.grey5Grey3, for: .disabled)
+      //        sendButton.backgroundColor = ImageBrowerColor.blue
+      sendButton.addTarget(self, action: #selector(send), for: .touchUpInside)
+      sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+      sendButton.pbs.corner(radii: 5)
+      sendButton.isEnabled = false
+      sendButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrower.Color.grey4), for: .disabled)
+      sendButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrower.Color.blue), for: .normal)
+
+      view.addSubview(sendButton)
+
+      self.view.addSubview(view)
+    }
+
+    @objc func cancel() {
+      dismiss(animated: true, completion: nil)
+      //        self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc func selectGroup() {
+      if tableView.isHidden {
+        tableView.reloadData()
+        tableView.isHidden = false
+
+        UIView.animate(withDuration: 0.2) {
+          self.coverView.alpha = 1
+          self.tableView.frame.origin.y = NavigationBarHeight
+          self.groupArrowView.transform = CGAffineTransform(rotationAngle: CGFloat(.pi * 180.0 / 180))
+        }
+      } else {
+        UIView.animate(withDuration: 0.2, animations: {
+          self.coverView.alpha = 0
+          self.tableView.frame.origin.y = NavigationBarHeight * 2 - ScreenHeight
+          self.groupArrowView.transform = CGAffineTransform(rotationAngle: 0)
+        }, completion: { over in
+          if over {
+            self.tableView.isHidden = true
           }
-          group.leave()
-        }
+        })
       }
     }
 
-    group.notify(queue: DispatchQueue.main) {
-      self.hiddenLoading()
-      self.selectBlock?(images)
-      self.dismiss(animated: true, completion: nil)
+    @objc func preview() {
+      let assets = selectIndex.map { albums[albumShowIndex].asstes[$0.row] }
+
+      let vc = ImageBrowerLiveChatImagePreviewVC()
+      vc.assets = assets
+      vc.selectBlock = selectBlock
+
+      navigationController?.pushViewController(vc, animated: true)
     }
-  }
 
-  func disableButtons() {
-    sendButton.isEnabled = false
-    previewButton.isEnabled = false
-  }
+    @objc func send() {
+      showLoading()
+      let assets = selectIndex.compactMap { indexPath -> ImageBrowerAsset? in
+        albums[albumShowIndex].asstes[indexPath.row]
+      }
 
-  func enableButtons() {
-    sendButton.isEnabled = true
-    previewButton.isEnabled = true
-    sendButton.setTitle("\(PBSImageBrowerStrings.send) (\(selectIndex.count))", for: .normal)
-  }
+      var images: [UIImage] = []
+      let group = DispatchGroup()
+      for i in 0..<assets.count {
+        group.enter()
+        DispatchQueue.global().async {
+          assets[i].getOriginImage { image in
+            if let image = image {
+              images.append(image)
+            }
+            group.leave()
+          }
+        }
+      }
 
-  func resetGroupSelectTitle() {
-    groupLabel.text = albums[albumShowIndex].collection.localizedTitle ?? ""
+      group.notify(queue: DispatchQueue.main) {
+        self.hiddenLoading()
+        self.selectBlock?(images)
+        self.dismiss(animated: true, completion: nil)
+      }
+    }
+
+    func disableButtons() {
+      sendButton.isEnabled = false
+      previewButton.isEnabled = false
+    }
+
+    func enableButtons() {
+      sendButton.isEnabled = true
+      previewButton.isEnabled = true
+      sendButton.setTitle("\(PBSImageBrowerStrings.send) (\(selectIndex.count))", for: .normal)
+    }
+
+    func resetGroupSelectTitle() {
+      groupLabel.text = albums[albumShowIndex].collection.localizedTitle ?? ""
+    }
   }
 }
 
-extension PBSImageBrowerSelectViewController {
+extension PBSImageBrower.SelectViewController {
   func getAllAlbumAndPHAsset() {
     let smartAlbums: PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
     for i in 0..<smartAlbums.count {
@@ -418,7 +420,7 @@ extension PBSImageBrowerSelectViewController {
   }
 }
 
-extension PBSImageBrowerSelectViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PBSImageBrower.SelectViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     guard albumShowIndex < albums.count else { return 0 }
     return albums[albumShowIndex].asstes.count
@@ -467,7 +469,7 @@ extension PBSImageBrowerSelectViewController: UICollectionViewDelegate, UICollec
   }
 }
 
-extension PBSImageBrowerSelectViewController {
+extension PBSImageBrower.SelectViewController {
   override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     albums.count
   }

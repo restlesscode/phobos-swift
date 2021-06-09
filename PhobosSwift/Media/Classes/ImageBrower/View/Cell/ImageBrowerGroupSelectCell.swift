@@ -51,7 +51,7 @@ class ImageBrowerGroupSelectCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     selectionStyle = .none
-    backgroundColor = PBSImageBrowerColor.whiteGrey8
+    backgroundColor = PBSImageBrower.Color.whiteGrey8
 
     UISetUp()
   }
@@ -65,7 +65,7 @@ class ImageBrowerGroupSelectCell: UITableViewCell {
     contentView.addSubview(assetImageView)
     contentView.addSubview(nameLabel)
     contentView.addSubview(selectedImageView)
-    backgroundColor = PBSImageBrowerColor.black
+    backgroundColor = PBSImageBrower.Color.black
 
     assetImageView.snp.makeConstraints { make in
       make.left.top.bottom.equalToSuperview()
@@ -96,7 +96,7 @@ class ImageBrowerGroupSelectCell: UITableViewCell {
     if let title = collection.collection.localizedTitle {
       let fullText = title + "  (\(collection.asstes.count))"
       let attrText = NSMutableAttributedString(string: fullText)
-      attrText.addAttribute(.foregroundColor, value: PBSImageBrowerColor.grey5Grey3, range: NSRange(location: title.count, length: fullText.count - title.count))
+      attrText.addAttribute(.foregroundColor, value: PBSImageBrower.Color.grey5Grey3, range: NSRange(location: title.count, length: fullText.count - title.count))
 
       nameLabel.attributedText = attrText
     }

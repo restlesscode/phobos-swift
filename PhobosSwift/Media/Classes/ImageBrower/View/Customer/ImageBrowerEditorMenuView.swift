@@ -77,12 +77,12 @@ class ImageBrowerEditorMenuView: UIView {
     }
 
     let doneButton = UIButton(frame: CGRect(x: ScreenWidth - 75, y: 59, width: 57, height: 32))
-    doneButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrowerColor.blue), for: .normal)
+    doneButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrower.Color.blue), for: .normal)
     doneButton.setTitle(PBSImageBrowerStrings.sure, for: .normal)
     doneButton.setTitleColor(UIColor.white, for: .normal)
     doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
     doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    doneButton.corner(radii: 5)
+    doneButton.pbs.corner(radii: 5)
 
     addSubview(doneButton)
   }

@@ -43,96 +43,98 @@ public struct PBSMPImagePreviewKey {
   public static let imageType = "imageType"
 }
 
-public class PBSImageBrowerPreviewViewController: PBSImageBrowerBaseViewController {
-//    var commentModel: MPEventMomentModel!
-  var position: Int = 0
-  var imageType: PBSMPImageType = .url
-  private lazy var collection_image: UICollectionView = {
-    let flowLayout = UICollectionViewFlowLayout()
-    flowLayout.itemSize = CGSize(width: ScreenWidth, height: ScreenHeight)
-    flowLayout.sectionInset = UIEdgeInsets.zero
-    flowLayout.minimumLineSpacing = 0 // 每个相邻layout的上下
-    flowLayout.minimumInteritemSpacing = 0 // 每个相邻layout的左右
-    flowLayout.scrollDirection = .horizontal
+extension PBSImageBrower {
+  public class PreviewViewController: BaseViewController {
+    //    var commentModel: MPEventMomentModel!
+    var position: Int = 0
+    var imageType: PBSMPImageType = .url
+    private lazy var collection_image: UICollectionView = {
+      let flowLayout = UICollectionViewFlowLayout()
+      flowLayout.itemSize = CGSize(width: ScreenWidth, height: ScreenHeight)
+      flowLayout.sectionInset = UIEdgeInsets.zero
+      flowLayout.minimumLineSpacing = 0 // 每个相邻layout的上下
+      flowLayout.minimumInteritemSpacing = 0 // 每个相邻layout的左右
+      flowLayout.scrollDirection = .horizontal
 
-    let height = ScreenHeight - NavigationBarHeight
-    let collection_image = UICollectionView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: height), collectionViewLayout: flowLayout)
-    collection_image.isPagingEnabled = true
-    collection_image.delegate = self
-    collection_image.dataSource = self
-    collection_image.tag = 1001
-    collection_image.backgroundColor = UIColor.clear
-    collection_image.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "1")
-    collection_image.showsHorizontalScrollIndicator = false
+      let height = ScreenHeight - NavigationBarHeight
+      let collection_image = UICollectionView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: height), collectionViewLayout: flowLayout)
+      collection_image.isPagingEnabled = true
+      collection_image.delegate = self
+      collection_image.dataSource = self
+      collection_image.tag = 1001
+      collection_image.backgroundColor = UIColor.clear
+      collection_image.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "1")
+      collection_image.showsHorizontalScrollIndicator = false
 
-    return collection_image
-  }()
+      return collection_image
+    }()
 
-  override public var preferredStatusBarStyle: UIStatusBarStyle {
-    .lightContent
-  }
-
-  private var images = [String]()
-
-  override public func viewDidLoad() {
-    super.viewDidLoad()
-    UISetUp()
-  }
-
-  func setOtherDatas(_ values: [String: Any]) {
-    if let position = values[PBSMPImagePreviewKey.position] as? Int {
-      self.position = position
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
+      .lightContent
     }
 
-    if let images = values[PBSMPImagePreviewKey.images] as? [String] {
-      self.images = images
+    private var images = [String]()
+
+    override public func viewDidLoad() {
+      super.viewDidLoad()
+      UISetUp()
     }
 
-    if let imageTypeRawValue = values[PBSMPImagePreviewKey.imageType] as? String {
-      if let imageType = PBSMPImageType(rawValue: imageTypeRawValue) {
-        self.imageType = imageType
+    func setOtherDatas(_ values: [String: Any]) {
+      if let position = values[PBSMPImagePreviewKey.position] as? Int {
+        self.position = position
+      }
+
+      if let images = values[PBSMPImagePreviewKey.images] as? [String] {
+        self.images = images
+      }
+
+      if let imageTypeRawValue = values[PBSMPImagePreviewKey.imageType] as? String {
+        if let imageType = PBSMPImageType(rawValue: imageTypeRawValue) {
+          self.imageType = imageType
+        }
       }
     }
-  }
 
-  /*
-   // MARK: - Navigation
+    /*
+     // MARK: - Navigation
 
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       // Get the new view controller using segue.destination.
-       // Pass the selected object to the new view controller.
-   }
-   */
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Get the new view controller using segue.destination.
+         // Pass the selected object to the new view controller.
+     }
+     */
 
-  override public func back() {
-    super.back()
-  }
+    override public func back() {
+      super.back()
+    }
 
-//    override func setCustomData(_ value: Any) {
-//        commentModel = value as? MPEventMomentModel
-//        self.images = commentModel.images
-//    }
+    //    override func setCustomData(_ value: Any) {
+    //        commentModel = value as? MPEventMomentModel
+    //        self.images = commentModel.images
+    //    }
 
-  override public func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigatorStyleChange(isBlack: true)
-  }
+    override public func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      navigatorStyleChange(isBlack: true)
+    }
 
-  override public func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    navigatorStyleChange(isBlack: false)
-  }
+    override public func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      navigatorStyleChange(isBlack: false)
+    }
 
-  override public func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    collection_image.contentOffset.x = CGFloat(position) * ScreenWidth
+    override public func viewWillLayoutSubviews() {
+      super.viewWillLayoutSubviews()
+      collection_image.contentOffset.x = CGFloat(position) * ScreenWidth
+    }
   }
 }
 
-extension PBSImageBrowerPreviewViewController {
+extension PBSImageBrower.PreviewViewController {
   func UISetUp() {
-    view.backgroundColor = PBSImageBrowerColor.black
+    view.backgroundColor = PBSImageBrower.Color.black
     // Do any additional setup after loading the view.
     view.addSubview(collection_image)
     updateTitle()
@@ -140,7 +142,7 @@ extension PBSImageBrowerPreviewViewController {
     let rightItem = UIButton(frame: CGRect(x: 0, y: 0, width: 28, height: 44))
     rightItem.setImage(baseBundle.image(withName: "ic_share_white")?.withRenderingMode(.alwaysTemplate), for: .normal)
     rightItem.addTarget(self, action: #selector(share), for: .touchUpInside)
-    rightItem.tintColor = PBSImageBrowerColor.whiteGrey8
+    rightItem.tintColor = PBSImageBrower.Color.whiteGrey8
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightItem)
 
     bottomViewInit()
@@ -161,12 +163,12 @@ extension PBSImageBrowerPreviewViewController {
   }
 
   func navigatorStyleChange(isBlack: Bool) {
-    navigationController?.navigationBar.barTintColor = isBlack ? PBSImageBrowerColor.black : PBSImageBrowerColor.whiteGrey8
+    navigationController?.navigationBar.barTintColor = isBlack ? PBSImageBrower.Color.black : PBSImageBrower.Color.whiteGrey8
     // 去除分割线
     navigationController?.navigationBar.shadowImage = UIImage()
 
     // 标题颜色
-    let titleColor = isBlack ? PBSImageBrowerColor.white : PBSImageBrowerColor.blackWhite
+    let titleColor = isBlack ? PBSImageBrower.Color.white : PBSImageBrower.Color.blackWhite
     navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: titleColor, .font: UIFont.boldSystemFont(ofSize: 17)]
 
     guard let backButton = navigationItem.leftBarButtonItem?.customView as? UIButton else {
@@ -197,7 +199,7 @@ extension PBSImageBrowerPreviewViewController {
   }
 }
 
-extension PBSImageBrowerPreviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PBSImageBrower.PreviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   // 存储图片至指定相册中
   public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     images.count

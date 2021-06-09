@@ -102,6 +102,12 @@ public let iphoneXSeries: [[CGFloat]] = {
 
 public class PBSConfig {}
 
+extension String {
+  var localized: String {
+    pbs.localized(inBundle: baseBundle)
+  }
+}
+
 extension Bundle {
   /// get image
   /// - Parameter name: image name

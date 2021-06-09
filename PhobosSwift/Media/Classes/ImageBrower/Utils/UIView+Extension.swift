@@ -25,53 +25,42 @@
 //
 
 import Foundation
+import PhobosSwiftCore
 import UIKit
 
-extension UIView {
+extension PhobosSwift where Base: UIView {
   /// 顶部
-  ///
-  /// - Returns: self.frame.origin.y
-  public func top() -> CGFloat {
-    frame.origin.y
+  public var top: CGFloat {
+    base.frame.origin.y
   }
 
   /// 底部坐标
-  ///
-  /// - Returns: self.frame.origin.y + self.frame.height
-  public func bottom() -> CGFloat {
-    frame.origin.y + frame.height
+  public var bottom: CGFloat {
+    base.frame.origin.y + base.frame.height
   }
 
   /// 左侧坐标
-  ///
-  /// - Returns: self.frame.origin.x
-  public func left() -> CGFloat {
-    frame.origin.x
+  public var left: CGFloat {
+    base.frame.origin.x
   }
 
   /// 右侧坐标
-  ///
-  /// - Returns: self.frame.origin.x + self.frame.size.width
-  public func right() -> CGFloat {
-    frame.origin.x + frame.size.width
+  public var right: CGFloat {
+    base.frame.origin.x + base.frame.size.width
   }
 
   /// 宽
-  ///
-  /// - Returns: 宽
-  public func width() -> CGFloat {
-    frame.width
+  public var width: CGFloat {
+    base.frame.width
   }
 
-  /// 髙
-  ///
-  /// - Returns: 髙
-  public func height() -> CGFloat {
-    frame.height
+  /// 高
+  public var height: CGFloat {
+    base.frame.height
   }
 
   // swiftlint:disable missing_docs
-  public class func getLine(_ x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat = 1) -> UIView {
+  public static func getLine(_ x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat = 1) -> UIView {
     let line = UIView(frame: CGRect(x: x, y: y, width: width, height: height))
     line.backgroundColor = UIColor.pbs.color(hex: 0xFFF, alpha: 0.6)
     return line
@@ -83,11 +72,11 @@ extension UIView {
   ///   - corners: 需要实现为圆角的角，可传入多个，不传则全部圆角
   ///   - radii: 圆角半径
   public func corner(byRoundingCorners corners: UIRectCorner? = UIRectCorner.allCorners, radii: CGFloat) {
-    let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners!, cornerRadii: CGSize(width: radii, height: radii))
+    let maskPath = UIBezierPath(roundedRect: base.bounds, byRoundingCorners: corners!, cornerRadii: CGSize(width: radii, height: radii))
     let maskLayer = CAShapeLayer()
-    maskLayer.frame = bounds
+    maskLayer.frame = base.bounds
     maskLayer.path = maskPath.cgPath
-    layer.mask = maskLayer
+    base.layer.mask = maskLayer
   }
 
   /// 获取当前ViewController
@@ -104,7 +93,7 @@ extension UIView {
 
   // swiftlint:disable missing_docs
   public func mpImageByRect(range: CGRect) -> UIImage? {
-    let rect = bounds
+    let rect = base.bounds
     var range = range
     let size = rect.size
     // 1.开启上下文
@@ -112,7 +101,7 @@ extension UIView {
     let context = UIGraphicsGetCurrentContext()
     // 2.绘制图层
     if let context = context {
-      layer.render(in: context)
+      base.layer.render(in: context)
     }
     // 3.从上下文中获取新图片
     let fullScreenImage = UIGraphicsGetImageFromCurrentImageContext()
