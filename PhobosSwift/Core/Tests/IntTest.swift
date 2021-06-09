@@ -1,6 +1,6 @@
 //
 //
-//  Int+Test.swift
+//  IntTest.swift
 //  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -28,23 +28,18 @@
 import Nimble
 import Quick
 
-class IntTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class IntTest: QuickSpec {
+  override func spec() {
+    testTextualString()
+    testCN()
+    testRandom()
   }
 
-  override func tearDown() {
-    super.tearDown()
+  func testTextualString() {
+    
   }
 
-  func test() {
-    let number = 11_111
+  func testCN() {}
 
-    XCTAssertEqual(number.pbs.cn, "一万一千一百一十一")
-
-    for _ in 0..<10 {
-      let randomNumber = Int.pbs.random(between: 0, and: 10)
-      XCTAssertTrue(randomNumber >= 0 && randomNumber <= 10)
-    }
-  }
+  func testRandom() {}
 }

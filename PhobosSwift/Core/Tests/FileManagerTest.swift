@@ -24,5 +24,77 @@
 //  THE SOFTWARE.
 //
 
+@testable import PhobosSwiftCore
+import Nimble
+import Quick
 
-import Foundation
+class FileManagerTest: QuickSpec {
+  override func spec() {
+    testPathInLibrary()
+    testPathInDocuments()
+    testPathInBundle()
+    testUserDocumentsUrl()
+    testUserLibraryUrl()
+  }
+
+  func testPathInLibrary() {
+    describe("Given 在测试环境中") {
+      let fileName = "test"
+      let fileExtension = ".jpg"
+      context("When 调用FileManager.pbs.path") {
+        let fileUrl = FileManager.pbs.path(inLibrary: fileName, withExtension: fileExtension)
+        it("Then 返回结果不能为空") {
+          expect(fileUrl?.absoluteString).toNot(beNil())
+        }
+      }
+    }
+  }
+
+  func testPathInDocuments() {
+    describe("Given 在测试环境中") {
+      let fileName = "test"
+      let fileExtension = ".jpg"
+      context("When 调用FileManager.pbs.path") {
+        let fileUrl = FileManager.pbs.path(inDocuments: fileName, withExtension: fileExtension)
+        it("Then 返回结果不能为空") {
+          expect(fileUrl?.absoluteString).toNot(beNil())
+        }
+      }
+    }
+  }
+
+  func testPathInBundle() {
+    describe("Given 在测试环境中，.main bundle不存在") {
+      let fileName = "test"
+      let fileExtension = ".jpg"
+      context("When 调用FileManager.pbs.path") {
+        let fileUrl = FileManager.pbs.path(name: fileName, withExtension: fileExtension)
+        it("Then 返回结果为空") {
+          expect(fileUrl?.absoluteString).to(beNil())
+        }
+      }
+    }
+  }
+
+  func testUserDocumentsUrl() {
+    describe("Given 在测试环境中") {
+      context("When 调用FileManager.pbs.userDocumentsUrl") {
+        let userDocumentsUrl = FileManager.pbs.userDocumentsUrl
+        it("Then 返回结果不能为空") {
+          expect(userDocumentsUrl?.absoluteString).toNot(beNil())
+        }
+      }
+    }
+  }
+
+  func testUserLibraryUrl() {
+    describe("Given 在测试环境中") {
+      context("When 调用FileManager.pbs.userLibraryUrl") {
+        let userLibraryUrl = FileManager.pbs.userLibraryUrl
+        it("Then 返回结果不能为空") {
+          expect(userLibraryUrl?.absoluteString).toNot(beNil())
+        }
+      }
+    }
+  }
+}
