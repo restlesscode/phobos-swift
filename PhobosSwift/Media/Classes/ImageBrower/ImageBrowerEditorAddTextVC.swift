@@ -75,7 +75,7 @@ class ImageBrowerEditorAddTextVC: PBSImageBrower.BaseViewController {
 
   private lazy var cancelButton: UIButton = {
     let button = UIButton(frame: CGRect(x: 0, y: StatusHeight, width: 60, height: 44))
-    button.setTitle(PBSImageBrowerStrings.cancel, for: .normal)
+    button.setTitle(PBSImageBrower.Strings.cancel, for: .normal)
     button.setTitleColor(UIColor.white, for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     button.addTarget(self, action: #selector(self.back), for: .touchUpInside)
@@ -86,7 +86,7 @@ class ImageBrowerEditorAddTextVC: PBSImageBrower.BaseViewController {
   private lazy var doneButton: UIButton = {
     let doneButton = UIButton(frame: CGRect(x: ScreenWidth - 75, y: StatusHeight + 6, width: 57, height: 32))
     doneButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrower.Color.blue), for: .normal)
-    doneButton.setTitle(PBSImageBrowerStrings.sure, for: .normal)
+    doneButton.setTitle(PBSImageBrower.Strings.sure, for: .normal)
     doneButton.setTitleColor(UIColor.white, for: .normal)
     doneButton.addTarget(self, action: #selector(self.done), for: .touchUpInside)
     doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -156,7 +156,7 @@ class ImageBrowerEditorAddTextVC: PBSImageBrower.BaseViewController {
 
   @objc func done() {
     guard textView.text != "" else {
-      showMessage(PBSImageBrowerStrings.pleaseInputText)
+      showMessage(PBSImageBrower.Strings.pleaseInputText)
       return
     }
 

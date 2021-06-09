@@ -185,7 +185,7 @@ extension PBSImageBrower.PreviewViewController {
   @objc func share() {
     /// 时间、标题
     var items = [Any]()
-    items.append(PBSImageBrowerStrings.pictureShare)
+    items.append(PBSImageBrower.Strings.pictureShare)
 
     if
       let zoomView = collection_image.cellForItem(at: IndexPath(row: position, section: 0))?.viewWithTag(10_001) as? ImageBrowerZoomView,
@@ -253,6 +253,6 @@ extension PBSImageBrower.PreviewViewController: UICollectionViewDelegate, UIColl
   }
 
   func updateTitle() {
-    title = "\(PBSImageBrowerStrings.picture)\(position + 1)/\(images.count)"
+    title = "\(PBSImageBrower.Strings.picture)\(position + 1)/\(images.count)"
   }
 }
