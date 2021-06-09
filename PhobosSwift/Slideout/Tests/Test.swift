@@ -37,7 +37,5 @@ class SlideoutTest: XCTestCase {
     super.tearDown()
   }
 
-  func test() {
-    
-  }
+  func test() {}
 }

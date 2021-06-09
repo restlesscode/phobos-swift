@@ -53,7 +53,8 @@ TODO: Add long description of the pod here.
   
   s.dependency 'PhobosSwiftCore', '~> 0.1.0'
   s.dependency 'PhobosSwiftLog', '~> 0.1.0'
-
+  s.dependency 'AlamofireImage', '~> 4.1'
+  s.dependency 'IQKeyboardManagerSwift'
   if has_resource_bundles
     s.resource_bundles = {
       "#{pod_name}" => ["#{group}/#{name}/Assets/**/*"]

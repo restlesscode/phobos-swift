@@ -24,10 +24,21 @@
 //  THE SOFTWARE.
 //
 
-"LANG" = "zh-Hans";
+"LANG" = "en";
 
-"SETTINGS" = "设置";
-"ALLOW_CAMERA_ACCESS" = "请打开相机的访问权限";
-"ALLOW_CAMERA_ACCESS_MESSAGE" = "我们的某些功能需要访问相机，请在设置中打开相机的访问权限";
-"ALLOW_PHOTO_ACCESS" = "请打开照片的访问权限";
-"ALLOW_PHOTO_ACCESS_MESSAGE" = "我们的某些功能需要访问照片，请在设置中打开照片的访问权限";
+"Cancel" = "取消";
+"Sure" = "确认";
+"NoPhotoLibraryAccess" = "您尚未授权访问所有照片";
+"NoCameraAccess" = "您尚未授权访问相机";
+"NoMircoAccess" = "您未授权使用麦克风";
+"SureToSetting" = "是否前往设置";
+"PictureShare" = "图片分享";
+"Picture" = "图片";
+"Preview" = "预览";
+"Send" = "发送";
+"MaxPicturesCount" = "最多选择9张";
+"Reduction" = "还原";
+"PleaseInputText" = "请输入文字";
+"SelectPickImageType" = "选择获取照片方式";
+"SelectByPhotoLibrary" = "从相册选择";
+"Edit" = "编辑";
