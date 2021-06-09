@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
-//  PhobosSwiftUIComponent
+//  DispatchQueueTest.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,45 +24,49 @@
 //  THE SOFTWARE.
 //
 
-import AlamofireImage
-import PhobosSwiftLog
-import RxCocoa
-import RxSwift
+@testable import PhobosSwiftCore
+import Nimble
+import Quick
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+class DispatchQueueTest: QuickSpec {
+  override func spec() {
+    testOnceInDispatchQueueNoToken()
+    testOnceInDispatchQueueHasToken()
   }
-}
 
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
+  func testOnceInDispatchQueueNoToken() {
+    describe("Given 没有任何Token，但是在同一行代码中多次触发") {
+      let repeatCount = 5
+      var complyCount = 0
+
+      context("When 执行多次DispatchQueue.pbs.once") {
+        for _ in 0..<repeatCount {
+          DispatchQueue.pbs.once {
+            complyCount += 1
+          }
+        }
+        it("Then 计数器为1") {
+          expect(complyCount).to(equal(1))
+        }
+      }
+    }
   }
-}
 
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
+  func testOnceInDispatchQueueHasToken() {
+    describe("Given 指定Token，在同一行代码中多次触发") {
+      let repeatCount = 5
+      var complyCount = 0
 
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-extension Reactive where Base: UIImageView {
-  /// Bindable sink for `imageUrl` property.
-  internal var imageUrl: Binder<URL?> {
-    Binder(base) { imageView, url in
-      if let url = url {
-        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
-      } else {
-        imageView.image = Resource.Image.kImageArticlePlaceHolder
+      context("When 执行多次DispatchQueue.pbs.once") {
+        for _ in 0..<repeatCount {
+          DispatchQueue.pbs.once(token: "Token") {
+            complyCount += 1
+          }
+        }
+        it("Then 计数器为1") {
+          expect(complyCount).to(equal(1))
+        }
       }
     }
   }
 }
-
-class PhobosSwiftUIComponent: NSObject {}

@@ -1,7 +1,7 @@
 //
 //
-//  Calendar+Test.swift
-//  PhobosSwiftCore-Unit-Tests
+//  PBSNativeAdDelegate.swift
+//  PhobosSwiftHades
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,24 +24,30 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftCore
 import Foundation
-import XCTest
 
-class CalendarTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
-  }
+///
+@objc public protocol PBSNativeAdLoaderDelegate {
+  ///
+  func adLoaderDidFailToReceiveAdWithError(_ error: Error)
+  ///
+  @objc optional func adLoaderDidFinishLoading()
+  ///
+  func adLoaderDidReceive(_ nativeAd: PBSNativeAd)
+}
 
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func test() {
-    var secondsDiff = Calendar.pbs.secondDifference(from: Date(), to: Date(timeIntervalSinceNow: 3600))
-    XCTAssertEqual(secondsDiff, 3600)
-
-    secondsDiff = Calendar.pbs.secondDifference(from: "2021-10-10 01:01:01", to: "2021-10-11 01:01:01")
-    XCTAssertEqual(secondsDiff, 3600 * 24)
-  }
+///
+@objc public protocol PBSNativeAdDelegate {
+  ///
+  func nativeAdDidRecordImpression(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdDidRecordClick(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdWillPresentScreen(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdWillDismissScreen(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdDidDismissScreen(_ nativeAd: PBSNativeAd)
+  ///
+  func nativeAdIsMuted(_ nativeAd: PBSNativeAd)
 }

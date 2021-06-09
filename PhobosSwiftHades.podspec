@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint PhobosSwiftCore.podspec' to ensure this is a
+# Be sure to run `pod lib lint PhobosSwiftUIComponent.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,11 +7,11 @@
 #
 
 group = "PhobosSwift"
-name = "Core"
+name = "Hades"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
-has_resource_bundles = true
+has_resource_bundles = false
 enable_test = true
 
 
@@ -45,38 +45,33 @@ TODO: Add long description of the pod here.
   s.prefix_header_file = false
 
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
-  s.exclude_files = "#{group}/#{name}/Classes/Privatized+third+party+code/SwiftyRSA/SwiftyRSA+ObjC.swift"
 
   s.preserve_paths = [
     "#{group}/#{name}/README.md",
     "#{group}/#{name}/CHANGELOG.md"
   ]
   
-  # https://github.com/firebase/firebase-ios-sdk/tree/master/GoogleUtilities/AppDelegateSwizzler
-  s.dependency 'GoogleUtilities', '~> 7.0'
-  s.dependency 'PhobosSwiftLog', '~> 0.1.0'
-  s.dependency 'RxSwift', '~> 6.1.0'
-  s.dependency 'RxCocoa', '~> 6.1.0'
-  s.dependency 'RxGesture'
-  s.dependency 'SnapKit'
+  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'PhobosSwiftNetwork', '~> 0.1.0'
+  s.dependency 'PhobosSwiftUIComponent', '~> 0.1.0'
+  s.dependency 'MirrorGoogleMobileAds'
 
   if has_resource_bundles
     s.resource_bundles = {
-      "#{pod_name}" => ["#{group}/#{name}/Assets/**/*"]
+      "#{pod_name}" => [
+        "#{group}/#{name}/Assets/*/*",
+        "#{group}/#{name}/Assets/*.xcassets"
+      ]
     }
   end
 
   if has_public_header_files
     s.public_header_files = "#{group}/#{name}/Classes/**/*.h"
   end
-
-  s.frameworks = 'Security'
   
   if enable_test
     s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = "#{group}/#{name}/Tests/**/*.{swift,h,m}"
-      test_spec.dependency 'Quick'
-      test_spec.dependency 'Nimble'
     end
   end
   

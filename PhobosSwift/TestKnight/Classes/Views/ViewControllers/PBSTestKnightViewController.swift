@@ -111,7 +111,7 @@ public class PBSTestKnightViewController: UIViewController {
     super.viewDidAppear(animated)
 
     // 默认选中第一个
-    DispatchQueue.pbs_once {
+    DispatchQueue.pbs.once {
       tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .bottom)
       PBSTestKnight.shared.configuration = viewModels[0].configuration.value
     }
@@ -119,8 +119,8 @@ public class PBSTestKnightViewController: UIViewController {
 
   func makeSubviews() {
     titleLabel.text = Strings.kWelcomTitle
-    view.backgroundColor = .pbs.systemBackground
-    tableView.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
+    tableView.backgroundColor = UIColor.pbs.systemBackground
     startTestingButton.setTitle(Strings.kStartTesting, for: .normal)
   }
 

@@ -1,7 +1,7 @@
 //
 //
-//  Rx.swift
-//  PhobosSwiftUIComponent
+//  PBSHades.swift
+//  PhobosSwiftHades
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,29 +24,45 @@
 //  THE SOFTWARE.
 //
 
-import AlamofireImage
-import Foundation
-import RxCocoa
-import RxSwift
+import GoogleMobileAds
+import PhobosSwiftLog
 
-extension Reactive where Base: UIImageView {
-  /// Bindable sink for `imageUrl` property.
-  internal var imageUrl: Binder<URL?> {
-    Binder(base) { imageView, url in
-      if let url = url {
-        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
-      } else {
-        imageView.image = Resource.Image.kImageArticlePlaceHolder
-      }
-    }
+/// PBSHades
+public class PBSHades: NSObject {
+  /// PBSAdProvider
+  public enum PBSAdProvider {
+    ///
+    case google
+    ///
+    case baidu
+    ///
+    case facebook
+    ///
+    case tencent
+    ///
+    case twitter
   }
-}
 
-extension Reactive where Base: PBSArticleBigCardCell {
-  /// Bindable sink for `textColor` property.
-  internal var style: Binder<PBSArticleBigCardCell.Style> {
-    Binder(base) { cell, style in
-      cell.style = style
+  ///
+  public static let shared = PBSHades()
+
+  override private init() {
+    super.init()
+  }
+
+  /// add Ad configuration
+  public static func configuration(adProviders: [PBSAdProvider]) {
+    guard !adProviders.isEmpty else {
+      fatalError("Ad provider should not be empty")
+    }
+
+    PBSLogger.logger.debug(message: "Google Mobile Ads SDK version: \(GADMobileAds.sharedInstance().sdkVersion)")
+
+    if adProviders.contains(.google) {
+      // Initialize Google Mobile Ads SDK
+      GADMobileAds.sharedInstance().start(completionHandler: nil)
+      // use sample device id for simulators
+//     GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["058548c9e87505f2788186e0642ca839" ] // Sample device ID
     }
   }
 }

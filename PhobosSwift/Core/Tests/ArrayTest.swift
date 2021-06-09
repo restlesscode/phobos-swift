@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
-//  PhobosSwiftUIComponent
+//  Array+Test.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,45 +24,30 @@
 //  THE SOFTWARE.
 //
 
-import AlamofireImage
-import PhobosSwiftLog
-import RxCocoa
-import RxSwift
+@testable import PhobosSwiftCore
+import Nimble
+import Quick
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+class ArrayTest: QuickSpec {
+  override func spec() {
+    testChunked()
   }
-}
 
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
+  func testChunked() {
+    describe("Given 有一个长度为7的数组, 拆分size为3") {
+      let array: [String] = ["Tom1", "Jack2", "Tom3", "Jack4", "Tom5", "Jack6", "Tom7"]
+      let expectSize = 3
+      let expectArray: [[String]] = [["Tom1", "Jack2", "Tom3"],
+                                     ["Jack4", "Tom5", "Jack6"],
+                                     ["Tom7"]]
 
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
+      context("When 调用Array.pbs_chunked方法") {
+        let chunkedArray = array.pbs_chunked(into: expectSize)
 
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-extension Reactive where Base: UIImageView {
-  /// Bindable sink for `imageUrl` property.
-  internal var imageUrl: Binder<URL?> {
-    Binder(base) { imageView, url in
-      if let url = url {
-        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
-      } else {
-        imageView.image = Resource.Image.kImageArticlePlaceHolder
+        it("Then 返回数组与期望数组一致") {
+          expect(chunkedArray).to(equal(expectArray))
+        }
       }
     }
   }
 }
-
-class PhobosSwiftUIComponent: NSObject {}

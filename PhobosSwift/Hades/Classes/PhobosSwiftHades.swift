@@ -1,7 +1,7 @@
 //
 //
-//  Array+Test.swift
-//  PhobosSwiftCore-Unit-Tests
+//  PhobosSwiftHades.swift
+//  PhobosSwiftHades
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,23 +24,13 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftCore
 import Foundation
-import XCTest
+import PhobosSwiftLog
 
-class ArrayTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
-  }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func testArray() {
-    let array: [Any] = ["Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1, "Jack", "Tom", 1]
-
-    let chunkedArray = array.pbs_chunked(into: 3)
-    XCTAssertEqual(chunkedArray.count, 4)
-  }
+extension PBSLogger {
+  static var logger = PBSLogger.shared
 }
+
+let ScreenWidth = UIScreen.main.bounds.width
+
+class PhobosSwiftHades: NSObject {}

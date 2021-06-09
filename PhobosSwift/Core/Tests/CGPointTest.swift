@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftUIComponent.swift
-//  PhobosSwiftUIComponent
+//  CGPointTest.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,45 +24,41 @@
 //  THE SOFTWARE.
 //
 
-import AlamofireImage
-import PhobosSwiftLog
-import RxCocoa
-import RxSwift
+@testable import PhobosSwiftCore
+import Nimble
+import Quick
 
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftUIComponent.self)
+class CGPointTest: QuickSpec {
+  override func spec() {
+    testDistance()
+    testOffset()
   }
-}
 
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
+  func testDistance() {
+    describe("Given 当前点为(x: 100, y: 100), 目标点为(x: 120, y: 120)") {
+      let nowPoint = CGPoint(x: 100, y: 100)
+      let objPoint = CGPoint(x: 120, y: 120)
+
+      context("When 调用CGPoint.pbs.distance") {
+        let distance = nowPoint.pbs.distance(to: objPoint)
+        it("Then 返回的距离为28.284271247461902") {
+          expect(distance).to(equal(28.284271247461902))
+        }
+      }
+    }
   }
-}
 
-extension PBSLogger {
-  static var logger = PBSLogger.shared
-}
+  func testOffset() {
+    describe("Given 当前点为(x: 100, y: 100), 偏移量为(x: 120, y: 120)") {
+      let nowPoint = CGPoint(x: 100, y: 100)
+      let offset = UIOffset(horizontal: 120, vertical: 120)
 
-extension UIImage {
-  internal static func image(named name: String) -> UIImage {
-    let emptyImage = UIImage.pbs.makeImage(from: .clear)
-    return UIImage(named: name, in: Bundle.bundle, compatibleWith: nil) ?? emptyImage
-  }
-}
-
-extension Reactive where Base: UIImageView {
-  /// Bindable sink for `imageUrl` property.
-  internal var imageUrl: Binder<URL?> {
-    Binder(base) { imageView, url in
-      if let url = url {
-        imageView.af.setImage(withURL: url, placeholderImage: Resource.Image.kImageArticlePlaceHolder)
-      } else {
-        imageView.image = Resource.Image.kImageArticlePlaceHolder
+      context("When 调用CGPoint.pbs.offset") {
+        let resultPoint = nowPoint.pbs.offset(x: offset.horizontal, y: offset.vertical)
+        it("Then 返回的Point为(x: 220, y: 220)") {
+          expect(resultPoint).to(equal(CGPoint(x: 220, y: 220)))
+        }
       }
     }
   }
 }
-
-class PhobosSwiftUIComponent: NSObject {}

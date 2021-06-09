@@ -271,8 +271,8 @@ extension PBSPayment.IAP.StoreObserver: SKPaymentTransactionObserver {
         iapError = PBSPayment.IAP.IAPError(code: .ineligibleForOffer)
       case .unsupportedPlatform:
         iapError = PBSPayment.IAP.IAPError(code: .unsupportedPlatform)
-      case .overlayPresentedInBackgroundScene:
-        iapError = PBSPayment.IAP.IAPError(code: .overlayPresentedInBackgroundScene)
+//      case .overlayPresentedInBackgroundScene:
+//        iapError = PBSPayment.IAP.IAPError(code: .overlayPresentedInBackgroundScene)
       @unknown default:
         break
       }
