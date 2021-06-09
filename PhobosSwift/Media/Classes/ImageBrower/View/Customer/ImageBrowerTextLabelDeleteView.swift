@@ -40,9 +40,9 @@ class ImageBrowerTextLabelDeleteView: UIView {
     super.init(frame: frame)
     addSubview(deleteIcon)
     addSubview(deleteLabel)
-    corner(radii: 10)
+    pbs.corner(radii: 10)
     deleteIcon.frame = CGRect(x: frame.width / 2 - 10, y: 10, width: 20, height: 20)
-    deleteLabel.frame = CGRect(x: 0, y: deleteIcon.bottom() + 10, width: frame.width, height: 20)
+    deleteLabel.frame = CGRect(x: 0, y: deleteIcon.pbs.bottom + 10, width: frame.width, height: 20)
     setStatus(canDelete: false)
   }
 
@@ -54,6 +54,6 @@ class ImageBrowerTextLabelDeleteView: UIView {
   func setStatus(canDelete: Bool) {
     deleteLabel.text = canDelete ? "松开即可删除" : "拖到此处删除"
     deleteIcon.image = baseBundle.image(withName: canDelete ? "delete_open" : "delete_close")
-    backgroundColor = canDelete ? PBSImageBrowerColor.blue : PBSImageBrowerColor.black
+    backgroundColor = canDelete ? PBSImageBrower.Color.blue : PBSImageBrower.Color.black
   }
 }

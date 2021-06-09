@@ -92,7 +92,7 @@ class ImageBrowerEditorTextView: UIView {
     label.text = editorText.text
     label.font = editorText.font
     label.textColor = editorText.color
-    label.corner(radii: 8)
+    label.pbs.corner(radii: 8)
 
     if editorText.hasBackground {
       label.backgroundColor = editorText.backGroundColor
