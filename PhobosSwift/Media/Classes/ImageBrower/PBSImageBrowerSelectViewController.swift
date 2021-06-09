@@ -181,7 +181,7 @@ extension PBSImageBrower {
 
     func noAuthorized() {
       // swiftlint:disable line_length
-      present(getSettingAlertControl(title: PBSImageBrowerStrings.noPhotoLibraryAccess, message: PBSImageBrowerStrings.sureToSetting, cancelBlock: { [weak self] in self?.cancel() }), animated: true, completion: nil)
+      present(getSettingAlertControl(title: PBSImageBrower.Strings.noPhotoLibraryAccess, message: PBSImageBrower.Strings.sureToSetting, cancelBlock: { [weak self] in self?.cancel() }), animated: true, completion: nil)
     }
 
     func dataInit() {
@@ -225,7 +225,7 @@ extension PBSImageBrower {
       view.addSubview(effectView)
 
       let cancelButton = UIButton(frame: CGRect(x: 0, y: NavigationBarHeight - 44, width: 75, height: 44))
-      cancelButton.setTitle(PBSImageBrowerStrings.cancel, for: .normal)
+      cancelButton.setTitle(PBSImageBrower.Strings.cancel, for: .normal)
       cancelButton.setTitleColor(UIColor.white, for: .normal)
       cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
       cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -283,7 +283,7 @@ extension PBSImageBrower {
       view.addSubview(effectView)
 
       previewButton = UIButton(frame: CGRect(x: 0, y: 0, width: 65, height: 55))
-      previewButton.setTitle(PBSImageBrowerStrings.preview, for: .normal)
+      previewButton.setTitle(PBSImageBrower.Strings.preview, for: .normal)
       previewButton.setTitleColor(UIColor.white, for: .normal)
       previewButton.setTitleColor(PBSImageBrower.Color.grey5Grey3, for: .disabled)
       previewButton.addTarget(self, action: #selector(preview), for: .touchUpInside)
@@ -293,7 +293,7 @@ extension PBSImageBrower {
       view.addSubview(previewButton)
 
       sendButton = UIButton(frame: CGRect(x: ScreenWidth - 95, y: 11, width: 80, height: 34))
-      sendButton.setTitle(PBSImageBrowerStrings.send, for: .disabled)
+      sendButton.setTitle(PBSImageBrower.Strings.send, for: .disabled)
       sendButton.setTitleColor(UIColor.white, for: .normal)
       sendButton.setTitleColor(PBSImageBrower.Color.grey5Grey3, for: .disabled)
       //        sendButton.backgroundColor = ImageBrowerColor.blue
@@ -382,7 +382,7 @@ extension PBSImageBrower {
     func enableButtons() {
       sendButton.isEnabled = true
       previewButton.isEnabled = true
-      sendButton.setTitle("\(PBSImageBrowerStrings.send) (\(selectIndex.count))", for: .normal)
+      sendButton.setTitle("\(PBSImageBrower.Strings.send) (\(selectIndex.count))", for: .normal)
     }
 
     func resetGroupSelectTitle() {
@@ -500,14 +500,14 @@ extension PBSImageBrower.SelectViewController {
   func getSettingAlertControl(title: String, message: String, cancelBlock: (() -> Void)? = nil) -> UIAlertController {
     let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-    controller.addAction(UIAlertAction(title: PBSImageBrowerStrings.sure, style: .default) { _ in
+    controller.addAction(UIAlertAction(title: PBSImageBrower.Strings.sure, style: .default) { _ in
       controller.dismiss(animated: true, completion: nil)
       guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
       guard UIApplication.shared.canOpenURL(url) else { return }
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
     })
 
-    controller.addAction(UIAlertAction(title: PBSImageBrowerStrings.cancel, style: .cancel) { _ in
+    controller.addAction(UIAlertAction(title: PBSImageBrower.Strings.cancel, style: .cancel) { _ in
       controller.dismiss(animated: true, completion: nil)
       cancelBlock?()
     })
