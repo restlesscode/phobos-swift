@@ -1,7 +1,7 @@
 //
 //
-//  Int+Test.swift
-//  PhobosSwiftCore-Unit-Tests
+//  Test.swift
+//  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,26 +25,37 @@
 //
 
 @testable import PhobosSwiftCore
-import Foundation
-import XCTest
+import Nimble
+import Quick
 
-class IntTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class PBSCoreTest: QuickSpec {
+  let core = PBSCore.shared
+
+  override func spec() {
+    testCheckInternalVersion()
   }
 
-  override func tearDown() {
-    super.tearDown()
-  }
+  func testCheckInternalVersion() {
+    describe("Given PBSCore inited") {
+      let expectPreviousVersion = PBSVersion(major: 0, minor: 0, patch: 0)
+      let expectCurrentVersion = PBSVersion(major: 0, minor: 1, patch: 0)
 
-  func test() {
-    let number = 11_111
+      context("When 调用PBSCore.shared.checkInternalVersion") {
+        core.checkInternalVersion { isUpgraded, previousVersion, currentVersion in
+          it("Then isUpgraded为true") {
+            expect(isUpgraded).to(beTrue())
+          }
 
-    XCTAssertEqual(number.pbs.cn, "一万一千一百一十一")
+          it("Then previousVersion、currentVersion为期望值") {
+            expect(previousVersion == expectPreviousVersion).to(beTrue())
+            expect(expectCurrentVersion == currentVersion).to(beTrue())
+          }
+        }
+      }
 
-    for _ in 0..<10 {
-      let randomNumber = Int.pbs.random(between: 0, and: 10)
-      XCTAssertTrue(randomNumber >= 0 && randomNumber <= 10)
+      it("Then serviceInfo不为空") {
+        expect(self.core.serviceInfo).toNot(beNil())
+      }
     }
   }
 }

@@ -50,19 +50,21 @@ extension Dictionary: URLQueryParameterStringConvertible {
   }
 }
 
-extension URL {
+extension URL: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base == URL {
   /// Creates a new URL by adding the given query parameters.
   ///
   /// - parameter parametersDictionary The query parameter dictionary to add.
   /// - return A new URL.
-  public func pbs_appendingQueryParameters(_ parametersDictionary: [String: String]) -> URL {
-    let URLString = String(format: "%@?%@", absoluteString, parametersDictionary.queryParameters)
+  public func appendingQueryParameters(_ parametersDictionary: [String: String]) -> URL {
+    let URLString = String(format: "%@?%@", base.absoluteString, parametersDictionary.queryParameters)
     return URL(string: URLString)!
   }
 
   /// 获取url上参数
-  public var pbs_parametersFromQueryString: [String: String]? {
-    guard let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
+  public var parametersFromQueryString: [String: String]? {
+    guard let components = URLComponents(url: base, resolvingAgainstBaseURL: true),
           let queryItems = components.queryItems else { return nil }
     return queryItems.reduce(into: [String: String]()) { result, item in
       result[item.name] = item.value
