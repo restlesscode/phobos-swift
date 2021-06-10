@@ -68,8 +68,8 @@ class IntTest: QuickSpec {
       context("When 调用Int.pbs.random") {
         let result = Int.pbs.random(between: number, and: maxNumber)
         it("Then 返回数值在12-30之间") {
-          expect(result) > number
-          expect(result) < maxNumber
+          expect(result) >= number
+          expect(result) <= maxNumber
         }
       }
     }
