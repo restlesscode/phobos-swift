@@ -36,10 +36,42 @@ class IntTest: QuickSpec {
   }
 
   func testTextualString() {
-    
+    describe("Given 数字12") {
+      let number: Int = 12
+      let expectResult = "twelve"
+      context("When 调用int.pbs.textualString") {
+        let result = number.pbs.textualString
+        it("Then 返回twelve") {
+          expect(result).to(equal(expectResult))
+        }
+      }
+    }
   }
 
-  func testCN() {}
+  func testCN() {
+    describe("Given 数字12") {
+      let number: Int = 12
+      let expectResult = "十二"
+      context("When 调用int.pbs.cn") {
+        let result = number.pbs.cn
+        it("Then 返回十二") {
+          expect(result).to(equal(expectResult))
+        }
+      }
+    }
+  }
 
-  func testRandom() {}
+  func testRandom() {
+    describe("Given 数字12，求12-30之间的随机数") {
+      let number: Int = 12
+      let maxNumber: Int = 30
+      context("When 调用Int.pbs.random") {
+        let result = Int.pbs.random(between: number, and: maxNumber)
+        it("Then 返回数值在12-30之间") {
+          expect(result) > number
+          expect(result) < maxNumber
+        }
+      }
+    }
+  }
 }
