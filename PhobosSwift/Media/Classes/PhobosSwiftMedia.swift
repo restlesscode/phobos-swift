@@ -24,27 +24,6 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import PhobosSwiftCore
-
-extension Bundle {
-  static var bundle: Bundle {
-    Bundle.pbs.bundle(with: PhobosSwiftMedia.self)
-  }
-}
-
-extension String {
-  var localized: String {
-    pbs.localized(inBundle: Bundle.bundle)
-  }
-}
-
-struct BUString {
-  static let kSettings = "SETTINGS".localized
-  static let kAllowCameraAccess = "ALLOW_CAMERA_ACCESS".localized
-  static let kAllowCameraAccessMessage = "ALLOW_CAMERA_ACCESS_MESSAGE".localized
-  static let kAllowPhotoAccess = "ALLOW_PHOTO_ACCESS".localized
-  static let kAllowPhotoAccessMessage = "ALLOW_PHOTO_ACCESS_MESSAGE".localized
-}
+import UIKit
 
 class PhobosSwiftMedia: NSObject {}

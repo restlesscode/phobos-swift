@@ -50,6 +50,7 @@ PODS:
     - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (7.4.0):
     - GoogleUtilities/Logger
+  - IQKeyboardManagerSwift (6.5.6)
   - MirrorGoogleMobileAds (0.1.0):
     - GoogleAppMeasurement (~> 7.0)
     - GoogleUserMessagingPlatform (~> 1.1)
@@ -136,6 +137,16 @@ PODS:
     - ObjcExceptionBridging (~> 1.0.1)
   - PhobosSwiftLog/Tests (0.1.0):
     - ObjcExceptionBridging (~> 1.0.1)
+  - PhobosSwiftMedia (0.1.0):
+    - AlamofireImage (~> 4.1)
+    - IQKeyboardManagerSwift
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+  - PhobosSwiftMedia/Tests (0.1.0):
+    - AlamofireImage (~> 4.1)
+    - IQKeyboardManagerSwift
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
   - PhobosSwiftNetwork (0.1.0):
     - Alamofire (~> 5.1.0)
     - CocoaAsyncSocket (~> 7.6.5)
@@ -281,6 +292,8 @@ DEPENDENCIES:
   - PhobosSwiftLocation/Tests (from `../`)
   - PhobosSwiftLog (from `../`)
   - PhobosSwiftLog/Tests (from `../`)
+  - PhobosSwiftMedia (from `../`)
+  - PhobosSwiftMedia/Tests (from `../`)
   - PhobosSwiftNetwork (from `../`)
   - PhobosSwiftNetwork/Tests (from `../`)
   - PhobosSwiftPayment (from `../`)
@@ -316,6 +329,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
     - GoogleUtilities
+    - IQKeyboardManagerSwift
     - nanopb
     - Nimble
     - ObjcExceptionBridging
@@ -346,6 +360,8 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftLog:
     :path: "../"
+  PhobosSwiftMedia:
+    :path: "../"
   PhobosSwiftNetwork:
     :path: "../"
   PhobosSwiftPayment:
@@ -374,6 +390,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: fd19169c3034975cb934e865e5667bfdce59df7f
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   MirrorGoogleMobileAds: f207c576fced0bc1dcd6bac897cb274d96ce73ef
   MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
@@ -388,6 +405,7 @@ SPEC CHECKSUMS:
   PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
   PhobosSwiftLocation: c48a2f45e8f7bbca8e347258ddf21c1ab8fc0cac
   PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
+  PhobosSwiftMedia: a5d96bb202b5d3238efd31a010f75af86b6e5799
   PhobosSwiftNetwork: 97c4b84133fb5c7e863207ea89bdcc4c0437c20d
   PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
   PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
@@ -408,6 +426,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 9f69ff163f27a78000b433c45a09f1a8b9f6c8a5
+PODFILE CHECKSUM: 05d5088dc5b76c548323a04b9dd7adbc9eef7650
 
 COCOAPODS: 1.10.1
