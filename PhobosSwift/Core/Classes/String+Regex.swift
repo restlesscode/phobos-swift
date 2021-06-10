@@ -102,7 +102,7 @@ extension PhobosSwift where Base == String {
   }
 
   public func match(regular: String) -> Bool {
-    NSPredicate(format: "SELF MATCHES %@", regular).evaluate(with: self)
+    NSPredicate(format: "SELF MATCHES %@", regular).evaluate(with: base)
   }
 
 //    /**
