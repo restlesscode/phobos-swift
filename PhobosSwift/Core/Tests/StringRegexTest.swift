@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftCore
 import Nimble
 import Quick
@@ -35,11 +34,11 @@ class StringRegexTest: QuickSpec {
     isValidPassword()
     testMatch()
   }
-  
+
   func testIsText() {
     describe("Given 给定一系列参数") {
       let tuples = RegexTestModel().testTuples
-      
+
       context("When 调用string.pbs.isText") {
         for tuple in tuples {
           let result = tuple.testValue.pbs.isText(ofRegexTypes: tuple.type, isEmptyAllowed: tuple.isEmptyAllowed)
@@ -50,11 +49,11 @@ class StringRegexTest: QuickSpec {
       }
     }
   }
-  
+
   func isValidPassword() {
     describe("Given 给定123456") {
       let password = "123456"
-      
+
       context("When 调用string.pbs.isValidPassword") {
         let result = password.pbs.isValidPassword
         it("Then 返回true") {
@@ -63,12 +62,12 @@ class StringRegexTest: QuickSpec {
       }
     }
   }
-  
+
   func testMatch() {
     describe("Given 给定正则[0-9]+，給定字符串12394") {
       let regular = "^[0-9]+$"
       let string = "12394"
-      
+
       context("When 调用string.pbs.match") {
         let result = string.pbs.match(regular: regular)
         it("Then 返回true") {
@@ -80,12 +79,10 @@ class StringRegexTest: QuickSpec {
 }
 
 struct RegexTestModel {
-  let testTuples: [(type: RegularExpressionType, isEmptyAllowed: Bool, decribtion: String, testValue: String)] = [
-    (type: .digit, isEmptyAllowed: false, decribtion: "数字", testValue: "1239"),
-    (type: .englishLetter, isEmptyAllowed: false, decribtion: "英文", testValue: "hello"),
-    (type: .chineseCharacter, isEmptyAllowed: false, decribtion: "中文", testValue: "中国"),
-    (type: .email, isEmptyAllowed: false, decribtion: "邮箱", testValue: "xxxx@xxx.com"),
-    (type: .chineseMobileNumber, isEmptyAllowed: false, decribtion: "中国合法手机号", testValue: "13888888888"),
-    (type: .punctuation, isEmptyAllowed: false, decribtion: "标点符号", testValue: "，。；：“”‘’（）「」【】·～《》,")
-  ]
+  let testTuples: [(type: RegularExpressionType, isEmptyAllowed: Bool, decribtion: String, testValue: String)] = [(type: .digit, isEmptyAllowed: false, decribtion: "数字", testValue: "1239"),
+                                                                                                                  (type: .englishLetter, isEmptyAllowed: false, decribtion: "英文", testValue: "hello"),
+                                                                                                                  (type: .chineseCharacter, isEmptyAllowed: false, decribtion: "中文", testValue: "中国"),
+                                                                                                                  (type: .email, isEmptyAllowed: false, decribtion: "邮箱", testValue: "xxxx@xxx.com"),
+                                                                                                                  (type: .chineseMobileNumber, isEmptyAllowed: false, decribtion: "中国合法手机号", testValue: "13888888888"),
+                                                                                                                  (type: .punctuation, isEmptyAllowed: false, decribtion: "标点符号", testValue: "，。；：“”‘’（）「」【】·～《》,")]
 }

@@ -47,7 +47,7 @@ class StringTest: QuickSpec {
     testInitialCapital()
     testConvertUTCDateToLocalDate()
   }
-  
+
   func testReversedString() {
     describe("Given 给定字符串: hello") {
       let string = "hello"
@@ -60,12 +60,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testContains() {
     describe("Given 给定字符串: hello, 判断是否包含hee、ll中的一个") {
       let string = "hello"
       let stringList = ["hee", "ll"]
-      
+
       context("When 调用string.pbs.contains") {
         let result = string.pbs.contains(oneOf: stringList)
         it("Then 返回true") {
@@ -74,12 +74,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testDouble() {
     describe("Given 给定字符串: 22.22") {
       let string = "22.22"
       let expectResult: Double = 22.22
-      
+
       context("When 调用string.pbs.double") {
         let result = string.pbs.double
         it("Then 返回22.22") {
@@ -88,12 +88,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testBase64() {
     describe("Given 给定字符串: hello, swift") {
       let string = "hello, swift"
       let expectResult = "aGVsbG8sIHN3aWZ0"
-      
+
       context("When 调用string.pbs.base64") {
         let result = string.pbs.base64
         it("Then 返回\(expectResult)") {
@@ -102,12 +102,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testMD5() {
     describe("Given 给定字符串: hello, swift") {
       let string = "hello, swift"
       let expectResult = "d7a52ee5936d3e276f541f5a3d5d181d"
-      
+
       context("When 调用string.pbs.md5") {
         let result = string.pbs.md5
         it("Then 返回\(expectResult)") {
@@ -116,12 +116,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testSha512() {
     describe("Given 给定字符串: hello, swift") {
       let string = "hello, swift"
       let expectResult = "757b30d737bab8a5de0faca898b3f728bbd2aa02d090fad20a8d5ba3ccf7d43c7aa2a2906f69715356a741606b5ccbe911d2ae9e383befb5a8b6321ce61631e6"
-      
+
       context("When 调用string.pbs.sha512") {
         let data = string.pbs.sha512
 //        let result = String(data: data, encoding: .utf8)
@@ -132,16 +132,14 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
-  func testLocalized() {
-    
-  }
-  
+
+  func testLocalized() {}
+
   func testInt() {
     describe("Given 给定字符串: 22.22") {
       let string = "22.22"
       let expectResult = 22
-      
+
       context("When 调用string.pbs.int") {
         let result = string.pbs.int
         it("Then 返回22") {
@@ -150,12 +148,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testTrim() {
     describe("Given 给定字符串: '   hello, swift   '") {
       let string = "   hello, swift   "
       let expectResult = "hello, swift"
-      
+
       context("When 调用string.pbs.trim") {
         let result = string.pbs.trim
         it("Then 返回\(expectResult)") {
@@ -164,14 +162,14 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testToTimeFormatter() {
     describe("Given 给定字符串: 2021-06-09，给定格式yyyy-MM-dd，期望格式yyyy/MM/dd HH:mm:ss") {
       let string = "2021-06-09"
       let dateFormatSrc = "yyyy-MM-dd"
       let dateFormatDesc = "yyyy/MM/dd HH:mm:ss"
       let expectResult = "2021/06/09 00:00:00"
-      
+
       context("When 调用string.pbs.toTimeFormatter") {
         let result = string.pbs.toTimeFormatter(from: dateFormatSrc, to: dateFormatDesc)
         it("Then 返回\(expectResult)") {
@@ -180,18 +178,18 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testIsIncludeChinese() {
     describe("Given 给定字符串: hello, 宝贝") {
       let string = "hello"
       let hasChineseStr = "hello, 宝贝"
-      
+
       context("When 调用string.pbs.isIncludeChinese") {
         let result = string.pbs.isIncludeChinese
         it("Then hello返回false") {
           expect(result).to(equal(false))
         }
-        
+
         let hasChineseResult = hasChineseStr.pbs.isIncludeChinese
         it("Then hello, 宝贝返回true") {
           expect(hasChineseResult).to(equal(true))
@@ -199,12 +197,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testToPinyin() {
     describe("Given 给定字符串: 宝贝") {
       let string = "宝贝"
       let expectResult = "bao bei"
-      
+
       context("When 调用string.pbs.toPinyin") {
         let result = string.pbs.toPinyin
         it("Then 返回\(expectResult)") {
@@ -213,12 +211,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testToPinyinWithoutBlank() {
     describe("Given 给定字符串: 宝贝") {
       let string = "宝贝"
       let expectResult = "baobei"
-      
+
       context("When 调用string.pbs.toPinyinWithoutBlank") {
         let result = string.pbs.toPinyinWithoutBlank
         it("Then 返回\(expectResult)") {
@@ -227,12 +225,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testPinyinHead() {
     describe("Given 给定字符串: 宝贝") {
       let string = "宝贝"
       let expectResult = "BB"
-      
+
       context("When 调用string.pbs.pinyinHead") {
         let result = string.pbs.pinyinHead
         it("Then 返回\(expectResult)") {
@@ -241,12 +239,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testInitialCapital() {
     describe("Given 给定字符串: 宝贝") {
       let string = "宝贝"
       let expectResult = "B"
-      
+
       context("When 调用string.pbs.initialCapital") {
         let result = string.pbs.initialCapital
         it("Then 返回\(expectResult)") {
@@ -255,12 +253,12 @@ class StringTest: QuickSpec {
       }
     }
   }
-  
+
   func testConvertUTCDateToLocalDate() {
     describe("Given 给定字符串: 2021-06-09'UTC'03:00:00") {
       let string = "2021-06-09T03:00:00"
       let expectResult = "2021-06-09"
-      
+
       context("When 调用string.pbs.convertUTCDateToLocalDate") {
         let result = string.pbs.convertUTCDateToLocalDate()
         it("Then 返回\(expectResult)") {

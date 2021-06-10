@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftCore
 import Nimble
 import Quick
@@ -36,14 +35,14 @@ class StringUITest: QuickSpec {
     testHeightInNSAttributedString()
     testWidthInNSAttributedString()
   }
-  
+
   func testHeight() {
     describe("Given 字符串：我爱我的祖国，我爱我的家*2，宽度100，字体16") {
       let string = "我爱我的祖国，我爱我的家，我爱我的祖国，我爱我的家"
       let width: CGFloat = 100
       let font = UIFont.systemFont(ofSize: 16)
       let expectHeight: CGFloat = 96
-      
+
       context("When 调用string.pbs.height") {
         let height = string.pbs.height(withConstrainedWidth: width, font: font)
         it("Then 返回的高度为\(expectHeight)") {
@@ -52,14 +51,14 @@ class StringUITest: QuickSpec {
       }
     }
   }
-  
+
   func testWidth() {
     describe("Given 字符串：我爱我的祖国，我爱我的家*2，高度100，字体16") {
       let string = "我爱我的祖国，我爱我的家，我爱我的祖国，我爱我的家"
       let height: CGFloat = 100
       let font = UIFont.systemFont(ofSize: 16)
       let expectWidth: CGFloat = 408
-      
+
       context("When 调用string.pbs.width") {
         let width = string.pbs.width(withConstrainedHeight: height, font: font)
         it("Then 返回的宽度为\(expectWidth)") {
@@ -68,7 +67,7 @@ class StringUITest: QuickSpec {
       }
     }
   }
-  
+
   func testHeightInNSAttributedString() {
     describe("Given 字符串：我爱我的祖国，我爱我的家*2，宽度100") {
       let string = "我爱我的祖国，我爱我的家，我爱我的祖国，我爱我的家"
@@ -76,7 +75,7 @@ class StringUITest: QuickSpec {
       attrString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: string.count))
       let width: CGFloat = 100
       let expectHeight: CGFloat = 96
-      
+
       context("When 调用string.pbs.height") {
         let height = (attrString as NSAttributedString).pbs.height(withConstrainedWidth: width)
         it("Then 返回的高度为\(expectHeight)") {
@@ -85,7 +84,7 @@ class StringUITest: QuickSpec {
       }
     }
   }
-  
+
   func testWidthInNSAttributedString() {
     describe("Given 字符串：我爱我的祖国，我爱我的家*2，高度100，字体16") {
       let string = "我爱我的祖国，我爱我的家，我爱我的祖国，我爱我的家"
@@ -93,7 +92,7 @@ class StringUITest: QuickSpec {
       attrString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: string.count))
       let height: CGFloat = 100
       let expectWidth: CGFloat = 408
-      
+
       context("When 调用string.pbs.width") {
         let width = (attrString as NSAttributedString).pbs.width(withConstrainedHeight: height)
         it("Then 返回的宽度为\(expectWidth)") {

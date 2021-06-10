@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftCore
 import Nimble
 import Quick
@@ -38,7 +37,7 @@ class PBSImageFilterTest: QuickSpec {
     testRGBToHSV()
     testHSVToRGB()
   }
-  
+
   func testRender() {
     describe("Given 有一个空的图片，tintColor为白色") {
       let emptyImage = UIImage()
@@ -51,13 +50,13 @@ class PBSImageFilterTest: QuickSpec {
       }
     }
   }
-  
+
   func testGetCubeData() {
     describe("Given size为2，tintColor为白色") {
       let size = 2
       let tintColor = UIColor.white
       let expectArray: [Float] = [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      
+
       context("When 调用PBSImageFilter.getCubeData") {
         let resultArray = PBSImageFilter.getCubeData(size: size, with: tintColor)
         it("Then 返回\(expectArray)") {
@@ -66,13 +65,13 @@ class PBSImageFilterTest: QuickSpec {
       }
     }
   }
-  
+
   func testFilter() {
     describe("Given 提供空的图片") {
       let cuteData: [Float] = []
       let size = 0
       let image = UIImage()
-      
+
       context("When 调用PBSImageFilter.filter") {
         let resultImage = PBSImageFilter.filter(with: cuteData, size: size, image: image)
         it("Then 返回nil") {
@@ -81,7 +80,7 @@ class PBSImageFilterTest: QuickSpec {
       }
     }
   }
-  
+
   func testBoomEffect() {
     describe("Given 提供空的图片") {
       let image = CIImage()
@@ -93,12 +92,12 @@ class PBSImageFilterTest: QuickSpec {
       }
     }
   }
-  
+
   func testRGBToHSV() {
     describe("Given 一个颜色为RGB(123, 123, 123)") {
       let color: (r: Float, g: Float, b: Float) = (r: 123, g: 123, b: 123)
       let expectColor: (h: Float, s: Float, v: Float) = (h: 0, s: 0, v: 123)
-      
+
       context("When 调用PBSImageFilter.RGBToHSV") {
         let result = PBSImageFilter.RGBToHSV(color.r, g: color.g, b: color.b)
         it("Then 返回的结果为\(expectColor)") {
@@ -107,12 +106,12 @@ class PBSImageFilterTest: QuickSpec {
       }
     }
   }
-  
+
   func testHSVToRGB() {
     describe("Given 一个颜色为HSV(0, 0, 123)") {
       let color: (h: Float, s: Float, v: Float) = (h: 0, s: 0, v: 123)
       let expectColor: (r: Float, g: Float, b: Float) = (r: 123, g: 123, b: 123)
-      
+
       context("When 调用PBSImageFilter.HSVToRGB") {
         let result = PBSImageFilter.HSVToRGB(color.h, s: color.s, v: color.v)
         it("Then 返回的结果为\(expectColor)") {
