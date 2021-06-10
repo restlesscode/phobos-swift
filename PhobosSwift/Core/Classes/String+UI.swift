@@ -43,6 +43,8 @@ extension PhobosSwift where Base == String {
   }
 }
 
+extension NSAttributedString: PhobosSwiftCompatible {}
+
 extension PhobosSwift where Base == NSAttributedString {
   /// 计算NSAttributedString高度
   public func height(withConstrainedWidth width: CGFloat) -> CGFloat {
