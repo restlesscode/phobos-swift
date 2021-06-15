@@ -231,7 +231,9 @@ PODS:
     - RxSwift (~> 6.1.0)
     - SnapKit
   - PhobosSwiftTestKnight/Tests (0.1.0):
+    - Nimble
     - PhobosSwiftCore (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxGesture
     - RxSwift (~> 6.1.0)
@@ -418,7 +420,7 @@ SPEC CHECKSUMS:
   PhobosSwiftRouter: 64687cb9c6afa21113399b4f3a07b8ddc5cb028d
   PhobosSwiftSlideout: 2db0aa4d94acb06b8cfc1a32b891bdcf07a68557
   PhobosSwiftSplash: 74a07d1556875c5e23cf6ef57ae78bf58b80cd1c
-  PhobosSwiftTestKnight: 2e4ad8cd41bd7bd3dc5b9c90f0da470a2c2a9d9d
+  PhobosSwiftTestKnight: 7d7a2a24f60f66097f27442d435d5e0edf7109b3
   PhobosSwiftUIComponent: cff4c50f4addaabb96a12f2583a20f01a8197bb7
   PhobosSwiftWechat: 2039b3c5e4725e62308eaadc45a14ae092bac263
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
