@@ -24,9 +24,9 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
 import PhobosSwiftCore
 import SnapKit
+import UIKit
 
 @available(iOS 13.0, *)
 public enum PBSAnimationType {
@@ -50,7 +50,7 @@ public enum PBSAlertIcon {
   case dislike
   case privacy
   case info
-  
+
   var image: UIImage? {
     switch self {
     case .heart: return UIImage(systemName: "heart.fill")
@@ -115,7 +115,6 @@ extension PBSProgressHUD {
 
 @available(iOS 13.0, *)
 extension PBSProgressHUD {
-  
   public class func dismiss() {
     DispatchQueue.main.async {
       shared.hudHide()
@@ -147,29 +146,27 @@ extension PBSProgressHUD {
       shared.setup(status: status, staticImage: image ?? shared.imageError, hide: true, interaction: interaction)
     }
   }
-  
+
   public class func show(_ bulletinType: PBSBulletinType, interaction: Bool = false) {
     DispatchQueue.main.async {
       switch bulletinType {
-      case .failed(let string):
+      case let .failed(string):
         PBSProgressHUD.colorHUD = UIColor.pbs.color(hex: 0x834040)
         shared.setup(status: string, staticImage: PBSAlertIcon.info.image?.withTintColor(UIColor.pbs.color(hex: 0xE0B912), renderingMode: .alwaysOriginal), hide: true, interaction: interaction)
-      case .success(let string):
+      case let .success(string):
         PBSProgressHUD.colorHUD = UIColor.pbs.color(hex: 0x234939)
         shared.setup(status: string, staticImage: PBSAlertIcon.info.image?.withTintColor(UIColor.pbs.color(hex: 0xD8D8D8), renderingMode: .alwaysOriginal), hide: true, interaction: interaction)
-      case .info(let string):
+      case let .info(string):
         PBSProgressHUD.colorHUD = UIColor.pbs.color(hex: 0x45698B)
         shared.setup(status: string, staticImage: PBSAlertIcon.info.image?.withTintColor(UIColor.pbs.color(hex: 0xD8D8D8), renderingMode: .alwaysOriginal), hide: true, interaction: interaction)
-      case .inProgress(let string):
+      case let .inProgress(string):
         PBSProgressHUD.animationType = .circleSpinFade
         PBSProgressHUD.colorHUD = UIColor.pbs.color(hex: 0x45698B)
         PBSProgressHUD.colorAnimation = .white
         shared.setup(status: string, hide: false, interaction: interaction)
       }
-      
     }
   }
-
 }
 
 @available(iOS 13.0, *)
@@ -271,9 +268,7 @@ public class PBSProgressHUD: UIView {
     labelStatus?.isHidden = (status == nil) ? true : false
   }
 
-
   private func setupAnimation() {
-    
     staticImageView?.removeFromSuperview()
 
     if viewAnimation == nil {
@@ -306,7 +301,6 @@ public class PBSProgressHUD: UIView {
   }
 
   private func setupStaticImage(_ staticImage: UIImage?) {
-    
     viewAnimation?.removeFromSuperview()
 
     if staticImageView == nil {
@@ -322,10 +316,9 @@ public class PBSProgressHUD: UIView {
   }
 
   private func setupSize() {
-    
     var width: CGFloat = UIScreen.main.bounds.size.width - 18 * 2
     var height: CGFloat = 66
-    
+
     toolbarHUD?.bounds = CGRect(x: 0, y: 0, width: width, height: height)
 
     if viewAnimation?.superview != nil {
@@ -342,7 +335,7 @@ public class PBSProgressHUD: UIView {
         $0.left.equalToSuperview().offset(16)
       }
     }
-    
+
     if labelStatus?.superview != nil {
       labelStatus?.snp.makeConstraints {
         $0.centerY.equalToSuperview()
@@ -350,7 +343,6 @@ public class PBSProgressHUD: UIView {
         $0.right.equalToSuperview().offset(-50)
       }
     }
-    
 
 //    if let text = labelStatus?.text {
 //      let sizeMax = CGSize(width: 250, height: 250)
@@ -367,7 +359,7 @@ public class PBSProgressHUD: UIView {
 //
 //      labelStatus?.frame = rectLabel
 //    }
-    
+
 //    let centerX = width / 2
 //    var centerY = height + 33
 //
@@ -385,10 +377,10 @@ public class PBSProgressHUD: UIView {
       alpha = 1
       toolbarHUD?.alpha = 0
       let screen = UIScreen.main.bounds
-      toolbarHUD?.center = CGPoint(x: screen.size.width / 2, y: screen.size.height + 33 )
+      toolbarHUD?.center = CGPoint(x: screen.size.width / 2, y: screen.size.height + 33)
 
       UIView.animate(withDuration: 0.15, delay: 0, options: [.allowUserInteraction], animations: {
-        self.toolbarHUD?.center = CGPoint(x: screen.size.width / 2, y: screen.size.height - 76 )
+        self.toolbarHUD?.center = CGPoint(x: screen.size.width / 2, y: screen.size.height - 76)
         self.toolbarHUD?.alpha = 1
       }, completion: nil)
     }
@@ -398,7 +390,7 @@ public class PBSProgressHUD: UIView {
     if alpha == 1 {
       let screen = UIScreen.main.bounds
       UIView.animate(withDuration: 0.15, delay: 0, options: [.allowUserInteraction], animations: {
-        self.toolbarHUD?.center = CGPoint(x: screen.size.width / 2, y: screen.size.height + 33 )
+        self.toolbarHUD?.center = CGPoint(x: screen.size.width / 2, y: screen.size.height + 33)
         self.toolbarHUD?.alpha = 0
       }, completion: { _ in
         self.hudDestroy()
@@ -422,6 +414,7 @@ public class PBSProgressHUD: UIView {
   }
 
   // MARK: - Animation
+
   private func animationSystemActivityIndicator(_ view: UIView) {
     let spinner = UIActivityIndicatorView(style: .large)
     spinner.frame = view.bounds
@@ -431,7 +424,7 @@ public class PBSProgressHUD: UIView {
     spinner.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
     view.addSubview(spinner)
   }
-  
+
   private func animationHorizontalCirclesPulse(_ view: UIView) {
     let width = view.frame.size.width
     let height = view.frame.size.height
@@ -844,5 +837,4 @@ public class PBSProgressHUD: UIView {
     layer.add(animation, forKey: "animation")
     view.layer.addSublayer(layer)
   }
-
 }

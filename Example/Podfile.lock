@@ -231,7 +231,9 @@ PODS:
     - RxSwift (~> 6.1.0)
     - SnapKit
   - PhobosSwiftTestKnight/Tests (0.1.0):
+    - Nimble
     - PhobosSwiftCore (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxGesture
     - RxSwift (~> 6.1.0)
@@ -395,7 +397,7 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  MirrorGoogleMobileAds: 8f615aaaf8b6c8b2876c8f4066b8c73cc6380cb0
+  MirrorGoogleMobileAds: f207c576fced0bc1dcd6bac897cb274d96ce73ef
   MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
@@ -405,7 +407,7 @@ SPEC CHECKSUMS:
   PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
   PhobosSwiftAuth: 81d06436d83e6f85e19e0803ec021f1f8b9ac95e
   PhobosSwiftCore: aef8d363c6e8897508d3307eddc85a22d89ee04b
-  PhobosSwiftCoreSwiftUI: 95522f5a6bd1425d897954e2995fcf4da7f6c2bf
+  PhobosSwiftCoreSwiftUI: f95ec989a5cad92e1d5f153358fa2e324788c65f
   PhobosSwiftGrowth: 6aa7db2c5fccc834d43c3b38e1b8fa0c8c7ff8bc
   PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
   PhobosSwiftLocation: c48a2f45e8f7bbca8e347258ddf21c1ab8fc0cac
@@ -418,7 +420,7 @@ SPEC CHECKSUMS:
   PhobosSwiftRouter: 64687cb9c6afa21113399b4f3a07b8ddc5cb028d
   PhobosSwiftSlideout: 2db0aa4d94acb06b8cfc1a32b891bdcf07a68557
   PhobosSwiftSplash: 74a07d1556875c5e23cf6ef57ae78bf58b80cd1c
-  PhobosSwiftTestKnight: 2e4ad8cd41bd7bd3dc5b9c90f0da470a2c2a9d9d
+  PhobosSwiftTestKnight: 7d7a2a24f60f66097f27442d435d5e0edf7109b3
   PhobosSwiftUIComponent: cff4c50f4addaabb96a12f2583a20f01a8197bb7
   PhobosSwiftWechat: 2039b3c5e4725e62308eaadc45a14ae092bac263
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
