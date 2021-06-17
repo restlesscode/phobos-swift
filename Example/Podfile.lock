@@ -262,6 +262,8 @@ PODS:
     - RxSwift (~> 6.1.0)
   - PhobosSwiftWechat/Tests (0.1.0):
     - MirrorWechatSDK
+    - Nimble
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PromisesObjC (1.2.12)
@@ -422,7 +424,7 @@ SPEC CHECKSUMS:
   PhobosSwiftSplash: 74a07d1556875c5e23cf6ef57ae78bf58b80cd1c
   PhobosSwiftTestKnight: 7d7a2a24f60f66097f27442d435d5e0edf7109b3
   PhobosSwiftUIComponent: cff4c50f4addaabb96a12f2583a20f01a8197bb7
-  PhobosSwiftWechat: 2039b3c5e4725e62308eaadc45a14ae092bac263
+  PhobosSwiftWechat: 14ad9aebd6e81b58e4981de90649a947169c68d3
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343

@@ -14,7 +14,7 @@
 //
 //  The above copyright notice and this permission notice shall be included in
 //  all copies or substantial portions of the Software.
-//t
+//
 //  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 //  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 //  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,19 +34,19 @@ class PBSTestKnightSpec: QuickSpec {
     testPBSTestKnightInit()
     testPBSTestKnightConfigure()
   }
-  
+
   func testPBSTestKnightInit() {
     describe("Given 已知本模块PBSTestKnight") {
       context("When 调用PBSTestKnight.shared 获取本模块") {
         let testKnight = PBSTestKnight.shared
-        
+
         it("Then 返回的testKnight的configuration 为debug") {
           expect(testKnight.configuration).to(equal(.debug))
         }
       }
     }
   }
-  
+
   func testPBSTestKnightConfigure() {
     describe("Given 已知PBSTestKnight") {
       let testKnight = PBSTestKnight.shared

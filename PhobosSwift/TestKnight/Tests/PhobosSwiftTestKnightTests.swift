@@ -24,14 +24,12 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftTestKnight
 import Nimble
 import PhobosSwiftCore
 import Quick
 
 class PhobosSwiftTestKnightSpec: QuickSpec {
-  
   override func spec() {
     testBundleInit()
     testBundleName()
@@ -50,7 +48,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
     testTkUrl()
     testTkRemoveObject()
   }
-  
+
   func testBundleInit() {
     describe("Given 已知本模块PhobosSwiftTestKnight") {
       context("When 调用Bundle.bundle获取本模块Bundle") {
@@ -62,7 +60,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
       }
     }
   }
-  
+
   func testBundleName() {
     describe("Given 已知本模块Bundle") {
       context("When 调用bundleName获取本模块bundleName") {
@@ -74,7 +72,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
       }
     }
   }
-  
+
   func testLocalizedString() {
     describe("Given a String") {
       let testString = "test String"
@@ -86,7 +84,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
       }
     }
   }
-  
+
   func testTkStringExtension() {
     describe("Given a String") {
       let testString = "Test"
@@ -98,7 +96,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
       }
     }
   }
-  
+
   func testTkObject() {
     describe("Given UserDefaults存储一个空object") {
       let key = "testKey"
@@ -111,7 +109,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
       }
     }
   }
-  
+
   func testTkString() {
     describe("Given UserDefaults存储一个String") {
       let key = "testKey"
@@ -125,7 +123,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
       }
     }
   }
-  
+
   func testTkArray() {
     describe("Given UserDefaults存储一个Array") {
       let key = "testKey"
@@ -139,119 +137,119 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
       }
     }
   }
-  
+
   func testTkDictionary() {
     describe("Given UserDefaults存储一个Dict") {
       let key = "testKey"
-      let expectDict: [String: Any]? = ["One": 1, "Two": 2,"Three": 3]
+      let expectDict: [String: Any]? = ["One": 1, "Two": 2, "Three": 3]
       UserDefaults.standard.tk_set(expectDict, forKey: key)
       context("When 调用tk_dictionary获取dict") {
-         let dict = UserDefaults.standard.tk_dictionary(forKey: key)
+        let dict = UserDefaults.standard.tk_dictionary(forKey: key)
         it("Then 返回Dict为expectDict") {
           expect(dict?.count).to(equal(3))
         }
       }
     }
   }
-  
+
   func testTkData() {
     describe("Given UserDefaults存储一个Data") {
       let key = "testKey"
       let expectData = Data(count: 10)
       UserDefaults.standard.tk_set(expectData, forKey: key)
       context("When 调用tk_data获取data") {
-         let data = UserDefaults.standard.tk_data(forKey: key)
+        let data = UserDefaults.standard.tk_data(forKey: key)
         it("Then 返回data为expectData") {
           expect(data?.count).to(equal(10))
         }
       }
     }
   }
-  
+
   func testTkStringArray() {
     describe("Given UserDefaults存储一个String Array") {
       let key = "testKey"
       let expectStringArray: [String] = ["One", "Two", "Three"]
       UserDefaults.standard.tk_set(expectStringArray, forKey: key)
       context("When 调用tk_stringArray获取string array") {
-         let stringArray = UserDefaults.standard.tk_stringArray(forKey: key)
+        let stringArray = UserDefaults.standard.tk_stringArray(forKey: key)
         it("Then 返回stringArray为expectStringArray") {
           expect(stringArray).to(equal(expectStringArray))
         }
       }
     }
   }
-  
+
   func testTkInteger() {
     describe("Given UserDefaults存储一个Int") {
       let key = "testKey"
       let expectInt = 2222
       UserDefaults.standard.tk_set(expectInt, forKey: key)
       context("When 调用tk_integer获取Int") {
-         let intValue = UserDefaults.standard.tk_integer(forKey: key)
+        let intValue = UserDefaults.standard.tk_integer(forKey: key)
         it("Then 返回intValue为expectInt") {
           expect(intValue).to(equal(expectInt))
         }
       }
     }
   }
-  
+
   func testTkFloat() {
     describe("Given UserDefaults存储一个Float") {
       let key = "testKey"
       let expectFloat: Float = 2222.2222
       UserDefaults.standard.tk_set(expectFloat, forKey: key)
       context("When 调用tk_float获取float") {
-         let floatValue = UserDefaults.standard.tk_float(forKey: key)
+        let floatValue = UserDefaults.standard.tk_float(forKey: key)
         it("Then 返回float为expectFloat") {
           expect(floatValue).to(equal(expectFloat))
         }
       }
     }
   }
-  
+
   func testTkDouble() {
     describe("Given UserDefaults存储一个Double") {
       let key = "testKey"
       let expectDouble: Double = 3333.3333
       UserDefaults.standard.tk_set(expectDouble, forKey: key)
       context("When 调用tk_double获取double") {
-         let doubleValue = UserDefaults.standard.tk_double(forKey: key)
+        let doubleValue = UserDefaults.standard.tk_double(forKey: key)
         it("Then 返回double为doubleValue") {
           expect(doubleValue).to(equal(expectDouble))
         }
       }
     }
   }
-  
+
   func testTkBool() {
     describe("Given UserDefaults存储一个Bool") {
       let key = "testKey"
       let expectBool: Bool = false
       UserDefaults.standard.tk_set(expectBool, forKey: key)
       context("When 调用tk_bool获取bool") {
-         let boolValue = UserDefaults.standard.tk_bool(forKey: key)
+        let boolValue = UserDefaults.standard.tk_bool(forKey: key)
         it("Then 返回boolValue为expectBool") {
           expect(boolValue).to(equal(expectBool))
         }
       }
     }
   }
-  
+
   func testTkUrl() {
     describe("Given UserDefaults存储一个URL") {
       let key = "testKey"
-      let expectURL: URL = URL(string: "testURL")!
+      let expectURL = URL(string: "testURL")!
       UserDefaults.standard.tk_set(expectURL, forKey: key)
       context("When 调用tk_url获取url") {
-         let url = UserDefaults.standard.tk_url(forKey: key)
+        let url = UserDefaults.standard.tk_url(forKey: key)
         it("Then 返回url为expectURL") {
           expect(url).to(equal(expectURL))
         }
       }
     }
   }
-  
+
   func testTkRemoveObject() {
     describe("Given UserDefaults存储一个String") {
       let key = "testKey"
@@ -267,4 +265,3 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
     }
   }
 }
-

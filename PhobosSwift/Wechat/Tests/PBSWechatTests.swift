@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftWechat
+//  PBSWechatTests.swift
+//  PhobosSwiftTestKnight
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,18 +24,31 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import XCTest
+@testable import PhobosSwiftWechat
+import Nimble
+import Quick
 
-/// Test the enhanced features of Bundle class is implemented in this extension
-class BundleTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class PBSWechatSpec: QuickSpec {
+  override func spec() {
+    describe("Given 本模块PBSWechat") {
+      let wechat = PBSWechat.shared
+      let expectId = "testAppId"
+      let expectUniversalLink = "testUniversalLink"
+      context("When 调用confifure方法") {
+        let result = wechat.configure(appId: expectId, universalLink: expectUniversalLink)
+        
+        it("Then 返回的结果为false") {
+          expect(result).to(equal(false))
+        }
+        
+        it("Then 返回的appId 为 expectId") {
+          expect(wechat.appId).to(equal(expectId))
+        }
+        
+        it("Then 返回的univeralLink 为 expectUniversalLink") {
+          expect(wechat.universalLink).to(equal(expectUniversalLink))
+        }
+      }
+    }
   }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func test() {}
 }
