@@ -48,7 +48,7 @@ extension String {
 extension PhobosSwift where Base == String {
   ///
   public var tkString: String {
-    "\(PBSTestKnight.shared.configuration.name).\(self)"
+    "\(PBSTestKnight.shared.configuration.name).\(base)"
   }
 }
 

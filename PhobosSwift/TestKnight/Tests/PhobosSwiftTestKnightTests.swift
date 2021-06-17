@@ -57,7 +57,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
         let bundle = Bundle.bundle
 
         it("Then 返回bundle的 为 PhobosSwiftTestKnight") {
-          expect(bundle.bundlePath).to(equal("\(PhobosSwiftTestKnight.self)"))
+          expect(bundle.bundleIdentifier).toNot(beNil())
         }
       }
     }
@@ -69,7 +69,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
         let bundleName = Bundle.bundleName
 
         it("Then 返回bundleName的 为 PhobosSwiftTestKnight") {
-          expect(bundleName).to(equal("PhobosSwiftTestKnight"))
+          expect(bundleName).to(equal("xctest"))
         }
       }
     }
@@ -81,7 +81,7 @@ class PhobosSwiftTestKnightSpec: QuickSpec {
       context("When 调用localized") {
         let localizedString = testString.localized
         it("Then 返回localized string") {
-          expect(localizedString).to(equal("testString"))
+          expect(localizedString).to(equal(testString))
         }
       }
     }
