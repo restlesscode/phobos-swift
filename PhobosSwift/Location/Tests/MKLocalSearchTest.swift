@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftLocation
+//  MKLocalSearchTest.swift
+//  PhobosSwiftLocation-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,17 +24,5 @@
 //  THE SOFTWARE.
 //
 
+
 import Foundation
-import XCTest
-
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
-  }
-
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func testCases() {}
-}
