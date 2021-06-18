@@ -24,5 +24,98 @@
 //  THE SOFTWARE.
 //
 
+@testable import PhobosSwiftLocation
+import MapKit
+import Nimble
+import Quick
 
-import Foundation
+class CLLocationManagerRXTest: QuickSpec {
+  override func spec() {
+    describe("Given CLLocationManager正常初始化") {
+      let localtionManager = CLLocationManager.pbs.makeLocationManager()
+      context("When 获取Reactive所有计算属性及函数") {
+        _ = localtionManager.rx.delegate
+        _ = localtionManager.rx.didUpdateLocations
+        _ = localtionManager.rx.didUpdateHeading
+        _ = localtionManager.rx.didDetermineState
+        _ = localtionManager.rx.didRangeBeacons
+        if #available(iOS 13.0, *) {
+          _ = localtionManager.rx.didRangeBeaconsSatisfyingBeaconConstraint
+          _ = localtionManager.rx.didFailRangingForBeaconConstraint
+        } else {
+          // Fallback on earlier versions
+        }
+
+        _ = localtionManager.rx.rangingBeaconsDidFailForBeaconRegion
+        _ = localtionManager.rx.didEnterRegion
+        _ = localtionManager.rx.didExitRegion
+        _ = localtionManager.rx.didFailWithError
+        _ = localtionManager.rx.monitoringDidFailForRegion
+        _ = localtionManager.rx.didChangeAuthorization
+        if #available(iOS 14.0, *) {
+          _ = localtionManager.rx.locationManagerDidChangeAuthorization
+        } else {
+          // Fallback on earlier versions
+        }
+        _ = localtionManager.rx.didStartMonitoringForRegion
+        _ = localtionManager.rx.locationManagerDidPauseLocationUpdates
+        _ = localtionManager.rx.locationManagerDidResumeLocationUpdates
+        _ = localtionManager.rx.didFinishDeferredUpdatesWithError
+        _ = localtionManager.rx.didVisit
+        _ = localtionManager.rx.setDelegate(CLLocationManagerDelegateStub())
+
+        it("不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
+  }
+}
+
+class CLLocationManagerDelegateStub: CLLocationManagerDelegate {
+  func isEqual(_ object: Any?) -> Bool {
+    true
+  }
+
+  var hash: Int = 0
+
+  var superclass: AnyClass?
+
+  func `self`() -> Self {
+    CLLocationManagerDelegateStub() as! Self
+  }
+
+  func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
+    nil
+  }
+
+  func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+    nil
+  }
+
+  func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
+    nil
+  }
+
+  func isProxy() -> Bool {
+    true
+  }
+
+  func isKind(of aClass: AnyClass) -> Bool {
+    true
+  }
+
+  func isMember(of aClass: AnyClass) -> Bool {
+    true
+  }
+
+  func conforms(to aProtocol: Protocol) -> Bool {
+    true
+  }
+
+  func responds(to aSelector: Selector!) -> Bool {
+    true
+  }
+
+  var description: String = ""
+}

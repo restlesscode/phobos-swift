@@ -24,5 +24,28 @@
 //  THE SOFTWARE.
 //
 
+@testable import PhobosSwiftLocation
+import Nimble
+import Quick
+import MapKit
 
-import Foundation
+class MKMapItemTest: QuickSpec {
+  override func spec() {
+    testMakeMapItem()
+  }
+  
+  func testMakeMapItem() {
+    describe("Given 提供定位及名称") {
+      let location = CLLocation(latitude: 31.30018852172415, longitude: 121.29127298178801)
+      let name = "南翔"
+      context("When 调用MKMapItem.pbs.makeMapItem") {
+        let mapItem = MKMapItem.pbs.makeMapItem(location: location, name: name)
+        it("Then 返回结果不能为空，同时坐标与名称与参数一致") {
+          expect(mapItem).toNot(beNil())
+          expect(mapItem.name).to(equal(name))
+          expect(mapItem.placemark.location?.coordinate).to(equal(location.coordinate))
+        }
+      }
+    }
+  }
+}

@@ -36,15 +36,15 @@ class PBSWechatSpec: QuickSpec {
       let expectUniversalLink = "testUniversalLink"
       context("When 调用confifure方法") {
         let result = wechat.configure(appId: expectId, universalLink: expectUniversalLink)
-        
+
         it("Then 返回的结果为false") {
           expect(result).to(equal(false))
         }
-        
+
         it("Then 返回的appId 为 expectId") {
           expect(wechat.appId).to(equal(expectId))
         }
-        
+
         it("Then 返回的univeralLink 为 expectUniversalLink") {
           expect(wechat.universalLink).to(equal(expectUniversalLink))
         }

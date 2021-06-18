@@ -24,5 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
-import Foundation
+@testable import PhobosSwiftLocation
+import Nimble
+import Quick

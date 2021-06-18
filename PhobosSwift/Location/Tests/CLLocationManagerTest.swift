@@ -24,5 +24,106 @@
 //  THE SOFTWARE.
 //
 
+@testable import PhobosSwiftLocation
+import MapKit
+import Nimble
+import Quick
 
-import Foundation
+class CLLocationManagerTest: QuickSpec {
+  var locationManager: CLLocationManager!
+
+  override func spec() {
+    beforeEach {
+      self.locationManager = CLLocationManager.pbs.makeLocationManager()
+    }
+    testMakeLocationManager()
+    testEscalateLocationServiceAuthorization()
+    testIsLocationServicesEnabled()
+    testShouldDisplayHeadingCalibration()
+    testAuthorizationStatus()
+    testUpdatingLocation()
+    testShowRouteInBuitinMap()
+  }
+
+  func testMakeLocationManager() {
+    describe("Given 提供默认参数") {
+      context("When 调用CLLocationManager.pbs.makeLocationManager") {
+        locationManager = CLLocationManager.pbs.makeLocationManager()
+
+        it("Then locationManager不为空") {
+          expect(self.locationManager).toNot(beNil())
+          expect(self.locationManager.pbs.shouldDisplayHeadingCalibration).to(beTrue())
+        }
+      }
+    }
+  }
+
+  func testEscalateLocationServiceAuthorization() {
+    describe("Given locationManager初始化成功") {
+      context("When 调用 locationManager.pbs.escalateLocationServiceAuthorization") {
+        locationManager.pbs.escalateLocationServiceAuthorization()
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
+  }
+
+  func testIsLocationServicesEnabled() {
+    describe("Given locationManager初始化成功") {
+      context("When 调用 locationManager.pbs.isLocationServicesEnabled") {
+        let enable = locationManager.pbs.isLocationServicesEnabled
+        it("Then 返回true") {
+          expect(enable).to(beTrue())
+        }
+      }
+    }
+  }
+
+  func testShouldDisplayHeadingCalibration() {
+    describe("Given locationManager初始化成功") {
+      context("When 调用 locationManager.pbs.shouldDisplayHeadingCalibration") {
+        let enable = locationManager.pbs.shouldDisplayHeadingCalibration
+        it("Then 返回true") {
+          expect(enable).to(beTrue())
+        }
+      }
+    }
+  }
+
+  func testAuthorizationStatus() {
+    describe("Given locationManager初始化成功") {
+      context("When 调用 locationManager.pbs.authorizationStatus") {
+        _ = locationManager.pbs.authorizationStatus
+        it("Then 返回true") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
+  }
+
+  func testUpdatingLocation() {
+    describe("Given locationManager初始化成功") {
+      context("When 调用 locationManager.pbs.updatingLocation") {
+        locationManager.pbs.updatingLocation(updating: true)
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
+  }
+
+  func testShowRouteInBuitinMap() {
+    describe("Given 提供对应参数") {
+      let location = CLLocationCoordinate2D(latitude: 31.29822544649922, longitude: 121.29552522985625)
+      let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: location))
+
+      context("When 调用 CLLocationManager.pbs.showRouteInBuitinMap") {
+        CLLocationManager.pbs.showRouteInBuitinMap(destLocation: mapItem)
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
+  }
+}

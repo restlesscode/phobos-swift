@@ -68,10 +68,10 @@ class RxCLLocationManagerDelegateProxy: DelegateProxy<CLLocationManager, CLLocat
   private var _didFailRangingForBeaconConstraintSubject: Any?
   @available(iOS 13.0, *)
   var didFailRangingForBeaconConstraintSubject: PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)> {
-    if _didRangeBeaconsSatisfyingBeaconConstraintSubject == nil {
-      _didRangeBeaconsSatisfyingBeaconConstraintSubject = PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)>()
+    if _didFailRangingForBeaconConstraintSubject == nil {
+      _didFailRangingForBeaconConstraintSubject = PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)>()
     }
-    return _didRangeBeaconsSatisfyingBeaconConstraintSubject as! PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)>
+    return _didFailRangingForBeaconConstraintSubject as! PublishSubject<(CLLocationManager, CLBeaconIdentityConstraint, Error)>
   }
 
   private(set) var rangingBeaconsDidFailForBeaconRegionSubject = PublishSubject<(CLLocationManager, CLBeaconRegion, Error)>()
