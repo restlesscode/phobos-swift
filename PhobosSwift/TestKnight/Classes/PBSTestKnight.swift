@@ -25,7 +25,6 @@
 //
 
 import PhobosSwiftCore
-import PhobosSwiftLog
 import UIKit
 
 public class PBSTestKnight: NSObject {

@@ -24,17 +24,40 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import XCTest
+@testable import PhobosSwiftTestKnight
+import Nimble
+import PhobosSwiftCore
+import Quick
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class PBSTestKnightSpec: QuickSpec {
+  override func spec() {
+    testPBSTestKnightInit()
+    testPBSTestKnightConfigure()
   }
 
-  override func tearDown() {
-    super.tearDown()
+  func testPBSTestKnightInit() {
+    describe("Given 已知本模块PBSTestKnight") {
+      context("When 调用PBSTestKnight.shared 获取本模块") {
+        let testKnight = PBSTestKnight.shared
+
+        it("Then 返回的testKnight的configuration 为debug") {
+          expect(testKnight.configuration).to(equal(.debug))
+        }
+      }
+    }
   }
 
-  func testCases() {}
+  func testPBSTestKnightConfigure() {
+    describe("Given 已知PBSTestKnight") {
+      let testKnight = PBSTestKnight.shared
+      context("When 调用Configure方法") {
+        let window = UIWindow()
+        testKnight.configure(window: window) {
+          it("Then 返回的window.rootViewController不能为空") {
+            expect(window.rootViewController).notTo(beNil())
+          }
+        }
+      }
+    }
+  }
 }

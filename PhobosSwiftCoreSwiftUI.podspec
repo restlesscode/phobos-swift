@@ -7,7 +7,7 @@
 #
 
 group = "PhobosSwift"
-name = "Core"
+name = "CoreSwiftUI"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
@@ -38,7 +38,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/restlesscode/phobos-swift.git', :tag => "#{name}-" + s.version.to_s }
   s.social_media_url = 'https://twitter.com/CodesRestless'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '13.0'
 
   s.cocoapods_version = '>= 1.10.0'
   s.static_framework = false
@@ -49,23 +49,11 @@ TODO: Add long description of the pod here.
     "#{group}/#{name}/CHANGELOG.md"
   ]
   
-  s.subspec 'Core' do |ss|
-    ss.ios.deployment_target = '10.0'
-    ss.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
-    ss.exclude_files = "#{group}/#{name}/Classes/Privatized+third+party+code/SwiftyRSA/SwiftyRSA+ObjC.swift"
-
-    # https://github.com/firebase/firebase-ios-sdk/tree/master/GoogleUtilities/AppDelegateSwizzler
-    ss.dependency 'GoogleUtilities', '~> 7.0'
-    ss.dependency 'RxSwift', '~> 6.1.0'
-    ss.dependency 'RxCocoa', '~> 6.1.0'
-    ss.dependency 'RxGesture'
-    ss.dependency 'SnapKit'
-  end
+  s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
+  #s.exclude_files = ""
   
-  s.default_subspec = 'Core'
-  
+  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
   s.dependency 'PhobosSwiftLog', '~> 0.1.0'
-
 
   if has_resource_bundles
     s.resource_bundles = {

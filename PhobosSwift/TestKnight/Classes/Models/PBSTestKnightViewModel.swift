@@ -1,6 +1,6 @@
 //
 //
-//  PBSTestKnightConfiguration.swift
+//  PBSTestKnightViewModel.swift
 //  PhobosSwiftTestKnight
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)

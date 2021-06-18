@@ -84,6 +84,9 @@ PODS:
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftCore (0.1.0):
+    - PhobosSwiftCore/Core (= 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
+  - PhobosSwiftCore/Core (0.1.0):
     - GoogleUtilities (~> 7.0)
     - PhobosSwiftLog (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
@@ -91,14 +94,12 @@ PODS:
     - RxSwift (~> 6.1.0)
     - SnapKit
   - PhobosSwiftCore/Tests (0.1.0):
-    - GoogleUtilities (~> 7.0)
     - Nimble
     - PhobosSwiftLog (~> 0.1.0)
     - Quick
-    - RxCocoa (~> 6.1.0)
-    - RxGesture
-    - RxSwift (~> 6.1.0)
-    - SnapKit
+  - PhobosSwiftCoreSwiftUI (0.1.0):
+    - PhobosSwiftCore (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.0)
   - PhobosSwiftGrowth (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
@@ -230,7 +231,9 @@ PODS:
     - RxSwift (~> 6.1.0)
     - SnapKit
   - PhobosSwiftTestKnight/Tests (0.1.0):
+    - Nimble
     - PhobosSwiftCore (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxGesture
     - RxSwift (~> 6.1.0)
@@ -259,6 +262,8 @@ PODS:
     - RxSwift (~> 6.1.0)
   - PhobosSwiftWechat/Tests (0.1.0):
     - MirrorWechatSDK
+    - Nimble
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PromisesObjC (1.2.12)
@@ -284,6 +289,7 @@ DEPENDENCIES:
   - PhobosSwiftAuth/Tests (from `../`)
   - PhobosSwiftCore (from `../`)
   - PhobosSwiftCore/Tests (from `../`)
+  - PhobosSwiftCoreSwiftUI (from `../`)
   - PhobosSwiftGrowth (from `../`)
   - PhobosSwiftGrowth/Tests (from `../`)
   - PhobosSwiftHades (from `../`)
@@ -352,6 +358,8 @@ EXTERNAL SOURCES:
     :path: "../"
   PhobosSwiftCore:
     :path: "../"
+  PhobosSwiftCoreSwiftUI:
+    :path: "../"
   PhobosSwiftGrowth:
     :path: "../"
   PhobosSwiftHades:
@@ -400,7 +408,8 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
   PhobosSwiftAuth: 81d06436d83e6f85e19e0803ec021f1f8b9ac95e
-  PhobosSwiftCore: ea96d6578b5f42b2d31f84173cf783d811bbe0d6
+  PhobosSwiftCore: aef8d363c6e8897508d3307eddc85a22d89ee04b
+  PhobosSwiftCoreSwiftUI: f95ec989a5cad92e1d5f153358fa2e324788c65f
   PhobosSwiftGrowth: 6aa7db2c5fccc834d43c3b38e1b8fa0c8c7ff8bc
   PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
   PhobosSwiftLocation: c48a2f45e8f7bbca8e347258ddf21c1ab8fc0cac
@@ -413,9 +422,9 @@ SPEC CHECKSUMS:
   PhobosSwiftRouter: 64687cb9c6afa21113399b4f3a07b8ddc5cb028d
   PhobosSwiftSlideout: 2db0aa4d94acb06b8cfc1a32b891bdcf07a68557
   PhobosSwiftSplash: 74a07d1556875c5e23cf6ef57ae78bf58b80cd1c
-  PhobosSwiftTestKnight: 2e4ad8cd41bd7bd3dc5b9c90f0da470a2c2a9d9d
+  PhobosSwiftTestKnight: 7d7a2a24f60f66097f27442d435d5e0edf7109b3
   PhobosSwiftUIComponent: cff4c50f4addaabb96a12f2583a20f01a8197bb7
-  PhobosSwiftWechat: 2039b3c5e4725e62308eaadc45a14ae092bac263
+  PhobosSwiftWechat: 14ad9aebd6e81b58e4981de90649a947169c68d3
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
@@ -426,6 +435,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 05d5088dc5b76c548323a04b9dd7adbc9eef7650
+PODFILE CHECKSUM: 5e38e3b15ff5dc668ad651086a2674039472740c
 
 COCOAPODS: 1.10.1
