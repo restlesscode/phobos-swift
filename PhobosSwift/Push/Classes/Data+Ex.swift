@@ -31,9 +31,6 @@ extension Data {
     let _token = reduce("") {
       $0 + String(format: "%02x", $1)
     }
-
-    print(_token)
-
     return _token
   }
 }
