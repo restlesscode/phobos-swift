@@ -25,6 +25,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ImageBrowerGroupSelectCell: UITableViewCell {
   let assetImageView: UIImageView = {

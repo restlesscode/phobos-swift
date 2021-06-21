@@ -208,8 +208,10 @@ PODS:
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPush/Tests (0.1.0):
+    - Nimble
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftRouter (0.1.0):
@@ -422,7 +424,7 @@ SPEC CHECKSUMS:
   PhobosSwiftNetwork: 97c4b84133fb5c7e863207ea89bdcc4c0437c20d
   PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
   PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
-  PhobosSwiftPush: a17dd5265d86a125c7afa74749f27655dca805c1
+  PhobosSwiftPush: 070abd98c19335dda9c46ab85d8b8a594196e782
   PhobosSwiftRouter: 64687cb9c6afa21113399b4f3a07b8ddc5cb028d
   PhobosSwiftSlideout: 2db0aa4d94acb06b8cfc1a32b891bdcf07a68557
   PhobosSwiftSplash: 74a07d1556875c5e23cf6ef57ae78bf58b80cd1c
