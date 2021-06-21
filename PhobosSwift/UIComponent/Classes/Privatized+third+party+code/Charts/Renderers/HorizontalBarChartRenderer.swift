@@ -251,7 +251,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer {
                                               dataSet: dataSet,
                                               dataSetIndex: index,
                                               stackSize: stackSize) { element in
-          element.accessibilityFrame = barRect
+            element.accessibilityFrame = barRect
         }
 
         accessibilityOrderedElements[j / stackSize].append(element)

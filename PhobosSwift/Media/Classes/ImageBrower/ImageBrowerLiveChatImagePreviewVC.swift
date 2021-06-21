@@ -167,7 +167,7 @@ extension ImageBrowerLiveChatImagePreviewVC {
     bottomView.addSubview(thumbnailCollection)
 
     editButton = UIButton(frame: CGRect(x: 0, y: thumbnailCollection.pbs.height, width: 65, height: 55))
-    editButton.setTitle(PBSImageBrowerStrings.edit, for: .normal)
+    editButton.setTitle(PBSImageBrower.Strings.edit, for: .normal)
     editButton.setTitleColor(UIColor.white, for: .normal)
     editButton.addTarget(self, action: #selector(edit), for: .touchUpInside)
     editButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -180,7 +180,7 @@ extension ImageBrowerLiveChatImagePreviewVC {
     sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     sendButton.pbs.corner(radii: 5)
     sendButton.setBackgroundImage(UIImage.pbs.makeImage(from: PBSImageBrower.Color.blue), for: .normal)
-    sendButton.setTitle("\(PBSImageBrowerStrings.send) (\(assets.count))", for: .normal)
+    sendButton.setTitle("\(PBSImageBrower.Strings.send) (\(assets.count))", for: .normal)
 
     bottomView.addSubview(sendButton)
 

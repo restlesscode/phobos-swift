@@ -85,7 +85,7 @@ extension PBSImageBrower {
 
     private let reductionButton: UIButton = {
       let button = UIButton(frame: CGRect(x: ScreenWidth / 2 - 25, y: ScreenHeight - 75, width: 50, height: 50))
-      button.setTitle(PBSImageBrowerStrings.reduction, for: .normal)
+      button.setTitle(PBSImageBrower.Strings.reduction, for: .normal)
       button.setTitleColor(UIColor.white, for: .normal)
       button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
       return button

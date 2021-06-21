@@ -38,7 +38,7 @@ extension PhobosSwift where Base == String {
   }
 
   /// 字符串包含一系列字符串
-  public func contains(_ stringList: [String]) -> Bool {
+  public func contains(oneOf stringList: [String]) -> Bool {
     for str in stringList {
       if base.range(of: str) != nil {
         return true
@@ -93,7 +93,7 @@ extension PhobosSwift where Base == String {
     NumberFormatter().number(from: base)?.intValue
   }
 
-  /// 字符串结尾去空格
+  /// 字符串首尾去空格
   public var trim: String {
     base.trimmingCharacters(in: .whitespaces)
   }

@@ -17,6 +17,7 @@ target 'PhobosSwiftExample' do
 
   # Core
   pod 'PhobosSwiftCore', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  pod 'PhobosSwiftCoreSwiftUI', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
   # Log
   pod 'PhobosSwiftLog', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Network

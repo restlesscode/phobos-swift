@@ -31,7 +31,8 @@ extension UIColor {
   public static func +(lhs: UIColor, rhs: UIColor) -> UIColor {
     UIColor.pbs.color(r255: lhs.pbs.rgb.r255 + rhs.pbs.rgb.r255,
                       g255: lhs.pbs.rgb.g255 + rhs.pbs.rgb.g255,
-                      b255: lhs.pbs.rgb.b255 + rhs.pbs.rgb.b255)
+                      b255: lhs.pbs.rgb.b255 + rhs.pbs.rgb.b255,
+                      alpha: lhs.pbs.rgb.alpha + rhs.pbs.rgb.alpha)
   }
 
   ///
@@ -63,6 +64,7 @@ extension UIColor {
       self.red = red
       self.green = green
       self.blue = blue
+      self.alpha = alpha
     }
   }
 }

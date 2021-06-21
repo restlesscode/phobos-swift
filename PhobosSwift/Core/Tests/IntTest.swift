@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftCore
+//  IntTest.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -25,32 +25,53 @@
 //
 
 @testable import PhobosSwiftCore
-import Foundation
-import XCTest
+import Nimble
+import Quick
 
-class PBSCoreTest: XCTestCase {
-  let core = PBSCore.shared
-
-  override func setUp() {
-    super.setUp()
+class IntTest: QuickSpec {
+  override func spec() {
+    testTextualString()
+    testCN()
+    testRandom()
   }
 
-  override func tearDown() {
-    super.tearDown()
-  }
-
-  func testInternalVersionCheck() {
-    let versionCheckExpectation = expectation(description: "version_check")
-
-    core.checkInternalVersion { isUpgraded, previousVersion, currentVersion in
-      XCTAssertTrue(isUpgraded)
-      XCTAssertTrue(previousVersion == PBSVersion(major: 0, minor: 0, patch: 0))
-      XCTAssertTrue(currentVersion == PBSVersion(major: 0, minor: 1, patch: 0))
-      versionCheckExpectation.fulfill()
+  func testTextualString() {
+    describe("Given 数字12") {
+      let number: Int = 12
+      let expectResult = "twelve"
+      context("When 调用int.pbs.textualString") {
+        let result = number.pbs.textualString
+        it("Then 返回twelve") {
+          expect(result).to(equal(expectResult))
+        }
+      }
     }
+  }
 
-    waitForExpectations(timeout: 1.0) { error in
-      XCTAssertNil(error)
+  func testCN() {
+    describe("Given 数字12") {
+      let number: Int = 12
+      let expectResult = "十二"
+      context("When 调用int.pbs.cn") {
+        let result = number.pbs.cn
+        it("Then 返回十二") {
+          expect(result).to(equal(expectResult))
+        }
+      }
+    }
+  }
+
+  func testRandom() {
+    describe("Given 数字12，求12-30之间的随机数") {
+      let number: Int = 12
+      let maxNumber: Int = 30
+      context("When 调用Int.pbs.random") {
+        let result = Int.pbs.random(between: number, and: maxNumber)
+        it("Then 返回数值在12-30之间") {
+          expect(result) >= number
+          expect(result) <= maxNumber
+        }
+      }
     }
   }
 }
