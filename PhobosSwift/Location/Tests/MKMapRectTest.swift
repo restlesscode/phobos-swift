@@ -25,9 +25,9 @@
 //
 
 @testable import PhobosSwiftLocation
+import MapKit
 import Nimble
 import Quick
-import MapKit
 
 class MKMapRectTest: QuickSpec {
   override func spec() {
@@ -35,7 +35,7 @@ class MKMapRectTest: QuickSpec {
     testMakeMapRect()
     testContains()
   }
-  
+
   func testMakeMapRectWithMinX() {
     describe("Given minX: 0, minY: 0, maxX: 100, maxY: 100") {
       let minX: Double = 0
@@ -51,7 +51,7 @@ class MKMapRectTest: QuickSpec {
       }
     }
   }
-  
+
   func testMakeMapRect() {
     describe("Given x: 0, y: 0, width: 100, height: 100") {
       let x: Double = 0
@@ -67,7 +67,7 @@ class MKMapRectTest: QuickSpec {
       }
     }
   }
-  
+
   func testContains() {
     describe("Given Rect x: 0, y: 0, width: 100, height: 100, location: 31.30018852172415, 121.29127298178801") {
       let rect = MKMapRect(x: 0, y: 0, width: 100, height: 100)
@@ -80,13 +80,13 @@ class MKMapRectTest: QuickSpec {
       }
     }
   }
-  
+
   func equal(lhs: MKMapRect, rhs: MKMapRect) -> Bool {
     guard lhs.minX == rhs.minX,
           lhs.minY == rhs.minY,
           lhs.width == rhs.width,
           lhs.height == rhs.height else { return false }
-    
+
     return true
   }
 }

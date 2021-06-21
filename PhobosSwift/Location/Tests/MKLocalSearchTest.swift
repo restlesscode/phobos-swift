@@ -25,27 +25,27 @@
 //
 
 @testable import PhobosSwiftLocation
+import MapKit
 import Nimble
 import Quick
-import MapKit
 
 class MKLocalSearchTest: QuickSpec {
   let location = CLLocationCoordinate2D(latitude: 31.30018852172415, longitude: 121.29127298178801)
-  
+
   override func spec() {
     testMakeNaturalLanguageSearchWithRegion()
     testMakeNaturalLanguageSearchWithMeters()
   }
-  
+
   func testMakeNaturalLanguageSearchWithRegion() {
     describe("Given 搜索关键字为超市，区域为附近10000米") {
       let keyword = "超市"
-      let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 10000, longitudinalMeters: 10000)
-      
+      let region = MKCoordinateRegion(center: location, latitudinalMeters: 10_000, longitudinalMeters: 10_000)
+
       context("When 调用MKLocalSearch.pbs.makeNaturalLanguageSearch") {
         let serach = MKLocalSearch.pbs.makeNaturalLanguageSearch(keyword: keyword, region: region)
         waitUntil(timeout: .seconds(5)) { done in
-          serach.start { (response, error) in
+          serach.start { response, _ in
             it("Then 返回结果不为空") {
               expect(response).toNot(beNil())
             }
@@ -55,15 +55,15 @@ class MKLocalSearchTest: QuickSpec {
       }
     }
   }
-  
+
   func testMakeNaturalLanguageSearchWithMeters() {
     describe("Given 搜索关键字为超市，区域为附近10000米") {
       let keyword = "超市"
-      
+
       context("When 调用MKLocalSearch.pbs.makeNaturalLanguageSearch") {
-        let serach = MKLocalSearch.pbs.makeNaturalLanguageSearch(keyword: keyword, center: location, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        let serach = MKLocalSearch.pbs.makeNaturalLanguageSearch(keyword: keyword, center: location, latitudinalMeters: 10_000, longitudinalMeters: 10_000)
         waitUntil(timeout: .seconds(5)) { done in
-          serach.start { (response, error) in
+          serach.start { response, _ in
             it("Then 返回结果不为空") {
               expect(response).toNot(beNil())
             }

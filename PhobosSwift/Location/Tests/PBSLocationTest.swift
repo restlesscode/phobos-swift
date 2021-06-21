@@ -24,19 +24,18 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftLocation
 import Nimble
 import Quick
 
 class PBSLocationTest: QuickSpec {
   let pbsLocation = PBSLocation()
-  
+
   override func spec() {
     testConfigure()
     testLocationAuthorizationAlertCtrl()
   }
-  
+
   func testConfigure() {
     describe("Given 初始化完成") {
       context("When 调用pbsLocation.configure") {
@@ -47,7 +46,7 @@ class PBSLocationTest: QuickSpec {
       }
     }
   }
-  
+
   func testLocationAuthorizationAlertCtrl() {
     describe("Given 初始化完成") {
       context("When 调用PBSLocation.makeAlertCtrl") {

@@ -24,16 +24,15 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftLocation
+import MapKit
 import Nimble
 import Quick
-import MapKit
 
 class PBSClusterManagerTest: QuickSpec {
   let clusterManager = PBSClusterManager()
   let model = PBSClusterManagerTestModel()
-  
+
   override func spec() {
     testAnnotations()
     testVisibleNestedAnnotations()
@@ -51,7 +50,7 @@ class PBSClusterManagerTest: QuickSpec {
     testDisplay()
     testCellSize()
   }
-  
+
   func testAnnotations() {
     describe("Given PBSClusterManager初始化成功") {
       context("When 获取annotations") {
@@ -62,7 +61,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testVisibleNestedAnnotations() {
     describe("Given PBSClusterManager初始化成功") {
       context("When 获取visibleNestedAnnotations") {
@@ -73,7 +72,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testAddItem() {
     describe("Given 提供一个Annotation") {
       let annotion = model.annotion
@@ -85,7 +84,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testAddItems() {
     describe("Given 提供多个Annotation") {
       let annotion = model.annotion
@@ -98,7 +97,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testRemoveItem() {
     describe("Given 提供一个Annotation") {
       let annotion = model.annotion
@@ -110,7 +109,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testRemoveItems() {
     describe("Given 提供多个Annotation") {
       let annotion = model.annotion
@@ -123,7 +122,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testRemoveAll() {
     describe("Given 初始化成功") {
       context("When 获取clusterManager.removeAll") {
@@ -134,10 +133,10 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testReload() {
     describe("Given 提供一个mapView") {
-      let mapView = MKMapView.init(frame: .zero)
+      let mapView = MKMapView(frame: .zero)
       context("When 获取clusterManager.reload") {
         clusterManager.reload(mapView: mapView, completion: { _ in })
         it("Then 不会闪退") {
@@ -146,7 +145,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testClusteredAnnotations() {
     describe("Given 提供zoomScale, visibleMapRect") {
       let zoomScale: Double = 1
@@ -159,7 +158,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testClusteredAnnotationsWithTree() {
     describe("Given 提供zoomScale, visibleMapRect") {
       let zoomScale: Double = 1
@@ -172,7 +171,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testDistributeAnnotations() {
     describe("Given 提供tree, visibleMapRect") {
       let visibleMapRect = MKMapRect(x: 0, y: 0, width: 100, height: 100)
@@ -184,7 +183,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testCoordinate() {
     describe("Given 提供多个Annotation") {
       let annotion = model.annotion
@@ -198,7 +197,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testMapRects() {
     describe("Given 提供zoomScale, visibleMapRect") {
       let zoomScale: Double = 1
@@ -211,12 +210,12 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testDisplay() {
     describe("Given 提供多个Annotation") {
       let annotion = model.annotion
       let annotion1 = model.annotion1
-      let mapView = MKMapView.init(frame: .zero)
+      let mapView = MKMapView(frame: .zero)
       context("When 调用clusterManager.display") {
         clusterManager.display(mapView: mapView, toAdd: [annotion], toRemove: [annotion1])
         it("Then 不会闪退") {
@@ -225,7 +224,7 @@ class PBSClusterManagerTest: QuickSpec {
       }
     }
   }
-  
+
   func testCellSize() {
     describe("Given zoomLevel 14") {
       let zoomLevel: Double = 14
@@ -240,6 +239,6 @@ class PBSClusterManagerTest: QuickSpec {
 }
 
 struct PBSClusterManagerTestModel {
-  let annotion = ClusterAnnotation.init(coordinate: CLLocationCoordinate2D(latitude: 31.30018852172415, longitude: 121.29127298178801))
-  let annotion1 = ClusterAnnotation.init(coordinate: CLLocationCoordinate2D(latitude: 31.40018852172415, longitude: 121.49127298178801))
+  let annotion = ClusterAnnotation(coordinate: CLLocationCoordinate2D(latitude: 31.30018852172415, longitude: 121.29127298178801))
+  let annotion1 = ClusterAnnotation(coordinate: CLLocationCoordinate2D(latitude: 31.40018852172415, longitude: 121.49127298178801))
 }

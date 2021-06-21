@@ -25,15 +25,15 @@
 //
 
 @testable import PhobosSwiftLocation
+import MapKit
 import Nimble
 import Quick
-import MapKit
 
 class MKMapItemTest: QuickSpec {
   override func spec() {
     testMakeMapItem()
   }
-  
+
   func testMakeMapItem() {
     describe("Given 提供定位及名称") {
       let location = CLLocation(latitude: 31.30018852172415, longitude: 121.29127298178801)
