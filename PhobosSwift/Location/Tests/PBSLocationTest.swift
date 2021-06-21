@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftLocation
+//  PBSLocationTest.swift
+//  PhobosSwiftLocation-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,17 +24,37 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import XCTest
+@testable import PhobosSwiftLocation
+import Nimble
+import Quick
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class PBSLocationTest: QuickSpec {
+  let pbsLocation = PBSLocation()
+
+  override func spec() {
+    testConfigure()
+    testLocationAuthorizationAlertCtrl()
   }
 
-  override func tearDown() {
-    super.tearDown()
+  func testConfigure() {
+    describe("Given 初始化完成") {
+      context("When 调用pbsLocation.configure") {
+        pbsLocation.configure()
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
   }
 
-  func testCases() {}
+  func testLocationAuthorizationAlertCtrl() {
+    describe("Given 初始化完成") {
+      context("When 调用PBSLocation.makeAlertCtrl") {
+        _ = PBSLocation.locationAuthorizationAlertCtrl
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
+  }
 }

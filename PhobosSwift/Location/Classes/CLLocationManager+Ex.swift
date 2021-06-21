@@ -94,7 +94,7 @@ extension PhobosSwift where Base: CLLocationManager {
   /// The current authorization status for the app.
   public var authorizationStatus: CLAuthorizationStatus? {
     if #available(iOS 14.0, *) {
-      return self.authorizationStatus
+      return base.authorizationStatus
     } else {
       return _authorizationStatus
     }
