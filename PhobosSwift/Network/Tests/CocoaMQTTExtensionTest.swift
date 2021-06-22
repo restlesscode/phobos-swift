@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftNetwork
 import Nimble
 import Quick
@@ -35,15 +34,14 @@ class CocoaMQTTExtensionTest: QuickSpec {
     testMakeMQTT()
     testConnect()
   }
-  
+
   func testMakeMQTTAndConnect() {
     describe("Given 连接host: https://www.baidu.com") {
       let host = "https://www.baidu.com"
       context("When 调用CocoaMQTT.pbs.makeMQTTAndConnect") {
-        _ = CocoaMQTT.pbs.makeMQTTAndConnect(host: host) { (_, _) in
-          
-        } didDisconnectHandler: { (_, _) in
-          
+        _ = CocoaMQTT.pbs.makeMQTTAndConnect(host: host) { _, _ in
+
+        } didDisconnectHandler: { _, _ in
         }
         it("Then 不会闪退") {
           expect(true).to(beTrue())
@@ -51,7 +49,7 @@ class CocoaMQTTExtensionTest: QuickSpec {
       }
     }
   }
-  
+
   func testMakeMQTT() {
     describe("Given 连接host: https://www.baidu.com") {
       let host = "https://www.baidu.com"
@@ -63,16 +61,15 @@ class CocoaMQTTExtensionTest: QuickSpec {
       }
     }
   }
-  
+
   func testConnect() {
     describe("Given 连接host: https://www.baidu.com") {
       let host = "https://www.baidu.com"
       let mqtt = CocoaMQTT.pbs.makeMQTT(host: host)
       context("When 调用CocoaMQTT.pbs.connect") {
-        mqtt.pbs.connect { (_, _) in
-          
-        } didDisconnectHandler: { (_, _) in
-          
+        mqtt.pbs.connect { _, _ in
+
+        } didDisconnectHandler: { _, _ in
         }
 
         it("Then 不会闪退") {

@@ -24,17 +24,16 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftNetwork
+import Alamofire
 import Nimble
 import Quick
-import Alamofire
 
 class SessionTest: QuickSpec {
   override func spec() {
     testCrashs()
   }
-  
+
   func testCrashs() {
     describe("Given 在测试环境中") {
       context("When 调用Session.pbs.allmethods") {
@@ -43,7 +42,7 @@ class SessionTest: QuickSpec {
         _ = Session.pbs.insecure
         Session.pbs.default.pbs.addCertificate(data: Data())
         Session.pbs.default.pbs.removeAllCertificates()
-        
+
         it("Then 不会闪退") {
           expect(true).to(beTrue())
         }

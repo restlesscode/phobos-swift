@@ -25,10 +25,10 @@
 //
 
 @testable import PhobosSwiftNetwork
-import Nimble
-import Quick
 import Alamofire
+import Nimble
 import PhobosSwiftCore
+import Quick
 
 class APIRequestTest: QuickSpec {
   override func spec() {
@@ -39,32 +39,32 @@ class APIRequestTest: QuickSpec {
     testDownloadRequest()
     testDownloadDataRequest()
   }
-  
+
   func testRequest() {
     describe("Given 提供调用同花顺的网址及对应参数") {
       var model = APIRequestModel()
       model.encoding = URLEncoding.default
       context("When 调用PBSNetwork.APIRequest.request") {
         let promisable: PBSPromisable<Result<APIRequestResponse, Error>> = PBSNetwork.APIRequest.request(model.url, method: model.method, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
           promisable.then { (result: Result<APIRequestResponse, Error>) in
             self.checkResponese(result: result)
             done()
           }
-        }        
+        }
       }
     }
-    
+
     describe("Given 提供调用同花顺的网址及对应参数-ModelResponse") {
       var model = APIRequestModel()
       model.encoding = URLEncoding.default
       typealias ModelResponse = PBSNetwork.APIRequest.ModelResponse
       context("When 调用PBSNetwork.APIRequest.request") {
         let promisable: PBSPromisable<Result<ModelResponse<APIRequestResponse>, Error>> = PBSNetwork.APIRequest.request(model.url, method: model.method, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
-          promisable.then { (result: Result<ModelResponse<APIRequestResponse>, Error>) in
+          promisable.then { (_: Result<ModelResponse<APIRequestResponse>, Error>) in
             it("Then 接口调用成功") {
               expect(true).to(beTrue())
             }
@@ -73,16 +73,16 @@ class APIRequestTest: QuickSpec {
         }
       }
     }
-    
+
     describe("Given 提供调用同花顺的网址及对应参数") {
       var model = APIRequestModel()
       model.encoding = URLEncoding.default
 
       context("When 调用PBSNetwork.APIRequest.request") {
         let promisable: PBSPromisable<Result<AFDataResponse<Data>, Error>> = PBSNetwork.APIRequest.request(model.url, method: model.method, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
-          promisable.then { (result: Result<AFDataResponse<Data>, Error>) in
+          promisable.then { (_: Result<AFDataResponse<Data>, Error>) in
             it("Then 接口调用成功") {
               expect(true).to(beTrue())
             }
@@ -91,16 +91,16 @@ class APIRequestTest: QuickSpec {
         }
       }
     }
-    
+
     describe("Given 提供调用同花顺的网址及对应参数") {
       var model = APIRequestModel()
       model.encoding = URLEncoding.default
 
       context("When 调用PBSNetwork.APIRequest.request") {
         let promisable: PBSPromisable<Result<PBSNetwork.APIRequest.Response, Error>> = PBSNetwork.APIRequest.request(model.url, method: model.method, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
-          promisable.then { (result: Result<PBSNetwork.APIRequest.Response, Error>) in
+          promisable.then { (_: Result<PBSNetwork.APIRequest.Response, Error>) in
             it("Then 接口调用成功") {
               expect(true).to(beTrue())
             }
@@ -110,14 +110,14 @@ class APIRequestTest: QuickSpec {
       }
     }
   }
-  
+
   func testGet() {
     describe("Given 提供调用同花顺的网址及对应参数") {
       var model = APIRequestModel()
       model.encoding = URLEncoding.default
       context("When 调用PBSNetwork.APIRequest.get") {
         let promisable: PBSPromisable<Result<APIRequestResponse, Error>> = PBSNetwork.APIRequest.get(model.url, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
           promisable.then { (result: Result<APIRequestResponse, Error>) in
             self.checkResponese(result: result)
@@ -127,13 +127,13 @@ class APIRequestTest: QuickSpec {
       }
     }
   }
-  
+
   func testPost() {
     describe("Given 提供调用同花顺的网址及对应参数") {
       let model = APIRequestModel()
       context("When 调用PBSNetwork.APIRequest.post") {
         let promisable: PBSPromisable<Result<APIRequestResponse, Error>> = PBSNetwork.APIRequest.post(model.url, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
           promisable.then { (result: Result<APIRequestResponse, Error>) in
             self.checkResponese(result: result)
@@ -143,13 +143,13 @@ class APIRequestTest: QuickSpec {
       }
     }
   }
-  
+
   func testPut() {
     describe("Given 提供调用同花顺的网址及对应参数") {
       let model = APIRequestModel()
       context("When 调用PBSNetwork.APIRequest.put") {
         let promisable: PBSPromisable<Result<APIRequestResponse, Error>> = PBSNetwork.APIRequest.put(model.url, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
           promisable.then { (result: Result<APIRequestResponse, Error>) in
             self.checkResponese(result: result)
@@ -159,15 +159,15 @@ class APIRequestTest: QuickSpec {
       }
     }
   }
-  
+
   func testDownloadRequest() {
     describe("Given 提供调用同花顺的网址及对应参数") {
       let model = APIRequestModel()
       context("When 调用PBSNetwork.APIRequest.downloadRequest") {
         let promisable: PBSPromisable<Result<DownloadResponse, Error>> = PBSNetwork.APIRequest.downloadRequest(url: URL(string: model.url as! String)!)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
-          promisable.then { (result: Result<DownloadResponse, Error>) in
+          promisable.then { (_: Result<DownloadResponse, Error>) in
             it("Then 接口调用成功") {
               expect(true).to(beTrue())
             }
@@ -177,15 +177,15 @@ class APIRequestTest: QuickSpec {
       }
     }
   }
-  
+
   func testDownloadDataRequest() {
     describe("Given 提供调用同花顺的网址及对应参数") {
       let model = APIRequestModel()
       context("When 调用PBSNetwork.APIRequest.downloadRequest") {
         let promisable: PBSPromisable<Result<AFDownloadResponse<Data>, Error>> = PBSNetwork.APIRequest.downloadDataRequest(url: URL(string: model.url as! String)!)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
-          promisable.then { (result: Result<AFDownloadResponse<Data>, Error>) in
+          promisable.then { (_: Result<AFDownloadResponse<Data>, Error>) in
             it("Then 接口调用成功") {
               expect(true).to(beTrue())
             }
@@ -195,24 +195,24 @@ class APIRequestTest: QuickSpec {
       }
     }
   }
-  
+
   func checkResponese(result: Result<APIRequestResponse, Error>) {
     switch result {
-      case .success(let model):
-        if model.errorcode == "0" {
-          it("Then 接口调用成功") {
-            expect(true).to(beTrue())
-          }
-        } else {
-          it("Then 接口调用失败, \(model.errormsg)") {
-            expect(true).to(beTrue())
-          }
-        }
-      case .failure(let error):
-        NSLog("request error: \(error.localizedDescription)")
-        it("Then 接口调用失败, \(error.localizedDescription)") {
+    case let .success(model):
+      if model.errorcode == "0" {
+        it("Then 接口调用成功") {
           expect(true).to(beTrue())
         }
+      } else {
+        it("Then 接口调用失败, \(model.errormsg)") {
+          expect(true).to(beTrue())
+        }
+      }
+    case let .failure(error):
+      NSLog("request error: \(error.localizedDescription)")
+      it("Then 接口调用失败, \(error.localizedDescription)") {
+        expect(true).to(beTrue())
+      }
     }
   }
 }
@@ -223,7 +223,7 @@ struct APIRequestModel {
   var parameters: Parameters? = ["id": "0001"]
   var encoding: ParameterEncoding = JSONEncoding.default
   var headers: PBSNetwork.APIRequest.Headers = ["Content-Type": "application/json"]
-  var session: Session = Session.pbs.insecure
+  var session = Session.pbs.insecure
 }
 
 struct APIRequestResponse: Codable {

@@ -32,7 +32,7 @@ class CocoaMQTTRXTest: QuickSpec {
   override func spec() {
     testCrashs()
   }
-  
+
   func testCrashs() {
     describe("Given CocoaMQTT初始化完成") {
       let host = "https://www.baidu.com"
@@ -55,39 +55,21 @@ class CocoaMQTTRXTest: QuickSpec {
 }
 
 class CocoaMQTTDelegateImpl: CocoaMQTTDelegate {
-  func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-    
-  }
-  
-  func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
-    
-  }
-  
-  func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
-    
-  }
-  
-  func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
-    
-  }
-  
-  func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topics: [String]) {
-    
-  }
-  
-  func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
-    
-  }
-  
-  func mqttDidPing(_ mqtt: CocoaMQTT) {
-    
-  }
-  
-  func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
-    
-  }
-  
-  func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-    
-  }
+  func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {}
+
+  func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {}
+
+  func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {}
+
+  func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {}
+
+  func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topics: [String]) {}
+
+  func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {}
+
+  func mqttDidPing(_ mqtt: CocoaMQTT) {}
+
+  func mqttDidReceivePong(_ mqtt: CocoaMQTT) {}
+
+  func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {}
 }

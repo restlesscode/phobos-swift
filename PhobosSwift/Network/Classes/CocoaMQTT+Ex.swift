@@ -24,10 +24,10 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftCore
 import RxRelay
 import RxSwift
 import UIKit
-import PhobosSwiftCore
 
 extension CocoaMQTT: PhobosSwiftCompatible {}
 
@@ -45,14 +45,14 @@ extension PhobosSwift where Base: CocoaMQTT {
   /// - parameter: didConnectAckHandler 连接收到Ack后的回调
   /// - parameter: didDisconnectHandler 连接断开后的回调
   public static func makeMQTTAndConnect(host: String,
-                                            port: UInt16 = 1883,
-                                            username: String? = nil,
-                                            password: String? = nil,
-                                            keepAlive: UInt16 = 60,
-                                            allowUntrustCACertificate: Bool = true,
-                                            retry: Int = 0,
-                                            didConnectAckHandler: @escaping (CocoaMQTT, CocoaMQTTConnAck) -> Void,
-                                            didDisconnectHandler: @escaping (CocoaMQTT, Error?) -> Void) -> CocoaMQTT? {
+                                        port: UInt16 = 1883,
+                                        username: String? = nil,
+                                        password: String? = nil,
+                                        keepAlive: UInt16 = 60,
+                                        allowUntrustCACertificate: Bool = true,
+                                        retry: Int = 0,
+                                        didConnectAckHandler: @escaping (CocoaMQTT, CocoaMQTTConnAck) -> Void,
+                                        didDisconnectHandler: @escaping (CocoaMQTT, Error?) -> Void) -> CocoaMQTT? {
     let mqtt = CocoaMQTT.pbs.makeMQTT(host: host,
                                       port: port,
                                       username: username,
@@ -73,11 +73,11 @@ extension PhobosSwift where Base: CocoaMQTT {
   /// - parameter: keepAlive 连接超时的时间（秒）
   /// - parameter: allowUntrustCACertificate 是否同意非安全的连接
   public static func makeMQTT(host: String,
-                                  port: UInt16 = 1883,
-                                  username: String? = nil,
-                                  password: String? = nil,
-                                  keepAlive: UInt16 = 60,
-                                  allowUntrustCACertificate: Bool = true) -> CocoaMQTT {
+                              port: UInt16 = 1883,
+                              username: String? = nil,
+                              password: String? = nil,
+                              keepAlive: UInt16 = 60,
+                              allowUntrustCACertificate: Bool = true) -> CocoaMQTT {
     let clientID = "PBSNetworkMQTT-" + String(ProcessInfo().processIdentifier)
     let mqtt = CocoaMQTT(clientID: clientID, host: host, port: port)
     if let username = username {
@@ -99,8 +99,8 @@ extension PhobosSwift where Base: CocoaMQTT {
   /// - parameter: didDisconnectHandler 连接断开后的回调
   @discardableResult
   public func connect(retry: Int = 0,
-                          didConnectAckHandler: @escaping (CocoaMQTT, CocoaMQTTConnAck) -> Void,
-                          didDisconnectHandler: @escaping (CocoaMQTT, Error?) -> Void) -> Bool {
+                      didConnectAckHandler: @escaping (CocoaMQTT, CocoaMQTTConnAck) -> Void,
+                      didDisconnectHandler: @escaping (CocoaMQTT, Error?) -> Void) -> Bool {
     Retry.countOfRetry = retry
 
     base.didConnectAck = didConnectAckHandler

@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftNetwork
 import Nimble
 import Quick
@@ -34,7 +33,7 @@ class PBSCertificatePinnerTest: QuickSpec {
     testServerTrustEvaluator()
     testEvaluate()
   }
-  
+
   func testServerTrustEvaluator() {
     describe("Given ServerTrustManager初始化完成, host: https://www.baidu.com") {
       let host = "https://www.baidu.com"
@@ -47,7 +46,7 @@ class PBSCertificatePinnerTest: QuickSpec {
       }
     }
   }
-  
+
   func testEvaluate() {
     describe("Given ServerTrustEvaluator初始化完成, host: https://www.baidu.com") {
       let host = "https://www.baidu.com"

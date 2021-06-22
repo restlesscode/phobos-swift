@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 //
 
-
 @testable import PhobosSwiftNetwork
 import Nimble
 import Quick
@@ -39,10 +38,10 @@ class ReachabilityTest: QuickSpec {
     testAlertCtrl()
     testConnectionType()
   }
-  
+
   func testIsReachable() {
     describe("Given 在Mac上PBSNetwork.Reachability初始化成功") {
-      let reachability = PBSNetwork.Reachability.init()
+      let reachability = PBSNetwork.Reachability()
       context("When 调用reachability.isReachable") {
         let isReachable = reachability.isReachable
         it("Then 返回false") {
@@ -51,10 +50,10 @@ class ReachabilityTest: QuickSpec {
       }
     }
   }
-  
+
   func testStatus() {
     describe("Given PBSNetwork.Reachability初始化成功") {
-      let reachability = PBSNetwork.Reachability.init()
+      let reachability = PBSNetwork.Reachability()
       context("When 调用reachability.status") {
         let status = reachability.status
         it("Then 返回unknown") {
@@ -63,10 +62,10 @@ class ReachabilityTest: QuickSpec {
       }
     }
   }
-  
+
   func testConfigure() {
     describe("Given PBSNetwork.Reachability初始化成功") {
-      let reachability = PBSNetwork.Reachability.init()
+      let reachability = PBSNetwork.Reachability()
       context("When 调用reachability.configure") {
         reachability.configure()
         it("Then 不会闪退") {
@@ -75,10 +74,10 @@ class ReachabilityTest: QuickSpec {
       }
     }
   }
-  
+
   func testConfigureWithEnableAlert() {
     describe("Given PBSNetwork.Reachability初始化成功") {
-      let reachability = PBSNetwork.Reachability.init()
+      let reachability = PBSNetwork.Reachability()
       context("When 调用reachability.configure") {
         reachability.configure(enableAlert: false)
         it("Then 不会闪退") {
@@ -87,10 +86,10 @@ class ReachabilityTest: QuickSpec {
       }
     }
   }
-  
+
   func testCheckConnectivity() {
     describe("Given PBSNetwork.Reachability初始化成功") {
-      let reachability = PBSNetwork.Reachability.init()
+      let reachability = PBSNetwork.Reachability()
       context("When 调用reachability.checkConnectivity") {
         reachability.checkConnectivity()
         it("Then 不会闪退") {
@@ -99,10 +98,10 @@ class ReachabilityTest: QuickSpec {
       }
     }
   }
-  
+
   func testAlertCtrl() {
     describe("Given PBSNetwork.Reachability初始化成功") {
-      let reachability = PBSNetwork.Reachability.init()
+      let reachability = PBSNetwork.Reachability()
       context("When 调用reachability.alertCtrl") {
         _ = reachability.alertCtrl
         it("Then 不会闪退") {
@@ -111,10 +110,10 @@ class ReachabilityTest: QuickSpec {
       }
     }
   }
-  
+
   func testConnectionType() {
     describe("Given PBSNetwork.Reachability初始化成功") {
-      let reachability = PBSNetwork.Reachability.init()
+      let reachability = PBSNetwork.Reachability()
       context("When 调用reachability.connectionType") {
         _ = reachability.connectionType
         it("Then 不会闪退") {

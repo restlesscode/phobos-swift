@@ -37,13 +37,13 @@ class AuthenticatorTest: QuickSpec {
     testPerformAuthenticateRequest()
     testPerformRequest()
   }
-  
+
   func testValidToken() {
     describe("Given PBSNetwork.Authenticator初始化成功") {
       context("When 调用PBSNetwork.Authenticator.shared.validToken") {
         let token = PBSNetwork.Authenticator.shared.validToken()
-        waitUntil(timeout: .seconds(10)) { (done) in
-          token.skip(1).subscribe { (token) in
+        waitUntil(timeout: .seconds(10)) { done in
+          token.skip(1).subscribe { _ in
             it("不会闪退") {
               expect(true).to(beTrue())
             }
@@ -53,13 +53,13 @@ class AuthenticatorTest: QuickSpec {
       }
     }
   }
-  
+
   func testRefreshToken() {
     describe("Given PBSNetwork.Authenticator初始化成功") {
       context("When 调用PBSNetwork.Authenticator.shared.refreshToken") {
         let token = PBSNetwork.Authenticator.shared.refreshToken()
-        waitUntil(timeout: .seconds(10)) { (done) in
-          token.skip(1).subscribe { (token) in
+        waitUntil(timeout: .seconds(10)) { done in
+          token.skip(1).subscribe { _ in
             it("不会闪退") {
               expect(true).to(beTrue())
             }
@@ -69,15 +69,15 @@ class AuthenticatorTest: QuickSpec {
       }
     }
   }
-  
+
   func testPerformAuthenticateRequest() {
     describe("Given 提供调用同花顺的网址及对应参数") {
       let model = APIRequestModel()
       context("When 调用PBSNetwork.NetworkManager.shared.performAuthenticateRequest") {
         let response: Observable<PBSNetwork.APIRequest.Response> = PBSNetwork.NetworkManager.shared.performAuthenticateRequest(method: model.method, url: model.url as! String, body: model.parameters, encoding: model.encoding, headers: model.headers)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
-          response.skip(1).subscribe { (response) in
+          response.skip(1).subscribe { _ in
             it("不会闪退") {
               expect(true).to(beTrue())
             }
@@ -87,15 +87,15 @@ class AuthenticatorTest: QuickSpec {
       }
     }
   }
-  
+
   func testPerformRequest() {
     describe("Given 提供调用同花顺的网址及对应参数") {
       let model = APIRequestModel()
       context("When 调用PBSNetwork.APIRequest.performRequest") {
         let response: Observable<PBSNetwork.APIRequest.Response> = PBSNetwork.APIRequest.performRequest(method: model.method, url: model.url as! String, body: model.parameters, encoding: model.encoding, headers: model.headers)
-        
+
         waitUntil(timeout: .seconds(30)) { done in
-          response.skip(1).subscribe { (response) in
+          response.skip(1).subscribe { _ in
             it("不会闪退") {
               expect(true).to(beTrue())
             }
@@ -106,4 +106,3 @@ class AuthenticatorTest: QuickSpec {
     }
   }
 }
-
