@@ -30,46 +30,14 @@ import Quick
 
 class PBSPushSpec: QuickSpec {
   override func spec() {
-    describe("Given 本模块PBSPush") {
-      let pbsPush = PBSPush.shared
-      context("When 调用registerRemoteNotifications 方法") {
-        pbsPush.registerRemoteNotifications { status in
-          it("Then status should be nil") {
-            expect(status).to(beNil())
-          }
-        } onError: { error in
-          it("Then error should NOT be nil") {
-            expect(error).notTo(beNil())
-          }
-        } onSuccess: { data in
-          it("Then data should be nil") {
-            expect(data).to(beNil())
-          }
+    describe("Given 一个expect Data") {
+      let expectData = Data(base64Encoded: "test")
+      context("When 调用deviceTokenString") {
+        let string = expectData?.deviceTokenString
+        it("Then 返回的string 为b5eb2d") {
+          expect(string).to(be("b5eb2d"))
         }
-
       }
     }
-    
-    
-//    describe("Given 本模块PBSWechat") {
-//      let wechat = PBSWechat.shared
-//      let expectId = "testAppId"
-//      let expectUniversalLink = "testUniversalLink"
-//      context("When 调用confifure方法") {
-//        let result = wechat.configure(appId: expectId, universalLink: expectUniversalLink)
-//
-//        it("Then 返回的结果为false") {
-//          expect(result).to(equal(false))
-//        }
-//
-//        it("Then 返回的appId 为 expectId") {
-//          expect(wechat.appId).to(equal(expectId))
-//        }
-//
-//        it("Then 返回的univeralLink 为 expectUniversalLink") {
-//          expect(wechat.universalLink).to(equal(expectUniversalLink))
-//        }
-//      }
-//    }
   }
 }

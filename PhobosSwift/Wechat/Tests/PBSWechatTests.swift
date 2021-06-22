@@ -30,12 +30,11 @@ import Nimble
 import Quick
 
 class PBSWechatSpec: QuickSpec {
-  
   override func spec() {
     testConfigureWechat()
     testPublicFunction()
   }
-  
+
   func testConfigureWechat() {
     describe("Given 本模块PBSWechat") {
       let wechat = PBSWechat.shared
@@ -58,7 +57,7 @@ class PBSWechatSpec: QuickSpec {
       }
     }
   }
-  
+
   func testPublicFunction() {
     describe("Given PBSWechat正常初始化") {
       let wechat = PBSWechat.shared
@@ -73,13 +72,11 @@ class PBSWechatSpec: QuickSpec {
         _ = PBSWechat.getWXAppInstallUrl
         _ = PBSWechat.getApiVersion
         _ = wechat.openWXApp()
-        
+
         it("不会闪退") {
           expect(true).to(beTrue())
         }
-        
       }
     }
-    
   }
 }
