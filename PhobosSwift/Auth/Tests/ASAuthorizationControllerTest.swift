@@ -25,15 +25,15 @@
 //
 
 @testable import PhobosSwiftAuth
+import AuthenticationServices
 import Nimble
 import Quick
-import AuthenticationServices
 
 class ASAuthorizationControllerTest: QuickSpec {
   override func spec() {
     testCrashs()
   }
-  
+
   func testCrashs() {
     describe("Given ASAuthorizationController初始化") {
       if #available(iOS 13.0, *) {
@@ -50,15 +50,14 @@ class ASAuthorizationControllerTest: QuickSpec {
       }
     }
   }
-  
+
   @available(iOS 13.0, *)
   func getASAuthorizationController() -> ASAuthorizationController {
     let appleIDProvider = ASAuthorizationAppleIDProvider()
     let request = appleIDProvider.createRequest()
     request.requestedScopes = [.fullName, .email]
-    let controller = ASAuthorizationController.init(authorizationRequests: [request])
-    
+    let controller = ASAuthorizationController(authorizationRequests: [request])
+
     return controller
   }
 }
-

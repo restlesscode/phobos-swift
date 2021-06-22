@@ -46,11 +46,9 @@ class PBSPushSpec: QuickSpec {
             expect(data).to(beNil())
           }
         }
-
       }
     }
-    
-    
+
 //    describe("Given 本模块PBSWechat") {
 //      let wechat = PBSWechat.shared
 //      let expectId = "testAppId"
