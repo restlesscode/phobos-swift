@@ -1,7 +1,7 @@
 //
 //
-//  ASAuthorizationControllerTest.swift
-//  PhobosSwiftAuth-Unit-Tests
+//  PBSCertificatePinnerTest.swift
+//  PhobosSwiftNetwork-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,40 +24,39 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftAuth
-import AuthenticationServices
+@testable import PhobosSwiftNetwork
 import Nimble
 import Quick
 
-class ASAuthorizationControllerTest: QuickSpec {
+class PBSCertificatePinnerTest: QuickSpec {
   override func spec() {
-    testCrashs()
+    testServerTrustEvaluator()
+    testEvaluate()
   }
 
-  func testCrashs() {
-    describe("Given ASAuthorizationController初始化") {
-      if #available(iOS 13.0, *) {
-        let controller = getASAuthorizationController()
-        context("When 调用.didCompleteWithAuthorization") {
-          _ = controller.rx.didCompleteWithAuthorization
-          _ = controller.rx.didCompleteWithError
-          it("Then 不会闪退") {
-            expect(true).to(beTrue())
-          }
+  func testServerTrustEvaluator() {
+    describe("Given ServerTrustManager初始化完成, host: https://www.baidu.com") {
+      let host = "https://www.baidu.com"
+      let manager = PBSCertificatePinner.ServerTrustManager()
+      context("When 调用serverTrustEvaluator") {
+        _ = try? manager.serverTrustEvaluator(forHost: host)
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
         }
-      } else {
-        // Fallback on earlier versions
       }
     }
   }
 
-  @available(iOS 13.0, *)
-  func getASAuthorizationController() -> ASAuthorizationController {
-    let appleIDProvider = ASAuthorizationAppleIDProvider()
-    let request = appleIDProvider.createRequest()
-    request.requestedScopes = [.fullName, .email]
-    let controller = ASAuthorizationController(authorizationRequests: [request])
-
-    return controller
+  func testEvaluate() {
+    describe("Given ServerTrustEvaluator初始化完成, host: https://www.baidu.com") {
+      let host = "https://www.baidu.com"
+      let manager = PBSCertificatePinner.ServerTrustManager()
+      context("When 调用serverTrustEvaluator") {
+        _ = try? manager.serverTrustEvaluator(forHost: host)
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
   }
 }

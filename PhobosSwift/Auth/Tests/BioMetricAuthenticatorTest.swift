@@ -37,7 +37,7 @@ class BioMetricAuthenticatorTest: QuickSpec {
     testIsFaceIDAvailable()
     testIsTouchIDAvailable()
   }
-  
+
   func testAllowableReuseDuration() {
     describe("Given 给定allowableReuseDuration为10") {
       BioMetricAuthenticator.shared.allowableReuseDuration = 10
@@ -49,7 +49,7 @@ class BioMetricAuthenticatorTest: QuickSpec {
       }
     }
   }
-  
+
   func testCanAuthenticate() {
     describe("Given BioMetricAuthenticator") {
       context("When 获取BioMetricAuthenticator.canAuthenticate") {
@@ -60,25 +60,25 @@ class BioMetricAuthenticatorTest: QuickSpec {
       }
     }
   }
-  
+
   func testAuthenticateWithBioMetrics() {
     describe("Given reason: 没有") {
       let reason = "没有"
       context("When 调用BioMetricAuthenticator.authenticateWithBioMetrics") {
         it("Then 不会闪退") {
-          BioMetricAuthenticator.authenticateWithBioMetrics(reason: reason) { (_) in
+          BioMetricAuthenticator.authenticateWithBioMetrics(reason: reason) { _ in
             expect(true).to(beTrue())
           }
         }
       }
     }
   }
-  
+
   func testAuthenticateWithPasscode() {
     describe("Given reason: 没有") {
       let reason = "没有"
       context("When 调用BioMetricAuthenticator.authenticateWithPasscode") {
-        BioMetricAuthenticator.authenticateWithPasscode(reason: reason) { (_) in
+        BioMetricAuthenticator.authenticateWithPasscode(reason: reason) { _ in
           it("Then 不会闪退") {
             expect(true).to(beTrue())
           }
@@ -86,7 +86,7 @@ class BioMetricAuthenticatorTest: QuickSpec {
       }
     }
   }
-  
+
   func testIsFaceIDAvailable() {
     describe("Given 在mac环境下") {
       context("When 调用BioMetricAuthenticator.shared.isFaceIDAvailable") {
@@ -97,7 +97,7 @@ class BioMetricAuthenticatorTest: QuickSpec {
       }
     }
   }
-  
+
   func testIsTouchIDAvailable() {
     describe("Given 在mac环境下") {
       context("When 调用BioMetricAuthenticator.shared.isTouchIDAvailable") {

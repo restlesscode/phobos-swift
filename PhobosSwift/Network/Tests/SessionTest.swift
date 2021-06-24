@@ -1,7 +1,7 @@
 //
 //
-//  ASAuthorizationControllerTest.swift
-//  PhobosSwiftAuth-Unit-Tests
+//  SessionTest.swift
+//  PhobosSwiftNetwork-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,40 +24,29 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftAuth
-import AuthenticationServices
+@testable import PhobosSwiftNetwork
+import Alamofire
 import Nimble
 import Quick
 
-class ASAuthorizationControllerTest: QuickSpec {
+class SessionTest: QuickSpec {
   override func spec() {
     testCrashs()
   }
 
   func testCrashs() {
-    describe("Given ASAuthorizationController初始化") {
-      if #available(iOS 13.0, *) {
-        let controller = getASAuthorizationController()
-        context("When 调用.didCompleteWithAuthorization") {
-          _ = controller.rx.didCompleteWithAuthorization
-          _ = controller.rx.didCompleteWithError
-          it("Then 不会闪退") {
-            expect(true).to(beTrue())
-          }
+    describe("Given 在测试环境中") {
+      context("When 调用Session.pbs.allmethods") {
+        _ = Session.pbs.default
+        _ = Session.pbs.redirectorDoNotFollow
+        _ = Session.pbs.insecure
+        Session.pbs.default.pbs.addCertificate(data: Data())
+        Session.pbs.default.pbs.removeAllCertificates()
+
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
         }
-      } else {
-        // Fallback on earlier versions
       }
     }
-  }
-
-  @available(iOS 13.0, *)
-  func getASAuthorizationController() -> ASAuthorizationController {
-    let appleIDProvider = ASAuthorizationAppleIDProvider()
-    let request = appleIDProvider.createRequest()
-    request.requestedScopes = [.fullName, .email]
-    let controller = ASAuthorizationController(authorizationRequests: [request])
-
-    return controller
   }
 }

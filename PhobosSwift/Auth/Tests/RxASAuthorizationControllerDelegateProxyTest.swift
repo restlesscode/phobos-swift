@@ -25,15 +25,15 @@
 //
 
 @testable import PhobosSwiftAuth
+import AuthenticationServices
 import Nimble
 import Quick
-import AuthenticationServices
 
 class RxASAuthorizationControllerDelegateProxyTest: QuickSpec {
   override func spec() {
     testCrashs()
   }
-  
+
   func testCrashs() {
     describe("Given ASAuthorizationController初始化，ASAuthorizationControllerDelegate初始化") {
       if #available(iOS 13.0, *) {
@@ -45,10 +45,9 @@ class RxASAuthorizationControllerDelegateProxyTest: QuickSpec {
 //          RxASAuthorizationControllerDelegateProxy.registerKnownImplementations()
           _ = RxASAuthorizationControllerDelegateProxy.currentDelegate(for: controller)
           RxASAuthorizationControllerDelegateProxy.setCurrentDelegate(delegate, to: controller)
-          
           _ = proxy.didCompleteWithErrorPublishSubject
           _ = proxy.didCompleteWithAuthorizationPublishSubject
-          proxy.authorizationController(controller: controller, didCompleteWithError: NSError.init(domain: "", code: 0, userInfo: nil))
+          proxy.authorizationController(controller: controller, didCompleteWithError: NSError(domain: "", code: 0, userInfo: nil))
 
           it("Then 不会闪退") {
             expect(true).to(beTrue())
@@ -59,14 +58,14 @@ class RxASAuthorizationControllerDelegateProxyTest: QuickSpec {
       }
     }
   }
-  
+
   @available(iOS 13.0, *)
   func getASAuthorizationController() -> ASAuthorizationController {
     let appleIDProvider = ASAuthorizationAppleIDProvider()
     let request = appleIDProvider.createRequest()
     request.requestedScopes = [.fullName, .email]
-    let controller = ASAuthorizationController.init(authorizationRequests: [request])
-    
+    let controller = ASAuthorizationController(authorizationRequests: [request])
+
     return controller
   }
 }
