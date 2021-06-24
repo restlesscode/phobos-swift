@@ -45,7 +45,6 @@ class RxASAuthorizationControllerDelegateProxyTest: QuickSpec {
 //          RxASAuthorizationControllerDelegateProxy.registerKnownImplementations()
           _ = RxASAuthorizationControllerDelegateProxy.currentDelegate(for: controller)
           RxASAuthorizationControllerDelegateProxy.setCurrentDelegate(delegate, to: controller)
-
           _ = proxy.didCompleteWithErrorPublishSubject
           _ = proxy.didCompleteWithAuthorizationPublishSubject
           proxy.authorizationController(controller: controller, didCompleteWithError: NSError(domain: "", code: 0, userInfo: nil))
