@@ -24,12 +24,15 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftCore
 import RxRelay
 import RxSwift
 import UIKit
 
+extension CocoaMQTT: PhobosSwiftCompatible {}
+
 /// 对CocoaMQTT的增强
-extension CocoaMQTT {
+extension PhobosSwift where Base: CocoaMQTT {
   /// 对MQTT进行连接
   ///
   /// - parameter: host
@@ -41,22 +44,22 @@ extension CocoaMQTT {
   /// - parameter: retry 发生disconnect后，重新连接的次数
   /// - parameter: didConnectAckHandler 连接收到Ack后的回调
   /// - parameter: didDisconnectHandler 连接断开后的回调
-  public static func pbs_makeMQTTAndConnect(host: String,
-                                            port: UInt16 = 1883,
-                                            username: String? = nil,
-                                            password: String? = nil,
-                                            keepAlive: UInt16 = 60,
-                                            allowUntrustCACertificate: Bool = true,
-                                            retry: Int = 0,
-                                            didConnectAckHandler: @escaping (CocoaMQTT, CocoaMQTTConnAck) -> Void,
-                                            didDisconnectHandler: @escaping (CocoaMQTT, Error?) -> Void) -> CocoaMQTT? {
-    let mqtt = CocoaMQTT.pbs_makeMQTT(host: host,
+  public static func makeMQTTAndConnect(host: String,
+                                        port: UInt16 = 1883,
+                                        username: String? = nil,
+                                        password: String? = nil,
+                                        keepAlive: UInt16 = 60,
+                                        allowUntrustCACertificate: Bool = true,
+                                        retry: Int = 0,
+                                        didConnectAckHandler: @escaping (CocoaMQTT, CocoaMQTTConnAck) -> Void,
+                                        didDisconnectHandler: @escaping (CocoaMQTT, Error?) -> Void) -> CocoaMQTT? {
+    let mqtt = CocoaMQTT.pbs.makeMQTT(host: host,
                                       port: port,
                                       username: username,
                                       password: password,
                                       keepAlive: keepAlive,
                                       allowUntrustCACertificate: allowUntrustCACertificate)
-    let result = mqtt.pbs_connect(retry: retry, didConnectAckHandler: didConnectAckHandler, didDisconnectHandler: didDisconnectHandler)
+    let result = mqtt.pbs.connect(retry: retry, didConnectAckHandler: didConnectAckHandler, didDisconnectHandler: didDisconnectHandler)
 
     return result ? mqtt : nil
   }
@@ -69,12 +72,12 @@ extension CocoaMQTT {
   /// - parameter: password 可以为空
   /// - parameter: keepAlive 连接超时的时间（秒）
   /// - parameter: allowUntrustCACertificate 是否同意非安全的连接
-  public static func pbs_makeMQTT(host: String,
-                                  port: UInt16 = 1883,
-                                  username: String? = nil,
-                                  password: String? = nil,
-                                  keepAlive: UInt16 = 60,
-                                  allowUntrustCACertificate: Bool = true) -> CocoaMQTT {
+  public static func makeMQTT(host: String,
+                              port: UInt16 = 1883,
+                              username: String? = nil,
+                              password: String? = nil,
+                              keepAlive: UInt16 = 60,
+                              allowUntrustCACertificate: Bool = true) -> CocoaMQTT {
     let clientID = "PBSNetworkMQTT-" + String(ProcessInfo().processIdentifier)
     let mqtt = CocoaMQTT(clientID: clientID, host: host, port: port)
     if let username = username {
@@ -95,25 +98,25 @@ extension CocoaMQTT {
   /// - parameter: didConnectAckHandler 连接收到Ack后的回调
   /// - parameter: didDisconnectHandler 连接断开后的回调
   @discardableResult
-  public func pbs_connect(retry: Int = 0,
-                          didConnectAckHandler: @escaping (CocoaMQTT, CocoaMQTTConnAck) -> Void,
-                          didDisconnectHandler: @escaping (CocoaMQTT, Error?) -> Void) -> Bool {
-    enum Retry {
-      static var countOfRetry: Int = 0
-    }
-
+  public func connect(retry: Int = 0,
+                      didConnectAckHandler: @escaping (CocoaMQTT, CocoaMQTTConnAck) -> Void,
+                      didDisconnectHandler: @escaping (CocoaMQTT, Error?) -> Void) -> Bool {
     Retry.countOfRetry = retry
 
-    didConnectAck = didConnectAckHandler
-    didDisconnect = {
+    base.didConnectAck = didConnectAckHandler
+    base.didDisconnect = {
       if Retry.countOfRetry == 0 || $1 == nil {
         didDisconnectHandler($0, $1)
       } else {
         Retry.countOfRetry -= 1
-        self.pbs_connect(retry: Retry.countOfRetry, didConnectAckHandler: didConnectAckHandler, didDisconnectHandler: didDisconnectHandler)
+        connect(retry: Retry.countOfRetry, didConnectAckHandler: didConnectAckHandler, didDisconnectHandler: didDisconnectHandler)
       }
     }
 
-    return connect()
+    return base.connect()
   }
+}
+
+enum Retry {
+  static var countOfRetry: Int = 0
 }
