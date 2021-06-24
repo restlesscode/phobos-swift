@@ -64,10 +64,15 @@ class APIRequestTest: QuickSpec {
         let promisable: PBSPromisable<Result<ModelResponse<APIRequestResponse>, Error>> = PBSNetwork.APIRequest.request(model.url, method: model.method, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
 
         waitUntil(timeout: .seconds(30)) { done in
-          promisable.then { (_: Result<ModelResponse<APIRequestResponse>, Error>) in
-            it("Then 接口调用成功") {
-              expect(true).to(beTrue())
+          promisable.then { (result: Result<ModelResponse<APIRequestResponse>, Error>) in
+            var expectResult: Result<APIRequestResponse, Error>
+            switch result {
+              case .success(let response):
+                expectResult = .success(response.model)
+              case .failure(let error):
+                expectResult = .failure(error)
             }
+            self.checkResponese(result: expectResult)
             done()
           }
         }
