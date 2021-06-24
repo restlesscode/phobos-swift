@@ -162,8 +162,10 @@ PODS:
   - PhobosSwiftNetwork/Tests (0.1.0):
     - Alamofire (~> 5.1.0)
     - CocoaAsyncSocket (~> 7.6.5)
+    - Nimble
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPayment (0.1.0):
@@ -421,7 +423,7 @@ SPEC CHECKSUMS:
   PhobosSwiftLocation: 617c18fa02257978e93eb10e36193c26a8f219e7
   PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
   PhobosSwiftMedia: a5d96bb202b5d3238efd31a010f75af86b6e5799
-  PhobosSwiftNetwork: 97c4b84133fb5c7e863207ea89bdcc4c0437c20d
+  PhobosSwiftNetwork: 29eafee987ac6d085adf4035d94cb77ec2370bfb
   PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
   PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
   PhobosSwiftPush: 070abd98c19335dda9c46ab85d8b8a594196e782
