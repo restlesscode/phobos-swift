@@ -1,6 +1,6 @@
 //
 //
-//  ViewController.swift
+//  CameraGuidePreviewImageViewController.swift
 //  PhobosSwiftExample
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,29 +24,24 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLocation
-import PhobosSwiftLog
-import PhobosSwiftMedia
-import PhobosSwiftNetwork
-import PhobosSwiftPayment
-import PhobosSwiftPersistence
-import PhobosSwiftPush
-import PhobosSwiftRouter
-import PhobosSwiftTestKnight
-import PhobosSwiftWechat
 import UIKit
 
-class ViewController: UIViewController {
-  let core = PBSCore.shared
+class CameraGuidePreviewImageViewController: UIViewController {
+  lazy var imageView: UIImageView = {
+    let _imageView = UIImageView()
+    view.addSubview(_imageView)
+    _imageView.contentMode = .scaleToFill
+
+    return _imageView
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+  }
 
-    core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
 
-      PBSLogger.shared.debug(message: "\(needUpgrade), \(previousVersion.string), \(currentVersion.string)", context: "Version")
-    }
+    imageView.frame = CGRect(x: 40, y: 256, width: view.bounds.width - 80, height: 256)
   }
 }

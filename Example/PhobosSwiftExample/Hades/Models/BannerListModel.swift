@@ -1,6 +1,6 @@
 //
 //
-//  ViewController.swift
+//  BannerListModel.swift
 //  PhobosSwiftExample
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,29 +24,10 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLocation
-import PhobosSwiftLog
-import PhobosSwiftMedia
-import PhobosSwiftNetwork
-import PhobosSwiftPayment
-import PhobosSwiftPersistence
-import PhobosSwiftPush
-import PhobosSwiftRouter
-import PhobosSwiftTestKnight
-import PhobosSwiftWechat
-import UIKit
+import Foundation
+import PhobosSwiftHades
 
-class ViewController: UIViewController {
-  let core = PBSCore.shared
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
-
-    core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
-
-      PBSLogger.shared.debug(message: "\(needUpgrade), \(previousVersion.string), \(currentVersion.string)", context: "Version")
-    }
-  }
+struct BannerModel {
+  var title: String
+  var bannerType: PBSBannerAd.PBSBannerType
 }

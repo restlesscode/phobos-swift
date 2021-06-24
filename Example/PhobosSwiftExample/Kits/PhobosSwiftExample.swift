@@ -1,6 +1,6 @@
 //
 //
-//  ViewController.swift
+//  PhobosSwiftExample.swift
 //  PhobosSwiftExample
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,29 +24,32 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftCore
-import PhobosSwiftLocation
-import PhobosSwiftLog
-import PhobosSwiftMedia
-import PhobosSwiftNetwork
-import PhobosSwiftPayment
-import PhobosSwiftPersistence
-import PhobosSwiftPush
-import PhobosSwiftRouter
-import PhobosSwiftTestKnight
-import PhobosSwiftWechat
+import Foundation
 import UIKit
 
-class ViewController: UIViewController {
-  let core = PBSCore.shared
+struct PhobosSwiftExample {
+  struct Constants {
+    static let kTestGADBannerViewAdUnitID = "ca-app-pub-3940256099942544/2934735716"
+    static let kTestGADRewardedAdUnitID = "ca-app-pub-3940256099942544/1712485313"
+    static let kTestGADIntersitialAdUnitID = "ca-app-pub-3940256099942544/4411468910"
+    static let kTestGADAppOpenAdUnitID = "ca-app-pub-3940256099942544/5662855259"
+    static let kTestGADNativeAdUnitID = "ca-app-pub-3940256099942544/3986624511"
+    static let kTestGADNativeAdVideoUnitID = "ca-app-pub-3940256099942544/2521693316"
+  }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view.
+  struct Color {
+    static let kBlackgroudColorSet = [UIColor.black, UIColor.pbs.color(R: 36, G: 41, B: 43)]
+    static let kBlackgroudColorTuple = (UIColor.black, UIColor.pbs.color(R: 36, G: 41, B: 43))
+  }
+}
 
-    core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
-
-      PBSLogger.shared.debug(message: "\(needUpgrade), \(previousVersion.string), \(currentVersion.string)", context: "Version")
-    }
+extension String {
+  /// # "2016-04-14T10:44:00+0000" to Date
+  var pbs_iso8601Date: Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    let date = dateFormatter.date(from: self)
+    return date
   }
 }
