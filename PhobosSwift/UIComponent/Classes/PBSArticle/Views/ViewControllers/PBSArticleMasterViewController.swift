@@ -99,14 +99,14 @@ open class PBSArticleMasterViewController: UIViewController, UIArticleKitFlowLay
     }
 
     registerHeaders()
-    registerCells(cellClasses: [PBSArticleColumnCell.self,
-                                PBSArticleNormalCell.self,
-                                PBSArticleIndexCell.self,
-                                PBSArticleCardCell.self,
-                                PBSArticleBigCardECell.self,
-                                PBSArticleBigCardXCell.self,
-                                PBSArticleBigCardYCell.self,
-                                PBSArticleBigCardSCell.self])
+    registerCells(cellClasses: [(PBSArticleColumnCell.self, PBSArticleColumnCell.pbs.reuseIdentifier),
+                                (PBSArticleNormalCell.self, PBSArticleNormalCell.pbs.reuseIdentifier),
+                                (PBSArticleIndexCell.self, PBSArticleIndexCell.pbs.reuseIdentifier),
+                                (PBSArticleCardCell.self, PBSArticleCardCell.pbs.reuseIdentifier),
+                                (PBSArticleBigCardECell.self, PBSArticleBigCardECell.pbs.reuseIdentifier),
+                                (PBSArticleBigCardXCell.self, PBSArticleBigCardXCell.pbs.reuseIdentifier),
+                                (PBSArticleBigCardYCell.self, PBSArticleBigCardYCell.pbs.reuseIdentifier),
+                                (PBSArticleBigCardSCell.self, PBSArticleBigCardSCell.pbs.reuseIdentifier)])
     registerFooters()
   }
 
@@ -118,10 +118,9 @@ open class PBSArticleMasterViewController: UIViewController, UIArticleKitFlowLay
     }
   }
 
-  private func registerCells(cellClasses: [AnyClass]) {
-    cellClasses.forEach { cellClass in
-      let id = String(describing: cellClass)
-      collectionView.register(cellClass, forCellWithReuseIdentifier: id)
+  private func registerCells(cellClasses: [(AnyClass, String)]) {
+    cellClasses.forEach { c in
+      collectionView.register(c.0, forCellWithReuseIdentifier: c.1)
     }
   }
 
@@ -226,10 +225,10 @@ open class PBSArticleMasterViewController: UIViewController, UIArticleKitFlowLay
     let items = collectionView.numberOfItems(inSection: indexPath.section)
 
     // 首先计算出IndexType从哪个item开始
-    var adjustOffset = (0..<items).filter {
+    var adjustOffset = (0..<items).first {
       let currentCellType = flowLayout(collectionViewLayout, cellTypeOfIndexPath: IndexPath(item: $0, section: indexPath.section))
       return currentCellType == cellType
-    }.first ?? 0
+    } ?? 0
 
     var isRightColumn = false
 
