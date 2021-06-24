@@ -31,7 +31,7 @@ import UIKit
 
 public class PBSTestKnightViewController: UIViewController {
   let disposeBag = DisposeBag()
-  var completedHandler: (() -> Void)?
+  public var completedHandler: ((UIViewController) -> Void)?
 
   lazy var titleLabel: UILabel = {
     let label = UILabel(frame: .zero)
@@ -127,7 +127,7 @@ public class PBSTestKnightViewController: UIViewController {
   func makeRxEvents() {
     startTestingButton.rx.controlEvent(.touchUpInside).subscribe(onNext: { [weak self] in
       guard let self = self else { return }
-      self.completedHandler?()
+      self.completedHandler?(self)
     }).disposed(by: disposeBag)
   }
 }

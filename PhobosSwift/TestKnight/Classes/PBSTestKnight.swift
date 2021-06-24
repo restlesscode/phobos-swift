@@ -45,7 +45,7 @@ public class PBSTestKnight: NSObject {
     #endif
   }
 
-  public func configure(window: UIWindow?, completed: @escaping () -> Void) {
+  public func configure(window: UIWindow?, completed: @escaping (UIViewController) -> Void) {
     let testKnightViewCtrl = PBSTestKnightViewController()
     testKnightViewCtrl.completedHandler = completed
     window?.rootViewController = testKnightViewCtrl
