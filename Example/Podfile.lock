@@ -80,7 +80,9 @@ PODS:
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftAuth/Tests (0.1.0):
+    - Nimble
     - PhobosSwiftCore (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftCore (0.1.0):
@@ -160,8 +162,10 @@ PODS:
   - PhobosSwiftNetwork/Tests (0.1.0):
     - Alamofire (~> 5.1.0)
     - CocoaAsyncSocket (~> 7.6.5)
+    - Nimble
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPayment (0.1.0):
@@ -411,7 +415,7 @@ SPEC CHECKSUMS:
   Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
-  PhobosSwiftAuth: 81d06436d83e6f85e19e0803ec021f1f8b9ac95e
+  PhobosSwiftAuth: b57db71d86fdcb78f53303f1ce5618a46d14148d
   PhobosSwiftCore: aef8d363c6e8897508d3307eddc85a22d89ee04b
   PhobosSwiftCoreSwiftUI: f95ec989a5cad92e1d5f153358fa2e324788c65f
   PhobosSwiftGrowth: 6aa7db2c5fccc834d43c3b38e1b8fa0c8c7ff8bc
@@ -419,7 +423,7 @@ SPEC CHECKSUMS:
   PhobosSwiftLocation: 617c18fa02257978e93eb10e36193c26a8f219e7
   PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
   PhobosSwiftMedia: a5d96bb202b5d3238efd31a010f75af86b6e5799
-  PhobosSwiftNetwork: 97c4b84133fb5c7e863207ea89bdcc4c0437c20d
+  PhobosSwiftNetwork: 29eafee987ac6d085adf4035d94cb77ec2370bfb
   PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
   PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
   PhobosSwiftPush: 070abd98c19335dda9c46ab85d8b8a594196e782
