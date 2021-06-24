@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftLocation
+//  SessionTest.swift
+//  PhobosSwiftNetwork-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,17 +24,29 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import XCTest
+@testable import PhobosSwiftNetwork
+import Alamofire
+import Nimble
+import Quick
 
-class LogTest: XCTestCase {
-  override func setUp() {
-    super.setUp()
+class SessionTest: QuickSpec {
+  override func spec() {
+    testCrashs()
   }
 
-  override func tearDown() {
-    super.tearDown()
-  }
+  func testCrashs() {
+    describe("Given 在测试环境中") {
+      context("When 调用Session.pbs.allmethods") {
+        _ = Session.pbs.default
+        _ = Session.pbs.redirectorDoNotFollow
+        _ = Session.pbs.insecure
+        Session.pbs.default.pbs.addCertificate(data: Data())
+        Session.pbs.default.pbs.removeAllCertificates()
 
-  func testCases() {}
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
+  }
 }

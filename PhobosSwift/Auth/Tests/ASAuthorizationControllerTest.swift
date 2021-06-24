@@ -1,7 +1,7 @@
 //
 //
-//  PBSWechatTests.swift
-//  PhobosSwiftTestKnight
+//  ASAuthorizationControllerTest.swift
+//  PhobosSwiftAuth-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,31 +24,40 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftWechat
+@testable import PhobosSwiftAuth
+import AuthenticationServices
 import Nimble
 import Quick
 
-class PBSWechatSpec: QuickSpec {
+class ASAuthorizationControllerTest: QuickSpec {
   override func spec() {
-    describe("Given 本模块PBSWechat") {
-      let wechat = PBSWechat.shared
-      let expectId = "testAppId"
-      let expectUniversalLink = "testUniversalLink"
-      context("When 调用confifure方法") {
-        let result = wechat.configure(appId: expectId, universalLink: expectUniversalLink)
+    testCrashs()
+  }
 
-        it("Then 返回的结果为false") {
-          expect(result).to(equal(false))
+  func testCrashs() {
+    describe("Given ASAuthorizationController初始化") {
+      if #available(iOS 13.0, *) {
+        let controller = getASAuthorizationController()
+        context("When 调用.didCompleteWithAuthorization") {
+          _ = controller.rx.didCompleteWithAuthorization
+          _ = controller.rx.didCompleteWithError
+          it("Then 不会闪退") {
+            expect(true).to(beTrue())
+          }
         }
-
-        it("Then 返回的appId 为 expectId") {
-          expect(wechat.appId).to(equal(expectId))
-        }
-
-        it("Then 返回的univeralLink 为 expectUniversalLink") {
-          expect(wechat.universalLink).to(equal(expectUniversalLink))
-        }
+      } else {
+        // Fallback on earlier versions
       }
     }
+  }
+
+  @available(iOS 13.0, *)
+  func getASAuthorizationController() -> ASAuthorizationController {
+    let appleIDProvider = ASAuthorizationAppleIDProvider()
+    let request = appleIDProvider.createRequest()
+    request.requestedScopes = [.fullName, .email]
+    let controller = ASAuthorizationController(authorizationRequests: [request])
+
+    return controller
   }
 }

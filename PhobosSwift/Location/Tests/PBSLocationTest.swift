@@ -1,7 +1,7 @@
 //
 //
-//  PBSWechatTests.swift
-//  PhobosSwiftTestKnight
+//  PBSLocationTest.swift
+//  PhobosSwiftLocation-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,29 +24,35 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftWechat
+@testable import PhobosSwiftLocation
 import Nimble
 import Quick
 
-class PBSWechatSpec: QuickSpec {
+class PBSLocationTest: QuickSpec {
+  let pbsLocation = PBSLocation()
+
   override func spec() {
-    describe("Given 本模块PBSWechat") {
-      let wechat = PBSWechat.shared
-      let expectId = "testAppId"
-      let expectUniversalLink = "testUniversalLink"
-      context("When 调用confifure方法") {
-        let result = wechat.configure(appId: expectId, universalLink: expectUniversalLink)
+    testConfigure()
+    testLocationAuthorizationAlertCtrl()
+  }
 
-        it("Then 返回的结果为false") {
-          expect(result).to(equal(false))
+  func testConfigure() {
+    describe("Given 初始化完成") {
+      context("When 调用pbsLocation.configure") {
+        pbsLocation.configure()
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
         }
+      }
+    }
+  }
 
-        it("Then 返回的appId 为 expectId") {
-          expect(wechat.appId).to(equal(expectId))
-        }
-
-        it("Then 返回的univeralLink 为 expectUniversalLink") {
-          expect(wechat.universalLink).to(equal(expectUniversalLink))
+  func testLocationAuthorizationAlertCtrl() {
+    describe("Given 初始化完成") {
+      context("When 调用PBSLocation.makeAlertCtrl") {
+        _ = PBSLocation.locationAuthorizationAlertCtrl
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
         }
       }
     }

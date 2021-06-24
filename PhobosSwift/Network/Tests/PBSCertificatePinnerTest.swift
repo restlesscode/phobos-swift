@@ -1,7 +1,7 @@
 //
 //
-//  PBSPush+Test.swift
-//  PhobosSwiftPush
+//  PBSCertificatePinnerTest.swift
+//  PhobosSwiftNetwork-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,31 +24,39 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftPush
-import Foundation
-import XCTest
+@testable import PhobosSwiftNetwork
+import Nimble
+import Quick
 
-class TestCase: XCTestCase {
-  let push = PBSPush.shared
-
-  override func setUp() {
-    super.setUp()
-
-    // 测试环境不需要configure，会产生错误
-    // push.configure(application: UIApplication.shared)
+class PBSCertificatePinnerTest: QuickSpec {
+  override func spec() {
+    testServerTrustEvaluator()
+    testEvaluate()
   }
 
-  override func tearDown() {
-    super.tearDown()
+  func testServerTrustEvaluator() {
+    describe("Given ServerTrustManager初始化完成, host: https://www.baidu.com") {
+      let host = "https://www.baidu.com"
+      let manager = PBSCertificatePinner.ServerTrustManager()
+      context("When 调用serverTrustEvaluator") {
+        _ = try? manager.serverTrustEvaluator(forHost: host)
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
   }
 
-  func test() {
-    push.registerRemoteNotifications(onUnauthorized: { _ in
-
-    }, onError: { _ in
-
-    }, onSuccess: { _ in
-
-    })
+  func testEvaluate() {
+    describe("Given ServerTrustEvaluator初始化完成, host: https://www.baidu.com") {
+      let host = "https://www.baidu.com"
+      let manager = PBSCertificatePinner.ServerTrustManager()
+      context("When 调用serverTrustEvaluator") {
+        _ = try? manager.serverTrustEvaluator(forHost: host)
+        it("Then 不会闪退") {
+          expect(true).to(beTrue())
+        }
+      }
+    }
   }
 }

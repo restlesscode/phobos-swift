@@ -1,7 +1,7 @@
 //
 //
-//  PBSWechatTests.swift
-//  PhobosSwiftTestKnight
+//  MKMapItemTest.swift
+//  PhobosSwiftLocation-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,29 +24,26 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftWechat
+@testable import PhobosSwiftLocation
+import MapKit
 import Nimble
 import Quick
 
-class PBSWechatSpec: QuickSpec {
+class MKMapItemTest: QuickSpec {
   override func spec() {
-    describe("Given 本模块PBSWechat") {
-      let wechat = PBSWechat.shared
-      let expectId = "testAppId"
-      let expectUniversalLink = "testUniversalLink"
-      context("When 调用confifure方法") {
-        let result = wechat.configure(appId: expectId, universalLink: expectUniversalLink)
+    testMakeMapItem()
+  }
 
-        it("Then 返回的结果为false") {
-          expect(result).to(equal(false))
-        }
-
-        it("Then 返回的appId 为 expectId") {
-          expect(wechat.appId).to(equal(expectId))
-        }
-
-        it("Then 返回的univeralLink 为 expectUniversalLink") {
-          expect(wechat.universalLink).to(equal(expectUniversalLink))
+  func testMakeMapItem() {
+    describe("Given 提供定位及名称") {
+      let location = CLLocation(latitude: 31.30018852172415, longitude: 121.29127298178801)
+      let name = "南翔"
+      context("When 调用MKMapItem.pbs.makeMapItem") {
+        let mapItem = MKMapItem.pbs.makeMapItem(location: location, name: name)
+        it("Then 返回结果不能为空，同时坐标与名称与参数一致") {
+          expect(mapItem).toNot(beNil())
+          expect(mapItem.name).to(equal(name))
+          expect(mapItem.placemark.location?.coordinate).to(equal(location.coordinate))
         }
       }
     }
