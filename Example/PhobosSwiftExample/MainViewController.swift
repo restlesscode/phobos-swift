@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftTestKnight
 import PhobosSwiftUIComponent
 
 class MainViewController: PBSArticleMasterViewController {
@@ -43,6 +44,8 @@ class MainViewController: PBSArticleMasterViewController {
     addCameraGuideExample()
     addGhostExample()
     addHadesExample()
+    addTestKnightExample()
+    addSlideExample()
   }
 
   private func addCameraGuideExample() {
@@ -84,6 +87,34 @@ class MainViewController: PBSArticleMasterViewController {
     sectionViewModels.append(PBSArticleSectionViewModel(title: "PhobosSwiftHades", subtitle: "展现移动端广告使用例子", articleViewModels: articleViewModels))
   }
 
+  private func addTestKnightExample() {
+    let articleModel = PBSArticleModel(title: "PhobosSwiftTestKnight",
+                                       subtitle: "",
+                                       tag: "PhobosSwiftTestKnight",
+                                       time: "Jun 24, 2021",
+                                       timestamp: nil,
+                                       coverImageUrl: nil,
+                                       url: nil,
+                                       body: nil)
+
+    let articleViewModels = [PBSArticleViewModel(model: articleModel)]
+    sectionViewModels.append(PBSArticleSectionViewModel(title: "PhobosSwiftTestKnight", subtitle: "有关 TestKnight 页面的使用例子", articleViewModels: articleViewModels))
+  }
+
+  private func addSlideExample() {
+    let articleModel = PBSArticleModel(title: "PhobosSwiftSlideout",
+                                       subtitle: "",
+                                       tag: "PhobosSwiftSlideout",
+                                       time: "Jun 25, 2021",
+                                       timestamp: nil,
+                                       coverImageUrl: nil,
+                                       url: nil,
+                                       body: nil)
+
+    let articleViewModels = [PBSArticleViewModel(model: articleModel)]
+    sectionViewModels.append(PBSArticleSectionViewModel(title: "PhobosSwiftSlideout", subtitle: "有关 Slideout 页面的使用例子", articleViewModels: articleViewModels))
+  }
+
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
 
@@ -97,6 +128,14 @@ class MainViewController: PBSArticleMasterViewController {
     } else if articleViewModel.title.value == "Hades Mobile Ads" {
       let viewCtrl = HadesMainViewController()
       show(viewCtrl, sender: self)
+    } else if articleViewModel.title.value == "PhobosSwiftTestKnight" {
+      let viewCtrl = PBSTestKnightViewController()
+      viewCtrl.completedHandler = { vc in
+        vc.dismiss(animated: true, completion: nil)
+      }
+      present(viewCtrl, animated: true, completion: nil)
+    } else if articleViewModel.title.value == "PhobosSwiftSlideout" {
+      present(SlideoutDemoCenterViewController.makeTheSlideoutDemo(), animated: true, completion: nil)
     }
   }
 
