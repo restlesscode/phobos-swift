@@ -24,8 +24,8 @@
 //  THE SOFTWARE.
 //
 
-import PhobosSwiftUIComponent
 import PhobosSwiftTestKnight
+import PhobosSwiftUIComponent
 
 class MainViewController: PBSArticleMasterViewController {
   override func viewDidLoad() {
@@ -45,6 +45,7 @@ class MainViewController: PBSArticleMasterViewController {
     addGhostExample()
     addHadesExample()
     addTestKnightExample()
+    addSlideExample()
   }
 
   private func addCameraGuideExample() {
@@ -100,6 +101,20 @@ class MainViewController: PBSArticleMasterViewController {
     sectionViewModels.append(PBSArticleSectionViewModel(title: "PhobosSwiftTestKnight", subtitle: "有关 TestKnight 页面的使用例子", articleViewModels: articleViewModels))
   }
 
+  private func addSlideExample() {
+    let articleModel = PBSArticleModel(title: "PhobosSwiftSlideout",
+                                       subtitle: "",
+                                       tag: "PhobosSwiftSlideout",
+                                       time: "Jun 25, 2021",
+                                       timestamp: nil,
+                                       coverImageUrl: nil,
+                                       url: nil,
+                                       body: nil)
+
+    let articleViewModels = [PBSArticleViewModel(model: articleModel)]
+    sectionViewModels.append(PBSArticleSectionViewModel(title: "PhobosSwiftSlideout", subtitle: "有关 Slideout 页面的使用例子", articleViewModels: articleViewModels))
+  }
+
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
 
@@ -119,6 +134,8 @@ class MainViewController: PBSArticleMasterViewController {
         vc.dismiss(animated: true, completion: nil)
       }
       present(viewCtrl, animated: true, completion: nil)
+    } else if articleViewModel.title.value == "PhobosSwiftSlideout" {
+      present(SlideoutDemoCenterViewController.makeTheSlideoutDemo(), animated: true, completion: nil)
     }
   }
 

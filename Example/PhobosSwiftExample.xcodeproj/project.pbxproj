@@ -36,6 +36,7 @@
 		E0A3869D268185DA003CCE8D /* AdaptiveBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3868E268185DA003CCE8D /* AdaptiveBannerViewController.swift */; };
 		E0A3869E268185DA003CCE8D /* BannerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3868F268185DA003CCE8D /* BannerListViewController.swift */; };
 		E0A386A0268193D0003CCE8D /* PhobosSwiftExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3869F268193D0003CCE8D /* PhobosSwiftExample.swift */; };
+		E0E0D665268583D3000CB88B /* SlideoutDemoCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D664268583D3000CB88B /* SlideoutDemoCenterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		E0A3868E268185DA003CCE8D /* AdaptiveBannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveBannerViewController.swift; sourceTree = "<group>"; };
 		E0A3868F268185DA003CCE8D /* BannerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerListViewController.swift; sourceTree = "<group>"; };
 		E0A3869F268193D0003CCE8D /* PhobosSwiftExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhobosSwiftExample.swift; sourceTree = "<group>"; };
+		E0E0D664268583D3000CB88B /* SlideoutDemoCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideoutDemoCenterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		A3BE5B9F264BB3330049D097 /* PhobosSwiftExample */ = {
 			isa = PBXGroup;
 			children = (
+				E0E0D6612685812E000CB88B /* Slideout */,
 				E0A3867C268185DA003CCE8D /* Hades */,
 				E0A3867726818505003CCE8D /* Kits */,
 				E0A3866B26818325003CCE8D /* Article */,
@@ -252,6 +255,30 @@
 				E0A3868D268185DA003CCE8D /* NativeAdvancedVideoViewController.swift */,
 				E0A3868E268185DA003CCE8D /* AdaptiveBannerViewController.swift */,
 				E0A3868F268185DA003CCE8D /* BannerListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E0E0D6612685812E000CB88B /* Slideout */ = {
+			isa = PBXGroup;
+			children = (
+				E0E0D66226858143000CB88B /* Views */,
+			);
+			path = Slideout;
+			sourceTree = "<group>";
+		};
+		E0E0D66226858143000CB88B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0E0D66326858150000CB88B /* ViewControllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E0E0D66326858150000CB88B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0E0D664268583D3000CB88B /* SlideoutDemoCenterViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -432,6 +459,7 @@
 				E0A38694268185DA003CCE8D /* NativeAdDemoViewController.swift in Sources */,
 				E0A3869B268185DA003CCE8D /* IntersitialAdListViewController.swift in Sources */,
 				E0A38699268185DA003CCE8D /* RewardedAdDemoViewController.swift in Sources */,
+				E0E0D665268583D3000CB88B /* SlideoutDemoCenterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
