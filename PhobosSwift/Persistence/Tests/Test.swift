@@ -41,7 +41,7 @@ import XCTest
 
 /// Test the enhanced features of Bundle class is implemented in this extension
 class Test: XCTestCase {
-  let testRealm = Realm.pbs_makeRealm(identifier: "test-realm", in: .memory)
+  let testRealm = Realm.pbs.makeRealm(identifier: "test-realm", in: .memory)
 
   override func setUp() {
     super.setUp()

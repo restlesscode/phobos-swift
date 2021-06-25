@@ -28,6 +28,7 @@ import PhobosSwiftAuth
 import PhobosSwiftCore
 import PhobosSwiftLog
 import PhobosSwiftNetwork
+import PhobosSwiftPush
 import PhobosSwiftRouter
 import PhobosSwiftWechat
 import UIKit
@@ -40,6 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let wxResult = PBSWechat.shared.configure(appId: "xxxx", universalLink: "https://xxxx/xxx")
     print(wxResult)
     PBSLogger.configure(identifier: Bundle.main.bundleIdentifier ?? "AAA", level: .verbose, mode: .icloud())
+
+    PBSPush.shared.registerRemoteNotifications { status in
+      PBSLogger.shared.debug(message: "\(status)")
+    } onError: { error in
+      PBSLogger.shared.debug(message: "\(error)")
+    } onSuccess: { data in
+      PBSLogger.shared.debug(message: "\(data)")
+    }
 
     return true
   }

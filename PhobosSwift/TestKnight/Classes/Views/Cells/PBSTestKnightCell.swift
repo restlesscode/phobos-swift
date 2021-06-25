@@ -25,7 +25,6 @@
 //
 
 import PhobosSwiftCore
-import SnapKit
 import RxCocoa
 import RxSwift
 import SnapKit
