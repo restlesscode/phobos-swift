@@ -129,11 +129,14 @@ class MainViewController: PBSArticleMasterViewController {
       let viewCtrl = HadesMainViewController()
       show(viewCtrl, sender: self)
     } else if articleViewModel.title.value == "PhobosSwiftTestKnight" {
-      let viewCtrl = PBSTestKnightViewController()
-      viewCtrl.completedHandler = { vc in
-        vc.dismiss(animated: true, completion: nil)
+      if let keyWindow = UIApplication.pbs_shared?.windows.first {
+        let lastRootViewController = keyWindow.rootViewController
+        PBSTestKnight.shared.configure(window: keyWindow, completed: {
+          UIWindow.transition(with: keyWindow, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+            keyWindow.rootViewController = lastRootViewController
+          })
+        })
       }
-      present(viewCtrl, animated: true, completion: nil)
     } else if articleViewModel.title.value == "PhobosSwiftSlideout" {
       present(SlideoutDemoCenterViewController.makeTheSlideoutDemo(), animated: true, completion: nil)
     }
