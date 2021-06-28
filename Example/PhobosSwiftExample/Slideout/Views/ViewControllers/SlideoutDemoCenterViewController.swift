@@ -53,7 +53,7 @@ class SlideoutDemoCenterViewController: UIViewController {
     }
     return vc
   }
-  
+
   var backButton = UIButton(type: .custom)
 
   override func viewDidLoad() {
