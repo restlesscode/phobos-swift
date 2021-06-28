@@ -40,7 +40,7 @@ class IntersitialAdListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Intersitial Ad Demo"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     makeSubviews()
   }
 

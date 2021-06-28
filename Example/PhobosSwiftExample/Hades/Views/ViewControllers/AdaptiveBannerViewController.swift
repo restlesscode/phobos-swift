@@ -35,7 +35,7 @@ class AdaptiveBannerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = bannerModel?.title
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     makeSubviews()
   }
 

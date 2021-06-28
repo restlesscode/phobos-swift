@@ -1,7 +1,7 @@
-PhobosSwiftAuth
+PhobosSwiftPersistence
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
+- Realm: Realm封装
 
 
 # Requirements
@@ -14,9 +14,9 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
+import PhobosSwiftPersistence
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+let realm = Realm.pbs.makeRealm()
 ```
 
 # Installation
@@ -25,7 +25,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftPersistence', '~> 0.1.0'
 ```
 
 
