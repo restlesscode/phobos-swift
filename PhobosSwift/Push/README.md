@@ -1,7 +1,7 @@
-PhobosSwiftAuth
+PhobosSwiftPush
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
+- Nitifications: 注册、接收、推送
 
 
 # Requirements
@@ -14,9 +14,17 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+import PhobosSwiftPush
+
+PBSPush.shared.registerRemoteNotifications { status in
+ 
+} onError: { error in
+
+} onSuccess: { data in
+
+}
+
 ```
 
 # Installation
@@ -25,7 +33,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftPush', '~> 0.1.0'
 ```
 
 

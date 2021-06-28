@@ -1,7 +1,7 @@
-PhobosSwiftAuth
+PhobosSwiftWechat
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
+- 基于微信SDK的封装（检查微信版本、是否安装、安装地址、调起微信、处理回调等）
 
 
 # Requirements
@@ -14,9 +14,12 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+import PhobosSwiftWechat
+
+let wechat = PBSWechat.shared
+wechat.configure(appId: "", universalLink: "")
+
 ```
 
 # Installation
@@ -25,7 +28,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftWechat', '~> 0.1.0'
 ```
 
 

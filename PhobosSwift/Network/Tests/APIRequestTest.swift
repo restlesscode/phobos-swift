@@ -67,10 +67,10 @@ class APIRequestTest: QuickSpec {
           promisable.then { (result: Result<ModelResponse<APIRequestResponse>, Error>) in
             var expectResult: Result<APIRequestResponse, Error>
             switch result {
-              case .success(let response):
-                expectResult = .success(response.model)
-              case .failure(let error):
-                expectResult = .failure(error)
+            case let .success(response):
+              expectResult = .success(response.model)
+            case let .failure(error):
+              expectResult = .failure(error)
             }
             self.checkResponese(result: expectResult)
             done()
