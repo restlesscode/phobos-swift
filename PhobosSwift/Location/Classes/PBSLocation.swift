@@ -30,9 +30,9 @@ import PhobosSwiftCore
 import PhobosSwiftLog
 import RxSwift
 
-/// CodebaseUILocation 将CLLocationManager和CLGeocoder 常用的方法做了封装，让调用更简单
+/// PBSLocation 将CLLocationManager和CLGeocoder 常用的方法做了封装，让调用更简单
 ///
-/// 整个App生命周期，取保只需要一个CodebaseUILocation即可
+/// 整个App生命周期，取保只需要一个PBSLocation即可
 open class PBSLocation {
   let disposeBag = DisposeBag()
 
@@ -57,7 +57,7 @@ open class PBSLocation {
       case .restricted, .denied:
         // Disable location features
         // disableLocationBasedFeatures()
-        DispatchQueue.pbs_once {
+        DispatchQueue.pbs.once {
           if PBSLocation.enableUnauthorizationAlert {
             if PBSLocation.locationAuthorizationAlertCtrl.presentingViewController == nil &&
               !PBSLocation.locationAuthorizationAlertCtrl.isBeingPresented {

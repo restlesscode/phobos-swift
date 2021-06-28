@@ -16,6 +16,27 @@
 		A3BE5BAD264BB3340049D097 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BAB264BB3340049D097 /* LaunchScreen.storyboard */; };
 		A3BE5BB7264CD20E0049D097 /* Phobos-Service-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BE5BB6264CD20E0049D097 /* Phobos-Service-Info.plist */; };
 		A3EAB08E264E907400A50916 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3EAB08D264E907400A50916 /* CloudKit.framework */; };
+		E0A38666268180A7003CCE8D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38665268180A7003CCE8D /* MainViewController.swift */; };
+		E0A3867426818325003CCE8D /* GhostMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3866E26818325003CCE8D /* GhostMasterViewController.swift */; };
+		E0A3867526818325003CCE8D /* CameraGuidePreviewImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3867226818325003CCE8D /* CameraGuidePreviewImageViewController.swift */; };
+		E0A3867626818325003CCE8D /* CameraGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3867326818325003CCE8D /* CameraGuideViewController.swift */; };
+		E0A38690268185DA003CCE8D /* BannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3867E268185DA003CCE8D /* BannerViewModel.swift */; };
+		E0A38691268185DA003CCE8D /* BannerListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38680268185DA003CCE8D /* BannerListModel.swift */; };
+		E0A38692268185DA003CCE8D /* NativeAdSmallTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38683268185DA003CCE8D /* NativeAdSmallTemplateViewController.swift */; };
+		E0A38693268185DA003CCE8D /* HadesMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38684268185DA003CCE8D /* HadesMainViewController.swift */; };
+		E0A38694268185DA003CCE8D /* NativeAdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38685268185DA003CCE8D /* NativeAdDemoViewController.swift */; };
+		E0A38695268185DA003CCE8D /* NativeAdListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38686268185DA003CCE8D /* NativeAdListViewController.swift */; };
+		E0A38696268185DA003CCE8D /* NativeAdMediumTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38687268185DA003CCE8D /* NativeAdMediumTemplateViewController.swift */; };
+		E0A38697268185DA003CCE8D /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38688268185DA003CCE8D /* BannerViewController.swift */; };
+		E0A38698268185DA003CCE8D /* RewardedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A38689268185DA003CCE8D /* RewardedListViewController.swift */; };
+		E0A38699268185DA003CCE8D /* RewardedAdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3868A268185DA003CCE8D /* RewardedAdDemoViewController.swift */; };
+		E0A3869A268185DA003CCE8D /* InterstitialAdDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3868B268185DA003CCE8D /* InterstitialAdDemoViewController.swift */; };
+		E0A3869B268185DA003CCE8D /* IntersitialAdListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3868C268185DA003CCE8D /* IntersitialAdListViewController.swift */; };
+		E0A3869C268185DA003CCE8D /* NativeAdvancedVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3868D268185DA003CCE8D /* NativeAdvancedVideoViewController.swift */; };
+		E0A3869D268185DA003CCE8D /* AdaptiveBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3868E268185DA003CCE8D /* AdaptiveBannerViewController.swift */; };
+		E0A3869E268185DA003CCE8D /* BannerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3868F268185DA003CCE8D /* BannerListViewController.swift */; };
+		E0A386A0268193D0003CCE8D /* PhobosSwiftExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3869F268193D0003CCE8D /* PhobosSwiftExample.swift */; };
+		E0E0D665268583D3000CB88B /* SlideoutDemoCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E0D664268583D3000CB88B /* SlideoutDemoCenterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +54,27 @@
 		A3EAB08D264E907400A50916 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D6A53AFCBE80CF7B7EDFF363 /* Pods-PhobosSwiftExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhobosSwiftExample.release.xcconfig"; path = "Target Support Files/Pods-PhobosSwiftExample/Pods-PhobosSwiftExample.release.xcconfig"; sourceTree = "<group>"; };
 		DBC15B467BD015B8C2F42EFD /* Pods_PhobosSwiftExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhobosSwiftExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0A38665268180A7003CCE8D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E0A3866E26818325003CCE8D /* GhostMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GhostMasterViewController.swift; sourceTree = "<group>"; };
+		E0A3867226818325003CCE8D /* CameraGuidePreviewImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraGuidePreviewImageViewController.swift; sourceTree = "<group>"; };
+		E0A3867326818325003CCE8D /* CameraGuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraGuideViewController.swift; sourceTree = "<group>"; };
+		E0A3867E268185DA003CCE8D /* BannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewModel.swift; sourceTree = "<group>"; };
+		E0A38680268185DA003CCE8D /* BannerListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerListModel.swift; sourceTree = "<group>"; };
+		E0A38683268185DA003CCE8D /* NativeAdSmallTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdSmallTemplateViewController.swift; sourceTree = "<group>"; };
+		E0A38684268185DA003CCE8D /* HadesMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HadesMainViewController.swift; sourceTree = "<group>"; };
+		E0A38685268185DA003CCE8D /* NativeAdDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdDemoViewController.swift; sourceTree = "<group>"; };
+		E0A38686268185DA003CCE8D /* NativeAdListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdListViewController.swift; sourceTree = "<group>"; };
+		E0A38687268185DA003CCE8D /* NativeAdMediumTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdMediumTemplateViewController.swift; sourceTree = "<group>"; };
+		E0A38688268185DA003CCE8D /* BannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		E0A38689268185DA003CCE8D /* RewardedListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardedListViewController.swift; sourceTree = "<group>"; };
+		E0A3868A268185DA003CCE8D /* RewardedAdDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardedAdDemoViewController.swift; sourceTree = "<group>"; };
+		E0A3868B268185DA003CCE8D /* InterstitialAdDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialAdDemoViewController.swift; sourceTree = "<group>"; };
+		E0A3868C268185DA003CCE8D /* IntersitialAdListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntersitialAdListViewController.swift; sourceTree = "<group>"; };
+		E0A3868D268185DA003CCE8D /* NativeAdvancedVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeAdvancedVideoViewController.swift; sourceTree = "<group>"; };
+		E0A3868E268185DA003CCE8D /* AdaptiveBannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveBannerViewController.swift; sourceTree = "<group>"; };
+		E0A3868F268185DA003CCE8D /* BannerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerListViewController.swift; sourceTree = "<group>"; };
+		E0A3869F268193D0003CCE8D /* PhobosSwiftExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhobosSwiftExample.swift; sourceTree = "<group>"; };
+		E0E0D664268583D3000CB88B /* SlideoutDemoCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideoutDemoCenterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,10 +129,16 @@
 		A3BE5B9F264BB3330049D097 /* PhobosSwiftExample */ = {
 			isa = PBXGroup;
 			children = (
+				E0E0D6612685812E000CB88B /* Slideout */,
+				E0A3867C268185DA003CCE8D /* Hades */,
+				E0A3867726818505003CCE8D /* Kits */,
+				E0A3866B26818325003CCE8D /* Article */,
+				E0A3866F26818325003CCE8D /* Camera */,
 				A3E63930264E689D00EBEEDD /* PhobosSwiftExample.entitlements */,
 				A3BE5BA0264BB3330049D097 /* AppDelegate.swift */,
 				A3BE5BA2264BB3330049D097 /* SceneDelegate.swift */,
 				A3BE5BA4264BB3330049D097 /* ViewController.swift */,
+				E0A38665268180A7003CCE8D /* MainViewController.swift */,
 				A3BE5BA6264BB3330049D097 /* Main.storyboard */,
 				A3BE5BA9264BB3340049D097 /* Assets.xcassets */,
 				A3BE5BAB264BB3340049D097 /* LaunchScreen.storyboard */,
@@ -98,6 +146,141 @@
 				A3BE5BB6264CD20E0049D097 /* Phobos-Service-Info.plist */,
 			);
 			path = PhobosSwiftExample;
+			sourceTree = "<group>";
+		};
+		E0A3866B26818325003CCE8D /* Article */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3866C26818325003CCE8D /* Views */,
+			);
+			path = Article;
+			sourceTree = "<group>";
+		};
+		E0A3866C26818325003CCE8D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3866D26818325003CCE8D /* ViewControllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E0A3866D26818325003CCE8D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3866E26818325003CCE8D /* GhostMasterViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E0A3866F26818325003CCE8D /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3867026818325003CCE8D /* Views */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		E0A3867026818325003CCE8D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3867126818325003CCE8D /* ViewControllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E0A3867126818325003CCE8D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3867226818325003CCE8D /* CameraGuidePreviewImageViewController.swift */,
+				E0A3867326818325003CCE8D /* CameraGuideViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E0A3867726818505003CCE8D /* Kits */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3869F268193D0003CCE8D /* PhobosSwiftExample.swift */,
+			);
+			path = Kits;
+			sourceTree = "<group>";
+		};
+		E0A3867C268185DA003CCE8D /* Hades */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3867D268185DA003CCE8D /* ViewModel */,
+				E0A3867F268185DA003CCE8D /* Models */,
+				E0A38681268185DA003CCE8D /* Views */,
+			);
+			path = Hades;
+			sourceTree = "<group>";
+		};
+		E0A3867D268185DA003CCE8D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0A3867E268185DA003CCE8D /* BannerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E0A3867F268185DA003CCE8D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E0A38680268185DA003CCE8D /* BannerListModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E0A38681268185DA003CCE8D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0A38682268185DA003CCE8D /* ViewControllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E0A38682268185DA003CCE8D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0A38683268185DA003CCE8D /* NativeAdSmallTemplateViewController.swift */,
+				E0A38684268185DA003CCE8D /* HadesMainViewController.swift */,
+				E0A38685268185DA003CCE8D /* NativeAdDemoViewController.swift */,
+				E0A38686268185DA003CCE8D /* NativeAdListViewController.swift */,
+				E0A38687268185DA003CCE8D /* NativeAdMediumTemplateViewController.swift */,
+				E0A38688268185DA003CCE8D /* BannerViewController.swift */,
+				E0A38689268185DA003CCE8D /* RewardedListViewController.swift */,
+				E0A3868A268185DA003CCE8D /* RewardedAdDemoViewController.swift */,
+				E0A3868B268185DA003CCE8D /* InterstitialAdDemoViewController.swift */,
+				E0A3868C268185DA003CCE8D /* IntersitialAdListViewController.swift */,
+				E0A3868D268185DA003CCE8D /* NativeAdvancedVideoViewController.swift */,
+				E0A3868E268185DA003CCE8D /* AdaptiveBannerViewController.swift */,
+				E0A3868F268185DA003CCE8D /* BannerListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E0E0D6612685812E000CB88B /* Slideout */ = {
+			isa = PBXGroup;
+			children = (
+				E0E0D66226858143000CB88B /* Views */,
+			);
+			path = Slideout;
+			sourceTree = "<group>";
+		};
+		E0E0D66226858143000CB88B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0E0D66326858150000CB88B /* ViewControllers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E0E0D66326858150000CB88B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0E0D664268583D3000CB88B /* SlideoutDemoCenterViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -113,7 +296,7 @@
 				A3BE5B9B264BB3330049D097 /* Resources */,
 				22FA4695376AEBE0E63AFD0C /* [CP] Embed Pods Frameworks */,
 				E697C81BBCF22FA0DDD06697 /* Run SwiftLint Script */,
-				C8A39BC092ECCE9AEE6F56BA /* Run SwiftFormat Script */,
+				142373F955DE8EABAC01C3C1 /* Run SwiftFormat Script */,
 			);
 			buildRules = (
 			);
@@ -171,6 +354,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		142373F955DE8EABAC01C3C1 /* Run SwiftFormat Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftFormat Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\n\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/PhobosSwiftExample\"\n\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/../PhobosSwift\"\n      \n";
+		};
 		22FA4695376AEBE0E63AFD0C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,24 +411,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C8A39BC092ECCE9AEE6F56BA /* Run SwiftFormat Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftFormat Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"$SRCROOT\"";
-		};
 		E697C81BBCF22FA0DDD06697 /* Run SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,9 +436,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0A38697268185DA003CCE8D /* BannerViewController.swift in Sources */,
+				E0A3869D268185DA003CCE8D /* AdaptiveBannerViewController.swift in Sources */,
+				E0A3869E268185DA003CCE8D /* BannerListViewController.swift in Sources */,
+				E0A38693268185DA003CCE8D /* HadesMainViewController.swift in Sources */,
+				E0A3869A268185DA003CCE8D /* InterstitialAdDemoViewController.swift in Sources */,
+				E0A38695268185DA003CCE8D /* NativeAdListViewController.swift in Sources */,
+				E0A3867626818325003CCE8D /* CameraGuideViewController.swift in Sources */,
+				E0A38698268185DA003CCE8D /* RewardedListViewController.swift in Sources */,
+				E0A3867426818325003CCE8D /* GhostMasterViewController.swift in Sources */,
+				E0A38690268185DA003CCE8D /* BannerViewModel.swift in Sources */,
+				E0A3867526818325003CCE8D /* CameraGuidePreviewImageViewController.swift in Sources */,
+				E0A38692268185DA003CCE8D /* NativeAdSmallTemplateViewController.swift in Sources */,
 				A3BE5BA5264BB3330049D097 /* ViewController.swift in Sources */,
 				A3BE5BA1264BB3330049D097 /* AppDelegate.swift in Sources */,
 				A3BE5BA3264BB3330049D097 /* SceneDelegate.swift in Sources */,
+				E0A3869C268185DA003CCE8D /* NativeAdvancedVideoViewController.swift in Sources */,
+				E0A38666268180A7003CCE8D /* MainViewController.swift in Sources */,
+				E0A38691268185DA003CCE8D /* BannerListModel.swift in Sources */,
+				E0A386A0268193D0003CCE8D /* PhobosSwiftExample.swift in Sources */,
+				E0A38696268185DA003CCE8D /* NativeAdMediumTemplateViewController.swift in Sources */,
+				E0A38694268185DA003CCE8D /* NativeAdDemoViewController.swift in Sources */,
+				E0A3869B268185DA003CCE8D /* IntersitialAdListViewController.swift in Sources */,
+				E0A38699268185DA003CCE8D /* RewardedAdDemoViewController.swift in Sources */,
+				E0E0D665268583D3000CB88B /* SlideoutDemoCenterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

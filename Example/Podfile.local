@@ -27,15 +27,33 @@ target 'PhobosSwiftExample' do
   pod 'PhobosSwiftWechat', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Auth
   pod 'PhobosSwiftAuth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Groth
+  pod 'PhobosSwiftGrowth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Slideout
+  pod 'PhobosSwiftSlideout', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Log
   pod 'PhobosSwiftLocation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Persistence
   pod 'PhobosSwiftPersistence', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   pod 'PhobosSwiftPersistence/Realm', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
+  # Media
+  pod 'PhobosSwiftMedia', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Push
   pod 'PhobosSwiftPush', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Payment
   pod 'PhobosSwiftPayment', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
+  # UIComponent
+  pod 'PhobosSwiftUIComponent', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # TestKnight
+  pod 'PhobosSwiftTestKnight', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Animation
+  pod 'PhobosSwiftAnimation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Splash
+  pod 'PhobosSwiftSplash', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Hades
+  pod 'PhobosSwiftHades', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  
+  pod 'MirrorGoogleMobileAds', :path => '../../mirror-google-mobile-ads-sdk/'
   #pod 'PhobosSwiftPayment/Wechatpay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
   #pod 'PhobosSwiftPayment/Alipay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
 
@@ -58,7 +76,10 @@ post_install do |installer|
     
     if not exist_run_script(target, 'Run SwiftFormat Script')
       puts 'Add Run SwiftFormat Script for %s' % [target.name]
-      add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$SRCROOT"')
+      add_run_script(target, 'Run SwiftFormat Script', '
+"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "${SRCROOT}/PhobosSwiftExample"
+"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "${SRCROOT}/../PhobosSwift"
+      ')
     end
     
     # 调整配置
@@ -74,12 +95,12 @@ post_install do |installer|
     #puts '----%s----' % [target.name]
     
     # add `Run SwiftFormat Script` for pods
-    if ['PhobosSwiftCore'].include?(target.name)
-      if not exist_run_script(target, 'Run SwiftFormat Script')
-        puts 'Add Run SwiftFormat Script for %s' % [target.name]
-        add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')
-      end
-    end
+#    if ['PhobosSwiftCore'].include?(target.name)
+#      if not exist_run_script(target, 'Run SwiftFormat Script')
+#        puts 'Add Run SwiftFormat Script for %s' % [target.name]
+#        add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')
+#      end
+#    end
     
     # mute warning on `IPHONEOS_DEPLOYMENT_TARGET`
     if ['SwiftFormat', 'ObjcExceptionBridging'].include?(target.name)

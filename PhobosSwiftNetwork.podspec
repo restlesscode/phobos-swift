@@ -47,11 +47,11 @@ TODO: Add long description of the pod here.
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
 
   s.preserve_paths = [
-    "{group}/#{name}/README.md",
-    "{group}/#{name}/CHANGELOG.md"
+    "#{group}/#{name}/README.md",
+    "#{group}/#{name}/CHANGELOG.md"
   ]
   
-  s.dependency 'Alamofire', '~> 5.0.0'
+  s.dependency 'Alamofire', '~> 5.1.0'
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
   s.dependency 'CocoaAsyncSocket', '~> 7.6.5'
@@ -71,6 +71,8 @@ TODO: Add long description of the pod here.
   if enable_test
     s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = "#{group}/#{name}/Tests/**/*.{swift,h,m}"
+      test_spec.dependency 'Quick'
+      test_spec.dependency 'Nimble'
     end
   end
   

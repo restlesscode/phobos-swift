@@ -1,0 +1,15 @@
+import_from_git(
+  url: "https://gitee.com/tjerwinchen/fastools.git", # The URL of the repository to import the Fastfile from.
+  branch: "master", # The branch to checkout on the repository
+  path: "lib/fastlane/fastlane.pods.rb", # The path of the Fastfile in the repository
+  #version: "~> 1.0.0" # The version to checkout on the repository. Optimistic match operator can be used to select the latest version within constraints.
+)
+
+import_from_git(
+  url: "https://gitee.com/tjerwinchen/fastools.git", # The URL of the repository to import the Fastfile from.
+  branch: "master", # The branch to checkout on the repository
+  path: "lib/fastlane/fastlane.framework.rb", # The path of the Fastfile in the repository
+  #version: "~> 1.0.0" # The version to checkout on the repository. Optimistic match operator can be used to select the latest version within constraints.
+)
+
+

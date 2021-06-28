@@ -48,7 +48,7 @@ public class PBSCore: NSObject {
     PBSVersion.makeVersion(from: serviceInfo.internalBuildVersion)
   }
 
-  private let appDelegateSwizzler = PhobosSwiftCoreAppDelegateSwizzler()
+  private let appDelegateSwizzler = PBSCoreAppDelegateSwizzler()
 
   /// Phobos-Service-Info Model
   public var serviceInfo: PhobosServiceInfo!
@@ -84,7 +84,7 @@ public class PBSCore: NSObject {
       fatalError("Data in `\(Self.infoPath)` loaded in error")
     }
 
-    guard let serviceInfo = data.pbs_model(modelType: PhobosServiceInfo.self, decoderType: .propertyList) else {
+    guard let serviceInfo: PhobosServiceInfo = data.pbs.model(decoderType: .propertyList) else {
       fatalError("Data in `\(Self.infoPath)` loaded in error")
     }
 

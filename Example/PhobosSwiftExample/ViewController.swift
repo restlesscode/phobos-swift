@@ -27,11 +27,13 @@
 import PhobosSwiftCore
 import PhobosSwiftLocation
 import PhobosSwiftLog
+import PhobosSwiftMedia
 import PhobosSwiftNetwork
 import PhobosSwiftPayment
 import PhobosSwiftPersistence
 import PhobosSwiftPush
 import PhobosSwiftRouter
+import PhobosSwiftTestKnight
 import PhobosSwiftWechat
 import UIKit
 
