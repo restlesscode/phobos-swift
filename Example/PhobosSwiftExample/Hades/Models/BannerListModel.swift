@@ -1,7 +1,7 @@
 //
 //
-//  PBSPush+Test.swift
-//  PhobosSwiftPush
+//  BannerListModel.swift
+//  PhobosSwiftExample
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,20 +24,10 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftPush
-import Nimble
-import Quick
+import Foundation
+import PhobosSwiftHades
 
-class PBSPushSpec: QuickSpec {
-  override func spec() {
-    describe("Given 一个expect Data") {
-      let expectData = Data(base64Encoded: "test")
-      context("When 调用deviceTokenString") {
-        let string = expectData?.deviceTokenString
-        it("Then 返回的string 为b5eb2d") {
-          expect(string).to(be("b5eb2d"))
-        }
-      }
-    }
-  }
+struct BannerModel {
+  var title: String
+  var bannerType: PBSBannerAd.PBSBannerType
 }

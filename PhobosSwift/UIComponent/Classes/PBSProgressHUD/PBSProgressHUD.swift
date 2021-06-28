@@ -327,22 +327,32 @@ public class PBSProgressHUD: UIView {
         $0.right.equalToSuperview().offset(-16)
         $0.size.equalTo(40)
       }
+      
+      if labelStatus?.superview != nil {
+        labelStatus?.snp.remakeConstraints {
+          $0.centerY.equalToSuperview()
+          $0.left.equalToSuperview().offset(16)
+          $0.right.equalToSuperview().offset(-72)
+        }
+      }
     }
+    
     if staticImageView?.superview != nil {
       staticImageView?.snp.makeConstraints {
         $0.centerY.equalToSuperview()
         $0.size.equalTo(22)
         $0.left.equalToSuperview().offset(16)
       }
-    }
-
-    if labelStatus?.superview != nil {
-      labelStatus?.snp.makeConstraints {
-        $0.centerY.equalToSuperview()
-        $0.left.equalToSuperview().offset(49)
-        $0.right.equalToSuperview().offset(-50)
+      
+      if labelStatus?.superview != nil {
+        labelStatus?.snp.remakeConstraints {
+          $0.centerY.equalToSuperview()
+          $0.left.equalToSuperview().offset(49)
+          $0.right.equalToSuperview().offset(-32)
+        }
       }
     }
+
 
 //    if let text = labelStatus?.text {
 //      let sizeMax = CGSize(width: 250, height: 250)

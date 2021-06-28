@@ -1,7 +1,7 @@
 //
 //
-//  Test.swift
-//  PhobosSwiftPersistence
+//  PhobosSwiftExample.swift
+//  PhobosSwiftExample
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,46 +24,32 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftPersistence
 import Foundation
-import MirrorRealmSwift
-import XCTest
+import UIKit
 
-/// Object representing a single flash card
-@objcMembers class TestEntity: Object {
-  // address dictionary properties
-  dynamic var name: String? // eg. Apple Inc.
+struct PhobosSwiftExample {
+  struct Constants {
+    static let kTestGADBannerViewAdUnitID = "ca-app-pub-3940256099942544/2934735716"
+    static let kTestGADRewardedAdUnitID = "ca-app-pub-3940256099942544/1712485313"
+    static let kTestGADIntersitialAdUnitID = "ca-app-pub-3940256099942544/4411468910"
+    static let kTestGADAppOpenAdUnitID = "ca-app-pub-3940256099942544/5662855259"
+    static let kTestGADNativeAdUnitID = "ca-app-pub-3940256099942544/3986624511"
+    static let kTestGADNativeAdVideoUnitID = "ca-app-pub-3940256099942544/2521693316"
+  }
 
-  override static func primaryKey() -> String? {
-    "name"
+  struct Color {
+    static let kBlackgroudColorSet = [UIColor.black, UIColor.pbs.color(R: 36, G: 41, B: 43)]
+    static let kBlackgroudColorTuple = (UIColor.black, UIColor.pbs.color(R: 36, G: 41, B: 43))
   }
 }
 
-/// Test the enhanced features of Bundle class is implemented in this extension
-class Test: XCTestCase {
-  let testRealm = Realm.pbs.makeRealm(identifier: "test-realm", in: .memory)
-
-  override func setUp() {
-    super.setUp()
-  }
-
-  func test() {
-    do {
-      try testRealm?.write {
-        let testEntity = TestEntity()
-        testEntity.name = "PhobosSwift-Persisitence-Realm"
-        testRealm?.add(testEntity, update: .modified)
-      }
-    } catch {
-      XCTAssertNil(error)
-    }
-
-    let testModels = testRealm?.objects(TestEntity.self)
-
-    XCTAssertEqual("PhobosSwift-Persisitence-Realm", testModels?.first?.name)
-  }
-
-  override func tearDown() {
-    super.tearDown()
+extension String {
+  /// # "2016-04-14T10:44:00+0000" to Date
+  var pbs_iso8601Date: Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    let date = dateFormatter.date(from: self)
+    return date
   }
 }

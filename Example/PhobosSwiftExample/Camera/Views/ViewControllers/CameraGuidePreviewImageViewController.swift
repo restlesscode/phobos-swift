@@ -1,7 +1,7 @@
 //
 //
-//  PBSPush+Test.swift
-//  PhobosSwiftPush
+//  CameraGuidePreviewImageViewController.swift
+//  PhobosSwiftExample
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,20 +24,24 @@
 //  THE SOFTWARE.
 //
 
-@testable import PhobosSwiftPush
-import Nimble
-import Quick
+import UIKit
 
-class PBSPushSpec: QuickSpec {
-  override func spec() {
-    describe("Given 一个expect Data") {
-      let expectData = Data(base64Encoded: "test")
-      context("When 调用deviceTokenString") {
-        let string = expectData?.deviceTokenString
-        it("Then 返回的string 为b5eb2d") {
-          expect(string).to(be("b5eb2d"))
-        }
-      }
-    }
+class CameraGuidePreviewImageViewController: UIViewController {
+  lazy var imageView: UIImageView = {
+    let _imageView = UIImageView()
+    view.addSubview(_imageView)
+    _imageView.contentMode = .scaleToFill
+
+    return _imageView
+  }()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
+    imageView.frame = CGRect(x: 40, y: 256, width: view.bounds.width - 80, height: 256)
   }
 }

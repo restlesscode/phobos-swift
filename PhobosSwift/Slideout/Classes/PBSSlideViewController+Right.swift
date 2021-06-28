@@ -117,6 +117,7 @@ extension PBSSlideViewController {
     delegate?.rightPanelWillToggle?(slideViewController: self)
 
     if shouldExpand {
+      currentState = .rightPanelSlidedout
       switch style.expandMode {
       case .normal,
            .scaled:

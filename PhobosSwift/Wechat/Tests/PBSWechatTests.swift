@@ -25,11 +25,17 @@
 //
 
 @testable import PhobosSwiftWechat
+import MirrorWechatSDK
 import Nimble
 import Quick
 
 class PBSWechatSpec: QuickSpec {
   override func spec() {
+    testConfigureWechat()
+    testPublicFunction()
+  }
+
+  func testConfigureWechat() {
     describe("Given 本模块PBSWechat") {
       let wechat = PBSWechat.shared
       let expectId = "testAppId"
@@ -47,6 +53,28 @@ class PBSWechatSpec: QuickSpec {
 
         it("Then 返回的univeralLink 为 expectUniversalLink") {
           expect(wechat.universalLink).to(equal(expectUniversalLink))
+        }
+      }
+    }
+  }
+
+  func testPublicFunction() {
+    describe("Given PBSWechat正常初始化") {
+      let wechat = PBSWechat.shared
+      context("When 获取所有属性及方法") {
+        wechat.sendReq(requset: LaunchFromWXReq())
+        wechat.sendResp(response: BaseResp())
+        wechat.sendAuthReq(request: SendAuthReq(), in: UIViewController())
+        wechat.handleOpen(url: URL(string: "testURL")!)
+        wechat.handleOpenUniversalLink(userActivity: NSUserActivity(activityType: "test"))
+        _ = PBSWechat.isWXAppInstalled
+        _ = PBSWechat.isWXAppSupportApi
+        _ = PBSWechat.getWXAppInstallUrl
+        _ = PBSWechat.getApiVersion
+        _ = wechat.openWXApp()
+
+        it("不会闪退") {
+          expect(true).to(beTrue())
         }
       }
     }
