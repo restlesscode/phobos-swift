@@ -1,8 +1,7 @@
-PhobosSwiftCoreSwiftUI
+PhobosSwiftSlideout
 ================
 # Features
-- SwiftUI
-
+- 抽屉式转场动画ViewController
 
 # Requirements
 - iOS 10.0 or later
@@ -14,8 +13,10 @@ PhobosSwiftCoreSwiftUI
 - swift
 
 ```
+import PhobosSwiftSlideout
 
-import PhobosSwiftCoreSwiftUI
+let viewController = UIViewController()
+let slideViewController = PBSSlideViewController(centerViewController: viewController, style: .scaled)
 
 ```
 
@@ -25,7 +26,7 @@ import PhobosSwiftCoreSwiftUI
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftCoreSwiftUI', '~> 0.1.0'
+pod 'PhobosSwiftSlideout', '~> 0.1.0'
 ```
 
 

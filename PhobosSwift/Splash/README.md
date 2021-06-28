@@ -1,7 +1,7 @@
-PhobosSwiftCoreSwiftUI
+PhobosSwiftSplash
 ================
 # Features
-- SwiftUI
+- APP进入后台时默认展示页
 
 
 # Requirements
@@ -15,8 +15,9 @@ PhobosSwiftCoreSwiftUI
 
 ```
 
-import PhobosSwiftCoreSwiftUI
+import PhobosSwiftSplash
 
+PBSSplash.shared.configuration
 ```
 
 # Installation
@@ -25,7 +26,7 @@ import PhobosSwiftCoreSwiftUI
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftCoreSwiftUI', '~> 0.1.0'
+pod 'PhobosSwiftSplash', '~> 0.1.0'
 ```
 
 

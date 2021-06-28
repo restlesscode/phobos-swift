@@ -1,7 +1,11 @@
-PhobosSwiftCoreSwiftUI
+PhobosSwiftUIMedia
 ================
 # Features
-- SwiftUI
+- Camera: 相机
+- ImageEditor: 图片编辑
+- ImageSelector: 图片选择
+- ImagePreview: 图片预览
+
 
 
 # Requirements
@@ -15,7 +19,10 @@ PhobosSwiftCoreSwiftUI
 
 ```
 
-import PhobosSwiftCoreSwiftUI
+import PhobosSwiftUIMedia
+
+let viewController = PBSImageBrower.PreviewViewController()
+viewController.setOtherData([:])
 
 ```
 
@@ -25,7 +32,7 @@ import PhobosSwiftCoreSwiftUI
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftCoreSwiftUI', '~> 0.1.0'
+pod 'PhobosSwiftUIMedia', '~> 0.1.0'
 ```
 
 

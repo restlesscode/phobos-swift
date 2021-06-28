@@ -1,8 +1,7 @@
-PhobosSwiftCoreSwiftUI
+PhobosSwiftGrowth
 ================
 # Features
-- SwiftUI
-
+- 空
 
 # Requirements
 - iOS 10.0 or later
@@ -14,8 +13,7 @@ PhobosSwiftCoreSwiftUI
 - swift
 
 ```
-
-import PhobosSwiftCoreSwiftUI
+import PhobosSwiftGrowth
 
 ```
 
@@ -25,7 +23,7 @@ import PhobosSwiftCoreSwiftUI
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftCoreSwiftUI', '~> 0.1.0'
+pod 'PhobosSwiftGrowth', '~> 0.1.0'
 ```
 
 
