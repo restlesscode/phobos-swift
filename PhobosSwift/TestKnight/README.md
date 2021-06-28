@@ -1,7 +1,7 @@
-PhobosSwiftCoreSwiftUI
+PhobosSwiftTestKnight
 ================
 # Features
-- SwiftUI
+- 测试环境工具
 
 
 # Requirements
@@ -15,8 +15,12 @@ PhobosSwiftCoreSwiftUI
 
 ```
 
-import PhobosSwiftCoreSwiftUI
+import PhobosSwiftTestKnight
 
+let testKnight = PBSTestKnight.shared
+if testKnight.configuration == .debug {
+
+}
 ```
 
 # Installation
@@ -25,7 +29,7 @@ import PhobosSwiftCoreSwiftUI
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftCoreSwiftUI', '~> 0.1.0'
+pod 'PhobosSwiftTestKnight', '~> 0.1.0'
 ```
 
 

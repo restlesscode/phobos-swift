@@ -1,7 +1,8 @@
-PhobosSwiftCoreSwiftUI
+PhobosSwiftAnimation
 ================
 # Features
-- SwiftUI
+- 转场动画封装
+
 
 
 # Requirements
@@ -15,7 +16,13 @@ PhobosSwiftCoreSwiftUI
 
 ```
 
-import PhobosSwiftCoreSwiftUI
+import PhobosSwiftAnimation
+
+let transition = PBSDraggableInteractiveTransition(cardView: UIView,
+pushFromViewCtrl: UIViewController,
+pushToViewCtrl: UIViewController,
+navigationController: UINavigationController,
+style: PBSDraggableInteractiveTransitionStyle)
 
 ```
 
@@ -25,7 +32,7 @@ import PhobosSwiftCoreSwiftUI
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftCoreSwiftUI', '~> 0.1.0'
+pod 'PhobosSwiftAnimation', '~> 0.1.0'
 ```
 
 

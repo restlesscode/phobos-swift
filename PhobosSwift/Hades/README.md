@@ -1,8 +1,7 @@
-PhobosSwiftCoreSwiftUI
+PhobosSwiftHades
 ================
 # Features
-- SwiftUI
-
+- 广告封装
 
 # Requirements
 - iOS 10.0 or later
@@ -15,7 +14,10 @@ PhobosSwiftCoreSwiftUI
 
 ```
 
-import PhobosSwiftCoreSwiftUI
+import PhobosSwiftHades
+
+let viewController = UIViewController()
+let bannerView = PBSBannerAd().createBannerView(bannerType: .google, rootViewController: viewController)
 
 ```
 
@@ -25,7 +27,7 @@ import PhobosSwiftCoreSwiftUI
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftCoreSwiftUI', '~> 0.1.0'
+pod 'PhobosSwiftHades', '~> 0.1.0'
 ```
 
 
