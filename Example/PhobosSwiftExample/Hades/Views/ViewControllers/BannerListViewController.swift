@@ -42,7 +42,7 @@ class BannerListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Banner Ad Demo"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     makeSubviews()
   }
 

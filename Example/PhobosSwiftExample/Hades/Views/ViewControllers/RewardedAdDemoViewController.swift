@@ -51,7 +51,7 @@ class RewardedAdDemoViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "GADRewarded Ad"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
 
     makeSubviews()
     setupBindings()

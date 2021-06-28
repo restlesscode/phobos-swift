@@ -51,7 +51,7 @@ class InterstitialAdDemoViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Interstitial Ad"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
 
     makeSubviews()
     setupBindings()

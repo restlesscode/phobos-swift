@@ -76,7 +76,7 @@ class CameraGuideViewController: UIViewController {
     super.viewDidLoad()
 
     title = "获取框中的内容"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     makeSubviews()
 
     if !PBSCameraSessionManager.isCameraAvailable {

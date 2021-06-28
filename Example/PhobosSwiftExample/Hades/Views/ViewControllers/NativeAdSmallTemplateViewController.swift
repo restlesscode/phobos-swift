@@ -36,7 +36,7 @@ class NativeAdSmallTemplateViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Small Template"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     nativeAd.pbs_loadNativaAdWith(adUnitID: PhobosSwiftExample.Constants.kTestGADNativeAdUnitID, rootViewController: self)
     makeSubviews()
     setupBindings()

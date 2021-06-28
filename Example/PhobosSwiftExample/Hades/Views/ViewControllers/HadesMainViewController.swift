@@ -42,7 +42,7 @@ class HadesMainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Ad formats"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     makeSubviews()
   }
 
