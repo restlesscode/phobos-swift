@@ -25,6 +25,7 @@
 //
 
 import Foundation
+import CloudKit
 
 extension PBSLogger {
   public struct Configuration {
@@ -37,11 +38,30 @@ extension PBSLogger {
     }
 
     public static func makeConfiguration(identifier: String, level: Level, mode: Mode, onComplete: @escaping (Configuration) -> Void) {
+      var configuration = makeConfiguration(identifier: identifier, level: level, mode: mode)
+      switch mode {
+      case let .icloud(containerIdentifier):
+        DispatchQueue.global(qos: .userInitiated).async {
+          configuration.urlForUbiquityContainerIdentifier = FileManager.default.url(forUbiquityContainerIdentifier: containerIdentifier)
+
+          onComplete(configuration)
+        }
+      default:
+        onComplete(configuration)
+      }
+    }
+    
+    public static func makeConfiguration(identifier: String, level: Level, mode: Mode, uuid: String = "") -> Configuration {
       var configuration = Configuration()
       configuration.identifier = identifier
       configuration.level = level
       configuration.mode = mode
-
+      configuration.uuid = uuid
+      return configuration
+    }
+    
+    public static func makeConfiguration(identifier: String, level: Level, mode: Mode, uuid: String, onComplete: @escaping (Configuration) -> Void) {
+      var configuration = makeConfiguration(identifier: identifier, level: level, mode: mode, uuid: uuid)
       switch mode {
       case let .icloud(containerIdentifier):
         DispatchQueue.global(qos: .userInitiated).async {
@@ -55,6 +75,10 @@ extension PBSLogger {
     }
 
     public var identifier: String = Constants.kDefalutLogIdentifier
+    
+    private var modelPlistPath: String?
+    /// UUID is a identity of user or other unique identity you define, default value is empty string
+    public var uuid: String = ""
 
     public var level: Level = .info
 
@@ -98,12 +122,17 @@ extension PBSLogger {
         guard let url = urlForUbiquityContainerIdentifier else {
           return nil
         }
-
         return url.appendingPathComponent(Constants.kDocuments)
-
       case .memory:
         return AutoRotatingFileDestination.defaultLogFolderURL
+      case .icloudKit:
+        return nil
       }
+    }
+    
+    var logModel: PBSLoggerRecord? {
+      
+      return nil
     }
 
     private var urlForUbiquityContainerIdentifier: URL?
@@ -133,6 +162,16 @@ extension PBSLogger {
     /// Determines if the log messages should also be written to a file
     public var writeToFile: Bool {
       logFilePath != nil
+    }
+    
+    /// Determines if the log message should also be save to cloudKit database
+    public var writeToCloudKit: Bool {
+      switch self.mode {
+      case .icloudKit:
+        return true
+      default:
+        return false
+      }
     }
 
     /// The path of the logfile
@@ -196,6 +235,14 @@ extension PBSLogger.Configuration {
     configure(destination: destination)
 
     return destination
+  }
+  
+  var cloudKitDestination: CloudKitDestination {
+    // create a destination for the cloudkit destination
+    let cloudKitDestination = CloudKitDestination(identifier: "\(identifier).CloudKitDestination")
+    cloudKitDestination.uuid = uuid
+    configure(destination: cloudKitDestination)
+    return cloudKitDestination
   }
 
   private func configure(destination: BaseQueuedDestination) {

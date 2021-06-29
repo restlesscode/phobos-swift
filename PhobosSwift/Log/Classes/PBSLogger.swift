@@ -35,6 +35,14 @@ extension PBSLogger {
     case icloud(containerIdentifier: String? = nil)
     /// Log to memory
     case memory
+    /// Log to icloud database
+    /// you must create database in icloudkit and structre on the below
+    /// CKRecordType Name Message
+    /// record fields
+    /// 1. name: message   type: string   message content
+    /// 2. name: uuid      type: string   identity user
+    /// 3. name: type      type: Int   identity log level compare with XCGLogger.Level
+    case icloudKit
   }
 }
 
@@ -58,8 +66,8 @@ public class PBSLogger {
   public static var shared = PBSLogger(configuration: Configuration.default)
 
   /// Set the configuration of shared logger
-  public static func configure(identifier: String, level: Level = .verbose, mode: Mode = .memory) {
-    PBSLogger.Configuration.makeConfiguration(identifier: identifier, level: level, mode: mode, onComplete: {
+  public static func configure(identifier: String, level: Level = .verbose, mode: Mode = .memory, uuid: String = "") {
+    PBSLogger.Configuration.makeConfiguration(identifier: identifier, level: level, mode: mode, uuid: uuid, onComplete: {
       PBSLogger.shared = PBSLogger(configuration: $0)
     })
   }
@@ -91,7 +99,10 @@ public class PBSLogger {
     if configuration.writeToFile {
       logger.add(destination: configuration.fileDestination)
     }
-
+    
+    if configuration.writeToCloudKit {
+      logger.add(destination: configuration.cloudKitDestination)
+    }
     // Add basic app info, version info etc, to the start of the logs
     logger.logAppDetails()
   }
