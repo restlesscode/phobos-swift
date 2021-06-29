@@ -38,6 +38,14 @@ class CameraGuideViewController: UIViewController {
 
   var sessionMgr = PBSCameraSessionManager()
 
+  lazy var lightButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("On", for: .normal)
+    button.setTitle("Off", for: .selected)
+    view.addSubview(button)
+    return button
+  }()
+
   lazy var captureButton: UIButton = {
     let button = UIButton(type: .system)
     view.addSubview(button)
@@ -95,7 +103,11 @@ class CameraGuideViewController: UIViewController {
       $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
       // $0.top.equalTo(self.topLayoutGuide.snp.bottom)
     }
-
+    lightButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview().multipliedBy(0.5)
+      $0.bottom.equalTo(cameraView.snp.bottom).offset(-66)
+      $0.height.width.equalTo(60)
+    }
     captureButton.snp.makeConstraints {
       $0.centerX.equalToSuperview()
       $0.bottom.equalTo(cameraView.snp.bottom).offset(-66)
@@ -110,6 +122,12 @@ class CameraGuideViewController: UIViewController {
   }
 
   func makeControlEvent() {
+    lightButton.rx.controlEvent(.touchUpInside).subscribe(onNext: { [weak self] in
+      guard let self = self else { return }
+      self.sessionMgr.toggleTorch()
+      self.lightButton.isSelected = self.sessionMgr.torchMode == .on
+    }).disposed(by: disposeBag)
+
     captureButton.rx.controlEvent(.touchUpInside).subscribe(onNext: { [weak self] in
       guard let self = self else { return }
       self.sessionMgr.capturePhoto()

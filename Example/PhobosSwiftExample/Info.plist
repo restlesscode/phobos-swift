@@ -26,6 +26,8 @@
 	<string>Privacy - Camera Usage Description</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Privacy - Microphone Usage Description</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Privacy - Photo Library Usage Description</string>
 	<key>NSUbiquitousContainers</key>
 	<dict>
 		<key>iCloud.codes.restless.phobosswift.example</key>
