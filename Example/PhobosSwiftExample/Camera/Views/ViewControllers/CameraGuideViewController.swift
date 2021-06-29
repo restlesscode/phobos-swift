@@ -154,9 +154,13 @@ class CameraGuideViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     sessionMgr.startRunning(notAuthorized: {
-      self.navigationItem.prompt = "doesn't have permission"
+      DispatchQueue.main.async {
+        self.navigationItem.prompt = "doesn't have permission"
+      }
     }, configurationFailed: {
-      self.navigationItem.prompt = "Unable to capture media"
+      DispatchQueue.main.async {
+        self.navigationItem.prompt = "Unable to capture media"
+      }
     }, isAsync: true)
   }
 
