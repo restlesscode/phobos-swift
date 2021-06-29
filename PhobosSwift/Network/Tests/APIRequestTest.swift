@@ -29,15 +29,27 @@ import Alamofire
 import Nimble
 import PhobosSwiftCore
 import Quick
+import OHHTTPStubs
 
 class APIRequestTest: QuickSpec {
   override func spec() {
+//    beforeSuite {
+//      self.interceptRequest()
+//    }
+    afterSuite {
+      HTTPStubs.removeAllStubs()
+      NSLog("Come in afterSuite")
+    }
+    
     testRequest()
     testGet()
     testPost()
     testPut()
     testDownloadRequest()
     testDownloadDataRequest()
+    
+    
+    
   }
 
   func testRequest() {
@@ -82,14 +94,20 @@ class APIRequestTest: QuickSpec {
     describe("Given 提供调用同花顺的网址及对应参数") {
       var model = APIRequestModel()
       model.encoding = URLEncoding.default
-
       context("When 调用PBSNetwork.APIRequest.request") {
         let promisable: PBSPromisable<Result<AFDataResponse<Data>, Error>> = PBSNetwork.APIRequest.request(model.url, method: model.method, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
 
         waitUntil(timeout: .seconds(30)) { done in
-          promisable.then { (_: Result<AFDataResponse<Data>, Error>) in
-            it("Then 接口调用成功") {
-              expect(true).to(beTrue())
+          promisable.then { (result: Result<AFDataResponse<Data>, Error>) in
+            switch result {
+            case let .success(response):
+              it("Then 调用接口成功") {
+                expect(response).toNot(beNil())
+              }
+            case let .failure(error):
+              it("Then 调用接口失败\(error.localizedDescription)") {
+                expect(false).to(beTrue())
+              }
             }
             done()
           }
@@ -105,9 +123,16 @@ class APIRequestTest: QuickSpec {
         let promisable: PBSPromisable<Result<PBSNetwork.APIRequest.Response, Error>> = PBSNetwork.APIRequest.request(model.url, method: model.method, parameters: model.parameters, encoding: model.encoding, headers: model.headers, session: model.session)
 
         waitUntil(timeout: .seconds(30)) { done in
-          promisable.then { (_: Result<PBSNetwork.APIRequest.Response, Error>) in
-            it("Then 接口调用成功") {
-              expect(true).to(beTrue())
+          promisable.then { (result: Result<PBSNetwork.APIRequest.Response, Error>) in
+            switch result {
+            case let .success(response):
+              it("Then 调用接口成功") {
+                expect(response).toNot(beNil())
+              }
+            case let .failure(error):
+              it("Then 调用接口失败\(error.localizedDescription)") {
+                expect(false).to(beTrue())
+              }
             }
             done()
           }
@@ -210,25 +235,37 @@ class APIRequestTest: QuickSpec {
         }
       } else {
         it("Then 接口调用失败, \(model.errormsg)") {
-          expect(true).to(beTrue())
+          expect(false).to(beTrue())
         }
       }
     case let .failure(error):
       NSLog("request error: \(error.localizedDescription)")
       it("Then 接口调用失败, \(error.localizedDescription)") {
-        expect(true).to(beTrue())
+        expect(false).to(beTrue())
       }
     }
   }
 }
 
 struct APIRequestModel {
-  var url: URLConvertible = "https://basic.10jqka.com.cn/api/stockph/conceptdetail/000151/"
+  var url: URLConvertible = "https://www.test.com"
   var method: HTTPMethod = .get
   var parameters: Parameters? = ["id": "0001"]
   var encoding: ParameterEncoding = JSONEncoding.default
   var headers: PBSNetwork.APIRequest.Headers = ["Content-Type": "application/json"]
   var session = Session.pbs.insecure
+  
+  init() {
+    interceptRequest()
+  }
+  
+  func interceptRequest() {
+    HTTPStubs.stubRequests { (request) -> Bool in
+      request.url?.host == "www.test.com"
+    } withStubResponse: { (request) -> HTTPStubsResponse in
+      return HTTPStubsResponse.init(jsonObject: ["errorcode": "0", "errormsg": "success"], statusCode: 200, headers: nil)
+    }
+  }
 }
 
 struct APIRequestResponse: Codable {
