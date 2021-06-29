@@ -69,6 +69,19 @@ PODS:
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - OHHTTPStubs (9.1.0):
+    - OHHTTPStubs/Default (= 9.1.0)
+  - OHHTTPStubs/Core (9.1.0)
+  - OHHTTPStubs/Default (9.1.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (9.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (9.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (9.1.0)
   - PhobosSwiftAnimation (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
@@ -163,6 +176,7 @@ PODS:
     - Alamofire (~> 5.1.0)
     - CocoaAsyncSocket (~> 7.6.5)
     - Nimble
+    - OHHTTPStubs
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
     - Quick
@@ -347,6 +361,7 @@ SPEC REPOS:
     - nanopb
     - Nimble
     - ObjcExceptionBridging
+    - OHHTTPStubs
     - PromisesObjC
     - Quick
     - RxCocoa
@@ -414,6 +429,7 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  OHHTTPStubs: 90eac6d8f2c18317baeca36698523dc67c513831
   PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
   PhobosSwiftAuth: b57db71d86fdcb78f53303f1ce5618a46d14148d
   PhobosSwiftCore: aef8d363c6e8897508d3307eddc85a22d89ee04b
@@ -423,7 +439,7 @@ SPEC CHECKSUMS:
   PhobosSwiftLocation: 617c18fa02257978e93eb10e36193c26a8f219e7
   PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
   PhobosSwiftMedia: a5d96bb202b5d3238efd31a010f75af86b6e5799
-  PhobosSwiftNetwork: 29eafee987ac6d085adf4035d94cb77ec2370bfb
+  PhobosSwiftNetwork: fecc6b7215ff07876cd24242d4d4854c48443217
   PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
   PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
   PhobosSwiftPush: 070abd98c19335dda9c46ab85d8b8a594196e782
