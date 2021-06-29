@@ -41,6 +41,7 @@ struct ImageBrowerAsset {
 
   func getOriginImage(block: @escaping (UIImage?) -> Void) {
     let option = PHImageRequestOptions()
+    option.isNetworkAccessAllowed = true
     option.isSynchronous = true
     PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: option) { image, _ in
       guard let image = image else {

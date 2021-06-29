@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftMedia
 import PhobosSwiftTestKnight
 import PhobosSwiftUIComponent
 
@@ -42,6 +43,7 @@ class MainViewController: PBSArticleMasterViewController {
     }
 
     addCameraGuideExample()
+    addBrowerSelect()
     addGhostExample()
     addHadesExample()
     addTestKnightExample()
@@ -61,6 +63,23 @@ class MainViewController: PBSArticleMasterViewController {
     let articleViewModels = [PBSArticleViewModel(model: articleModel)]
     sectionViewModels.append(
       PBSArticleSectionViewModel(title: "PhobosSwiftUIComponent",
+                                 subtitle: "",
+                                 articleViewModels: articleViewModels))
+  }
+
+  private func addBrowerSelect() {
+    let articleModel = PBSArticleModel(title: "图片选择",
+                                       subtitle: "subtitle",
+                                       tag: "PhobosSwiftMedia",
+                                       time: "Jun 29, 2021",
+                                       timestamp: nil,
+                                       coverImageUrl: nil,
+                                       url: nil,
+                                       body: nil)
+
+    let articleViewModels = [PBSArticleViewModel(model: articleModel)]
+    sectionViewModels.append(
+      PBSArticleSectionViewModel(title: "PhobosSwiftMedia",
                                  subtitle: "",
                                  articleViewModels: articleViewModels))
   }
@@ -122,6 +141,11 @@ class MainViewController: PBSArticleMasterViewController {
     if articleViewModel.title.value == "相机中有引导框，照相后只获得框中内容" {
       let viewCtrl = CameraGuideViewController()
       show(viewCtrl, sender: self)
+    } else if articleViewModel.title.value == "图片选择" {
+      modalPresentationStyle = .fullScreen
+      let vc = UINavigationController(rootViewController: PBSImageBrower.SelectViewController())
+      vc.modalPresentationStyle = .fullScreen
+      present(vc, animated: true, completion: nil)
     } else if articleViewModel.title.value == "Blog Articles" {
       let viewCtrl = GhostMasterViewController()
       show(viewCtrl, sender: self)
