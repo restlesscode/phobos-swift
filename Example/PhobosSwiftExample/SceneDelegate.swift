@@ -27,6 +27,7 @@
 import AdSupport
 import AppTrackingTransparency
 import PhobosSwiftHades
+import PhobosSwiftSplash
 import RxCocoa
 import RxSwift
 import UIKit
@@ -61,7 +62,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
     }
     setupBindings()
-    window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+
+    guard let window = self.window else { return }
+
+    let splashViewController = SplashDemoViewController {
+      window.rootViewController = UINavigationController(rootViewController: MainViewController())
+    }
+    UIView.transition(with: window, duration: 0.25, options: .curveLinear) {
+      window.rootViewController = splashViewController
+    }
+    PBSSplash.shared.configuration(window: window, isEnabled: true, protectionSplashViewCtrl: splashViewController)
   }
 
   func sceneDidDisconnect(_: UIScene) {

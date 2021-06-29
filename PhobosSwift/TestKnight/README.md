@@ -1,7 +1,7 @@
-PhobosSwiftAuth
+PhobosSwiftTestKnight
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
+- 测试环境工具
 
 
 # Requirements
@@ -14,9 +14,13 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+import PhobosSwiftTestKnight
+
+let testKnight = PBSTestKnight.shared
+if testKnight.configuration == .debug {
+
+}
 ```
 
 # Installation
@@ -25,7 +29,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftTestKnight', '~> 0.1.0'
 ```
 
 

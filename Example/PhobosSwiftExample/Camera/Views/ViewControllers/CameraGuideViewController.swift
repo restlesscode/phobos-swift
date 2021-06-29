@@ -76,7 +76,7 @@ class CameraGuideViewController: UIViewController {
     super.viewDidLoad()
 
     title = "获取框中的内容"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     makeSubviews()
 
     if !PBSCameraSessionManager.isCameraAvailable {
@@ -154,9 +154,13 @@ class CameraGuideViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     sessionMgr.startRunning(notAuthorized: {
-      self.navigationItem.prompt = "doesn't have permission"
+      DispatchQueue.main.async {
+        self.navigationItem.prompt = "doesn't have permission"
+      }
     }, configurationFailed: {
-      self.navigationItem.prompt = "Unable to capture media"
+      DispatchQueue.main.async {
+        self.navigationItem.prompt = "Unable to capture media"
+      }
     }, isAsync: true)
   }
 

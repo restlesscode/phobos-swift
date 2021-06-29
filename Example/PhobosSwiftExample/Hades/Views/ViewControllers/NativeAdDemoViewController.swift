@@ -36,7 +36,7 @@ class NativeAdDemoViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Navtive Ad"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     nativeAd.pbs_loadNativaAdWith(adUnitID: PhobosSwiftExample.Constants.kTestGADNativeAdUnitID, rootViewController: self)
     makeSubviews()
     setupBindings()

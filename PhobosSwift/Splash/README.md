@@ -1,7 +1,7 @@
-PhobosSwiftAuth
+PhobosSwiftSplash
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
+- APP进入后台时默认展示页
 
 
 # Requirements
@@ -14,9 +14,10 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+import PhobosSwiftSplash
+
+PBSSplash.shared.configuration
 ```
 
 # Installation
@@ -25,7 +26,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftSplash', '~> 0.1.0'
 ```
 
 

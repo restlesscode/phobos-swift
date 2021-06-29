@@ -1,7 +1,8 @@
-PhobosSwiftAuth
+PhobosSwiftPayment
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
+- IAP: 内购封装
+- PaymentAppDelegateSwizzler: 微信、支付宝、IAP支付回调封装
 
 
 # Requirements
@@ -14,9 +15,10 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
+import PhobosSwiftPayment
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+PBSPayment.shared()
+
 ```
 
 # Installation
@@ -25,7 +27,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftPayment', '~> 0.1.0'
 ```
 
 

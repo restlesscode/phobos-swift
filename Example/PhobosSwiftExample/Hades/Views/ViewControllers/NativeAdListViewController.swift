@@ -43,7 +43,7 @@ class NativeAdListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Native Ad Demo"
-    view.backgroundColor = .pbs.systemBackground
+    view.backgroundColor = UIColor.pbs.systemBackground
     makeSubviews()
   }
 

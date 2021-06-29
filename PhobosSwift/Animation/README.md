@@ -1,7 +1,8 @@
-PhobosSwiftAuth
+PhobosSwiftAnimation
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
+- 转场动画封装
+
 
 
 # Requirements
@@ -14,9 +15,15 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+import PhobosSwiftAnimation
+
+let transition = PBSDraggableInteractiveTransition(cardView: UIView,
+pushFromViewCtrl: UIViewController,
+pushToViewCtrl: UIViewController,
+navigationController: UINavigationController,
+style: PBSDraggableInteractiveTransitionStyle)
+
 ```
 
 # Installation
@@ -25,7 +32,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftAnimation', '~> 0.1.0'
 ```
 
 

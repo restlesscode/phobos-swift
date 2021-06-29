@@ -1,7 +1,11 @@
-PhobosSwiftAuth
+PhobosSwiftUIMedia
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
+- Camera: 相机
+- ImageEditor: 图片编辑
+- ImageSelector: 图片选择
+- ImagePreview: 图片预览
+
 
 
 # Requirements
@@ -14,9 +18,12 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+import PhobosSwiftUIMedia
+
+let viewController = PBSImageBrower.PreviewViewController()
+viewController.setOtherData([:])
+
 ```
 
 # Installation
@@ -25,7 +32,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftUIMedia', '~> 0.1.0'
 ```
 
 

@@ -1,8 +1,7 @@
-PhobosSwiftAuth
+PhobosSwiftHades
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
-
+- 广告封装
 
 # Requirements
 - iOS 10.0 or later
@@ -14,9 +13,12 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+import PhobosSwiftHades
+
+let viewController = UIViewController()
+let bannerView = PBSBannerAd().createBannerView(bannerType: .google, rootViewController: viewController)
+
 ```
 
 # Installation
@@ -25,7 +27,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftHades', '~> 0.1.0'
 ```
 
 

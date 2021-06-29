@@ -1,8 +1,7 @@
-PhobosSwiftAuth
+PhobosSwiftSlideout
 ================
 # Features
-- 常规权限获取(TouchId、FaceId..)
-
+- 抽屉式转场动画ViewController
 
 # Requirements
 - iOS 10.0 or later
@@ -14,9 +13,11 @@ PhobosSwiftAuth
 - swift
 
 ```
-import PhobosSwiftAuth
+import PhobosSwiftSlideout
 
-let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
+let viewController = UIViewController()
+let slideViewController = PBSSlideViewController(centerViewController: viewController, style: .scaled)
+
 ```
 
 # Installation
@@ -25,7 +26,7 @@ let isFaceIDAvailable = BioMetricAuthenticator.shared.isFaceIDAvailable
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'PhobosSwiftAuth', '~> 0.1.0'
+pod 'PhobosSwiftSlideout', '~> 0.1.0'
 ```
 
 
