@@ -42,7 +42,7 @@ extension PBSLogger {
     /// 1. name: message   type: string   message content
     /// 2. name: uuid      type: string   identity user
     /// 3. name: type      type: Int   identity log level compare with XCGLogger.Level
-    case icloudKit
+    case icloudKit(uniqueIdentifier: String)
   }
 }
 
@@ -66,8 +66,8 @@ public class PBSLogger {
   public static var shared = PBSLogger(configuration: Configuration.default)
 
   /// Set the configuration of shared logger
-  public static func configure(identifier: String, level: Level = .verbose, mode: Mode = .memory, uuid: String = "") {
-    PBSLogger.Configuration.makeConfiguration(identifier: identifier, level: level, mode: mode, uuid: uuid, onComplete: {
+  public static func configure(identifier: String, level: Level = .verbose, mode: Mode = .memory) {
+    PBSLogger.Configuration.makeConfiguration(identifier: identifier, level: level, mode: mode, onComplete: {
       PBSLogger.shared = PBSLogger(configuration: $0)
     })
   }
@@ -99,7 +99,7 @@ public class PBSLogger {
     if configuration.writeToFile {
       logger.add(destination: configuration.fileDestination)
     }
-    
+
     if configuration.writeToCloudKit {
       logger.add(destination: configuration.cloudKitDestination)
     }

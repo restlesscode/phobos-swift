@@ -51,6 +51,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.4.0):
     - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.5.6)
+  - LookinServer (1.0.0)
   - MirrorGoogleMobileAds (0.1.0):
     - GoogleAppMeasurement (~> 7.0)
     - GoogleUserMessagingPlatform (~> 1.1)
@@ -304,6 +305,7 @@ PODS:
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
+  - LookinServer (from `https://gitee.com/tjerwinchen/LookinServer.git`)
   - MirrorGoogleMobileAds (from `../../mirror-google-mobile-ads-sdk/`)
   - PhobosSwiftAnimation (from `../`)
   - PhobosSwiftAnimation/Tests (from `../`)
@@ -373,6 +375,8 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
+  LookinServer:
+    :git: https://gitee.com/tjerwinchen/LookinServer.git
   MirrorGoogleMobileAds:
     :path: "../../mirror-google-mobile-ads-sdk/"
   PhobosSwiftAnimation:
@@ -414,6 +418,11 @@ EXTERNAL SOURCES:
   PhobosSwiftWechat:
     :path: "../"
 
+CHECKOUT OPTIONS:
+  LookinServer:
+    :commit: df5580956a96ffb5acca439dc81af8afea763f8e
+    :git: https://gitee.com/tjerwinchen/LookinServer.git
+
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
@@ -422,7 +431,8 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
   GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  MirrorGoogleMobileAds: f207c576fced0bc1dcd6bac897cb274d96ce73ef
+  LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
+  MirrorGoogleMobileAds: 8f615aaaf8b6c8b2876c8f4066b8c73cc6380cb0
   MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
@@ -459,6 +469,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 5e38e3b15ff5dc668ad651086a2674039472740c
+PODFILE CHECKSUM: 9dd1a2b768d10b963fbaad3ea7e8b0ebbb007dc5
 
 COCOAPODS: 1.10.1
