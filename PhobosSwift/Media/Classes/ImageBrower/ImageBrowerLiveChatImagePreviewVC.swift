@@ -257,7 +257,8 @@ extension ImageBrowerLiveChatImagePreviewVC: UICollectionViewDelegate, UICollect
         zoomView = cell.viewWithTag(10_001) as? ImageBrowerZoomView
       }
 
-      zoomView.image = asset.origin
+      if let thumb = asset.thumb { zoomView.image = thumb }
+      if let origin = asset.origin { zoomView.image = origin }
 
       return cell
     } else {
