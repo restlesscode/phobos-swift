@@ -51,6 +51,19 @@ extension PhobosSwift where Base: Session {
     Session.insecure
   }
 
+  /// 添加PublicKey
+  public func addPublicKey(publicKey: String) {
+    guard let serverTrustManager = base.serverTrustManager as? PBSPublicKeyPinner.ServerTrustManager else {
+      return
+    }
+
+//    guard let secKey = how to get seckey else {
+//      return
+//    }
+//
+//    serverTrustManager.evaluator.keys.append(secKey)
+  }
+
   /// 添加证书
   public func addCertificate(data: Data) {
     guard let serverTrustManager = base.serverTrustManager as? PBSCertificatePinner.ServerTrustManager else {

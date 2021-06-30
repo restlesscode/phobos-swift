@@ -32,12 +32,26 @@ import Foundation
 public struct PBSPublicKeyPinner {}
 
 extension PBSPublicKeyPinner {
+  public class ServerTrustManager: Alamofire.ServerTrustManager {
+    public let evaluator = ServerTrustEvaluator()
+
+    init() {
+      super.init(allHostsMustBeEvaluated: true, evaluators: [:])
+    }
+
+    override open func serverTrustEvaluator(forHost host: String) throws -> ServerTrustEvaluating? {
+      evaluator
+    }
+  }
+}
+
+extension PBSPublicKeyPinner {
   /// Uses the pinned public keys to validate the server trust. The server trust is considered valid if one of the pinned
   /// public keys match one of the server certificate public keys. By validating both the certificate chain and host,
   /// public key pinning provides a very secure form of server trust validation mitigating most, if not all, MITM attacks.
   /// Applications are encouraged to always validate the host and require a valid certificate chain in production
   /// environments.
-  public final class PublicKeysTrustEvaluator: Alamofire.ServerTrustEvaluating {
+  public final class ServerTrustEvaluator: Alamofire.ServerTrustEvaluating {
     public var keys: [SecKey]
     public var performDefaultValidation: Bool
     public var validateHost: Bool
