@@ -51,17 +51,19 @@ extension PhobosSwift where Base: Session {
     Session.insecure
   }
 
+  public static var certifyPublicKey: Session {
+    Session.certifyPublicKey
+  }
+
   /// 添加PublicKey
   public func addPublicKey(publicKey: String) {
-    guard let serverTrustManager = base.serverTrustManager as? PBSPublicKeyPinner.ServerTrustManager else {
+    guard
+      let secKey = PublicKey.publicKeys(pemEncoded: publicKey).first?.reference,
+      let serverTrustManager = base.serverTrustManager as? PBSPublicKeyPinner.ServerTrustManager
+    else {
       return
     }
-
-//    guard let secKey = how to get seckey else {
-//      return
-//    }
-//
-//    serverTrustManager.evaluator.keys.append(secKey)
+    serverTrustManager.evaluator.keys.append(secKey)
   }
 
   /// 添加证书
@@ -110,5 +112,11 @@ extension Session {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
     return Session(configuration: config)
+  }()
+
+  static let certifyPublicKey: Session = {
+    let config = URLSessionConfiguration.default
+    config.timeoutIntervalForRequest = 30.0
+    return Session(configuration: config, serverTrustManager: PBSPublicKeyPinner.ServerTrustManager())
   }()
 }

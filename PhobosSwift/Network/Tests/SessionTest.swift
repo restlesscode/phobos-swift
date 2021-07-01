@@ -32,6 +32,7 @@ import Quick
 class SessionTest: QuickSpec {
   override func spec() {
     testCrashs()
+    testPublicKey()
   }
 
   func testCrashs() {
@@ -45,6 +46,33 @@ class SessionTest: QuickSpec {
 
         it("Then 不会闪退") {
           expect(true).to(beTrue())
+        }
+      }
+    }
+  }
+
+  func testPublicKey() {
+    describe("Given 在测试环境中") {
+      context("When 调用Session.pbs.addPublicKey") {
+        let pubKey = """
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3CguP+6UfxGv7qs9sd1r
+        p5Gj94L9JbVMjezU2RMdwgXhdeDI0YxVu0flK1tJ9d8bOlZOimmBOl6jHpHc+d9D
+        1jDAQwnNvMWy+8hQrEKs7OaZIQH1owvyX47Gf1nzuLIG2NVhdoqWCahBANvxthZs
+        ns0dZK/qYOP0b+33uFidlUx+omxZQEVKsC7laUGin/7VpD77YorY812oB23iqljw
+        ttNM1RQohwhlbmGRqfj9NIyppT+iDZMdqBzQnwmjvDvuSdnwDbg4nEFIFA8g7U6T
+        lKnG5xYVYNHbnuCbALyKBtEH11vzmwwesi+nLDMLanWQ8595z7EUUPG985OUwZZI
+        xQIDAQAB
+        -----END PUBLIC KEY-----
+        """
+        let session = Session.pbs.certifyPublicKey
+        session.pbs.addPublicKey(publicKey: pubKey)
+        it("Then 不会闪退") {
+          if let serverTrustManager = session.serverTrustManager as? PBSPublicKeyPinner.ServerTrustManager {
+            expect(!serverTrustManager.evaluator.keys.isEmpty).to(beTrue())
+          } else {
+            expect(false).to(beTrue())
+          }
         }
       }
     }
