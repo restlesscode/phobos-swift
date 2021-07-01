@@ -65,11 +65,11 @@ class SessionTest: QuickSpec {
         xQIDAQAB
         -----END PUBLIC KEY-----
         """
-        let session = Session.pbs.certifyPublicKey
+        let session = Session.pbs.default
         session.pbs.addPublicKey(publicKey: pubKey)
-        it("Then 不会闪退") {
-          if let serverTrustManager = session.serverTrustManager as? PBSPublicKeyPinner.ServerTrustManager {
-            expect(!serverTrustManager.evaluator.keys.isEmpty).to(beTrue())
+        it("Then publicKeyEvaluator.keys 不为空") {
+          if let serverTrustManager = session.serverTrustManager as? PBSPinner.ServerTrustManager {
+            expect(!serverTrustManager.evaluator.publicKeyEvaluator.keys.isEmpty).to(beTrue())
           } else {
             expect(false).to(beTrue())
           }

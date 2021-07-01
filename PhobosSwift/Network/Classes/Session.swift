@@ -33,9 +33,7 @@ extension PhobosSwift where Base: Session {
   private static func makeDefault() -> Session {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
-
-    let serverTrustManager = PBSCertificatePinner.ServerTrustManager()
-
+    let serverTrustManager = PBSPinner.ServerTrustManager()
     return Session(configuration: config, serverTrustManager: serverTrustManager)
   }
 
@@ -51,41 +49,36 @@ extension PhobosSwift where Base: Session {
     Session.insecure
   }
 
-  public static var certifyPublicKey: Session {
-    Session.certifyPublicKey
-  }
-
   /// 添加PublicKey
   public func addPublicKey(publicKey: String) {
     guard
       let secKey = PublicKey.publicKeys(pemEncoded: publicKey).first?.reference,
-      let serverTrustManager = base.serverTrustManager as? PBSPublicKeyPinner.ServerTrustManager
+      let serverTrustManager = base.serverTrustManager as? PBSPinner.ServerTrustManager
     else {
       return
     }
-    serverTrustManager.evaluator.keys.append(secKey)
+    serverTrustManager.evaluator.publicKeyEvaluator.keys.append(secKey)
   }
 
   /// 添加证书
   public func addCertificate(data: Data) {
-    guard let serverTrustManager = base.serverTrustManager as? PBSCertificatePinner.ServerTrustManager else {
+    guard
+      let serverTrustManager = base.serverTrustManager as? PBSPinner.ServerTrustManager,
+      let certificate = SecCertificateCreateWithData(nil, data as CFData)
+    else {
       return
     }
-
-    guard let certificate = SecCertificateCreateWithData(nil, data as CFData) else {
-      return
-    }
-
-    serverTrustManager.evaluator.certificates.append(certificate)
+    serverTrustManager.evaluator.certificateEvaluator.certificates.append(certificate)
   }
 
   /// 清空所有证书
   public func removeAllCertificates() {
-    guard let serverTrustManager = base.serverTrustManager as? PBSCertificatePinner.ServerTrustManager else {
+    guard
+      let serverTrustManager = base.serverTrustManager as? PBSPinner.ServerTrustManager
+    else {
       return
     }
-
-    serverTrustManager.evaluator.certificates.removeAll(keepingCapacity: true)
+    serverTrustManager.evaluator.certificateEvaluator.certificates.removeAll(keepingCapacity: true)
   }
 }
 
@@ -93,18 +86,14 @@ extension Session {
   static let `default`: Session = {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
-
-    let serverTrustManager = PBSCertificatePinner.ServerTrustManager()
-
+    let serverTrustManager = PBSPinner.ServerTrustManager()
     return Session(configuration: config, serverTrustManager: serverTrustManager)
   }()
 
   static let redirectorDoNotFollow: Session = {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
-
-    let serverTrustManager = PBSCertificatePinner.ServerTrustManager()
-
+    let serverTrustManager = PBSPinner.ServerTrustManager()
     return Session(configuration: config, serverTrustManager: serverTrustManager, redirectHandler: Redirector(behavior: .doNotFollow))
   }()
 
@@ -117,6 +106,6 @@ extension Session {
   static let certifyPublicKey: Session = {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
-    return Session(configuration: config, serverTrustManager: PBSPublicKeyPinner.ServerTrustManager())
+    return Session(configuration: config, serverTrustManager: PBSPinner.ServerTrustManager())
   }()
 }

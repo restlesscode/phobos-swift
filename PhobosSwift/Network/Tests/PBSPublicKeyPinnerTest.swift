@@ -37,7 +37,7 @@ class PBSPublicKeyPinnerTest: QuickSpec {
   func testServerTrustEvaluator() {
     describe("Given ServerTrustManager初始化完成, host: https://www.baidu.com") {
       let host = "https://www.baidu.com"
-      let manager = PBSPublicKeyPinner.ServerTrustManager()
+      let manager = PBSPinner.ServerTrustManager()
       context("When 调用serverTrustEvaluator") {
         _ = try? manager.serverTrustEvaluator(forHost: host)
         it("Then 不会闪退") {
@@ -50,7 +50,7 @@ class PBSPublicKeyPinnerTest: QuickSpec {
   func testEvaluate() {
     describe("Given ServerTrustEvaluator初始化完成, host: https://www.baidu.com") {
       let host = "https://www.baidu.com"
-      let manager = PBSPublicKeyPinner.ServerTrustManager()
+      let manager = PBSPinner.ServerTrustManager()
       context("When 调用serverTrustEvaluator") {
         _ = try? manager.serverTrustEvaluator(forHost: host)
         it("Then 不会闪退") {

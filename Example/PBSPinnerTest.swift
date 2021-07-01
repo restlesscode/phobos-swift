@@ -1,6 +1,6 @@
 //
 //
-//  PBSCertificatePinnerTest.swift
+//  PBSPinnerTest.swift
 //  PhobosSwiftNetwork-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,11 +24,12 @@
 //  THE SOFTWARE.
 //
 
+
 @testable import PhobosSwiftNetwork
 import Nimble
 import Quick
 
-class PBSCertificatePinnerTest: QuickSpec {
+class PBSPinnerTest: QuickSpec {
   override func spec() {
     testServerTrustEvaluator()
     testEvaluate()

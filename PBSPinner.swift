@@ -1,6 +1,6 @@
 //
 //
-//  PBSCertificatePinner.swift
+//  PBSPinner.swift
 //  PhobosSwiftNetwork
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,17 +24,29 @@
 //  THE SOFTWARE.
 //
 
+
 import Alamofire
 
-public struct PBSCertificatePinner {}
+public struct PBSPinner {}
 
-extension PBSCertificatePinner {
+extension PBSPinner {
+  public class ServerTrustManager: Alamofire.ServerTrustManager {
+    let evaluator = PBSPinner.ServerTrustEvaluator()
+
+    init() {
+      super.init(allHostsMustBeEvaluated: true, evaluators: [:])
+    }
+
+    override open func serverTrustEvaluator(forHost host: String) throws -> ServerTrustEvaluating? {
+      evaluator
+    }
+  }
+}
+
+extension PBSPinner {
   public final class ServerTrustEvaluator: Alamofire.ServerTrustEvaluating {
-    public var certificates: [SecCertificate]
-    public var acceptSelfSignedCertificates: Bool
-    public var performDefaultValidation: Bool
-    public var validateHost: Bool
-
+    let certificateEvaluator = PBSCertificatePinner.ServerTrustEvaluator()
+    let publicKeyEvaluator = PBSPublicKeyPinner.ServerTrustEvaluator()
     /// Creates a `PinnedCertificatesTrustEvaluator`.
     ///
     /// - Parameters:
@@ -48,42 +60,13 @@ extension PBSCertificatePinner {
     ///   - validateHost:                 Determines whether or not the evaluator should validate the host, in addition
     ///                                   to performing the default evaluation, even if `performDefaultValidation` is
     ///                                   `false`. `true` by default.
-    public init(certificates: [SecCertificate] = Bundle.main.af.certificates,
-                acceptSelfSignedCertificates: Bool = true,
-                performDefaultValidation: Bool = true,
-                validateHost: Bool = true) {
-      self.certificates = certificates
-      self.acceptSelfSignedCertificates = acceptSelfSignedCertificates
-      self.performDefaultValidation = performDefaultValidation
-      self.validateHost = validateHost
-    }
+    public init() {}
 
     public func evaluate(_ trust: SecTrust, forHost host: String) throws {
-      guard !certificates.isEmpty else {
-        throw AFError.serverTrustEvaluationFailed(reason: .noCertificatesFound)
-      }
-
-      if acceptSelfSignedCertificates {
-        try trust.af.setAnchorCertificates(certificates)
-      }
-
-      if performDefaultValidation {
-        try trust.af.performDefaultValidation(forHost: host)
-      }
-
-      if validateHost {
-        try trust.af.performValidation(forHost: host)
-      }
-
-      let serverCertificatesData = Set(trust.af.certificateData)
-      let pinnedCertificatesData = Set(certificates.af.data)
-      let pinnedCertificatesInServerData = !serverCertificatesData.isDisjoint(with: pinnedCertificatesData)
-      if !pinnedCertificatesInServerData {
-        throw AFError.serverTrustEvaluationFailed(
-          reason: .certificatePinningFailed(host: host,
-                                            trust: trust,
-                                            pinnedCertificates: certificates,
-                                            serverCertificates: trust.af.certificates))
+      do {
+        try certificateEvaluator.evaluate(trust, forHost: host)
+      } catch {
+        try publicKeyEvaluator.evaluate(trust, forHost: host)
       }
     }
   }
