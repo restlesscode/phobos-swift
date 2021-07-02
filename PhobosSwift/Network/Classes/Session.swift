@@ -102,10 +102,4 @@ extension Session {
     config.timeoutIntervalForRequest = 30.0
     return Session(configuration: config)
   }()
-
-  static let certifyPublicKey: Session = {
-    let config = URLSessionConfiguration.default
-    config.timeoutIntervalForRequest = 30.0
-    return Session(configuration: config, serverTrustManager: PBSPinner.ServerTrustManager())
-  }()
 }
