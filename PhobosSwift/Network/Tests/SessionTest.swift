@@ -80,7 +80,11 @@ class SessionTest: QuickSpec {
         let incorrectUrl = "https://baidu.com"
         it("Then 请求通过") {
             waitUntil(timeout: .seconds(10), action: { done in
-                pubKeySession.request(correctUrl, method: .options, parameters: nil, encoding: URLEncoding.default, headers: HTTPHeaders([:]))
+                pubKeySession.request(correctUrl,
+                                      method: .options,
+                                      parameters: nil,
+                                      encoding: URLEncoding.default,
+                                      headers: HTTPHeaders([:]))
                   .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
                     defer { done() }
                     let statusCode = response.response?.statusCode ?? 0
@@ -88,7 +92,11 @@ class SessionTest: QuickSpec {
                   }
             })
             waitUntil(timeout: .seconds(10), action: { done in
-                pubKeySession.request(incorrectUrl, method: .options, parameters: nil, encoding: URLEncoding.default, headers: HTTPHeaders([:]))
+                pubKeySession.request(incorrectUrl,
+                                      method: .options,
+                                      parameters: nil,
+                                      encoding: URLEncoding.default,
+                                      headers: HTTPHeaders([:]))
                   .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
                     defer { done() }
                     let statusCode = response.response?.statusCode ?? 0
@@ -96,7 +104,11 @@ class SessionTest: QuickSpec {
                   }
             })
             waitUntil(timeout: .seconds(10), action: { done in
-                cerSession.request(correctUrl, method: .options, parameters: nil, encoding: URLEncoding.default, headers: HTTPHeaders([:]))
+                cerSession.request(correctUrl,
+                                   method: .options,
+                                   parameters: nil,
+                                   encoding: URLEncoding.default,
+                                   headers: HTTPHeaders([:]))
                   .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
                     defer { done() }
                     let statusCode = response.response?.statusCode ?? 0
@@ -104,7 +116,11 @@ class SessionTest: QuickSpec {
                   }
             })
             waitUntil(timeout: .seconds(10), action: { done in
-                cerSession.request(incorrectUrl, method: .options, parameters: nil, encoding: URLEncoding.default, headers: HTTPHeaders([:]))
+                cerSession.request(incorrectUrl,
+                                   method: .options,
+                                   parameters: nil,
+                                   encoding: URLEncoding.default,
+                                   headers: HTTPHeaders([:]))
                   .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
                     defer { done() }
                     let statusCode = response.response?.statusCode ?? 0
