@@ -42,7 +42,7 @@ extension PBSLogger {
     /// 1. name: message   type: string   message content
     /// 2. name: uuid      type: string   identity user
     /// 3. name: type      type: Int   identity log level compare with XCGLogger.Level
-    case icloudKit(uniqueIdentifier: String)
+    case icloudKit(uniqueIdentifier: String? = nil, containerIdentifier: String? = nil)
   }
 }
 
@@ -108,25 +108,33 @@ public class PBSLogger {
   }
 
   public func debug(message: String, context: String = "", functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-    logger?.debug("[\(context)] " + "🛠 " + message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    let record = (message: "[\(context)] " + "🛠 " + message,
+                  context: context)
+    logger?.debug(record, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
   public func info(message: String, context: String = "", functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-    logger?.info("[\(context)] " + "ℹ️ " + message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    let record = (message: "[\(context)] " + "ℹ️ " + message,
+                  context: context)
+    logger?.info(record, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
   public func warning(message: String, context: String = "", functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-    logger?.warning("[\(context)] " + "⚠️ " + message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    let record = (message: "[\(context)] " + "⚠️ " + message,
+                  context: context)
+    logger?.warning(record, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
   public func error(message: String, context: String = "", functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
-    logger?.error("[\(context)] " + "❌ " + message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    let record = (message: "[\(context)] " + "❌ " + message,
+                  context: context)
+    logger?.error(record, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
   public func logResponse(payload: Data?, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     guard let payload = payload else { return }
     guard configuration.shouldLogResponse else { return }
-    logger?.debug("[Response] " + "🛠 " + getStringFrom(data: payload), functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    debug(message: "[response] " + "🛠 " + getStringFrom(data: payload), context: "response", functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
 
   private func getStringFrom(data: Data) -> String {
