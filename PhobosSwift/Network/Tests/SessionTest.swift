@@ -72,62 +72,61 @@ class SessionTest: QuickSpec {
         pubKeySession.pbs.addPublicKey(publicKey: pubKey)
         let cerSession = Session.pbs.default
         if let data = Data(base64Encoded: certificate) {
-            cerSession.pbs.addCertificate(data: data)
+          cerSession.pbs.addCertificate(data: data)
         } else {
-            expect(false).to(beTrue())
+          expect(false).to(beTrue())
         }
         let correctUrl = "https://cn.bing.com"
         let incorrectUrl = "https://baidu.com"
         it("Then 请求通过") {
-            waitUntil(timeout: .seconds(10), action: { done in
-                pubKeySession.request(correctUrl,
-                                      method: .options,
-                                      parameters: nil,
-                                      encoding: URLEncoding.default,
-                                      headers: HTTPHeaders([:]))
-                  .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
-                    defer { done() }
-                    let statusCode = response.response?.statusCode ?? 0
-                    expect((statusCode < 300 && statusCode >= 200)).to(beTrue())
-                  }
-            })
-            waitUntil(timeout: .seconds(10), action: { done in
-                pubKeySession.request(incorrectUrl,
-                                      method: .options,
-                                      parameters: nil,
-                                      encoding: URLEncoding.default,
-                                      headers: HTTPHeaders([:]))
-                  .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
-                    defer { done() }
-                    let statusCode = response.response?.statusCode ?? 0
-                    expect((statusCode < 300 && statusCode >= 200)).to(beFalse())
-                  }
-            })
-            waitUntil(timeout: .seconds(10), action: { done in
-                cerSession.request(correctUrl,
-                                   method: .options,
-                                   parameters: nil,
-                                   encoding: URLEncoding.default,
-                                   headers: HTTPHeaders([:]))
-                  .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
-                    defer { done() }
-                    let statusCode = response.response?.statusCode ?? 0
-                    expect((statusCode < 300 && statusCode >= 200)).to(beTrue())
-                  }
-            })
-            waitUntil(timeout: .seconds(10), action: { done in
-                cerSession.request(incorrectUrl,
-                                   method: .options,
-                                   parameters: nil,
-                                   encoding: URLEncoding.default,
-                                   headers: HTTPHeaders([:]))
-                  .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
-                    defer { done() }
-                    let statusCode = response.response?.statusCode ?? 0
-                    expect((statusCode < 300 && statusCode >= 200)).to(beFalse())
-                  }
-            })
-            
+          waitUntil(timeout: .seconds(10), action: { done in
+            pubKeySession.request(correctUrl,
+                                  method: .options,
+                                  parameters: nil,
+                                  encoding: URLEncoding.default,
+                                  headers: HTTPHeaders([:]))
+              .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
+                defer { done() }
+                let statusCode = response.response?.statusCode ?? 0
+                expect(statusCode < 300 && statusCode >= 200).to(beTrue())
+              }
+          })
+          waitUntil(timeout: .seconds(10), action: { done in
+            pubKeySession.request(incorrectUrl,
+                                  method: .options,
+                                  parameters: nil,
+                                  encoding: URLEncoding.default,
+                                  headers: HTTPHeaders([:]))
+              .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
+                defer { done() }
+                let statusCode = response.response?.statusCode ?? 0
+                expect(statusCode < 300 && statusCode >= 200).to(beFalse())
+              }
+          })
+          waitUntil(timeout: .seconds(10), action: { done in
+            cerSession.request(correctUrl,
+                               method: .options,
+                               parameters: nil,
+                               encoding: URLEncoding.default,
+                               headers: HTTPHeaders([:]))
+              .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
+                defer { done() }
+                let statusCode = response.response?.statusCode ?? 0
+                expect(statusCode < 300 && statusCode >= 200).to(beTrue())
+              }
+          })
+          waitUntil(timeout: .seconds(10), action: { done in
+            cerSession.request(incorrectUrl,
+                               method: .options,
+                               parameters: nil,
+                               encoding: URLEncoding.default,
+                               headers: HTTPHeaders([:]))
+              .responseDecodable { (response: DataResponse<ConceptDetailResponse, AFError>) in
+                defer { done() }
+                let statusCode = response.response?.statusCode ?? 0
+                expect(statusCode < 300 && statusCode >= 200).to(beFalse())
+              }
+          })
         }
       }
     }
