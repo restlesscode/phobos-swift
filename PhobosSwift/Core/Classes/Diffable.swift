@@ -27,20 +27,39 @@
 import Foundation
 
 @available(iOS 13.0, *)
-///
 public protocol Diffable: Hashable & Identifiable {
   var id: UUID { get }
 }
 
 @available(iOS 13.0, *)
 extension Diffable {
-  ///
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
 
-  ///
   public static func ==(lhs: Self, rhs: Self) -> Bool {
     lhs.id == rhs.id
+  }
+}
+
+@available(iOS 13.0, *)
+public struct Item: Diffable {
+  public let id = UUID()
+
+  public var data: Any
+
+  public init(data: Any) {
+    self.data = data
+  }
+}
+
+@available(iOS 13.0, *)
+public struct Section: Diffable {
+  public let id = UUID()
+
+  public var items: [Item]
+
+  public init(items: [Item]) {
+    self.items = items
   }
 }
