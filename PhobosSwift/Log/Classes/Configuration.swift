@@ -160,6 +160,20 @@ extension PBSLogger {
     var logFilePath: URL? {
       logFileFolder?.appendingPathComponent(logFileName)
     }
+
+    let kUniqueIdentifier = "UniqueIdentifier"
+
+    var defaultUniqueIdentifier: String {
+      if let uuid = UserDefaults.standard.string(forKey: kUniqueIdentifier) {
+        return uuid
+      }
+      let uuid = [UUID().uuidString,
+                  Locale.current.regionCode ?? "regionCode",
+                  "\(Int(Date().timeIntervalSince1970))"].joined(separator: "-")
+
+      UserDefaults.standard.setValue(uuid, forKey: kUniqueIdentifier)
+      return uuid
+    }
   }
 }
 
@@ -222,12 +236,13 @@ extension PBSLogger.Configuration {
   var cloudKitDestination: CloudKitDestination {
     // create a destination for the cloudkit destination
     let cloudKitDestination = CloudKitDestination(identifier: "\(identifier).CloudKitDestination")
-
+    cloudKitDestination.idfl = defaultUniqueIdentifier
     switch mode {
-    case let .icloudKit(uniqueIdentifier):
-      cloudKitDestination.uuid = uniqueIdentifier
+    case let .icloudKit(uniqueIdentifier, containerIdentifier):
+      if let _uniqueIdentifier = uniqueIdentifier { cloudKitDestination.idfl = _uniqueIdentifier }
+      cloudKitDestination.containerIdentifier = containerIdentifier
     default:
-      cloudKitDestination.uuid = ""
+      break
     }
 
     configure(destination: cloudKitDestination)

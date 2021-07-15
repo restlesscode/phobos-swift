@@ -27,23 +27,7 @@
 import Alamofire
 import Foundation
 
-/// To be completed
-
 public struct PBSPublicKeyPinner {}
-
-extension PBSPublicKeyPinner {
-  public class ServerTrustManager: Alamofire.ServerTrustManager {
-    public let evaluator = ServerTrustEvaluator()
-
-    init() {
-      super.init(allHostsMustBeEvaluated: true, evaluators: [:])
-    }
-
-    override open func serverTrustEvaluator(forHost host: String) throws -> ServerTrustEvaluating? {
-      evaluator
-    }
-  }
-}
 
 extension PBSPublicKeyPinner {
   /// Uses the pinned public keys to validate the server trust. The server trust is considered valid if one of the pinned
