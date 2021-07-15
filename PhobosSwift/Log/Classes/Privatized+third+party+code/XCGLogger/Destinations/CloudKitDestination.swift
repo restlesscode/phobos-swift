@@ -13,7 +13,15 @@ open class CloudKitDestination: BaseQueuedDestination {
 
   let recordType = "Logs"
 
-  var uuid: String = ""
+  // IdentifierForLogging (IDFL)
+  var idfl = ""
+
+  var containerIdentifier: String?
+
+  var currentDatabase: CKDatabase {
+    guard let containerIdentifier = containerIdentifier else { return dataBase }
+    return CKContainer(identifier: containerIdentifier).publicCloudDatabase
+  }
 
   override open func write(logDetails: LogDetails, message: String) {
     writeToCloudKit(logDetails: logDetails, message: message)
@@ -46,9 +54,10 @@ open class CloudKitDestination: BaseQueuedDestination {
       type = "none"
     }
     recordNew["type"] = type
-    recordNew["uuid"] = uuid
+    recordNew["idfl"] = idfl
+    recordNew["context"] = logDetails.context
     DispatchQueue.global(qos: .utility).async {
-      self.dataBase.save(recordNew, completionHandler: { _, error in
+      self.currentDatabase.save(recordNew, completionHandler: { _, error in
         if error != nil {
           print("save log to cloudkit error == \(error?.localizedDescription ?? "")")
         }

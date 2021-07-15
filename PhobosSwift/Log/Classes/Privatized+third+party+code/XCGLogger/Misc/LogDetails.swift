@@ -22,6 +22,9 @@ public struct LogDetails {
   /// The log message to display
   public var message: String
 
+  /// The log context to display
+  public var context: String
+
   /// Name of the function that generated this log
   public var functionName: String
 
@@ -34,10 +37,11 @@ public struct LogDetails {
   /// Dictionary to store miscellaneous data about the log, can be used by formatters and filters etc. Please prefix any keys to help avoid collissions.
   public var userInfo: [String: Any]
 
-  public init(level: XCGLogger.Level, date: Date, message: String, functionName: String, fileName: String, lineNumber: Int, userInfo: [String: Any] = [:]) {
+  public init(level: XCGLogger.Level, date: Date, message: String, context: String, functionName: String, fileName: String, lineNumber: Int, userInfo: [String: Any] = [:]) {
     self.level = level
     self.date = date
     self.message = message
+    self.context = context
     self.functionName = functionName
     self.fileName = fileName
     self.lineNumber = lineNumber
