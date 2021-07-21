@@ -46,3 +46,37 @@ open class PBSRouter: Navigator {
     appDelegateSwizzler.unload()
   }
 }
+
+public protocol PBSRouterViewController: UIViewController {
+  func setContext(_ context: Any?)
+}
+
+public protocol PBSRouterProtocol: CaseIterable, RawRepresentable {
+  func controller() -> UIViewController?
+
+  var urlPattern: String { get }
+}
+
+extension PBSRouterProtocol {
+  public static func regist() {
+    allCases.forEach { item in
+      PBSRouter.default.register(item.urlPattern) {
+        let controller = item.controller()
+        if controller is PBSRouterViewController {
+          (controller as? PBSRouterViewController)?.setContext($2)
+        }
+        return controller
+      }
+    }
+  }
+
+  public func show(context: Any?) {
+    PBSRouter.default.openURL(urlPattern, context: context)
+  }
+}
+
+extension PBSRouterProtocol where Self.RawValue == String {
+  public var urlPattern: String {
+    String(describing: Self.self) + "/" + rawValue
+  }
+}
