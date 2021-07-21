@@ -67,6 +67,8 @@ TODO: Add long description of the pod here.
   if enable_test
     s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = "#{group}/#{name}/Tests/**/*.{swift,h,m}"
+      test_spec.dependency 'Quick'
+      test_spec.dependency 'Nimble'
     end
   end
   

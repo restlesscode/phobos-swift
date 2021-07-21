@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftCoreAppDelegateSwizzler.swift
+//  PBSNetworkService.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,35 +24,23 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Alamofire
+import Foundation
+import PhobosSwiftCore
+import PhobosSwiftLog
 
-class PBSCoreAppDelegateSwizzler: NSObject {
-  weak var defaultCore: PBSCore!
-  var interceptorID: GULAppDelegateInterceptorID?
+public typealias AnyPromisable<T> = PBSPromisable<Result<T, Error>>
 
-  func load(withDefaultCore defaultCore: PBSCore) {
-    self.defaultCore = defaultCore
-    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
-  }
-
-  func unload() {
-    if let interceptorID = self.interceptorID {
-      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
-    }
-  }
+/// 通用网络服务
+public protocol PBSNetworkService {
+  func request<T: Decodable>(endPoint: PBSEndPoint) -> AnyPromisable<T>
 }
 
-// MARK: - UIApplicationDelegate Method
+/// 通用网络服务实现，初始化需传入Session
+public class PBSNetworkServiceImpl: PBSNetworkService {
+  public init() {}
 
-extension PBSCoreAppDelegateSwizzler: UIApplicationDelegate {
-  func applicationDidEnterBackground(_: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
-  }
-
-  func applicationWillTerminate(_ application: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+  public func request<T: Decodable>(endPoint: PBSEndPoint) -> AnyPromisable<T> {
+    PBSNetwork.APIRequest.request(endPoint.uri, method: endPoint.method, parameters: endPoint.parameters, encoding: endPoint.encoding, headers: endPoint.heards, session: endPoint.sessionType.session)
   }
 }

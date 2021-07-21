@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftCoreAppDelegateSwizzler.swift
+//  PBSResolver.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,35 +24,23 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+public class PBSResolver {
+  public static let shared = PBSResolver()
+  private var factory: [String: () -> Any] = [:]
+  private init() {}
 
-class PBSCoreAppDelegateSwizzler: NSObject {
-  weak var defaultCore: PBSCore!
-  var interceptorID: GULAppDelegateInterceptorID?
-
-  func load(withDefaultCore defaultCore: PBSCore) {
-    self.defaultCore = defaultCore
-    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+  /// 添加工厂方法及对应类型到Resolver中
+  /// - Parameters:
+  ///   - type: Any
+  ///   - factoryBlock: 返回传入type的实例Block
+  public func add<T>(type: T.Type, _ factoryBlock: @escaping () -> T) {
+    factory.updateValue(factoryBlock, forKey: String(describing: type.self))
   }
 
-  func unload() {
-    if let interceptorID = self.interceptorID {
-      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
-    }
-  }
-}
-
-// MARK: - UIApplicationDelegate Method
-
-extension PBSCoreAppDelegateSwizzler: UIApplicationDelegate {
-  func applicationDidEnterBackground(_: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
-  }
-
-  func applicationWillTerminate(_ application: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+  /// 根据类型获取实例
+  /// - Parameter type: 获取目标类型
+  /// - Returns: 目标类型实例
+  public func resolve<T>(_ type: T.Type) -> T {
+    factory[String(describing: T.self)]?() as! T
   }
 }

@@ -27,9 +27,9 @@
 @testable import PhobosSwiftNetwork
 import Alamofire
 import Nimble
+import OHHTTPStubs
 import PhobosSwiftCore
 import Quick
-import OHHTTPStubs
 
 class APIRequestTest: QuickSpec {
   override func spec() {
@@ -40,16 +40,13 @@ class APIRequestTest: QuickSpec {
       HTTPStubs.removeAllStubs()
       NSLog("Come in afterSuite")
     }
-    
+
     testRequest()
     testGet()
     testPost()
     testPut()
     testDownloadRequest()
     testDownloadDataRequest()
-    
-    
-    
   }
 
   func testRequest() {
@@ -254,16 +251,16 @@ struct APIRequestModel {
   var encoding: ParameterEncoding = JSONEncoding.default
   var headers: PBSNetwork.APIRequest.Headers = ["Content-Type": "application/json"]
   var session = Session.pbs.insecure
-  
+
   init() {
     interceptRequest()
   }
-  
+
   func interceptRequest() {
-    HTTPStubs.stubRequests { (request) -> Bool in
+    HTTPStubs.stubRequests { request -> Bool in
       request.url?.host == "www.test.com"
-    } withStubResponse: { (request) -> HTTPStubsResponse in
-      return HTTPStubsResponse.init(jsonObject: ["errorcode": "0", "errormsg": "success"], statusCode: 200, headers: nil)
+    } withStubResponse: { _ -> HTTPStubsResponse in
+      HTTPStubsResponse(jsonObject: ["errorcode": "0", "errormsg": "success"], statusCode: 200, headers: nil)
     }
   }
 }

@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftCoreAppDelegateSwizzler.swift
+//  RxPropertyWrapper.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,35 +24,69 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import RxCocoa
+import RxSwift
 
-class PBSCoreAppDelegateSwizzler: NSObject {
-  weak var defaultCore: PBSCore!
-  var interceptorID: GULAppDelegateInterceptorID?
-
-  func load(withDefaultCore defaultCore: PBSCore) {
-    self.defaultCore = defaultCore
-    PBSAppDelegateSwizzler.proxyOriginalDelegateIncludingAPNSMethods()
-    interceptorID = PBSAppDelegateSwizzler.registerAppDelegateInterceptor(self)
+@propertyWrapper
+public struct RxBehaviorRelay<Value> {
+  private let relay: BehaviorRelay<Value>
+  public init(default value: Value) {
+    relay = .init(value: value)
   }
 
-  func unload() {
-    if let interceptorID = self.interceptorID {
-      PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
-    }
+  public var wrappedValue: Value {
+    relay.value
+  }
+
+  public var projectedValue: BehaviorRelay<Value> {
+    relay
   }
 }
 
-// MARK: - UIApplicationDelegate Method
-
-extension PBSCoreAppDelegateSwizzler: UIApplicationDelegate {
-  func applicationDidEnterBackground(_: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+@propertyWrapper
+public struct RxPublishRelay<Value> {
+  private let relay: PublishRelay<Value>
+  public init() {
+    relay = .init()
   }
 
-  func applicationWillTerminate(_ application: UIApplication) {
-    // 用户退到后台时候，将InternalBuildVersion写会UserDefaults
-    UserDefaults.standard.set(defaultCore.serviceInfo.internalBuildVersion, forKey: Constants.kInternalBuildVersion)
+  public var wrappedValue: Value? {
+    nil
+  }
+
+  public var projectedValue: PublishRelay<Value> {
+    relay
+  }
+}
+
+@propertyWrapper
+public struct RxPublishSubject<Value> {
+  private let subject: PublishSubject<Value>
+  public init() {
+    subject = .init()
+  }
+
+  public var wrappedValue: Value? {
+    nil
+  }
+
+  public var projectedValue: PublishSubject<Value> {
+    subject
+  }
+}
+
+@propertyWrapper
+public struct RxBehaviorSubject<Value> {
+  private let subject: BehaviorSubject<Value>
+  public init(default value: Value) {
+    subject = .init(value: value)
+  }
+
+  public var wrappedValue: Value? {
+    try? subject.value()
+  }
+
+  public var projectedValue: BehaviorSubject<Value> {
+    subject
   }
 }
