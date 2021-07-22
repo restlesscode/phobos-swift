@@ -63,7 +63,7 @@ class PBSRouterProtocolTest: QuickSpec {
 enum PBSTestRouter: String, PBSRouterProtocol {
   case test
 
-  func controller() -> UIViewController? {
+  var controller: UIViewController? {
     switch self {
     case .test:
       return PBSTestViewControllerSpy()

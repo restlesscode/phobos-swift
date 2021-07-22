@@ -57,12 +57,12 @@ public struct Item: Diffable {
 public struct Section: Diffable {
   public let id = UUID()
 
-    public var data: Any?
+  public var data: Any?
 
   public var items: [Item]
-    
-    public init(items: [Item], data: Any?=nil) {
-      self.data = data
-        self.items = items
-    }
+
+  public init(items: [Item], data: Any? = nil) {
+    self.data = data
+    self.items = items
+  }
 }
