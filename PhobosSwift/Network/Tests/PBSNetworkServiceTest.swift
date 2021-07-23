@@ -43,8 +43,8 @@ class PBSNetworkServiceTest: QuickSpec {
   func testNetworkServiceRequest() {
     describe("Given 提供NetworkService及相应Endpoint") {
       let networkService = PBSNetworkServiceImpl()
-      let request = Model.UrlParameters(page: 1, size: 10)
-      let endPoint = EndPoint.test(parameters: request.toParameters())
+      let parameters = Model.UrlParameters(page: 1, size: 10)
+      let endPoint = EndPoint.test(parameters: parameters)
 
       context("When 调用Request") {
         let resultObservable: AnyPromisable<Model> = networkService.request(endPoint: endPoint)
@@ -79,7 +79,7 @@ class PBSNetworkServiceTest: QuickSpec {
   }
 
   enum EndPoint: PBSEndPoint {
-    case test(parameters: [String: Any])
+    case test(parameters: Model.UrlParameters)
 
     var gateway: PBSGateway {
       Gateway.test
@@ -95,7 +95,7 @@ class PBSNetworkServiceTest: QuickSpec {
     var parameters: PBSNetwork.APIRequest.Parameters? {
       switch self {
       case let .test(parameters):
-        return parameters
+        return parameters.pbs_dictionary
       }
     }
   }
@@ -104,7 +104,7 @@ class PBSNetworkServiceTest: QuickSpec {
     let errorcode: String
     let errormsg: String
 
-    struct UrlParameters {
+    struct UrlParameters: Encodable {
       let page: Int
       let size: Int
 
@@ -112,10 +112,6 @@ class PBSNetworkServiceTest: QuickSpec {
         self.page = page
         self.size = size
         interceptRequest()
-      }
-
-      func toParameters() -> PBSNetwork.APIRequest.Parameters {
-        ["page_number": page, "page_size": size]
       }
 
       func interceptRequest() {

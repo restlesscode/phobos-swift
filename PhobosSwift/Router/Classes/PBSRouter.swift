@@ -52,8 +52,7 @@ public protocol PBSRouterViewController: UIViewController {
 }
 
 public protocol PBSRouterProtocol: CaseIterable, RawRepresentable {
-  func controller() -> UIViewController?
-
+  var controller: UIViewController? { get }
   var urlPattern: String { get }
 }
 
@@ -61,7 +60,7 @@ extension PBSRouterProtocol {
   public static func regist() {
     allCases.forEach { item in
       PBSRouter.default.register(item.urlPattern) {
-        let controller = item.controller()
+        let controller = item.controller
         if controller is PBSRouterViewController {
           (controller as? PBSRouterViewController)?.setContext($2)
         }
@@ -71,7 +70,7 @@ extension PBSRouterProtocol {
   }
 
   public func show(context: Any?) {
-    PBSRouter.default.openURL(urlPattern, context: context)
+    PBSRouter.default.showURL(urlPattern, context: context)
   }
 }
 
