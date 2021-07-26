@@ -121,10 +121,10 @@ open class RadarChartRenderer: LineRadarRenderer {
       let axElement = createAccessibleElement(withDescription: axDescription,
                                               container: chart,
                                               dataSet: dataSet) { element in
-          element.accessibilityFrame = CGRect(x: axp.x - accessibilityFrameWidth,
-                                              y: axp.y - accessibilityFrameWidth,
-                                              width: 2 * accessibilityFrameWidth,
-                                              height: 2 * accessibilityFrameWidth)
+        element.accessibilityFrame = CGRect(x: axp.x - accessibilityFrameWidth,
+                                            y: axp.y - accessibilityFrameWidth,
+                                            width: 2 * accessibilityFrameWidth,
+                                            height: 2 * accessibilityFrameWidth)
       }
 
       accessibilityEntryElements.append(axElement)
@@ -160,8 +160,8 @@ open class RadarChartRenderer: LineRadarRenderer {
       let axElement = createAccessibleElement(withDescription: accessibilityDataSetDescription,
                                               container: chart,
                                               dataSet: dataSet) { element in
-          element.isHeader = true
-          element.accessibilityFrame = path.boundingBoxOfPath
+        element.isHeader = true
+        element.accessibilityFrame = path.boundingBoxOfPath
       }
 
       accessibleChartElements.append(axElement)
