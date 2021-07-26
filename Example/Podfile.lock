@@ -119,17 +119,13 @@ PODS:
   - PhobosSwiftGrowth (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
-    - RxCocoa
-    - RxGesture
-    - RxSwift
-    - SnapKit
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - PhobosSwiftUIComponent (~> 0.1.0)
   - PhobosSwiftGrowth/Tests (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
-    - RxCocoa
-    - RxGesture
-    - RxSwift
-    - SnapKit
+    - PhobosSwiftNetwork (~> 0.1.0)
+    - PhobosSwiftUIComponent (~> 0.1.0)
   - PhobosSwiftHades (0.1.0):
     - MirrorGoogleMobileAds
     - PhobosSwiftCore (~> 0.1.0)
@@ -446,7 +442,7 @@ SPEC CHECKSUMS:
   PhobosSwiftAuth: b57db71d86fdcb78f53303f1ce5618a46d14148d
   PhobosSwiftCore: aef8d363c6e8897508d3307eddc85a22d89ee04b
   PhobosSwiftCoreSwiftUI: f95ec989a5cad92e1d5f153358fa2e324788c65f
-  PhobosSwiftGrowth: 6aa7db2c5fccc834d43c3b38e1b8fa0c8c7ff8bc
+  PhobosSwiftGrowth: ff8e253c77d4c70e71bfb6facb1f17ae32c8d2c8
   PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
   PhobosSwiftLocation: 617c18fa02257978e93eb10e36193c26a8f219e7
   PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
@@ -471,6 +467,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 9dd1a2b768d10b963fbaad3ea7e8b0ebbb007dc5
+PODFILE CHECKSUM: b2d863f22e7b776ace6278b59851de3e09cade7f
 
 COCOAPODS: 1.10.1

@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint PhobosSwiftAuth.podspec' to ensure this is a
+# Be sure to run `pod lib lint PhobosSwiftGrowth.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -47,21 +47,21 @@ TODO: Add long description of the pod here.
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
 
   s.preserve_paths = [
-    "{group}/#{name}/README.md",
-    "{group}/#{name}/CHANGELOG.md"
+    "#{group}/#{name}/README.md",
+    "#{group}/#{name}/CHANGELOG.md"
   ]
   
-  s.dependency 'SnapKit'
-  s.dependency 'RxSwift'
-  s.dependency 'RxCocoa'
-  s.dependency 'RxGesture'
-  # private pods
-  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
   s.dependency 'PhobosSwiftLog', '~> 0.1.0'
+  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'PhobosSwiftNetwork', '~> 0.1.0'
+  s.dependency 'PhobosSwiftUIComponent', '~> 0.1.0'
 
   if has_resource_bundles
     s.resource_bundles = {
-      "#{pod_name}" => ["#{group}/#{name}/Assets/**/*"]
+      "#{pod_name}" => [
+        "#{group}/#{name}/Assets/*/*",
+        "#{group}/#{name}/Assets/*.xcassets"
+      ]
     }
   end
 
