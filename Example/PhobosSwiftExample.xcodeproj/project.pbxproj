@@ -321,9 +321,9 @@
 				A3BE5B99264BB3330049D097 /* Sources */,
 				A3BE5B9A264BB3330049D097 /* Frameworks */,
 				A3BE5B9B264BB3330049D097 /* Resources */,
-				22FA4695376AEBE0E63AFD0C /* [CP] Embed Pods Frameworks */,
 				E697C81BBCF22FA0DDD06697 /* Run SwiftLint Script */,
 				142373F955DE8EABAC01C3C1 /* Run SwiftFormat Script */,
+				5BD1C91A87D7B427BF9489B1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -399,7 +399,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\n\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/PhobosSwiftExample\"\n\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/../PhobosSwift\"\n      \n";
 		};
-		22FA4695376AEBE0E63AFD0C /* [CP] Embed Pods Frameworks */ = {
+		5BD1C91A87D7B427BF9489B1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

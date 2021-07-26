@@ -17,41 +17,40 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
     - nanopb (~> 2.30908.0)
   - GoogleUserMessagingPlatform (1.4.0)
-  - GoogleUtilities (7.4.0):
-    - GoogleUtilities/AppDelegateSwizzler (= 7.4.0)
-    - GoogleUtilities/Environment (= 7.4.0)
-    - GoogleUtilities/ISASwizzler (= 7.4.0)
-    - GoogleUtilities/Logger (= 7.4.0)
-    - GoogleUtilities/MethodSwizzler (= 7.4.0)
-    - GoogleUtilities/Network (= 7.4.0)
-    - "GoogleUtilities/NSData+zlib (= 7.4.0)"
-    - GoogleUtilities/Reachability (= 7.4.0)
-    - GoogleUtilities/SwizzlerTestHelpers (= 7.4.0)
-    - GoogleUtilities/UserDefaults (= 7.4.0)
-  - GoogleUtilities/AppDelegateSwizzler (7.4.0):
+  - GoogleUtilities (7.5.0):
+    - GoogleUtilities/AppDelegateSwizzler (= 7.5.0)
+    - GoogleUtilities/Environment (= 7.5.0)
+    - GoogleUtilities/ISASwizzler (= 7.5.0)
+    - GoogleUtilities/Logger (= 7.5.0)
+    - GoogleUtilities/MethodSwizzler (= 7.5.0)
+    - GoogleUtilities/Network (= 7.5.0)
+    - "GoogleUtilities/NSData+zlib (= 7.5.0)"
+    - GoogleUtilities/Reachability (= 7.5.0)
+    - GoogleUtilities/SwizzlerTestHelpers (= 7.5.0)
+    - GoogleUtilities/UserDefaults (= 7.5.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.5.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.4.0):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/ISASwizzler (7.4.0)
-  - GoogleUtilities/Logger (7.4.0):
+  - GoogleUtilities/Environment (7.5.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/ISASwizzler (7.5.0)
+  - GoogleUtilities/Logger (7.5.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.4.0):
+  - GoogleUtilities/MethodSwizzler (7.5.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.4.0):
+  - GoogleUtilities/Network (7.5.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.4.0)"
-  - GoogleUtilities/Reachability (7.4.0):
+  - "GoogleUtilities/NSData+zlib (7.5.0)"
+  - GoogleUtilities/Reachability (7.5.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/SwizzlerTestHelpers (7.4.0):
+  - GoogleUtilities/SwizzlerTestHelpers (7.5.0):
     - GoogleUtilities/MethodSwizzler
-  - GoogleUtilities/UserDefaults (7.4.0):
+  - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.5.6)
-  - LookinServer (1.0.0)
   - MirrorGoogleMobileAds (0.1.0):
     - GoogleAppMeasurement (~> 7.0)
     - GoogleUserMessagingPlatform (~> 1.1)
@@ -287,7 +286,7 @@ PODS:
     - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
-  - PromisesObjC (1.2.12)
+  - PromisesObjC (2.0.0)
   - Quick (4.0.0)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
@@ -299,11 +298,10 @@ PODS:
     - RxSwift (= 6.1.0)
   - RxSwift (6.1.0)
   - SnapKit (5.0.1)
-  - SwiftFormat/CLI (0.48.0)
+  - SwiftFormat/CLI (0.48.9)
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
-  - LookinServer (from `https://gitee.com/tjerwinchen/LookinServer.git`)
   - MirrorGoogleMobileAds (from `../../mirror-google-mobile-ads-sdk/`)
   - PhobosSwiftAnimation (from `../`)
   - PhobosSwiftAnimation/Tests (from `../`)
@@ -373,8 +371,6 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
-  LookinServer:
-    :git: https://gitee.com/tjerwinchen/LookinServer.git
   MirrorGoogleMobileAds:
     :path: "../../mirror-google-mobile-ads-sdk/"
   PhobosSwiftAnimation:
@@ -416,20 +412,14 @@ EXTERNAL SOURCES:
   PhobosSwiftWechat:
     :path: "../"
 
-CHECKOUT OPTIONS:
-  LookinServer:
-    :commit: df5580956a96ffb5acca439dc81af8afea763f8e
-    :git: https://gitee.com/tjerwinchen/LookinServer.git
-
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   GoogleAppMeasurement: fd19169c3034975cb934e865e5667bfdce59df7f
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
-  GoogleUtilities: 284cddc7fffc14ae1907efb6f78ab95c1fccaedc
+  GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   MirrorGoogleMobileAds: f207c576fced0bc1dcd6bac897cb274d96ce73ef
   MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
   MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
@@ -457,16 +447,16 @@ SPEC CHECKSUMS:
   PhobosSwiftTestKnight: 7d7a2a24f60f66097f27442d435d5e0edf7109b3
   PhobosSwiftUIComponent: cff4c50f4addaabb96a12f2583a20f01a8197bb7
   PhobosSwiftWechat: 14ad9aebd6e81b58e4981de90649a947169c68d3
-  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftFormat: 48a96bf55d167e44b8eb825f3dbda0e1204e549a
+  SwiftFormat: 7d1ea6c83bb13a860289785c37cd2438d01fabb1
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: b2d863f22e7b776ace6278b59851de3e09cade7f
+PODFILE CHECKSUM: a5b97dff25695510d17a06fc7a32756438cb1aee
 
 COCOAPODS: 1.10.1

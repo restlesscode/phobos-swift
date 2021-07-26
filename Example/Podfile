@@ -4,13 +4,19 @@ source 'https://gitee.com/tjerwinchen/cocoa-mirror-spec.git'
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
+BUILD_FOR_M1 = ENV["BUILD_FOR_M1"]
+
 target 'PhobosSwiftExample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   inhibit_all_warnings!
   
-  # LookinServer
-  pod 'LookinServer', :git => 'https://gitee.com/tjerwinchen/LookinServer.git', :configurations => ['Debug']
+  if BUILD_FOR_M1
+    puts("Build for M1 Chip Mac")
+  else
+    # LookinServer
+    pod 'LookinServer', :git => 'https://gitee.com/tjerwinchen/LookinServer.git', :configurations => ['Debug']
+  end
   
   # SwiftLint
   pod 'SwiftLint', :configurations => ['Debug']
