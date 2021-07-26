@@ -1,6 +1,6 @@
 //
 //
-//  Diffable.swift
+//  RxPropertyWrapper.swift
 //  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -24,45 +24,69 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
+import RxCocoa
+import RxSwift
 
-@available(iOS 13.0, *)
-public protocol Diffable: Hashable & Identifiable {
-  var id: UUID { get }
-}
-
-@available(iOS 13.0, *)
-extension Diffable {
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
+@propertyWrapper
+public struct RxBehaviorRelay<Value> {
+  private let relay: BehaviorRelay<Value>
+  public init(default value: Value) {
+    relay = .init(value: value)
   }
 
-  public static func ==(lhs: Self, rhs: Self) -> Bool {
-    lhs.id == rhs.id
+  public var wrappedValue: Value {
+    relay.value
   }
-}
 
-@available(iOS 13.0, *)
-public struct Item: Diffable {
-  public let id = UUID()
-
-  public var data: Any
-
-  public init(data: Any) {
-    self.data = data
+  public var projectedValue: BehaviorRelay<Value> {
+    relay
   }
 }
 
-@available(iOS 13.0, *)
-public struct Section: Diffable {
-  public let id = UUID()
+@propertyWrapper
+public struct RxPublishRelay<Value> {
+  private let relay: PublishRelay<Value>
+  public init() {
+    relay = .init()
+  }
 
-  public var data: Any?
+  public var wrappedValue: Value? {
+    nil
+  }
 
-  public var items: [Item]
+  public var projectedValue: PublishRelay<Value> {
+    relay
+  }
+}
 
-  public init(items: [Item], data: Any? = nil) {
-    self.data = data
-    self.items = items
+@propertyWrapper
+public struct RxPublishSubject<Value> {
+  private let subject: PublishSubject<Value>
+  public init() {
+    subject = .init()
+  }
+
+  public var wrappedValue: Value? {
+    nil
+  }
+
+  public var projectedValue: PublishSubject<Value> {
+    subject
+  }
+}
+
+@propertyWrapper
+public struct RxBehaviorSubject<Value> {
+  private let subject: BehaviorSubject<Value>
+  public init(default value: Value) {
+    subject = .init(value: value)
+  }
+
+  public var wrappedValue: Value? {
+    try? subject.value()
+  }
+
+  public var projectedValue: BehaviorSubject<Value> {
+    subject
   }
 }

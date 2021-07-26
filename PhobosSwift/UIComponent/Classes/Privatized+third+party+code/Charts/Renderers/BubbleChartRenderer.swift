@@ -131,7 +131,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer {
                                               dataSet: dataSet,
                                               dataSetIndex: dataSetIndex,
                                               shapeSize: shapeSize) { element in
-            element.accessibilityFrame = rect
+          element.accessibilityFrame = rect
         }
 
         accessibilityOrderedElements[dataSetIndex].append(element)

@@ -67,6 +67,15 @@ extension Encodable {
 
     return nil
   }
+
+  public var pbs_dictionary: [String: Any] {
+    guard let data = try? JSONEncoder().encode(self),
+          let dictionary = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+      return [:]
+    }
+
+    return dictionary
+  }
 }
 
 /// Enhanced features of String class is implemented in this extension

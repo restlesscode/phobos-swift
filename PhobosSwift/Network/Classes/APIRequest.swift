@@ -53,12 +53,14 @@ extension PBSNetwork.APIRequest: PBSPromisableType {
         .responseDecodable { (response: DataResponse<T, AFError>) in
           PBSLogger.logger.logResponse(payload: response.data)
           if let error = response.error {
+            PBSLogger.logger.error(message: error.localizedDescription, context: "network.error")
             return resolve(.failure(error))
           } else {
             switch response.result {
             case let .success(decodable):
               resolve(.success(decodable))
             case let .failure(error):
+              PBSLogger.logger.error(message: error.localizedDescription, context: "network.error")
               return resolve(.failure(error))
             }
           }
@@ -112,6 +114,7 @@ extension PBSNetwork.APIRequest {
           PBSLogger.logger.logResponse(payload: response.data)
 
           if let error = response.error {
+            PBSLogger.logger.error(message: error.localizedDescription, context: "network.error")
             return resolve(.failure(error))
           } else {
             switch response.result {
@@ -119,6 +122,7 @@ extension PBSNetwork.APIRequest {
               let dataResponse = ModelResponse(model: decodable, response: response.response!)
               resolve(.success(dataResponse))
             case let .failure(error):
+              PBSLogger.logger.error(message: error.localizedDescription, context: "network.error")
               return resolve(.failure(error))
             }
           }
@@ -174,6 +178,7 @@ extension PBSNetwork.APIRequest {
         .responseData(completionHandler: { (response: AFDataResponse<Data>) in
           PBSLogger.logger.logResponse(payload: response.data)
           if let error = response.error {
+            PBSLogger.logger.error(message: error.localizedDescription, context: "network.error")
             resolve(.failure(error))
           } else {
             resolve(.success(response))
@@ -200,6 +205,7 @@ extension PBSNetwork.APIRequest {
         .responseJSON { response in
           PBSLogger.logger.logResponse(payload: response.data)
           if let error = response.error {
+            PBSLogger.logger.error(message: error.localizedDescription, context: "network.error")
             resolve(.failure(error))
           } else {
             resolve(.success(response))
@@ -223,6 +229,7 @@ extension PBSNetwork.APIRequest {
         .responseJSON { response in
           PBSLogger.logger.logResponse(payload: response.debugDescription.data(using: .utf8))
           if let error = response.error {
+            PBSLogger.logger.error(message: error.localizedDescription, context: "network.error")
             resolve(.failure(error))
           } else {
             resolve(.success(response))
@@ -246,6 +253,7 @@ extension PBSNetwork.APIRequest {
         .responseData { response in
           PBSLogger.logger.logResponse(payload: response.debugDescription.data(using: .utf8))
           if let error = response.error {
+            PBSLogger.logger.error(message: error.localizedDescription, context: "network.error")
             resolve(.failure(error))
           } else {
             resolve(.success(response))

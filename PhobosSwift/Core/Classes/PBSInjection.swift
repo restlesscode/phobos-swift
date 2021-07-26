@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftGrowth.swift
-//  PhobosSwiftGrowth
+//  PBSInjection.swift
+//  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,11 +24,13 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import PhobosSwiftLog
+@propertyWrapper
+public struct PBSInjection<T> {
+  private let component: T
 
-extension PBSLogger {
-  static var logger = PBSLogger.shared
+  public init() {
+    component = PBSResolver.shared.resolve(T.self)
+  }
+
+  public var wrappedValue: T { component }
 }
-
-class PhobosSwiftGrowth: NSObject {}

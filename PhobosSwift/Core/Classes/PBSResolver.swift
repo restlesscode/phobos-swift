@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftGrowth.swift
-//  PhobosSwiftGrowth
+//  PBSResolver.swift
+//  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,11 +24,23 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import PhobosSwiftLog
+public class PBSResolver {
+  public static let shared = PBSResolver()
+  private var factory: [String: () -> Any] = [:]
+  private init() {}
 
-extension PBSLogger {
-  static var logger = PBSLogger.shared
+  /// 添加工厂方法及对应类型到Resolver中
+  /// - Parameters:
+  ///   - type: Any
+  ///   - factoryBlock: 返回传入type的实例Block
+  public func add<T>(type: T.Type, _ factoryBlock: @escaping () -> T) {
+    factory.updateValue(factoryBlock, forKey: String(describing: type.self))
+  }
+
+  /// 根据类型获取实例
+  /// - Parameter type: 获取目标类型
+  /// - Returns: 目标类型实例
+  public func resolve<T>(_ type: T.Type) -> T {
+    factory[String(describing: T.self)]?() as! T
+  }
 }
-
-class PhobosSwiftGrowth: NSObject {}

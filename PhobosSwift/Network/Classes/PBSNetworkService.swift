@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftGrowth.swift
-//  PhobosSwiftGrowth
+//  PBSNetworkService.swift
+//  PhobosSwiftCore
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,11 +24,23 @@
 //  THE SOFTWARE.
 //
 
+import Alamofire
 import Foundation
+import PhobosSwiftCore
 import PhobosSwiftLog
 
-extension PBSLogger {
-  static var logger = PBSLogger.shared
+public typealias AnyPromisable<T> = PBSPromisable<Result<T, Error>>
+
+/// 通用网络服务
+public protocol PBSNetworkService {
+  func request<T: Decodable>(endPoint: PBSEndPoint) -> AnyPromisable<T>
 }
 
-class PhobosSwiftGrowth: NSObject {}
+/// 通用网络服务实现，初始化需传入Session
+public class PBSNetworkServiceImpl: PBSNetworkService {
+  public init() {}
+
+  public func request<T: Decodable>(endPoint: PBSEndPoint) -> AnyPromisable<T> {
+    PBSNetwork.APIRequest.request(endPoint.uri, method: endPoint.method, parameters: endPoint.parameters, encoding: endPoint.encoding, headers: endPoint.heards, session: endPoint.sessionType.session)
+  }
+}

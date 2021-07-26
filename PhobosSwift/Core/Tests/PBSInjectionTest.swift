@@ -1,7 +1,7 @@
 //
 //
-//  PhobosSwiftGrowth.swift
-//  PhobosSwiftGrowth
+//  PBSInjectionTest.swift
+//  PhobosSwiftCore-Unit-Tests
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
 //
@@ -24,11 +24,38 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
-import PhobosSwiftLog
+@testable import PhobosSwiftCore
+import Nimble
+import Quick
 
-extension PBSLogger {
-  static var logger = PBSLogger.shared
+class PBSInjectionTest: QuickSpec {
+  override func spec() {
+    testInjection()
+  }
+
+  func testInjection() {
+    describe("Given 已经通过PBSResolver注入了名称为hahahah的InjectTestModel") {
+      inject()
+      context("When 使用@PBSInjection") {
+        let viewModel = InjectTestViewModel()
+        it("Then 取出的Model.name为hahahah") {
+          expect(viewModel.model.name).to(equal("hahahah"))
+        }
+      }
+    }
+  }
+
+  func inject() {
+    PBSResolver.shared.add(type: InjectTestModel.self) { () -> InjectTestModel in
+      .init(name: "hahahah")
+    }
+  }
 }
 
-class PhobosSwiftGrowth: NSObject {}
+struct InjectTestModel {
+  let name: String
+}
+
+class InjectTestViewModel {
+  @PBSInjection var model: InjectTestModel
+}
