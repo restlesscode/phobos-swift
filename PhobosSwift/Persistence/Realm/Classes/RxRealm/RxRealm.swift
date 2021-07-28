@@ -6,7 +6,7 @@
 //  Created by Marin Todorov
 //
 import Foundation
-import MirrorRealmSwift
+import RealmSwift
 import RxSwift
 
 public enum RxRealmError: Error {
