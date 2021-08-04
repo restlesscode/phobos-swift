@@ -110,7 +110,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         /// should do nothing
         break
       case .loadFailedWith:
-        /// load failed
         break
       case .adNotReady:
         self.appOpenAd.pbs_loadAppOpenAd(with: .portrait)

@@ -5,7 +5,7 @@
 //  Created by sergdort on 6/3/16.
 //
 import Foundation
-import MirrorRealmSwift
+import RealmSwift
 import RxSwift
 
 /**

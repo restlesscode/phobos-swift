@@ -25,7 +25,7 @@
 //
 
 import Foundation
-import MirrorRealmSwift
+import RealmSwift
 import PhobosSwiftCore
 import PhobosSwiftLog
 
