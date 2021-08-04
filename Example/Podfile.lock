@@ -51,14 +51,10 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.5.6)
+  - LookinServer (1.0.0)
   - MirrorGoogleMobileAds (0.1.0):
     - GoogleAppMeasurement (~> 7.0)
     - GoogleUserMessagingPlatform (~> 1.1)
-  - MirrorRealm (0.3.1):
-    - MirrorRealm/Headers (= 0.3.1)
-  - MirrorRealm/Headers (0.3.1)
-  - MirrorRealmSwift (0.3.1):
-    - MirrorRealm (~> 0.3.1)
   - MirrorWechatSDK (0.1.5)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
@@ -203,11 +199,12 @@ PODS:
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPersistence/Realm (0.1.0):
-    - MirrorRealm (~> 0.3.1)
-    - MirrorRealmSwift (~> 0.3.1)
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - Realm
+    - RealmSwift
     - RxCocoa (~> 6.1.0)
+    - RxRealm
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPersistence/Tests (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
@@ -288,10 +285,20 @@ PODS:
     - RxSwift (~> 6.1.0)
   - PromisesObjC (2.0.0)
   - Quick (4.0.0)
+  - Realm (10.11.0):
+    - Realm/Headers (= 10.11.0)
+  - Realm/Headers (10.11.0)
+  - RealmSwift (10.11.0):
+    - Realm (= 10.11.0)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
     - RxSwift (= 6.1.0)
   - RxGesture (4.0.2):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRealm (5.0.1):
+    - Realm (~> 10.5)
+    - RealmSwift (~> 10.5)
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
   - RxRelay (6.1.0):
@@ -302,6 +309,7 @@ PODS:
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
+  - LookinServer (from `https://gitee.com/tjerwinchen/LookinServer.git`)
   - MirrorGoogleMobileAds (from `../../mirror-google-mobile-ads-sdk/`)
   - PhobosSwiftAnimation (from `../`)
   - PhobosSwiftAnimation/Tests (from `../`)
@@ -345,8 +353,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://gitee.com/tjerwinchen/cocoa-mirror-spec.git:
-    - MirrorRealm
-    - MirrorRealmSwift
     - MirrorWechatSDK
   trunk:
     - Alamofire
@@ -362,8 +368,11 @@ SPEC REPOS:
     - OHHTTPStubs
     - PromisesObjC
     - Quick
+    - Realm
+    - RealmSwift
     - RxCocoa
     - RxGesture
+    - RxRealm
     - RxRelay
     - RxSwift
     - SnapKit
@@ -371,6 +380,8 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
+  LookinServer:
+    :git: https://gitee.com/tjerwinchen/LookinServer.git
   MirrorGoogleMobileAds:
     :path: "../../mirror-google-mobile-ads-sdk/"
   PhobosSwiftAnimation:
@@ -412,6 +423,11 @@ EXTERNAL SOURCES:
   PhobosSwiftWechat:
     :path: "../"
 
+CHECKOUT OPTIONS:
+  LookinServer:
+    :commit: df5580956a96ffb5acca439dc81af8afea763f8e
+    :git: https://gitee.com/tjerwinchen/LookinServer.git
+
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
@@ -420,9 +436,8 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   MirrorGoogleMobileAds: f207c576fced0bc1dcd6bac897cb274d96ce73ef
-  MirrorRealm: 9e74edc3d74858c5e36f01eae2afee5adc664e12
-  MirrorRealmSwift: 78e8a385e88989b395758270e72569dc0622bf6e
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
@@ -439,7 +454,7 @@ SPEC CHECKSUMS:
   PhobosSwiftMedia: a5d96bb202b5d3238efd31a010f75af86b6e5799
   PhobosSwiftNetwork: 74126ce2fd11c7f414be20ba166a7680d2a73097
   PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
-  PhobosSwiftPersistence: 091b0860c9300c0285476ae56a3a3181acf2fe15
+  PhobosSwiftPersistence: 24b39fbbf92777fdc59707da4740944e7414b9ba
   PhobosSwiftPush: 070abd98c19335dda9c46ab85d8b8a594196e782
   PhobosSwiftRouter: f15ce20a7d9beb68c1b251bbf23466bc5e807bae
   PhobosSwiftSlideout: 2db0aa4d94acb06b8cfc1a32b891bdcf07a68557
@@ -449,8 +464,11 @@ SPEC CHECKSUMS:
   PhobosSwiftWechat: 14ad9aebd6e81b58e4981de90649a947169c68d3
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
+  Realm: 39ff23f0f709cd4ed93eb47ee6593c2158945b38
+  RealmSwift: 42713e09a8631070d6c12c3c5fb22b8edc1daa41
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxGesture: f059f2aeef966fb17dad56ee440e76410f10e55f
+  RxRealm: bd7c601e78cfebe48c24d4550db83c31e1ab2c33
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
