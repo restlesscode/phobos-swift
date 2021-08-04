@@ -34,7 +34,7 @@ extension PhobosSwift where Base: Session {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
     let serverTrustManager = PBSPinner.ServerTrustManager()
-    return Session(configuration: config, serverTrustManager: serverTrustManager)
+    return Session(configuration: config, interceptor: PBSNetworkInterceptor(), serverTrustManager: serverTrustManager)
   }
 
   public static var `default`: Session {
@@ -87,19 +87,19 @@ extension Session {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
     let serverTrustManager = PBSPinner.ServerTrustManager()
-    return Session(configuration: config, serverTrustManager: serverTrustManager)
+    return Session(configuration: config, interceptor: PBSNetworkInterceptor(), serverTrustManager: serverTrustManager)
   }()
 
   static let redirectorDoNotFollow: Session = {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
     let serverTrustManager = PBSPinner.ServerTrustManager()
-    return Session(configuration: config, serverTrustManager: serverTrustManager, redirectHandler: Redirector(behavior: .doNotFollow))
+    return Session(configuration: config, interceptor: PBSNetworkInterceptor(), serverTrustManager: serverTrustManager, redirectHandler: Redirector(behavior: .doNotFollow))
   }()
 
   static let insecure: Session = {
     let config = URLSessionConfiguration.default
     config.timeoutIntervalForRequest = 30.0
-    return Session(configuration: config)
+    return Session(configuration: config, interceptor: PBSNetworkInterceptor())
   }()
 }

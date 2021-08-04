@@ -46,6 +46,10 @@ extension PBSGateway {
   public func replaceVersion(old: String, new: String) -> String {
     routePath.replacingOccurrences(of: old, with: new)
   }
+
+  public var host: String {
+    return URL(string: domain)?.host ?? ""
+  }
 }
 
 /// 接口端点配置
