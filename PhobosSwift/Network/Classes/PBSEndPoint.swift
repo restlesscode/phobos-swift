@@ -48,7 +48,7 @@ extension PBSGateway {
   }
 
   public var host: String {
-    return URL(string: domain)?.host ?? ""
+    URL(string: domain)?.host ?? ""
   }
 }
 

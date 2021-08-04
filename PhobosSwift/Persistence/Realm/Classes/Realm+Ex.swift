@@ -25,9 +25,9 @@
 //
 
 import Foundation
-import RealmSwift
 import PhobosSwiftCore
 import PhobosSwiftLog
+import RealmSwift
 
 let kAppGroupId = "AppGroupId"
 let kRealm = "realm"

@@ -38,7 +38,7 @@ class PBSNetworkInterceptor: RequestInterceptor {
       completion(.doNotRetryWithError(error))
       return
     }
-    
+
     guard let refreshTokenBlock = PBSRefreshTokenUtil.shared.refreshTokenBlocks[host] else {
       completion(.doNotRetryWithError(error))
       return
