@@ -33,7 +33,7 @@ public protocol PBSGateway {
   /// 路由+版本路径
   var routePath: String { get }
   /// 请求头
-  var heards: PBSNetwork.APIRequest.Headers? { get }
+  var headers: PBSNetwork.APIRequest.Headers? { get }
 
   /// API版本切换
   /// - Parameters:
@@ -61,7 +61,7 @@ public protocol PBSEndPoint {
   /// 默认实现 gateway.domain + path，特殊情况可自定义
   var uri: String { get }
   /// 默认获取gateway中的headers
-  var heards: PBSNetwork.APIRequest.Headers? { get }
+  var headers: PBSNetwork.APIRequest.Headers? { get }
   /// 默认为nil
   var parameters: PBSNetwork.APIRequest.Parameters? { get }
   /// 默认get
@@ -78,7 +78,7 @@ extension PBSEndPoint {
   }
 
   public var parameters: PBSNetwork.APIRequest.Parameters? { nil }
-  public var heards: PBSNetwork.APIRequest.Headers? { gateway.heards }
+  public var headers: PBSNetwork.APIRequest.Headers? { gateway.headers }
   public var method: HTTPMethod { .get }
   public var encoding: ParameterEncoding {
     switch method {

@@ -27,7 +27,7 @@
 import Foundation
 
 public typealias PBSRefreshTokenCallBack = (Bool) -> Void
-public typealias PBSRefreshToken = (PBSRefreshTokenCallBack) -> Void
+public typealias PBSRefreshToken = (@escaping PBSRefreshTokenCallBack) -> Void
 
 public class PBSRefreshTokenUtil {
   public static let shared = PBSRefreshTokenUtil()
