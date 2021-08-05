@@ -82,7 +82,7 @@ class PBSRefreshTokenTest: QuickSpec {
 
     var routePath: String { "/bff/v1" }
 
-    var heards: PBSNetwork.APIRequest.Headers? { [:] }
+    var headers: PBSNetwork.APIRequest.Headers? { [:] }
   }
 
   enum EndPoint: PBSEndPoint {
