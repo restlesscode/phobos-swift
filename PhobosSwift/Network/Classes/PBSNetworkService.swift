@@ -41,6 +41,6 @@ public class PBSNetworkServiceImpl: PBSNetworkService {
   public init() {}
 
   public func request<T: Decodable>(endPoint: PBSEndPoint) -> AnyPromisable<T> {
-    PBSNetwork.APIRequest.request(endPoint.uri, method: endPoint.method, parameters: endPoint.parameters, encoding: endPoint.encoding, headers: endPoint.heards, session: endPoint.sessionType.session)
+    PBSNetwork.APIRequest.request(endPoint.uri, method: endPoint.method, parameters: endPoint.parameters, encoding: endPoint.encoding, headers: endPoint.headers, session: endPoint.sessionType.session)
   }
 }
