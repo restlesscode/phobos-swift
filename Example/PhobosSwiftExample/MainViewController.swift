@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftGrowth
 import PhobosSwiftMedia
 import PhobosSwiftTestKnight
 import PhobosSwiftUIComponent
@@ -41,7 +42,7 @@ class MainViewController: PBSArticleMasterViewController {
       navigationController?.navigationBar.prefersLargeTitles = true
       navigationItem.largeTitleDisplayMode = .automatic
     }
-
+    addGrowrhExample()
     addCameraGuideExample()
     addBrowerSelect()
     addGhostExample()
@@ -134,6 +135,20 @@ class MainViewController: PBSArticleMasterViewController {
     sectionViewModels.append(PBSArticleSectionViewModel(title: "PhobosSwiftSlideout", subtitle: "有关 Slideout 页面的使用例子", articleViewModels: articleViewModels))
   }
 
+  private func addGrowrhExample() {
+    let articleModel = PBSArticleModel(title: "PhobosSwiftGrowrh",
+                                       subtitle: "",
+                                       tag: "Growrh",
+                                       time: "Jul 26, 2021",
+                                       timestamp: nil,
+                                       coverImageUrl: nil,
+                                       url: nil,
+                                       body: nil)
+
+    let articleViewModels = [PBSArticleViewModel(model: articleModel)]
+    sectionViewModels.append(PBSArticleSectionViewModel(title: "PhobosSwiftGrowrh", subtitle: "有关 Growrh 页面的使用例子", articleViewModels: articleViewModels))
+  }
+
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
 
@@ -163,6 +178,10 @@ class MainViewController: PBSArticleMasterViewController {
       }
     } else if articleViewModel.title.value == "PhobosSwiftSlideout" {
       present(SlideoutDemoCenterViewController.makeTheSlideoutDemo(), animated: true, completion: nil)
+    } else if articleViewModel.title.value == "PhobosSwiftGrowrh" {
+      let vc = UINavigationController(rootViewController: PBSGrowthHomeViewController())
+      vc.modalPresentationStyle = .fullScreen
+      present(vc, animated: true, completion: nil)
     }
   }
 

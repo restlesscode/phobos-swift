@@ -78,6 +78,7 @@ extension PBSImageBrower {
     private let cellId = "AssetImageCell"
     private let groupCellId = "MPGroupSelectCell"
     public var selectBlock: (([UIImage]) -> Void)?
+    public var maxSelectCount = 9
     private lazy var collectionView: UICollectionView = {
       let space: CGFloat = 3
       let oneRowCount: CGFloat = 4
@@ -454,7 +455,7 @@ extension PBSImageBrower.SelectViewController: UICollectionViewDelegate, UIColle
       selectIndex.remove(at: index)
       cell.setSelectStatus(selected: false)
     } else {
-      guard selectIndex.count < 9 else {
+      guard selectIndex.count < maxSelectCount else {
         return
       }
 
