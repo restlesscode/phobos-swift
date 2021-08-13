@@ -11,7 +11,7 @@ name = "Growth"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
-has_resource_bundles = false
+has_resource_bundles = true
 enable_test = true
 
 
@@ -55,6 +55,7 @@ TODO: Add long description of the pod here.
   s.dependency 'PhobosSwiftCore', '~> 0.1.0'
   s.dependency 'PhobosSwiftNetwork', '~> 0.1.0'
   s.dependency 'PhobosSwiftUIComponent', '~> 0.1.0'
+  s.dependency 'PhobosSwiftMedia', '~> 0.1.0'
 
   if has_resource_bundles
     s.resource_bundles = {

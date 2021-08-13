@@ -114,11 +114,13 @@ PODS:
   - PhobosSwiftGrowth (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftMedia (~> 0.1.0)
     - PhobosSwiftNetwork (~> 0.1.0)
     - PhobosSwiftUIComponent (~> 0.1.0)
   - PhobosSwiftGrowth/Tests (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftMedia (~> 0.1.0)
     - PhobosSwiftNetwork (~> 0.1.0)
     - PhobosSwiftUIComponent (~> 0.1.0)
   - PhobosSwiftHades (0.1.0):
@@ -447,7 +449,7 @@ SPEC CHECKSUMS:
   PhobosSwiftAuth: b57db71d86fdcb78f53303f1ce5618a46d14148d
   PhobosSwiftCore: aef8d363c6e8897508d3307eddc85a22d89ee04b
   PhobosSwiftCoreSwiftUI: f95ec989a5cad92e1d5f153358fa2e324788c65f
-  PhobosSwiftGrowth: ff8e253c77d4c70e71bfb6facb1f17ae32c8d2c8
+  PhobosSwiftGrowth: 46ee5f29f84053e3a24bbc26e74b688f44d1fbf5
   PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
   PhobosSwiftLocation: 617c18fa02257978e93eb10e36193c26a8f219e7
   PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
