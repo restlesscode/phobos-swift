@@ -28,12 +28,17 @@ import Foundation
 import PhobosSwiftLog
 
 public protocol PBSModule: AnyObject {
+  static var name: String { get }
   static var logger: PBSLogger { get }
   static var moduleBundle: Bundle { get }
   static var resourceBundle: Bundle { get }
 }
 
 extension PBSModule {
+  public static var name: String {
+    String(describing: Self.self)
+  }
+    
   public static var logger: PBSLogger {
     PBSLogger.shared
   }
