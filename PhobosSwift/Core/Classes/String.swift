@@ -84,8 +84,8 @@ extension PhobosSwift where Base == String {
   /// 转成多语言字符串
   ///
   /// - parameter bundle 对bundle对象中的多语言字符串，进行转换
-  public func localized(inBundle bundle: Bundle = Bundle.main, value: String = "", comment: String = "") -> String {
-    NSLocalizedString(base, tableName: nil, bundle: bundle, value: value, comment: comment)
+  public func localized(inBundle bundle: Bundle = Bundle.main, tableName: String? = nil, value: String = "", comment: String = "") -> String {
+    NSLocalizedString(base, tableName: tableName, bundle: bundle, value: value, comment: comment)
   }
 
   /// 字符串转成整数
