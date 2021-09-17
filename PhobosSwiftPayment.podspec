@@ -52,7 +52,7 @@ TODO: Add long description of the pod here.
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
   s.dependency 'PhobosSwiftCore', '~> 0.1.0'
-  s.dependency 'PhobosSwiftLog', '~> 0.1.0'
+  s.dependency 'PhobosSwiftLog', '~> 0.1.1'
   s.dependency 'PhobosSwiftNetwork', '~> 0.1.0'
 
   s.frameworks = 'Security'

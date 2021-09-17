@@ -64,7 +64,7 @@ TODO: Add long description of the pod here.
   
   s.default_subspec = 'Core'
   
-  s.dependency 'PhobosSwiftLog', '~> 0.1.0'
+  s.dependency 'PhobosSwiftLog', '~> 0.1.1'
 
 
   if has_resource_bundles
