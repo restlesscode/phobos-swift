@@ -51,10 +51,10 @@ TODO: Add long description of the pod here.
     "{group}/#{name}/CHANGELOG.md"
   ]
   
-  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'PhobosSwiftCore', '~> 0.1.1'
   s.dependency 'PhobosSwiftLog', '~> 0.1.1'
   s.dependency 'AlamofireImage', '~> 4.1'
-  s.dependency 'IQKeyboardManagerSwift'
+  s.dependency 'IQKeyboardManagerSwift', '~> 6.5.6'
   if has_resource_bundles
     s.resource_bundles = {
       "#{pod_name}" => ["#{group}/#{name}/Assets/**/*"]

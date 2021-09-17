@@ -51,7 +51,7 @@ TODO: Add long description of the pod here.
     "#{group}/#{name}/CHANGELOG.md"
   ]
   
-  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'PhobosSwiftCore', '~> 0.1.1'
   s.dependency 'PhobosSwiftNetwork', '~> 0.1.0'
   s.dependency 'PhobosSwiftUIComponent', '~> 0.1.0'
   s.dependency 'MirrorGoogleMobileAds'
