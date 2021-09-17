@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftGrowth.swift
+//  Localization.swift
 //  PhobosSwiftGrowth
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -25,14 +25,15 @@
 //
 
 import Foundation
-import PhobosSwiftLog
 
-extension PBSLogger {
-  static var logger = PBSGrowth.logger
+extension PBSGrowth {
+  enum Localization {
+    enum Strings: String {
+      case giveUSYourFeedback
+
+      var localization: String {
+        rawValue.pbs.localized(inBundle: Bundle.bundle)
+      }
+    }
+  }
 }
-
-extension Bundle {
-  static var bundle = PBSGrowth.resourceBundle
-}
-
-class PhobosSwiftGrowth: NSObject {}

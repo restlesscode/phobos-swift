@@ -51,7 +51,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.0):
     - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.5.6)
-  - LookinServer (1.0.0)
+  - LookinServer (1.0.4)
   - MirrorGoogleMobileAds (0.1.0):
     - GoogleAppMeasurement (~> 7.0)
     - GoogleUserMessagingPlatform (~> 1.1)
@@ -311,7 +311,7 @@ PODS:
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
-  - LookinServer (from `https://gitee.com/tjerwinchen/LookinServer.git`)
+  - LookinServer
   - MirrorGoogleMobileAds (from `../../mirror-google-mobile-ads-sdk/`)
   - PhobosSwiftAnimation (from `../`)
   - PhobosSwiftAnimation/Tests (from `../`)
@@ -364,6 +364,7 @@ SPEC REPOS:
     - GoogleUserMessagingPlatform
     - GoogleUtilities
     - IQKeyboardManagerSwift
+    - LookinServer
     - nanopb
     - Nimble
     - ObjcExceptionBridging
@@ -382,8 +383,6 @@ SPEC REPOS:
     - SwiftLint
 
 EXTERNAL SOURCES:
-  LookinServer:
-    :git: https://gitee.com/tjerwinchen/LookinServer.git
   MirrorGoogleMobileAds:
     :path: "../../mirror-google-mobile-ads-sdk/"
   PhobosSwiftAnimation:
@@ -425,11 +424,6 @@ EXTERNAL SOURCES:
   PhobosSwiftWechat:
     :path: "../"
 
-CHECKOUT OPTIONS:
-  LookinServer:
-    :commit: df5580956a96ffb5acca439dc81af8afea763f8e
-    :git: https://gitee.com/tjerwinchen/LookinServer.git
-
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
@@ -438,7 +432,7 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
   GoogleUtilities: eea970f4a389963963bffe8d8fabe43540678b9c
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
+  LookinServer: 743c1681771d0a8dcc38825325a080c3186404a5
   MirrorGoogleMobileAds: f207c576fced0bc1dcd6bac897cb274d96ce73ef
   MirrorWechatSDK: 8cec8ecc8dc5dc9c829a72a2584020b441d1e7bf
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
@@ -477,6 +471,6 @@ SPEC CHECKSUMS:
   SwiftFormat: 7d1ea6c83bb13a860289785c37cd2438d01fabb1
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: a5b97dff25695510d17a06fc7a32756438cb1aee
+PODFILE CHECKSUM: 9a3dff28045d8d43aa09c03b740a4beaeb22a5e0
 
 COCOAPODS: 1.10.1

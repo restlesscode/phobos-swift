@@ -25,3 +25,7 @@
 //
 
 import Foundation
+import PhobosSwiftCore
+import PhobosSwiftLog
+
+class PBSGrowth: PBSModule {}

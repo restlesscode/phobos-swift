@@ -1,6 +1,6 @@
 //
 //
-//  PhobosSwiftGrowth.swift
+//  Router.swift
 //  PhobosSwiftGrowth
 //
 //  Copyright (c) 2021 Restless Codes Team (https://github.com/restlesscode/)
@@ -25,14 +25,19 @@
 //
 
 import Foundation
-import PhobosSwiftLog
+import PhobosSwiftRouter
 
-extension PBSLogger {
-  static var logger = PBSGrowth.logger
+extension PBSGrowth {
+  enum Router: String, PBSRouterProtocol {
+    case postDetail
+
+    var controller: UIViewController? {
+      switch self {
+      case .postDetail:
+        let controller = UIViewController()
+        controller.hidesBottomBarWhenPushed = true
+        return controller
+      }
+    }
+  }
 }
-
-extension Bundle {
-  static var bundle = PBSGrowth.resourceBundle
-}
-
-class PhobosSwiftGrowth: NSObject {}
