@@ -61,8 +61,11 @@ public class PBSHades: NSObject {
     if adProviders.contains(.google) {
       // Initialize Google Mobile Ads SDK
       GADMobileAds.sharedInstance().start(completionHandler: nil)
-      // use sample device id for simulators
-//     GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["058548c9e87505f2788186e0642ca839" ] // Sample device ID
+      #if targetEnvironment(simulator)
+      GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [kGADSimulatorID as! String] // Sample device ID
+      #else
+      GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["058548c9e87505f2788186e0642ca839"] // Sample device ID
+      #endif
     }
   }
 }

@@ -38,11 +38,11 @@ extension PBSModule {
   public static var name: String {
     String(describing: Self.self)
   }
-    
+
   public static var logger: PBSLogger {
     PBSLogger.shared
   }
-    
+
   /// the bundle for the framework or library
   /// for example, <module-name>.framework
   public static var moduleBundle: Bundle {
