@@ -80,10 +80,10 @@ PODS:
     - OHHTTPStubs/Default
   - PhobosSwiftAnimation (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
   - PhobosSwiftAnimation/Tests (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
   - PhobosSwiftAuth (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
@@ -96,30 +96,30 @@ PODS:
     - RxSwift (~> 6.1.0)
   - PhobosSwiftCore (0.1.0):
     - PhobosSwiftCore/Core (= 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
   - PhobosSwiftCore/Core (0.1.0):
     - GoogleUtilities (~> 7.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - RxCocoa (~> 6.1.0)
     - RxGesture
     - RxSwift (~> 6.1.0)
     - SnapKit
   - PhobosSwiftCore/Tests (0.1.0):
     - Nimble
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - Quick
   - PhobosSwiftCoreSwiftUI (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
   - PhobosSwiftGrowth (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - PhobosSwiftMedia (~> 0.1.0)
     - PhobosSwiftNetwork (~> 0.1.0)
     - PhobosSwiftUIComponent (~> 0.1.0)
   - PhobosSwiftGrowth/Tests (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - PhobosSwiftMedia (~> 0.1.0)
     - PhobosSwiftNetwork (~> 0.1.0)
     - PhobosSwiftUIComponent (~> 0.1.0)
@@ -135,35 +135,35 @@ PODS:
     - PhobosSwiftUIComponent (~> 0.1.0)
   - PhobosSwiftLocation (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftLocation/Tests (0.1.0):
     - Nimble
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
-  - PhobosSwiftLog (0.1.0):
+  - PhobosSwiftLog (0.1.1):
     - ObjcExceptionBridging (~> 1.0.1)
-  - PhobosSwiftLog/Tests (0.1.0):
+  - PhobosSwiftLog/Tests (0.1.1):
     - ObjcExceptionBridging (~> 1.0.1)
   - PhobosSwiftMedia (0.1.0):
     - AlamofireImage (~> 4.1)
     - IQKeyboardManagerSwift
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
   - PhobosSwiftMedia/Tests (0.1.0):
     - AlamofireImage (~> 4.1)
     - IQKeyboardManagerSwift
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
   - PhobosSwiftNetwork (0.1.0):
     - Alamofire (~> 5.1.0)
     - CocoaAsyncSocket (~> 7.6.5)
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftNetwork/Tests (0.1.0):
@@ -172,37 +172,37 @@ PODS:
     - Nimble
     - OHHTTPStubs/Swift
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPayment (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - PhobosSwiftNetwork (~> 0.1.0)
     - PhobosSwiftPayment/Core (= 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPayment/Core (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - PhobosSwiftNetwork (~> 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPersistence (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - PhobosSwiftPersistence/Core (= 0.1.0)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPersistence/Core (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPersistence/Realm (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - Realm
     - RealmSwift
     - RxCocoa (~> 6.1.0)
@@ -210,28 +210,28 @@ PODS:
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPersistence/Tests (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPush (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftPush/Tests (0.1.0):
     - Nimble
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog (~> 0.1.0)
+    - PhobosSwiftLog (~> 0.1.1)
     - Quick
     - RxCocoa (~> 6.1.0)
     - RxSwift (~> 6.1.0)
   - PhobosSwiftRouter (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog
+    - PhobosSwiftLog (~> 0.1.1)
   - PhobosSwiftRouter/Tests (0.1.0):
     - Nimble
     - PhobosSwiftCore (~> 0.1.0)
-    - PhobosSwiftLog
+    - PhobosSwiftLog (~> 0.1.1)
     - Quick
   - PhobosSwiftSlideout (0.1.0):
     - PhobosSwiftCore (~> 0.1.0)
@@ -439,20 +439,20 @@ SPEC CHECKSUMS:
   Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   OHHTTPStubs: 90eac6d8f2c18317baeca36698523dc67c513831
-  PhobosSwiftAnimation: bf2f194b79a01ce2e85ea598c21691b345f82a81
+  PhobosSwiftAnimation: 9e2351f9a9233b56b10c595446fcae00548c4f66
   PhobosSwiftAuth: b57db71d86fdcb78f53303f1ce5618a46d14148d
-  PhobosSwiftCore: aef8d363c6e8897508d3307eddc85a22d89ee04b
-  PhobosSwiftCoreSwiftUI: f95ec989a5cad92e1d5f153358fa2e324788c65f
-  PhobosSwiftGrowth: 46ee5f29f84053e3a24bbc26e74b688f44d1fbf5
+  PhobosSwiftCore: 31b83cf7ab9e2e39e94bc52969439496f97a9fce
+  PhobosSwiftCoreSwiftUI: 9463973e649959dda96b5680be1e30702eb507d5
+  PhobosSwiftGrowth: 527c45d6b67820103049770d123e96231b1c67cb
   PhobosSwiftHades: ca75e31ec79af61954960554c11f0abd694fe356
-  PhobosSwiftLocation: 617c18fa02257978e93eb10e36193c26a8f219e7
-  PhobosSwiftLog: f1ba9419afb5a82ea4f03dec681c61eb079bcc54
-  PhobosSwiftMedia: a5d96bb202b5d3238efd31a010f75af86b6e5799
-  PhobosSwiftNetwork: 74126ce2fd11c7f414be20ba166a7680d2a73097
-  PhobosSwiftPayment: d0c08c9078e4b81f7cf272db97ab27875faa1744
-  PhobosSwiftPersistence: 24b39fbbf92777fdc59707da4740944e7414b9ba
-  PhobosSwiftPush: 070abd98c19335dda9c46ab85d8b8a594196e782
-  PhobosSwiftRouter: f15ce20a7d9beb68c1b251bbf23466bc5e807bae
+  PhobosSwiftLocation: 618598180139a2b6d60beb4f0e7b2fbf6dc7a47e
+  PhobosSwiftLog: cc0f946b30e9264bfc0dfeaee4bcc2546d486f94
+  PhobosSwiftMedia: a86f8d2c01a33cd223822f34a9f4cf0a88c47917
+  PhobosSwiftNetwork: 140a7ecb543c3e4148a4c921ff417b32f62fc9e0
+  PhobosSwiftPayment: b1fcc8fa50405a4d214adc9bf5d54a3b47e280a1
+  PhobosSwiftPersistence: 8a43d1fc40a39ac28cd733ea72fb7b3c36870178
+  PhobosSwiftPush: 5dc62bdd1a5f528427e5a8c3365fabfb2765a722
+  PhobosSwiftRouter: e96bb0177dcb1f3379836fd484cffd27807fa565
   PhobosSwiftSlideout: 2db0aa4d94acb06b8cfc1a32b891bdcf07a68557
   PhobosSwiftSplash: 74a07d1556875c5e23cf6ef57ae78bf58b80cd1c
   PhobosSwiftTestKnight: 7d7a2a24f60f66097f27442d435d5e0edf7109b3
