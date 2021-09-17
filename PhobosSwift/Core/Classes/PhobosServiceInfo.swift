@@ -26,126 +26,12 @@
 
 import UIKit
 
-public struct PBSPushSDKTypes: OptionSet, Codable {
-  public let rawValue: UInt8
-
-  public init(rawValue: UInt8) {
-    self.rawValue = rawValue
-  }
-
-  public static let server = PBSPushSDKTypes(rawValue: 1 << 0)
-  public static let umeng = PBSPushSDKTypes(rawValue: 1 << 1)
-  public static let firebase = PBSPushSDKTypes(rawValue: 1 << 2)
-  public static let aliyun = PBSPushSDKTypes(rawValue: 1 << 3)
-  public static let all: PBSPushSDKTypes = [.server, .umeng, .firebase, .aliyun]
-}
-
-public struct DefaultServer: Codable {
-  public let url: String?
-  enum CodingKeys: String, CodingKey {
-    case url = "URL"
-  }
-
-  var type: PBSPushSDKTypes {
-    .server
-  }
-}
-
-public struct UMeng: Codable {
-  public let appkey: String?
-  enum CodingKeys: String, CodingKey {
-    case appkey = "AppKey"
-  }
-
-  var type: PBSPushSDKTypes {
-    .umeng
-  }
-}
-
-public struct Firebase: Codable {
-  public let appkey: String?
-  enum CodingKeys: String, CodingKey {
-    case appkey = "AppKey"
-  }
-
-  var type: PBSPushSDKTypes {
-    .firebase
-  }
-}
-
-public struct Aliyun: Codable {
-  public let appkey: String?
-  public let appSecret: String?
-  enum CodingKeys: String, CodingKey {
-    case appkey = "AppKey"
-    case appSecret = "AppSecret"
-  }
-
-  var type: PBSPushSDKTypes {
-    .aliyun
-  }
-}
-
-public struct PhobosPushInfo: Codable {
-  public let defaultServer: DefaultServer?
-  public let umeng: UMeng?
-  public let firebase: Firebase?
-  public let aliyun: Aliyun?
-
-  enum CodingKeys: String, CodingKey {
-    case defaultServer = "DefaultServer"
-    case umeng = "UMeng"
-    case firebase = "Firebase"
-    case aliyun = "Aliyun"
-  }
-}
-
-public struct PhobosLogInfo: Codable {
-  public let maxFileSize: UInt64
-  public let maxTimeInterval: TimeInterval
-  public let maxLogFiles: UInt8
-  public let iCloudContainerIdentifier: String?
-
-  enum CodingKeys: String, CodingKey {
-    case maxFileSize = "MaxFileSize"
-    case maxTimeInterval = "MaxTimeInterval"
-    case maxLogFiles = "MaxLogFiles"
-    case iCloudContainerIdentifier
-  }
-}
-
-public struct BuglyInfo: Codable {
-  public let appId: String
-
-  enum CodingKeys: String, CodingKey {
-    case appId = "AppId"
-  }
-}
-
-public struct PgyerInfo: Codable {
-  public let apiKey: String
-  public let appKey: String
-
-  enum CodingKeys: String, CodingKey {
-    case apiKey = "ApiKey"
-    case appKey = "AppKey"
-  }
-}
-
 public struct PhobosServiceInfo: Codable {
   public let plistVersion: String
   public let internalBuildVersion: String
-  public let log: PhobosLogInfo?
-  public let push: PhobosPushInfo?
-  public let bugly: BuglyInfo?
-  public let pgyer: PgyerInfo?
 
   enum CodingKeys: String, CodingKey {
     case plistVersion = "Version"
     case internalBuildVersion = "InternalBuildVersion"
-    case log = "Log"
-    case push = "Push"
-    case bugly = "Bugly"
-    case pgyer = "Pgyer"
   }
 }

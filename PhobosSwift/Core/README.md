@@ -1,51 +1,43 @@
-# Codebase Core for iOS
-
-Codebase Core basic develop-kits for all the frameworks and apps.
-
-## Installation
-
-CodebaseCore is available through private [CocoaPods](https://cocoapods.org). To install
-it, simply add the following lines to your Podfile:
-
-Add source to your podfile
+PhobosSwiftCore
+================
+# Features
+- Extensions 
 ```
-source 'https://github.com/CocoaPods/Specs.git'
-source 'git@gitlab.porsche-preview.cn:porsche-digital-china/cscn/mobile-ios/codebase-spec.git'
-```
-
-Add pod to your podfile
-```
-pod 'CodebaseCore'
-```
-
-
-## Codebase Core Development
-
-To access CodebaseCore via a checked out version of the codebase-ios-sdk repo do:
+Array、Bundle、Calendar、Date、CATransition、CGPoint、Codable、Diffable、DispatchQueue、FileManager、Int、String、UIApplication、UIColor、UIImage、UINavifationBar、UITableView、UIView、UIViewController、UIWindow、URL...
 
 ```
-pod 'CodebaseCore', :path => '/path/to/codebase-ios-sdk'
+- Utils
+
+
+# Requirements
+- iOS 10.0 or later
+- Xcode 11.0 or later
+- cocoapods 1.10.0 or later
+
+
+# How To Use
+- swift
+
+```
+import PhobosSwiftCore
+
+let number = "22".pbs.int
 ```
 
-## Codebase Core Release
+# Installation
+## Podfile
 
-We use fastlane as a tool to publish any new version of CodebaseCore, simple by following steps:
-1. Go to the directory where your CodebaseCore.podspec listed
 ```
-cd /path/to/codebase-ios-sdk
-```
-
-2. Release a new version of CodebaseCore pod
-```
-bundle exec fastlane ios release_pod --env Core
+platform :ios, '10.0'
+use_frameworks!
+pod 'PhobosSwiftCore', '~> 0.1.0'
 ```
 
-## Usage
 
-## Author
+# Author
+[Restless Developer](https://github.com/restlesscode)
 
-Theo Chen, me@theochen.com
 
-## License
 
-CodebaseCore is available under the MIT license. See the LICENSE file for more info.
+# Licenses
+All source code is licensed under the [MIT License](../../LICENSE).

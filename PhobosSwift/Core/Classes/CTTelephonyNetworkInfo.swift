@@ -27,11 +27,13 @@
 import CoreTelephony
 import Foundation
 
-extension CTTelephonyNetworkInfo {
+extension CTTelephonyNetworkInfo: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base: CTTelephonyNetworkInfo {
   /// 获取当前sim卡的CTCarrier
   /// 目前逻辑如下，单卡手机只返回单卡信息，双卡手机返回双卡，没有插卡则该数据为空数组
   /// - Returns: CTCarrier 数组
-  public static func current() -> [CTCarrier] {
+  public static var current: [CTCarrier] {
     let netWorkInfo = CTTelephonyNetworkInfo()
     var carriers = [CTCarrier]()
     if #available(iOS 12.0, *) {
@@ -48,8 +50,8 @@ extension CTTelephonyNetworkInfo {
 
   /// 返回目前sim的所有country code
   /// - Returns: 返回iSO country code 数组
-  public static func iSOCountryCode() -> [String] {
-    Self.current().compactMap {
+  public static var iSOCountryCode: [String] {
+    Self.current.compactMap {
       $0.isoCountryCode
     }
   }
@@ -58,8 +60,8 @@ extension CTTelephonyNetworkInfo {
   /// 1、如果插卡返回当前卡的country code
   /// 2、如果没插卡，则根据系统设置local返回country code
   /// - Returns:
-  public static func pbs_locale() -> [String] {
-    var localeCode = iSOCountryCode()
+  public static func locale() -> [String] {
+    var localeCode = Self.iSOCountryCode
     if localeCode.isEmpty {
       let locale = Locale.current
       if let region = locale.regionCode {

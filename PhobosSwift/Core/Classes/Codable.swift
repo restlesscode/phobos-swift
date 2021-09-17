@@ -24,24 +24,26 @@
 //  THE SOFTWARE.
 //
 
-import UIKit
+import Foundation
+import PhobosSwiftLog
+
+extension JSONSerialization: PhobosSwiftCompatible {}
 
 /// Enhanced features of JSONSerialization class is implemented in this extension
-extension JSONSerialization {
+extension PhobosSwift where Base: JSONSerialization {
   /// 将Dictionary转化成JSON string
   ///
   /// - parameter dict: 要转成Json String的字典对象.
   ///
   /// - returns: JSON String （如果是失败，则为空）
-  @objc(stringFromDictionary:)
-  public static func pbs_string(fromDictionary dict: [AnyHashable: Any]?) -> String? {
+  public static func jsonString(fromDictionary dict: [AnyHashable: Any]?) -> String? {
     do {
       let jsonData = try JSONSerialization.data(withJSONObject: dict ?? [], options: .prettyPrinted)
       let jsonStr = String(data: jsonData, encoding: .utf8)
 
       return jsonStr
     } catch {
-      print("JSONSerialization Error:\(error.localizedDescription)")
+      PBSLogger.logger.error(message: error.localizedDescription, context: "Dict to String")
     }
     return nil
   }
@@ -60,22 +62,31 @@ extension Encodable {
 
       return jsonString
     } catch {
-      print(error.localizedDescription)
+      PBSLogger.logger.error(message: error.localizedDescription, context: "Model to JSON String")
     }
 
     return nil
   }
+
+  public var pbs_dictionary: [String: Any] {
+    guard let data = try? JSONEncoder().encode(self),
+          let dictionary = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+      return [:]
+    }
+
+    return dictionary
+  }
 }
 
 /// Enhanced features of String class is implemented in this extension
-extension String {
+extension PhobosSwift where Base == String {
   /// 将json string转化成model
   ///
   /// - parameter modelType: 要转成的Model的类型
   ///
   /// - returns: 要转成的Model对象
-  public func pbs_model<T>(modelType: T.Type) -> T? where T: Decodable {
-    data(using: .utf8)?.pbs_model(modelType: modelType, decoderType: .json)
+  public func model<T: Decodable>() -> T? {
+    base.data(using: .utf8)?.pbs.model(decoderType: .json)
   }
 }
 
@@ -87,66 +98,59 @@ public enum PBSDecoderType {
   case json
 }
 
+extension Data: PhobosSwiftCompatible {}
+
 /// Enhanced features of Data class is implemented in this extension
-extension Data {
+extension PhobosSwift where Base == Data {
   /// 将json data转化成model
   ///
-  /// - parameter modelType: 要转成的Model的类型
-  ///
   /// - returns: 要转成的Model对象
-  public func pbs_model<T>(modelType: T.Type,
-                           decoderType: PBSDecoderType = .json) -> T? where T: Decodable {
+  public func model<T: Decodable>(decoderType: PBSDecoderType = .json) -> T? {
     do {
       switch decoderType {
       case .json:
         let decoder = JSONDecoder()
-        let _model = try decoder.decode(modelType, from: self)
+        let _model = try decoder.decode(T.self, from: base)
         return _model
       case .propertyList:
         let decoder = PropertyListDecoder()
-        let _model = try decoder.decode(modelType, from: self)
+        let _model = try decoder.decode(T.self, from: base)
         return _model
       }
     } catch {
-      print(error)
+      PBSLogger.logger.error(message: error.localizedDescription, context: "JSON Data to Model")
       return nil
-    }
-  }
-
-  /// 将json data转化成model
-  ///
-  /// - parameter modelType: 要转成的Model的类型
-  ///
-  /// - returns: 要转成的Model对象
-  public func pbs_asModel<ModelType>(
-    decoderType: PBSDecoderType = .json) throws -> ModelType where ModelType: Decodable {
-    switch decoderType {
-    case .json:
-      let decoder = JSONDecoder()
-      let _model = try decoder.decode(ModelType.self, from: self)
-      return _model
-    case .propertyList:
-      let decoder = PropertyListDecoder()
-      let _model = try decoder.decode(ModelType.self, from: self)
-      return _model
     }
   }
 }
 
+extension Dictionary: PhobosSwiftCompatible {}
+
 /// Enhanced features of Dictionary class is implemented in this extension
-extension Dictionary {
+extension PhobosSwift where Base == [AnyHashable: Any] {
   /// 将字典对象转化成JSON stirng
   ///
   /// - returns: JSON String （如果是失败，则为空）
-  public var pbs_jsonString: String? {
+  public var jsonString: String? {
     do {
-      let jsonData = try JSONSerialization.data(withJSONObject: self, options: [])
+      let jsonData = try JSONSerialization.data(withJSONObject: base, options: [])
       let jsonString = String(data: jsonData, encoding: .utf8)
       return jsonString
     } catch {
-      print(error.localizedDescription)
+      PBSLogger.logger.error(message: error.localizedDescription, context: "Dict to JSON String")
     }
 
     return nil
+  }
+
+  /// convert dictionary to model
+  public func model<T: Decodable>() -> T? {
+    do {
+      let data = try JSONSerialization.data(withJSONObject: base, options: .fragmentsAllowed)
+      return try JSONDecoder().decode(T.self, from: data)
+    } catch {
+      PBSLogger.logger.error(message: error.localizedDescription, context: "JSON Data to Model")
+      return nil
+    }
   }
 }

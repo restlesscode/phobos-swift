@@ -24,13 +24,33 @@
 //  THE SOFTWARE.
 //
 
+import PhobosSwiftAuth
+import PhobosSwiftCore
+import PhobosSwiftLog
+import PhobosSwiftNetwork
+import PhobosSwiftPush
+import PhobosSwiftRouter
+import PhobosSwiftWechat
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    true
+
+    let wxResult = PBSWechat.shared.configure(appId: "xxxx", universalLink: "https://xxxx/xxx")
+    print(wxResult)
+    PBSLogger.configure(identifier: Bundle.main.bundleIdentifier ?? "AAA", level: .verbose, mode: .icloud())
+
+    PBSPush.shared.registerRemoteNotifications { status in
+      PBSLogger.shared.debug(message: "\(status)")
+    } onError: { error in
+      PBSLogger.shared.debug(message: "\(error)")
+    } onSuccess: { data in
+      PBSLogger.shared.debug(message: "\(data)")
+    }
+
+    return true
   }
 
   // MARK: UISceneSession Lifecycle

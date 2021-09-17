@@ -25,6 +25,16 @@
 //
 
 import PhobosSwiftCore
+import PhobosSwiftLocation
+import PhobosSwiftLog
+import PhobosSwiftMedia
+import PhobosSwiftNetwork
+import PhobosSwiftPayment
+import PhobosSwiftPersistence
+import PhobosSwiftPush
+import PhobosSwiftRouter
+import PhobosSwiftTestKnight
+import PhobosSwiftWechat
 import UIKit
 
 class ViewController: UIViewController {
@@ -35,7 +45,8 @@ class ViewController: UIViewController {
     // Do any additional setup after loading the view.
 
     core.checkInternalVersion { needUpgrade, previousVersion, currentVersion in
-      print(needUpgrade, previousVersion.string, currentVersion.string)
+
+      PBSLogger.shared.debug(message: "\(needUpgrade), \(previousVersion.string), \(currentVersion.string)", context: "Version")
     }
   }
 }

@@ -15,11 +15,33 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>7</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Privacy - Camera Usage Description</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Privacy - Microphone Usage Description</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Privacy - Photo Library Usage Description</string>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.codes.restless.phobosswift.example</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>$(PRODUCT_NAME)</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Privacy - Tracking Usage Description</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

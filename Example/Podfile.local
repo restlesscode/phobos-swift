@@ -1,0 +1,175 @@
+source 'https://cdn.cocoapods.org/'
+source 'https://gitee.com/tjerwinchen/cocoa-mirror-spec.git'
+
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'PhobosSwiftExample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  inhibit_all_warnings!
+
+  # SwiftLint
+  pod 'SwiftLint', :configurations => ['Debug']
+
+  # SwiftFormat
+  pod 'SwiftFormat/CLI', :configurations => ['Debug']
+
+  # Core
+  pod 'PhobosSwiftCore', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Log
+  pod 'PhobosSwiftLog', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Network
+  pod 'PhobosSwiftNetwork', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Router
+  pod 'PhobosSwiftRouter', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Wechat
+  pod 'PhobosSwiftWechat', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Auth
+  pod 'PhobosSwiftAuth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Groth
+  pod 'PhobosSwiftGrowth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Slideout
+  pod 'PhobosSwiftSlideout', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Log
+  pod 'PhobosSwiftLocation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Persistence
+  pod 'PhobosSwiftPersistence', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  pod 'PhobosSwiftPersistence/Realm', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
+  # Media
+  pod 'PhobosSwiftMedia', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Push
+  pod 'PhobosSwiftPush', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Payment
+  pod 'PhobosSwiftPayment', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
+  # UIComponent
+  pod 'PhobosSwiftUIComponent', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # TestKnight
+  pod 'PhobosSwiftTestKnight', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Animation
+  pod 'PhobosSwiftAnimation', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Splash
+  pod 'PhobosSwiftSplash', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  # Hades
+  pod 'PhobosSwiftHades', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  
+  pod 'MirrorGoogleMobileAds', :path => '../../mirror-google-mobile-ads-sdk/'
+  #pod 'PhobosSwiftPayment/Wechatpay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
+  #pod 'PhobosSwiftPayment/Alipay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
+
+end
+
+
+post_install do |installer|
+  project_path = 'PhobosSwiftExample.xcodeproj'    # 工程的全路径
+  project = Xcodeproj::Project.open(project_path)
+  # 添加"RELEASE"到"Active Compialtion Conditions"
+  add_release_to_active_compilation_conditions(project)
+  
+  project.targets.each do |target|
+    #puts '----%s----' % [target.name]
+    
+    if not exist_run_script(target, 'Run SwiftLint Script')
+      puts 'Add Run SwiftLint Script for %s' % [target.name]
+      add_run_script(target, 'Run SwiftLint Script', '${PODS_ROOT}/SwiftLint/swiftlint')
+    end
+    
+    if not exist_run_script(target, 'Run SwiftFormat Script')
+      puts 'Add Run SwiftFormat Script for %s' % [target.name]
+      add_run_script(target, 'Run SwiftFormat Script', '
+"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "${SRCROOT}/PhobosSwiftExample"
+"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "${SRCROOT}/../PhobosSwift"
+      ')
+    end
+    
+    # 调整配置
+    #adjust_xcconfig(target)
+    
+  end
+  project.save()
+  
+  # 添加"RELEASE"到"Active Compialtion Conditions"
+  add_release_to_active_compilation_conditions(installer.pods_project)
+  
+  installer.pods_project.targets.each do |target|
+    #puts '----%s----' % [target.name]
+    
+    # add `Run SwiftFormat Script` for pods
+#    if ['PhobosSwiftCore'].include?(target.name)
+#      if not exist_run_script(target, 'Run SwiftFormat Script')
+#        puts 'Add Run SwiftFormat Script for %s' % [target.name]
+#        add_run_script(target, 'Run SwiftFormat Script', '"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat" "$PODS_TARGET_SRCROOT"')
+#      end
+#    end
+    
+    # mute warning on `IPHONEOS_DEPLOYMENT_TARGET`
+    if ['SwiftFormat', 'ObjcExceptionBridging'].include?(target.name)
+      target.build_configurations.each do |config|
+         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
+    
+  end
+  
+end
+
+
+
+# 判断是否已经添加了"Run SwiftLint Script"
+def exist_run_script(target, run_script_name)
+  #puts target.name
+  
+  target.build_phases.each do |build_phase|
+    #puts "  ╟ #{build_phase}"
+    #puts String(build_phase) == 'Run SwiftLint Script'
+    
+    if String(build_phase) == run_script_name
+      return true
+    end
+  end
+  
+  return false
+end
+
+# 添加"Run SwiftLint Script"到build phase中
+def add_run_script(target, run_script_name, shell_script)
+  phase = target.new_shell_script_build_phase(run_script_name)
+  phase.shell_script = shell_script
+  target.build_configurations.each do |config|
+  end
+end
+
+# 添加"RELEASE"到"Active Compialtion Conditions"
+def add_release_to_active_compilation_conditions(project)
+  # 修改 Swift Active Compilation Condidations 的设置，设成 RELEASE
+  project.build_configurations.each do |config|
+    if config.name == 'Release'
+      config.build_settings['SWIFT_ACTIVE_COMPILATION_CONDITIONS'] = 'RELEASE'
+    elsif config.name == 'Preproduction'
+      config.build_settings['SWIFT_ACTIVE_COMPILATION_CONDITIONS'] = 'PREPRODUCTION'
+    elsif config.name == 'Staging'
+      config.build_settings['SWIFT_ACTIVE_COMPILATION_CONDITIONS'] = 'STAGING'
+    end
+  end
+end
+
+def show_installer(installer)
+  # puts 为在终端打印方法
+  puts "##### post_install start #####"
+  
+  # 为了打印的日志方便查看，使用╟符号修饰
+  puts "╟ installer"
+  # 获取属性名称列表，并遍历
+  installer.instance_variables.each do |variableName|
+    # 打印属性名称
+    puts "  ╟ #{variableName}"
+  end
+  
+  puts "  ╟ installer.public_methods"
+  # 获取方法名称列表，并遍历
+  installer.public_methods.each do |method|
+    # 打印方法名称
+    puts "    ┣ #{method}"
+  end
+  puts "##### post_install end #####"
+end

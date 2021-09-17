@@ -26,8 +26,17 @@
 
 import UIKit
 
+extension CATransition: PhobosSwiftCompatible {}
+
+extension PhobosSwift where Base: CATransition {
+  /// Default Reveal Animation
+  public static var revealAnimation: CATransition {
+    CATransition.revealAnimation
+  }
+}
+
 extension CATransition {
-  public static var pbs_revealAnimation: CATransition = {
+  static var revealAnimation: CATransition = {
     let transition = CATransition()
     transition.type = .reveal
     transition.subtype = .fromBottom

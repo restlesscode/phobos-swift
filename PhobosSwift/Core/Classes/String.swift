@@ -27,29 +27,20 @@
 import CommonCrypto
 import Security
 
-/// Enhanced features of String class is implemented in this extension
-extension String {
-  /// 对比版本号，判断是否小于otherVersion版本号
-  public func pbs_olderVersionThan(_ otherVersion: String) -> Bool {
-    compare(otherVersion, options: .numeric) == ComparisonResult.orderedAscending
-  }
+extension String: PhobosSwiftCompatible {}
 
-  /// 对比版本号，判断是否大于otherVersion版本号
-  public func pbs_laterVersionThan(_ otherVersion: String) -> Bool {
-    compare(otherVersion, options: .numeric) == ComparisonResult.orderedDescending
-  }
-
+extension PhobosSwift where Base == String {
   /// 字符串反转
-  public var pbs_reversedString: String {
-    let reversedCharacters = reversed()
+  public var reversedString: String {
+    let reversedCharacters = base.reversed()
 
     return String(reversedCharacters)
   }
 
   /// 字符串包含一系列字符串
-  public func pbs_contains(_ stringList: [String]) -> Bool {
+  public func contains(oneOf stringList: [String]) -> Bool {
     for str in stringList {
-      if range(of: str) != nil {
+      if base.range(of: str) != nil {
         return true
       }
     }
@@ -58,19 +49,19 @@ extension String {
   }
 
   /// 字符串转浮点数
-  public var pbs_double: Double? {
-    NumberFormatter().number(from: self)?.doubleValue
+  public var double: Double? {
+    NumberFormatter().number(from: base)?.doubleValue
   }
 
   /// 字符串encode成base64
-  public var pbs_base64: String {
-    data(using: .utf8)?.base64EncodedString() ?? ""
+  public var base64: String {
+    base.data(using: .utf8)?.base64EncodedString() ?? ""
   }
 
   /// 字符串encode成md5
-  public var pbs_md5: String {
-    let str = cString(using: String.Encoding.utf8)
-    let strLen = CUnsignedInt(lengthOfBytes(using: String.Encoding.utf8))
+  public var md5: String {
+    let str = base.cString(using: String.Encoding.utf8)
+    let strLen = CUnsignedInt(base.lengthOfBytes(using: String.Encoding.utf8))
     let digestLen = Int(CC_MD5_DIGEST_LENGTH)
     let result = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
     CC_MD5(str!, strLen, result)
@@ -83,52 +74,60 @@ extension String {
   }
 
   /// 字符串encode成sha512
-  public var pbs_sha512: Data {
-    let stringData = data(using: String.Encoding.utf8)!
+  public var sha512: Data {
+    let stringData = base.data(using: String.Encoding.utf8)!
     let result = (stringData as NSData).swiftyRSASHA512()
 
     return result
   }
 
-  /// 转成多语言字符串(main bundle)
-  ///
-  public var pbs_localizedInMainBundle: String {
-    pbs_localized()
-  }
-
   /// 转成多语言字符串
   ///
   /// - parameter bundle 对bundle对象中的多语言字符串，进行转换
-  public func pbs_localized(inBundle bundle: Bundle = Bundle.main, value: String = "", comment: String = "") -> String {
-    NSLocalizedString(self, tableName: nil, bundle: bundle, value: value, comment: comment)
+  public func localized(inBundle bundle: Bundle = Bundle.main, tableName: String? = nil, value: String = "", comment: String = "") -> String {
+    NSLocalizedString(base, tableName: tableName, bundle: bundle, value: value, comment: comment)
   }
 
   /// 字符串转成整数
-  public var pbs_int: Int? {
-    NumberFormatter().number(from: self)?.intValue
+  public var int: Int? {
+    NumberFormatter().number(from: base)?.intValue
   }
 
-  /// 字符串结尾去空格
-  public var pbs_trim: String {
-    trimmingCharacters(in: [" "])
+  /// 字符串首尾去空格
+  public var trim: String {
+    base.trimmingCharacters(in: .whitespaces)
+  }
+
+  /// 时间转换 transfer to time in format
+  public func toTimeFormatter(from dateFormatStrSrc: String, to dateFormatStrDesc: String) -> String? {
+    let formatter1 = DateFormatter()
+    formatter1.dateFormat = dateFormatStrSrc
+    if let datetime = formatter1.date(from: base) {
+      let formatter2 = DateFormatter()
+      formatter2.dateFormat = dateFormatStrDesc
+      let datetimeStr = formatter2.string(from: datetime)
+
+      return datetimeStr
+    }
+
+    return nil
   }
 }
 
 // MARK: - 获取汉字首字母
 
-/// Enhanced features of String class in Chinese Pinyin
-extension String {
+extension PhobosSwift where Base == String {
   /// 是否包含中文
-  public var pbs_isIncludeChinese: Bool {
+  public var isIncludeChinese: Bool {
     // 中文字符范围：0x4e00 ~ 0x9fff
-    unicodeScalars.contains { ch in
+    base.unicodeScalars.contains { ch in
       ch.value > 0x4E00 && ch.value < 0x9FFF
     }
   }
 
   /// 改成拼音
-  public var pbs_toPinyin: String {
-    let stringRef = NSMutableString(string: self) as CFMutableString
+  public var toPinyin: String {
+    let stringRef = NSMutableString(string: base) as CFMutableString
     // 转换为带音标的拼音
     CFStringTransform(stringRef, nil, kCFStringTransformToLatin, false)
     // 去掉音标
@@ -140,17 +139,17 @@ extension String {
 
   /// 改成拼音
   ///
-  public var pbs_toPinyinWithoutBlank: String {
-    var pinyin = pbs_toPinyin
+  public var toPinyinWithoutBlank: String {
+    var pinyin = toPinyin
     pinyin = pinyin.replacingOccurrences(of: " ", with: "")
     return pinyin
   }
 
   /// 获得拼音大写字母
   ///
-  public var pbs_pinyinHead: String {
+  public var pinyinHead: String {
     // 字符串转换为首字母大写
-    let pinyin = pbs_toPinyin.capitalized
+    let pinyin = toPinyin.capitalized
     var headPinyinStr = ""
 
     // 获取所有大写字母
@@ -161,25 +160,28 @@ extension String {
   }
 
   /// 获取第一个字符
-  public var pbs_initialCapital: String {
-    String(pbs_pinyinHead.prefix(1))
+  public var initialCapital: String {
+    String(pinyinHead.prefix(1))
   }
 }
 
-/// 时间转换
-extension String {
-  /// transfer to time in format
-  public func pbs_toTimeFormatter(from dateFormatStrSrc: String, to dateFormatStrDesc: String) -> String? {
-    let formatter1 = DateFormatter()
-    formatter1.dateFormat = dateFormatStrSrc
-    if let datetime = formatter1.date(from: self) {
-      let formatter2 = DateFormatter()
-      formatter2.dateFormat = dateFormatStrDesc
-      let datetimeStr = formatter2.string(from: datetime)
-
-      return datetimeStr
+/// Enhanced features of String class is implemented in this extension
+extension PhobosSwift where Base == String {
+  /// Convert UTC Date to Local Date
+  ///
+  /// - Parameter dateFormat: dateFormat String
+  /// - Returns: Locat Data String
+  public func convertUTCDateToLocalDate(_ dateFormat: String = "yyyy-MM-dd") -> String? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    let localTimeZone = NSTimeZone.local
+    dateFormatter.timeZone = localTimeZone
+    let dateFormatted = dateFormatter.date(from: base)
+    dateFormatter.dateFormat = dateFormat
+    guard let date = dateFormatted else {
+      return nil
     }
-
-    return nil
+    let dateString = dateFormatter.string(from: date)
+    return dateString
   }
 }

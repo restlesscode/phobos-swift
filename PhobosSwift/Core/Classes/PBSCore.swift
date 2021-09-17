@@ -29,32 +29,32 @@ import Foundation
 ///
 @objcMembers
 public class PBSCore: NSObject {
-  private static let infoPath = Constants.kPhobosServiceInfoPlist
+  public static var infoPath = Constants.kPhobosServiceInfoPlist
 
   /// The singleton `PBSCore` instance.
   public static var shared = PBSCore()
 
   /// Whether current running in XCTest
   public static var isRunningTest: Bool {
-    NSClassFromString("XCTest") != nil
+    NSClassFromString(Constants.kXCTest) != nil
   }
 
   /// The `InternalBuildVersion` of previous installation
-  public private(set) var previousInternalBuildVersion: FBSVersion
+  public private(set) var previousInternalBuildVersion: PBSVersion
 
   /// The  `InternalBuildVersion` of latest installation
-  public var currentInternalBuildVersion: FBSVersion {
+  public var currentInternalBuildVersion: PBSVersion {
     // 在获取当前安装时，InternalBuildVersion
-    FBSVersion.makeVersion(from: serviceInfo.internalBuildVersion)
+    PBSVersion.makeVersion(from: serviceInfo.internalBuildVersion)
   }
 
-  private let appDelegateSwizzler = PhobosSwiftCoreAppDelegateSwizzler()
+  private let appDelegateSwizzler = PBSCoreAppDelegateSwizzler()
 
   /// Phobos-Service-Info Model
   public var serviceInfo: PhobosServiceInfo!
 
   override private init() {
-    previousInternalBuildVersion = FBSVersion.makeVersion(from: UserDefaults.standard.string(forKey: Constants.kInternalBuildVersion))
+    previousInternalBuildVersion = PBSVersion.makeVersion(from: UserDefaults.standard.string(forKey: Constants.kInternalBuildVersion))
 
     super.init()
     loadInfoPlist()
@@ -65,7 +65,7 @@ public class PBSCore: NSObject {
     appDelegateSwizzler.unload()
   }
 
-  public func checkInternalVersion(internalBuildVersion: (_ isUpgraded: Bool, _ previousVersion: FBSVersion, _ currentVersion: FBSVersion) -> Void) {
+  public func checkInternalVersion(internalBuildVersion: (_ isUpgraded: Bool, _ previousVersion: PBSVersion, _ currentVersion: PBSVersion) -> Void) {
     let isUpgraded = currentInternalBuildVersion > previousInternalBuildVersion
     internalBuildVersion(isUpgraded, previousInternalBuildVersion, currentInternalBuildVersion)
   }
@@ -73,7 +73,7 @@ public class PBSCore: NSObject {
   private func loadInfoPlist() {
     var bundle = Bundle.main
     if PBSCore.isRunningTest {
-      bundle = PhobosSwiftCore.bundle
+      bundle = Bundle.bundle
     }
 
     guard let infoPlistPath = bundle.url(forResource: Self.infoPath, withExtension: nil) else {
@@ -84,7 +84,7 @@ public class PBSCore: NSObject {
       fatalError("Data in `\(Self.infoPath)` loaded in error")
     }
 
-    guard let serviceInfo = data.pbs_model(modelType: PhobosServiceInfo.self, decoderType: .propertyList) else {
+    guard let serviceInfo: PhobosServiceInfo = data.pbs.model(decoderType: .propertyList) else {
       fatalError("Data in `\(Self.infoPath)` loaded in error")
     }
 

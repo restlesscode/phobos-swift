@@ -28,16 +28,18 @@ import Foundation
 
 private let kBundle = "bundle"
 private let kBundleURLTypes = "CFBundleURLTypes"
+private let kBundleVersion = "CFBundleVersion"
+private let kBundleShortVersionString = "CFBundleShortVersionString"
 private let kBundleURLSchemes = "CFBundleURLSchemes"
 private let kBundleTypeRole = "CFBundleTypeRole"
-private let kTestAppScheme = "TestAppScheme"
-
 ///
 public enum BundleTypeRole: String {
   case editor = "Editor"
   case viewer = "Viewer"
   case none = "None"
 }
+
+extension Bundle: PhobosSwiftCompatible {}
 
 /// Bundle URL Scheme
 public struct PBSBundleURLScheme {
@@ -47,10 +49,8 @@ public struct PBSBundleURLScheme {
   public var role: BundleTypeRole
 }
 
-/// Enhanced features of Bundle class is implemented in this extension
-extension Bundle {
+extension PhobosSwift where Base: Bundle {
   /// The alias of AnyClass
-  ///
   public typealias BundleClass = AnyClass
 
   /// 获取前私有Pods对应的Bundle的实例
@@ -58,16 +58,38 @@ extension Bundle {
   /// - parameter bundleClass: The URL.
   ///
   /// - returns: The `Bundle` of the BundleClass in pod framework.
-  @objc public static func pbs_bundle(with bundleClass: BundleClass) -> Bundle {
+  public static func bundle(with bundleClass: BundleClass) -> Bundle {
     let className = String(describing: bundleClass)
     let path = Bundle(for: bundleClass).path(forResource: className, ofType: kBundle) ?? ""
     return Bundle(path: path) ?? Bundle.main
   }
 
+  /// 获取bundle Short Version
+  public var bundleShortVersion: String? {
+    if let info = base.infoDictionary {
+      if let appVersion = info[kBundleShortVersionString] as? String {
+        return appVersion
+      }
+    }
+
+    return nil
+  }
+
+  /// 获取bundle Version
+  public var bundleVersion: String? {
+    if let info = base.infoDictionary {
+      if let bundleVersion = info[kBundleVersion] as? String {
+        return bundleVersion
+      }
+    }
+
+    return nil
+  }
+
   /// Get the current list of External URL Schemes
   ///
-  public static let pbs_externalURLSchemes: [PBSBundleURLScheme] = {
-    guard let urlTypes = main.infoDictionary?[kBundleURLTypes] as? [[String: Any]] else {
+  public var externalURLSchemes: [PBSBundleURLScheme] {
+    guard let urlTypes = base.infoDictionary?[kBundleURLTypes] as? [[String: Any]] else {
       return []
     }
 
@@ -82,23 +104,5 @@ extension Bundle {
     }
 
     return result
-  }()
-
-  ///
-  public static let pbs_appURLSchemeName: String = {
-    if PBSCore.isRunningTest {
-      return kTestAppScheme
-    }
-
-    let _appURLScheme = Bundle.pbs_externalURLSchemes.first {
-      $0.role == .viewer
-    }
-
-    guard let appURLScheme = _appURLScheme else {
-      fatalError("请在设置中，对AppURLScheme进行设置（需放在URL Types Viewer类型 的第一个位置）")
-    }
-
-    return appURLScheme.name
-
-  }()
+  }
 }
