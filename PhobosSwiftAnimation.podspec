@@ -47,10 +47,10 @@ TODO: Add long description of the pod here.
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
 
   s.preserve_paths = [
-    "{group}/#{name}/README.md",
-    "{group}/#{name}/CHANGELOG.md"
+    "#{group}/#{name}/README.md",
+    "#{group}/#{name}/CHANGELOG.md"
   ]
-  
+    
   s.dependency 'PhobosSwiftCore', '~> 0.1.1'
   s.dependency 'PhobosSwiftLog', '~> 0.1.1'
 
