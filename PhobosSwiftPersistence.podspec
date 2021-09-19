@@ -11,7 +11,7 @@ name = "Persistence"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
-has_resource_bundles = true
+has_resource_bundles = false
 enable_test = true
 
 
@@ -38,7 +38,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/restlesscode/phobos-swift.git', :tag => "#{name}-" + s.version.to_s }
   s.social_media_url = 'https://twitter.com/CodesRestless'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
 
   s.cocoapods_version = '>= 1.10.0'
   s.static_framework = false
@@ -60,9 +60,10 @@ TODO: Add long description of the pod here.
 
   s.subspec 'Realm' do |ss|
     ss.source_files = "#{group}/#{name}/Realm/Classes/**/*.{swift,m,h}"
-    ss.dependency 'RealmSwift'
-    ss.dependency 'Realm'
-    ss.dependency 'RxRealm'
+    ss.dependency 'PhobosSwiftPersistence/Core'
+    ss.dependency 'RealmSwift', '~> 10.15.1'
+    ss.dependency 'Realm', '~> 10.15.1'
+    ss.dependency 'RxRealm', '~> 5.0.3'
   end
   
   s.default_subspec = 'Core'
