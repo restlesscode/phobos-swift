@@ -56,9 +56,9 @@ TODO: Add long description of the pod here.
   
   s.dependency 'PhobosSwiftLog', '~> 0.1.1'
   s.dependency 'PhobosSwiftCore', '~> 0.1.1'
-  s.dependency 'PhobosSwiftNetwork', '~> 0.1.0'
-  s.dependency 'PhobosSwiftUIComponent', '~> 0.1.0'
-  s.dependency 'PhobosSwiftMedia', '~> 0.1.0'
+  s.dependency 'PhobosSwiftNetwork', '~> 0.1.1'
+  s.dependency 'PhobosSwiftUIComponent', '~> 0.1.1'
+  s.dependency 'PhobosSwiftMedia', '~> 0.1.1'
 
   if has_resource_bundles
     s.resource_bundles = {
