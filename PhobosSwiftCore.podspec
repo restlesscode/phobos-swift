@@ -61,8 +61,8 @@ TODO: Add long description of the pod here.
     ss.dependency 'GoogleUtilities', '~> 7.0'
     ss.dependency 'RxSwift', '~> 6.1.0'
     ss.dependency 'RxCocoa', '~> 6.1.0'
-    ss.dependency 'RxGesture'
-    ss.dependency 'SnapKit'
+    ss.dependency 'RxGesture', '~> 4.0.2'
+    ss.dependency 'SnapKit', '~> 5.0.1'
   end
   
   s.default_subspec = 'Core'

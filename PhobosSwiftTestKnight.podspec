@@ -57,8 +57,8 @@ TODO: Add long description of the pod here.
   s.dependency 'PhobosSwiftCore', '~> 0.1.1'
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
-  s.dependency 'RxGesture'
-  s.dependency 'SnapKit'
+  s.dependency 'RxGesture', '~> 4.0.2'
+  s.dependency 'SnapKit', '~> 5.0.1'
 
   if has_resource_bundles
     s.resource_bundles = {
