@@ -12,6 +12,7 @@ pod_name = "#{group}#{name}"
 
 has_public_header_files = false
 has_resource_bundles = true
+has_preserve_paths = true
 enable_test = true
 
 
@@ -44,10 +45,12 @@ TODO: Add long description of the pod here.
   s.static_framework = false
   s.prefix_header_file = false
 
-  s.preserve_paths = [
-    "#{group}/#{name}/README.md",
-    "#{group}/#{name}/CHANGELOG.md"
-  ]
+  if has_preserve_paths
+    s.preserve_paths = [
+      "#{group}/#{name}/README.md",
+      "#{group}/#{name}/CHANGELOG.md"
+    ]
+  end
   
   s.subspec 'Core' do |ss|
     ss.ios.deployment_target = '10.0'
