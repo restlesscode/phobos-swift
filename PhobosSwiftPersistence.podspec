@@ -17,7 +17,7 @@ enable_test = true
 
 Pod::Spec.new do |s|
   s.name             = "#{pod_name}"
-  s.version          = '0.1.1'
+  s.version          = '0.1.0'
   s.summary          = "#{pod_name} is a basic develop-kits for all the frameworks and apps."
   s.swift_version    = '5.0'
 
@@ -83,6 +83,8 @@ TODO: Add long description of the pod here.
       test_spec.dependency 'RealmSwift'
       test_spec.dependency 'Realm'
       test_spec.dependency 'PhobosSwiftCore'
+      test_spec.dependency 'PhobosSwiftPersistence/Core'
+      test_spec.dependency 'PhobosSwiftPersistence/Realm'
 
       test_spec.source_files = "#{group}/#{name}/Tests/**/*.{swift,h,m}"
     end
