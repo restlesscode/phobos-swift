@@ -11,13 +11,14 @@ name = "Persistence"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
-has_resource_bundles = true
+has_resource_bundles = false
+has_preserve_paths = true
 enable_test = true
 
 
 Pod::Spec.new do |s|
   s.name             = "#{pod_name}"
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = "#{pod_name} is a basic develop-kits for all the frameworks and apps."
   s.swift_version    = '5.0'
 
@@ -38,20 +39,22 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/restlesscode/phobos-swift.git', :tag => "#{name}-" + s.version.to_s }
   s.social_media_url = 'https://twitter.com/CodesRestless'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
 
   s.cocoapods_version = '>= 1.10.0'
   s.static_framework = false
   s.prefix_header_file = false
 
-  s.preserve_paths = [
-    "#{group}/#{name}/README.md",
-    "#{group}/#{name}/CHANGELOG.md"
-  ]
+  if has_preserve_paths
+    s.preserve_paths = [
+      "#{group}/#{name}/README.md",
+      "#{group}/#{name}/CHANGELOG.md"
+    ]
+  end
   
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
-  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'PhobosSwiftCore', '~> 0.1.1'
   s.dependency 'PhobosSwiftLog', '~> 0.1.1'
 
   s.subspec 'Core' do |ss|
@@ -60,9 +63,10 @@ TODO: Add long description of the pod here.
 
   s.subspec 'Realm' do |ss|
     ss.source_files = "#{group}/#{name}/Realm/Classes/**/*.{swift,m,h}"
-    ss.dependency 'RealmSwift'
-    ss.dependency 'Realm'
-    ss.dependency 'RxRealm'
+    ss.dependency 'PhobosSwiftPersistence/Core'
+    ss.dependency 'RealmSwift', '~> 10.15.1'
+    ss.dependency 'Realm', '~> 10.15.1'
+    ss.dependency 'RxRealm', '~> 5.0.3'
   end
   
   s.default_subspec = 'Core'
@@ -79,6 +83,12 @@ TODO: Add long description of the pod here.
   
   if enable_test
     s.test_spec 'Tests' do |test_spec|
+      test_spec.dependency 'RealmSwift'
+      test_spec.dependency 'Realm'
+      test_spec.dependency 'PhobosSwiftCore'
+      test_spec.dependency 'PhobosSwiftPersistence/Core'
+      test_spec.dependency 'PhobosSwiftPersistence/Realm'
+
       test_spec.source_files = "#{group}/#{name}/Tests/**/*.{swift,h,m}"
     end
   end

@@ -12,12 +12,13 @@ pod_name = "#{group}#{name}"
 
 has_public_header_files = false
 has_resource_bundles = true
+has_preserve_paths = true
 enable_test = true
 
 
 Pod::Spec.new do |s|
   s.name             = "#{pod_name}"
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = "#{pod_name} is a basic develop-kits for all the frameworks and apps."
   s.swift_version    = '5.0'
 
@@ -46,16 +47,18 @@ TODO: Add long description of the pod here.
 
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
 
-  s.preserve_paths = [
-    "#{group}/#{name}/README.md",
-    "#{group}/#{name}/CHANGELOG.md"
-  ]
+  if has_preserve_paths
+    s.preserve_paths = [
+      "#{group}/#{name}/README.md",
+      "#{group}/#{name}/CHANGELOG.md"
+    ]
+  end
   
-  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'PhobosSwiftCore', '~> 0.1.1'
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
-  s.dependency 'RxGesture'
-  s.dependency 'SnapKit'
+  s.dependency 'RxGesture', '~> 4.0.2'
+  s.dependency 'SnapKit', '~> 5.0.1'
 
   if has_resource_bundles
     s.resource_bundles = {

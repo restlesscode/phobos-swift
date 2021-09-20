@@ -1,4 +1,4 @@
-PhobosSwiftCoreSwiftUI
+PhobosSwiftPersistence
 ================
 # Changelog
 

@@ -26,7 +26,8 @@
 
 @testable import PhobosSwiftPersistence
 import Foundation
-import MirrorRealmSwift
+import PhobosSwiftCore
+import RealmSwift
 import XCTest
 
 /// Object representing a single flash card

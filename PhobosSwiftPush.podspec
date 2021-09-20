@@ -11,13 +11,13 @@ name = "Push"
 pod_name = "#{group}#{name}"
 
 has_public_header_files = false
-has_resource_bundles = true
+has_resource_bundles = false
+has_preserve_paths = true
 enable_test = true
-
 
 Pod::Spec.new do |s|
   s.name             = "#{pod_name}"
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = "#{pod_name} is a basic develop-kits for all the frameworks and apps."
   s.swift_version    = '5.0'
 
@@ -46,14 +46,16 @@ TODO: Add long description of the pod here.
 
   s.source_files = "#{group}/#{name}/Classes/**/*.{swift,m,h}"
 
-  s.preserve_paths = [
-    "#{group}/#{name}/README.md",
-    "#{group}/#{name}/CHANGELOG.md"
-  ]
+  if has_preserve_paths
+    s.preserve_paths = [
+      "#{group}/#{name}/README.md",
+      "#{group}/#{name}/CHANGELOG.md"
+    ]
+  end
   
   s.dependency 'RxSwift', '~> 6.1.0'
   s.dependency 'RxCocoa', '~> 6.1.0'
-  s.dependency 'PhobosSwiftCore', '~> 0.1.0'
+  s.dependency 'PhobosSwiftCore', '~> 0.1.1'
   s.dependency 'PhobosSwiftLog', '~> 0.1.1'
 
   if has_resource_bundles
