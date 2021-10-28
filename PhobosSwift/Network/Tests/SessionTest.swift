@@ -32,7 +32,7 @@ import Quick
 class SessionTest: QuickSpec {
   override func spec() {
     testCrashs()
-    testSession()
+//    testSession()
   }
 
   func testCrashs() {
