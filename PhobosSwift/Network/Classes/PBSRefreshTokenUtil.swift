@@ -32,7 +32,7 @@ public typealias PBSRefreshToken = (@escaping PBSRefreshTokenCallBack) -> Void
 public class PBSRefreshTokenUtil {
   public static let shared = PBSRefreshTokenUtil()
   var refreshTokenBlocks: [String: PBSRefreshToken] = [:]
-
+  var accessTokenPairs: [String: (key: String, value: String)] = [:]
   private init() {}
 
   public func append(host: String, block: @escaping PBSRefreshToken) {
