@@ -55,11 +55,11 @@ target 'PhobosSwiftExample' do
   # Splash
   pod 'PhobosSwiftSplash', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Hades
-  pod 'PhobosSwiftHades', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
+  #pod 'PhobosSwiftHades', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests']
   # Growth
   pod 'PhobosSwiftGrowth', :path => '../', :inhibit_warnings => false, :testspecs => ['Tests'] 
  
-  pod 'MirrorGoogleMobileAds', :path => '../../mirror-google-mobile-ads-sdk/'
+  #pod 'MirrorGoogleMobileAds', :path => '../../mirror-google-mobile-ads-sdk/'
   #pod 'PhobosSwiftPayment/Wechatpay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
   #pod 'PhobosSwiftPayment/Alipay', :path => '../', :inhibit_warnings => false#, :testspecs => ['Tests']
 
