@@ -104,7 +104,7 @@ public class PBSSplash: NSObject {
   }
 
   public func remove() {
-    if let window = self.window {
+    if let window = window {
       UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
         self.protectionSplashViewCtrl?.view.removeFromSuperview()
       })

@@ -12,16 +12,33 @@
 import Foundation
 
 open class PieChartData: ChartData {
-  override public init() {
+  public required init() {
     super.init()
   }
 
-  override public init(dataSets: [IChartDataSet]?) {
+  override public init(dataSets: [ChartDataSetProtocol]) {
     super.init(dataSets: dataSets)
   }
 
-  /// All DataSet objects this ChartData object holds.
-  @objc override open var dataSets: [IChartDataSet] {
+  public required init(arrayLiteral elements: ChartDataSetProtocol...) {
+    super.init(dataSets: elements)
+  }
+
+  @objc public var dataSet: PieChartDataSetProtocol? {
+    get {
+      dataSets.first as? PieChartDataSetProtocol
+    }
+    set {
+      if let set = newValue {
+        dataSets = [set]
+      } else {
+        dataSets = []
+      }
+    }
+  }
+
+  /// - returns: All up to one dataSet object this ChartData object holds.
+  @objc override open var dataSets: [ChartDataSetProtocol] {
     get {
       assert(super.dataSets.count <= 1, "Found multiple data sets while pie chart only allows one")
       return super.dataSets
@@ -31,28 +48,13 @@ open class PieChartData: ChartData {
     }
   }
 
-  @objc var dataSet: IPieChartDataSet? {
-    get {
-      !dataSets.isEmpty ? dataSets[0] as? IPieChartDataSet : nil
-    }
-    set {
-      if let newValue = newValue {
-        dataSets = [newValue]
-      } else {
-        dataSets = []
-      }
-    }
+  override open func dataSet(at index: ChartData.Index) -> ChartData.Element? {
+    guard index == 0 else { return nil }
+    return self[index]
   }
 
-  override open func getDataSetByIndex(_ index: Int) -> IChartDataSet? {
-    if index != 0 {
-      return nil
-    }
-    return super.getDataSetByIndex(index)
-  }
-
-  override open func getDataSetByLabel(_ label: String, ignorecase: Bool) -> IChartDataSet? {
-    if dataSets.isEmpty || dataSets[0].label == nil {
+  override open func dataSet(forLabel label: String, ignorecase: Bool) -> ChartDataSetProtocol? {
+    if dataSets.first?.label == nil {
       return nil
     }
 
@@ -68,24 +70,8 @@ open class PieChartData: ChartData {
     return nil
   }
 
-  override open func entryForHighlight(_ highlight: Highlight) -> ChartDataEntry? {
+  @objc override open func entry(for highlight: Highlight) -> ChartDataEntry? {
     dataSet?.entryForIndex(Int(highlight.x))
-  }
-
-  override open func addDataSet(_ d: IChartDataSet!) {
-    super.addDataSet(d)
-  }
-
-  /// Removes the DataSet at the given index in the DataSet array from the data object.
-  /// Also recalculates all minimum and maximum values.
-  ///
-  /// - Returns: `true` if a DataSet was removed, `false` ifno DataSet could be removed.
-  override open func removeDataSetByIndex(_ index: Int) -> Bool {
-    if index >= _dataSets.count || index < 0 {
-      return false
-    }
-
-    return false
   }
 
   /// The total y-value sum across all DataSet objects the this object represents.

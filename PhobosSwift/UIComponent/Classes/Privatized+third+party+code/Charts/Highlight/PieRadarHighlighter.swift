@@ -15,7 +15,7 @@ import Foundation
 @objc(PieRadarChartHighlighter)
 open class PieRadarHighlighter: ChartHighlighter {
   override open func getHighlight(x: CGFloat, y: CGFloat) -> Highlight? {
-    guard let chart = self.chart as? PieRadarChartViewBase else { return nil }
+    guard let chart = chart as? PieRadarChartViewBase else { return nil }
 
     let touchDistanceToCenter = chart.distanceToCenter(x: x, y: y)
 

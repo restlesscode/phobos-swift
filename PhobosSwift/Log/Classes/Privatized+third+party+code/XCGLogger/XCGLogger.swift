@@ -1572,7 +1572,7 @@ open class XCGLogger: CustomDebugStringConvertible {
   // MARK: - DebugPrintable
 
   open var debugDescription: String {
-    var description: String = "\(extractTypeName(self)): \(identifier) - destinations: \r"
+    var description = "\(extractTypeName(self)): \(identifier) - destinations: \r"
     for destination in destinations {
       description += "\t \(destination.debugDescription)\r"
     }

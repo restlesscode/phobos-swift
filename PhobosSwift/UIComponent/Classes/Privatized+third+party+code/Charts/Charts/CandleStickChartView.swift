@@ -17,7 +17,7 @@ open class CandleStickChartView: BarLineChartViewBase, CandleChartDataProvider {
   override internal func initialize() {
     super.initialize()
 
-    renderer = CandleStickChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
+    renderer = CandleStickChartRenderer(dataProvider: self, animator: chartAnimator, viewPortHandler: viewPortHandler)
 
     xAxis.spaceMin = 0.5
     xAxis.spaceMax = 0.5
@@ -26,6 +26,6 @@ open class CandleStickChartView: BarLineChartViewBase, CandleChartDataProvider {
   // MARK: - CandleChartDataProvider
 
   open var candleData: CandleChartData? {
-    _data as? CandleChartData
+    data as? CandleChartData
   }
 }

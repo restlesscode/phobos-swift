@@ -33,18 +33,17 @@ open class AnimatedViewPortJob: ViewPortJob {
                     xOrigin: CGFloat,
                     yOrigin: CGFloat,
                     duration: TimeInterval,
-                    easing: ChartEasingFunctionBlock?)
-  {
+                    easing: ChartEasingFunctionBlock?) {
+    self.xOrigin = xOrigin
+    self.yOrigin = yOrigin
+    _duration = duration
+    _easing = easing
+
     super.init(viewPortHandler: viewPortHandler,
                xValue: xValue,
                yValue: yValue,
                transformer: transformer,
                view: view)
-
-    self.xOrigin = xOrigin
-    self.yOrigin = yOrigin
-    _duration = duration
-    _easing = easing
   }
 
   deinit {

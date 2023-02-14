@@ -65,6 +65,6 @@ open class BaseQueuedDestination: BaseDestination {
   ///
   open func write(logDetails: LogDetails, message: String) {
     // Do something with the message in an overridden version of this method
-    precondition(false, "Must override this")
+    preconditionFailure("Must override this")
   }
 }

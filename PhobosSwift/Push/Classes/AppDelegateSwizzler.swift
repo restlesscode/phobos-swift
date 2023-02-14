@@ -39,7 +39,7 @@ class PBSPushAppDelegateSwizzler: NSObject {
   }
 
   func unload() {
-    if let interceptorID = self.interceptorID {
+    if let interceptorID = interceptorID {
       PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
     }
   }

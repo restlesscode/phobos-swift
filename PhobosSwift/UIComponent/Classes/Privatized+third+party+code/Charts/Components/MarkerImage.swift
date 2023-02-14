@@ -13,16 +13,16 @@ import CoreGraphics
 import Foundation
 
 @objc(ChartMarkerImage)
-open class MarkerImage: NSObject, IMarker {
+open class MarkerImage: NSObject, Marker {
   /// The marker image to render
   @objc open var image: NSUIImage?
 
-  open var offset = CGPoint()
+  open var offset: CGPoint = .init()
 
   @objc open weak var chartView: ChartViewBase?
 
   /// As long as size is 0.0/0.0 - it will default to the image's size
-  @objc open var size = CGSize()
+  @objc open var size: CGSize = .init()
 
   override public init() {
     super.init()

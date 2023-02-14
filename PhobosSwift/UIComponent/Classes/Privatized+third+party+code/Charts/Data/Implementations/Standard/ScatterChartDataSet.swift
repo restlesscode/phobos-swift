@@ -12,7 +12,7 @@
 import CoreGraphics
 import Foundation
 
-open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChartDataSet {
+open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, ScatterChartDataSetProtocol {
   @objc(ScatterShape)
   public enum Shape: Int {
     case square
@@ -36,7 +36,7 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChar
   open var scatterShapeHoleColor: NSUIColor?
 
   /// Sets the ScatterShape this DataSet should be drawn with.
-  /// This will search for an available IShapeRenderer and set this renderer for the DataSet
+  /// This will search for an available ShapeRenderer and set this renderer for the DataSet
   @objc open func setScatterShape(_ shape: Shape) {
     shapeRenderer = ScatterChartDataSet.renderer(forShape: shape)
   }
@@ -44,9 +44,9 @@ open class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterChar
   /// The IShapeRenderer responsible for rendering this DataSet.
   /// This can also be used to set a custom IShapeRenderer aside from the default ones.
   /// **default**: `SquareShapeRenderer`
-  open var shapeRenderer: IShapeRenderer? = SquareShapeRenderer()
+  open var shapeRenderer: ShapeRenderer? = SquareShapeRenderer()
 
-  @objc open class func renderer(forShape shape: Shape) -> IShapeRenderer {
+  @objc open class func renderer(forShape shape: Shape) -> ShapeRenderer {
     switch shape {
     case .square: return SquareShapeRenderer()
     case .circle: return CircleShapeRenderer()

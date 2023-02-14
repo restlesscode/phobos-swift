@@ -34,9 +34,7 @@ open class BioMetricAuthenticator: NSObject {
   // MARK: - Private
 
   override private init() {}
-  private lazy var context: LAContext? = {
-    LAContext()
-  }()
+  private lazy var context: LAContext? = LAContext()
 
   // MARK: - Public
 

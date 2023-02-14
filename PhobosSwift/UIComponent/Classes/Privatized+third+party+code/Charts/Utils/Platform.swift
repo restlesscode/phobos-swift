@@ -4,15 +4,31 @@ import Foundation
  alike, and for the chart library's usage of the APIs it is often sufficient to typealias one to the other. The NSUI*
  types are aliased to either their UI* implementation (on iOS) or their NS* implementation (on OS X). */
 #if os(iOS) || os(tvOS)
-#if canImport(UIKit)
 import UIKit
-#endif
 
+public typealias ParagraphStyle = NSParagraphStyle
+public typealias MutableParagraphStyle = NSMutableParagraphStyle
+public typealias TextAlignment = NSTextAlignment
 public typealias NSUIFont = UIFont
 public typealias NSUIImage = UIImage
 public typealias NSUIScrollView = UIScrollView
 public typealias NSUIScreen = UIScreen
 public typealias NSUIDisplayLink = CADisplayLink
+
+extension NSUIColor {
+  var nsuirgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)? {
+    var red: CGFloat = 0
+    var green: CGFloat = 0
+    var blue: CGFloat = 0
+    var alpha: CGFloat = 0
+
+    guard getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+      return nil
+    }
+
+    return (red: red, green: green, blue: blue, alpha: alpha)
+  }
+}
 
 open class NSUIView: UIView {
   @objc var nsuiLayer: CALayer? {
@@ -33,12 +49,19 @@ extension UIScreen {
   }
 }
 
+func NSUIMainScreen() -> NSUIScreen? {
+  NSUIScreen.main
+}
+
 #endif
 
 #if os(OSX)
 import Cocoa
 import Quartz
 
+public typealias ParagraphStyle = NSParagraphStyle
+public typealias MutableParagraphStyle = NSMutableParagraphStyle
+public typealias TextAlignment = NSTextAlignment
 public typealias NSUIFont = NSFont
 public typealias NSUIImage = NSImage
 public typealias NSUIScrollView = NSScrollView
@@ -57,8 +80,8 @@ public class NSUIDisplayLink {
     _timestamp
   }
 
-  init(target: Any, selector: Selector) {
-    _target = target as AnyObject
+  init(target: AnyObject, selector: Selector) {
+    _target = target
     _selector = selector
 
     if CVDisplayLinkCreateWithActiveCGDisplays(&displayLink) == kCVReturnSuccess {
@@ -99,6 +122,25 @@ public class NSUIDisplayLink {
     if timer != nil {
       timer?.invalidate()
     }
+  }
+}
+
+extension NSUIColor {
+  var nsuirgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)? {
+    var red: CGFloat = 0
+    var green: CGFloat = 0
+    var blue: CGFloat = 0
+    var alpha: CGFloat = 0
+
+    guard let colorSpaceModel = cgColor.colorSpace?.model else {
+      return nil
+    }
+    guard colorSpaceModel == .rgb else {
+      return nil
+    }
+
+    getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+    return (red: red, green: green, blue: blue, alpha: alpha)
   }
 }
 
@@ -176,17 +218,18 @@ extension NSImage {
 }
 
 extension NSScrollView {
-  /// NOTE: Unable to disable scrolling in macOS
   var scrollEnabled: Bool {
     get {
       true
     }
-    set {}
+    set {
+      // FIXME: We can't disable  scrolling it on OSX
+    }
   }
 }
 
-#endif
-
-extension NSUIScreen {
-  class var nsuiMain: NSUIScreen? { .main }
+func NSUIMainScreen() -> NSUIScreen? {
+  NSUIScreen.main
 }
+
+#endif

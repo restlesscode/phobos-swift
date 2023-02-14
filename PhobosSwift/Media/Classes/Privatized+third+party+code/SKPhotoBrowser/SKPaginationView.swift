@@ -77,7 +77,7 @@ class SKPaginationView: UIView {
     let alpha: CGFloat = hidden ? 0.0 : 1.0
 
     UIView.animate(withDuration: 0.35,
-                   animations: { () -> Void in self.alpha = alpha },
+                   animations: { () in self.alpha = alpha },
                    completion: nil)
   }
 }

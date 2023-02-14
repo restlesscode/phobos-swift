@@ -25,26 +25,19 @@ open class ZoomViewJob: ViewPortJob {
                     yValue: Double,
                     transformer: Transformer,
                     axis: YAxis.AxisDependency,
-                    view: ChartViewBase)
-  {
+                    view: ChartViewBase) {
+    self.scaleX = scaleX
+    self.scaleY = scaleY
+    axisDependency = axis
+
     super.init(viewPortHandler: viewPortHandler,
                xValue: xValue,
                yValue: yValue,
                transformer: transformer,
                view: view)
-
-    self.scaleX = scaleX
-    self.scaleY = scaleY
-    axisDependency = axis
   }
 
   override open func doJob() {
-    guard
-      let viewPortHandler = viewPortHandler,
-      let transformer = transformer,
-      let view = view
-    else { return }
-
     var matrix = viewPortHandler.setZoom(scaleX: scaleX, scaleY: scaleY)
     viewPortHandler.refresh(newMatrix: matrix, chart: view, invalidate: false)
 

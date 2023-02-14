@@ -109,7 +109,7 @@ extension NavigatorType {
   ///
   @discardableResult
   public func pushURL(_ url: URLConvertible, context: Any? = nil, from: UINavigationControllerType? = nil, animated: Bool = true) -> UIViewController? {
-    guard let viewController = self.viewController(for: url, context: context) else { return nil }
+    guard let viewController = viewController(for: url, context: context) else { return nil }
     return pushViewController(viewController, from: from, animated: animated)
   }
 
@@ -128,7 +128,7 @@ extension NavigatorType {
   public func showURL(_ url: URLConvertible,
                       context: Any? = nil,
                       from: UIViewControllerType? = nil) -> UIViewController? {
-    guard let viewController = self.viewController(for: url, context: context) else { return nil }
+    guard let viewController = viewController(for: url, context: context) else { return nil }
     return showViewController(viewController, from: from)
   }
 
@@ -154,7 +154,7 @@ extension NavigatorType {
                          from: UIViewControllerType? = nil,
                          animated: Bool = true,
                          completion: (() -> Void)? = nil) -> UIViewController? {
-    guard let viewController = self.viewController(for: url, context: context) else { return nil }
+    guard let viewController = viewController(for: url, context: context) else { return nil }
     return presentViewController(viewController, wrap: wrap, from: from, animated: animated, completion: completion)
   }
 
@@ -182,7 +182,7 @@ extension NavigatorType {
   ///
   @discardableResult
   public func openURL(_ url: URLConvertible, context: Any?) -> Bool {
-    guard let handler = self.handler(for: url, context: context) else { return false }
+    guard let handler = handler(for: url, context: context) else { return false }
     return handler()
   }
 }
@@ -285,7 +285,7 @@ extension NavigatorType {
                    transaction: CATransition? = CATransition.pbs.revealAnimation,
                    completion: (() -> Void)? = nil) -> Bool {
     if let window = keyWindow ?? UIApplication.pbs_shared?.windows.first(where: { $0.isKeyWindow }) {
-      guard let viewController = self.viewController(for: url, context: context) else { return false }
+      guard let viewController = viewController(for: url, context: context) else { return false }
 
       CATransaction.begin()
       CATransaction.setCompletionBlock(completion)

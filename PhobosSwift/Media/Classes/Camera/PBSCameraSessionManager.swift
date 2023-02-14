@@ -319,7 +319,7 @@ public class PBSCameraSessionManager: NSObject {
   }
 
   func addMediaOutput() -> Bool {
-    guard let videoDeviceInput = self.videoDeviceInput else { return false }
+    guard let videoDeviceInput = videoDeviceInput else { return false }
 
     if captureSession.canAddOutput(mediaOutput) {
       captureSession.addOutput(mediaOutput)
@@ -582,7 +582,7 @@ public class PBSCameraSessionManager: NSObject {
 
   /// # 改设备的手电筒能力当前能不能用
   public var isTorchAvailable: Bool {
-    guard let videoDeviceInput = self.videoDeviceInput else { return false }
+    guard let videoDeviceInput = videoDeviceInput else { return false }
 
     return videoDeviceInput.device.isTorchAvailable
   }
@@ -590,7 +590,7 @@ public class PBSCameraSessionManager: NSObject {
   /// # 开关手电筒
   public func toggleTorch() {
     guard isTorchAvailable else { return }
-    guard let videoDeviceInput = self.videoDeviceInput else { return }
+    guard let videoDeviceInput = videoDeviceInput else { return }
 
     do {
       try videoDeviceInput.device.lockForConfiguration()
@@ -606,14 +606,14 @@ public class PBSCameraSessionManager: NSObject {
 
   /// # 手电筒的状态
   public var torchMode: AVCaptureDevice.TorchMode {
-    guard let videoDeviceInput = self.videoDeviceInput else { return .off }
+    guard let videoDeviceInput = videoDeviceInput else { return .off }
 
     return videoDeviceInput.device.torchMode
   }
 
   ///
   public func capturePhoto() {
-    guard let videoDeviceInput = self.videoDeviceInput else { return }
+    guard let videoDeviceInput = videoDeviceInput else { return }
 
     /*
      Retrieve the video preview layer's video orientation on the main queue before

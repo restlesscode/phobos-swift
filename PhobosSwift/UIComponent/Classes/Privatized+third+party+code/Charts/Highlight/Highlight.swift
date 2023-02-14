@@ -38,7 +38,7 @@ open class Highlight: NSObject {
   fileprivate var _stackIndex = Int(-1)
 
   /// the axis the highlighted value belongs to
-  private var _axis = YAxis.AxisDependency.left
+  private var _axis: YAxis.AxisDependency = .left
 
   /// the x-position (pixels) on which this highlight object was last drawn
   @objc open var drawX: CGFloat = 0.0
@@ -64,8 +64,7 @@ open class Highlight: NSObject {
                     dataIndex: Int,
                     dataSetIndex: Int,
                     stackIndex: Int,
-                    axis: YAxis.AxisDependency)
-  {
+                    axis: YAxis.AxisDependency) {
     super.init()
 
     _x = x
@@ -90,8 +89,7 @@ open class Highlight: NSObject {
                                 xPx: CGFloat, yPx: CGFloat,
                                 dataSetIndex: Int,
                                 stackIndex: Int,
-                                axis: YAxis.AxisDependency)
-  {
+                                axis: YAxis.AxisDependency) {
     self.init(x: x, y: y, xPx: xPx, yPx: yPx,
               dataIndex: 0,
               dataSetIndex: dataSetIndex,
@@ -111,8 +109,7 @@ open class Highlight: NSObject {
   @objc public init(x: Double, y: Double,
                     xPx: CGFloat, yPx: CGFloat,
                     dataSetIndex: Int,
-                    axis: YAxis.AxisDependency)
-  {
+                    axis: YAxis.AxisDependency) {
     super.init()
 
     _x = x

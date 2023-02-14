@@ -97,7 +97,7 @@ extension DestinationProtocol {
   ///     - false:    Keep this log message and continue processing.
   ///
   public func shouldExclude(logDetails: inout LogDetails, message: inout String) -> Bool {
-    guard let filters = self.filters ?? owner?.filters, !filters.isEmpty else { return false }
+    guard let filters = filters ?? owner?.filters, !filters.isEmpty else { return false }
 
     for filter in filters {
       if filter.shouldExclude(logDetails: &logDetails, message: &message) {
@@ -117,7 +117,7 @@ extension DestinationProtocol {
   /// - Returns:  Nothing
   ///
   public func applyFormatters(logDetails: inout LogDetails, message: inout String) {
-    guard let formatters = self.formatters ?? owner?.formatters, !formatters.isEmpty else { return }
+    guard let formatters = formatters ?? owner?.formatters, !formatters.isEmpty else { return }
 
     for formatter in formatters {
       formatter.format(logDetails: &logDetails, message: &message)

@@ -27,14 +27,10 @@
 import Foundation
 
 /// UIScreen.main.bounds.width
-public let ScreenWidth: CGFloat = {
-  UIScreen.main.bounds.width
-}()
+public let ScreenWidth: CGFloat = UIScreen.main.bounds.width
 
 /// UIScreen.main.bounds.height
-public let ScreenHeight: CGFloat = {
-  UIScreen.main.bounds.height
-}()
+public let ScreenHeight: CGFloat = UIScreen.main.bounds.height
 
 /// The default bottom space
 public let bottomSpace: CGFloat = {

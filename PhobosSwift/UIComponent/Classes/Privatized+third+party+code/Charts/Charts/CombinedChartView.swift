@@ -15,7 +15,7 @@ import Foundation
 /// This chart class allows the combination of lines, bars, scatter and candle data all displayed in one chart area.
 open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider {
   /// the fill-formatter used for determining the position of the fill-line
-  internal var _fillFormatter: IFillFormatter!
+  internal var _fillFormatter: FillFormatter!
 
   /// enum that allows to specify the order in which the different data objects for the combined-chart are drawn
   @objc(CombinedChartDrawOrder)
@@ -37,7 +37,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider {
 
     _fillFormatter = DefaultFillFormatter()
 
-    renderer = CombinedChartRenderer(chart: self, animator: _animator, viewPortHandler: _viewPortHandler)
+    renderer = CombinedChartRenderer(chart: self, animator: chartAnimator, viewPortHandler: viewPortHandler)
   }
 
   override open var data: ChartData? {
@@ -54,7 +54,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider {
     }
   }
 
-  @objc open var fillFormatter: IFillFormatter {
+  @objc open var fillFormatter: FillFormatter {
     get {
       _fillFormatter
     }
@@ -68,7 +68,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider {
 
   /// - Returns: The Highlight object (contains x-index and DataSet index) of the selected value at the given touch point inside the CombinedChart.
   override open func getHighlightByTouchPoint(_ pt: CGPoint) -> Highlight? {
-    if _data === nil {
+    if data === nil {
       Swift.print("Can't select by touch. No data set.")
       return nil
     }
@@ -90,7 +90,7 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider {
   // MARK: - CombinedChartDataProvider
 
   open var combinedData: CombinedChartData? {
-    _data as? CombinedChartData
+    data as? CombinedChartData
   }
 
   // MARK: - LineChartDataProvider
@@ -170,23 +170,23 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider {
       isDrawMarkersEnabled && valuesToHighlight()
     else { return }
 
-    for i in 0..<_indicesToHighlight.count {
-      let highlight = _indicesToHighlight[i]
+    for i in highlighted.indices {
+      let highlight = highlighted[i]
 
       guard
         let set = combinedData?.getDataSetByHighlight(highlight),
-        let e = _data?.entryForHighlight(highlight)
+        let e = data?.entry(for: highlight)
       else { continue }
 
       let entryIndex = set.entryIndex(entry: e)
-      if entryIndex > Int(Double(set.entryCount) * _animator.phaseX) {
+      if entryIndex > Int(Double(set.entryCount) * chartAnimator.phaseX) {
         continue
       }
 
       let pos = getMarkerPosition(highlight: highlight)
 
       // check bounds
-      if !_viewPortHandler.isInBounds(x: pos.x, y: pos.y) {
+      if !viewPortHandler.isInBounds(x: pos.x, y: pos.y) {
         continue
       }
 

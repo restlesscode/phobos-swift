@@ -82,7 +82,7 @@ open class BaseDestination: DestinationProtocol, CustomDebugStringConvertible {
   open func process(logDetails: LogDetails) {
     guard let owner = owner else { return }
 
-    var extendedDetails: String = ""
+    var extendedDetails = ""
 
     if showDate {
       extendedDetails += "\((owner.dateFormatter != nil) ? owner.dateFormatter!.string(from: logDetails.date) : logDetails.date.description) "
@@ -133,7 +133,7 @@ open class BaseDestination: DestinationProtocol, CustomDebugStringConvertible {
   open func processInternal(logDetails: LogDetails) {
     guard let owner = owner else { return }
 
-    var extendedDetails: String = ""
+    var extendedDetails = ""
 
     if showDate {
       extendedDetails += "\((owner.dateFormatter != nil) ? owner.dateFormatter!.string(from: logDetails.date) : logDetails.date.description) "
@@ -177,6 +177,6 @@ open class BaseDestination: DestinationProtocol, CustomDebugStringConvertible {
   ///
   open func output(logDetails: LogDetails, message: String) {
     // Do something with the text in an overridden version of this method
-    precondition(false, "Must override this")
+    preconditionFailure("Must override this")
   }
 }

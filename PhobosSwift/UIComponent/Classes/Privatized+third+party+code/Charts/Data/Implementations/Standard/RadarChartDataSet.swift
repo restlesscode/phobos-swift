@@ -12,7 +12,7 @@
 import CoreGraphics
 import Foundation
 
-open class RadarChartDataSet: LineRadarChartDataSet, IRadarChartDataSet {
+open class RadarChartDataSet: LineRadarChartDataSet, RadarChartDataSetProtocol {
   private func initialize() {
     valueFont = NSUIFont.systemFont(ofSize: 13.0)
   }
@@ -22,7 +22,7 @@ open class RadarChartDataSet: LineRadarChartDataSet, IRadarChartDataSet {
     initialize()
   }
 
-  override public required init(entries: [ChartDataEntry]?, label: String?) {
+  override public required init(entries: [ChartDataEntry], label: String) {
     super.init(entries: entries, label: label)
     initialize()
   }

@@ -507,7 +507,7 @@ extension SKPhotoBrowser {
       actionSheetController.addAction(UIAlertAction(title: cancelTitle, style: .cancel))
 
       for idx in titles.indices {
-        actionSheetController.addAction(UIAlertAction(title: titles[idx], style: .default, handler: { _ -> Void in
+        actionSheetController.addAction(UIAlertAction(title: titles[idx], style: .default, handler: { _ in
           self.delegate?.didDismissActionSheetWithButtonIndex?(idx, photoIndex: self.currentPageIndex)
         }))
       }
@@ -522,7 +522,7 @@ extension SKPhotoBrowser {
           popoverController.barButtonItem = toolbar.toolActionButton
         }
 
-        present(actionSheetController, animated: true, completion: { () -> Void in
+        present(actionSheetController, animated: true, completion: { () in
         })
       }
 

@@ -11,13 +11,12 @@
 import CoreGraphics
 import Foundation
 
-open class ChevronDownShapeRenderer: NSObject, IShapeRenderer {
+open class ChevronDownShapeRenderer: NSObject, ShapeRenderer {
   open func renderShape(context: CGContext,
-                        dataSet: IScatterChartDataSet,
+                        dataSet: ScatterChartDataSetProtocol,
                         viewPortHandler: ViewPortHandler,
                         point: CGPoint,
-                        color: NSUIColor)
-  {
+                        color: NSUIColor) {
     let shapeSize = dataSet.scatterShapeSize
     let shapeHalf = shapeSize / 2.0
 

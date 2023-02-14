@@ -108,7 +108,7 @@ public class PBSMessagePanel: NSObject {
     let panelView: UIView! = panelVC?.view
 
     let topVC = UIWindow.pbs.keyWindowTopMostController?.pbs.topMostController
-    if let vc = topVC, let panelVC = self.panelVC {
+    if let vc = topVC, let panelVC = panelVC {
       vc.addChild(panelVC)
       let parentView: UIView! = vc.view
       parentView.addSubview(panelView)

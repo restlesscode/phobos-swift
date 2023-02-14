@@ -692,7 +692,7 @@ class CocoaMQTTReader {
   }
 
   func lengthReady(_ byte: UInt8) {
-    length += (UInt)((Int)(byte & 127) * multiply)
+    length += UInt(Int(byte & 127) * multiply)
     // done
     if byte & 0x80 == 0 {
       if length == 0 {

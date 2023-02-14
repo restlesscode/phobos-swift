@@ -183,7 +183,7 @@ class PBSGrowthFeedbackViewController: UIViewController {
       present(actionSheetController, animated: true, completion: nil)
     } else {
       actionSheetController.modalPresentationStyle = .popover
-      present(actionSheetController, animated: true, completion: { () -> Void in
+      present(actionSheetController, animated: true, completion: { () in
       })
     }
   }

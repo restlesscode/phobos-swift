@@ -208,8 +208,7 @@ open class Animator: NSObject {
     updateAnimationPhases(_startTimeX)
 
     if _enabledX || _enabledY,
-       _displayLink == nil
-    {
+       _displayLink == nil {
       _displayLink = NSUIDisplayLink(target: self, selector: #selector(animationLoop))
       _displayLink?.add(to: .main, forMode: RunLoop.Mode.common)
     }
@@ -245,8 +244,7 @@ open class Animator: NSObject {
     updateAnimationPhases(_startTimeY)
 
     if _enabledX || _enabledY,
-       _displayLink == nil
-    {
+       _displayLink == nil {
       _displayLink = NSUIDisplayLink(target: self, selector: #selector(animationLoop))
       _displayLink?.add(to: .main, forMode: RunLoop.Mode.common)
     }

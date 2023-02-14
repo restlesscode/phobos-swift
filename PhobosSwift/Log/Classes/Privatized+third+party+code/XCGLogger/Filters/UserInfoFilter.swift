@@ -99,7 +99,7 @@ open class UserInfoFilter: FilterProtocol {
   ///     - false:    Keep this log message and continue processing.
   ///
   open func shouldExclude(logDetails: inout LogDetails, message: inout String) -> Bool {
-    var matched: Bool = false
+    var matched = false
 
     if !applyFilterToInternalMessages,
        let isInternal = logDetails.userInfo[XCGLogger.Constants.userInfoKeyInternal] as? Bool,
@@ -127,7 +127,7 @@ open class UserInfoFilter: FilterProtocol {
   // MARK: - CustomDebugStringConvertible
 
   open var debugDescription: String {
-    var description: String = "\(extractTypeName(self)): \(applyFilterToInternalMessages ? "(Filtering Internal) " : "")" + (inverse ? "Including only matches for: " : "Excluding matches for: ")
+    var description = "\(extractTypeName(self)): \(applyFilterToInternalMessages ? "(Filtering Internal) " : "")" + (inverse ? "Including only matches for: " : "Excluding matches for: ")
     if itemsToMatch.count > 5 {
       description += "\n\t- " + itemsToMatch.sorted().joined(separator: "\n\t- ")
     } else {
