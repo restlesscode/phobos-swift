@@ -241,7 +241,7 @@ open class ANSIColorLogFormatter: LogFormatterProtocol, CustomDebugStringConvert
   ///
   open func colorize(level: XCGLogger.Level, with foregroundColor: ANSIColor = .default, on backgroundColor: ANSIColor = .default, options: [ANSIOption] = []) {
     var codes: [String] = [foregroundColor.foregroundCode, backgroundColor.backgroundCode]
-    var description: String = "\(foregroundColor) on \(backgroundColor)"
+    var description = "\(foregroundColor) on \(backgroundColor)"
 
     for option in options {
       codes.append(option.code)
@@ -331,7 +331,7 @@ open class ANSIColorLogFormatter: LogFormatterProtocol, CustomDebugStringConvert
   // MARK: - CustomDebugStringConvertible
 
   open var debugDescription: String {
-    var description: String = "\(extractTypeName(self)): "
+    var description = "\(extractTypeName(self)): "
     for level in XCGLogger.Level.allCases {
       description += "\n\t- \(level) > \(descriptionStrings[level] ?? "None")"
     }

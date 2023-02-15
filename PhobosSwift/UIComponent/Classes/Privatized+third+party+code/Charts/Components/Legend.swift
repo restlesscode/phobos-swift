@@ -74,13 +74,13 @@ open class Legend: ComponentBase {
   private var _isLegendCustom = false
 
   /// The horizontal alignment of the legend
-  @objc open var horizontalAlignment = HorizontalAlignment.left
+  @objc open var horizontalAlignment: HorizontalAlignment = .left
 
   /// The vertical alignment of the legend
-  @objc open var verticalAlignment = VerticalAlignment.bottom
+  @objc open var verticalAlignment: VerticalAlignment = .bottom
 
   /// The orientation of the legend
-  @objc open var orientation = Orientation.horizontal
+  @objc open var orientation: Orientation = .horizontal
 
   /// Flag indicating whether the legend will draw inside the chart or outside
   @objc open var drawInside: Bool = false
@@ -89,9 +89,9 @@ open class Legend: ComponentBase {
   @objc open var isDrawInsideEnabled: Bool { drawInside }
 
   /// The text direction of the legend
-  @objc open var direction = Direction.leftToRight
+  @objc open var direction: Direction = .leftToRight
 
-  @objc open var font = NSUIFont.systemFont(ofSize: 10.0)
+  @objc open var font: NSUIFont = NSUIFont.systemFont(ofSize: 10.0)
   @objc open var textColor = NSUIColor.labelOrBlack
 
   /// The form/shape of the legend forms
@@ -212,11 +212,10 @@ open class Legend: ComponentBase {
 
       var wasStacked = false
 
-      for i in 0..<entryCount {
+      for i in entries.indices {
         let e = entries[i]
         let drawingForm = e.form != .none
         let formSize = e.formSize.isNaN ? defaultFormSize : e.formSize
-        let label = e.label
 
         if !wasStacked {
           width = 0.0
@@ -229,8 +228,8 @@ open class Legend: ComponentBase {
           width += formSize
         }
 
-        if label != nil {
-          let size = (label! as NSString).size(withAttributes: [.font: labelFont])
+        if let label = e.label {
+          let size = (label as NSString).size(withAttributes: [.font: labelFont])
 
           if drawingForm && !wasStacked {
             width += formToTextSpace
@@ -277,13 +276,12 @@ open class Legend: ComponentBase {
 
       // Start calculating layout
 
-      let labelAttrs = [NSAttributedString.Key.font: labelFont]
       var maxLineWidth: CGFloat = 0.0
       var currentLineWidth: CGFloat = 0.0
       var requiredWidth: CGFloat = 0.0
       var stackedStartIndex: Int = -1
 
-      for i in 0..<entryCount {
+      for i in entries.indices {
         let e = entries[i]
         let drawingForm = e.form != .none
         let label = e.label
@@ -299,8 +297,8 @@ open class Legend: ComponentBase {
         }
 
         // grouped forms have null labels
-        if label != nil {
-          calculatedLabelSizes[i] = (label! as NSString).size(withAttributes: labelAttrs)
+        if let label = label {
+          calculatedLabelSizes[i] = (label as NSString).size(withAttributes: [.font: labelFont])
           requiredWidth += drawingForm ? formToTextSpace + formSize : 0.0
           requiredWidth += calculatedLabelSizes[i].width
         } else {

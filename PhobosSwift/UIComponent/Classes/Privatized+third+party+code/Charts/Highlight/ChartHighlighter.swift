@@ -9,10 +9,11 @@
 //  https://github.com/danielgindi/Charts
 //
 
+import Algorithms
 import CoreGraphics
 import Foundation
 
-open class ChartHighlighter: NSObject, IHighlighter {
+open class ChartHighlighter: NSObject, Highlighter {
   /// instance of the data-provider
   @objc open weak var chart: ChartDataProvider?
 
@@ -29,7 +30,7 @@ open class ChartHighlighter: NSObject, IHighlighter {
   ///   - x:
   /// - Returns: The corresponding x-pos for a given touch-position in pixels.
   @objc open func getValsForTouch(x: CGFloat, y: CGFloat) -> CGPoint {
-    guard let chart = self.chart as? BarLineScatterCandleBubbleChartDataProvider else { return .zero }
+    guard let chart = chart as? BarLineScatterCandleBubbleChartDataProvider else { return .zero }
 
     // take any transformer to determine the values
     return chart.getTransformer(forAxis: .left).valueForTouchPoint(x: x, y: y)
@@ -65,29 +66,23 @@ open class ChartHighlighter: NSObject, IHighlighter {
   @objc open func getHighlights(xValue: Double, x: CGFloat, y: CGFloat) -> [Highlight] {
     var vals = [Highlight]()
 
-    guard let data = self.data else { return vals }
+    guard let data = data else { return vals }
 
-    for i in 0..<data.dataSetCount {
-      guard
-        let dataSet = data.getDataSetByIndex(i),
-        dataSet.isHighlightEnabled // don't include datasets that cannot be highlighted
-      else { continue }
-
+    for (i, set) in data.indexed() where set.isHighlightEnabled {
       // extract all y-values from all DataSets at the given x-value.
       // some datasets (i.e bubble charts) make sense to have multiple values for an x-value. We'll have to find a way to handle that later on. It's more complicated now when x-indices are floating point.
-      vals.append(contentsOf: buildHighlights(dataSet: dataSet, dataSetIndex: i, xValue: xValue, rounding: .closest))
+      vals.append(contentsOf: buildHighlights(dataSet: set, dataSetIndex: i, xValue: xValue, rounding: .closest))
     }
 
     return vals
   }
 
   /// - Returns: An array of `Highlight` objects corresponding to the selected xValue and dataSetIndex.
-  internal func buildHighlights(dataSet set: IChartDataSet,
+  internal func buildHighlights(dataSet set: ChartDataSetProtocol,
                                 dataSetIndex: Int,
                                 xValue: Double,
-                                rounding: ChartDataSetRounding) -> [Highlight]
-  {
-    guard let chart = self.chart as? BarLineScatterCandleBubbleChartDataProvider else { return [] }
+                                rounding: ChartDataSetRounding) -> [Highlight] {
+    guard let chart = chart as? BarLineScatterCandleBubbleChartDataProvider else { return [] }
 
     var entries = set.entriesForXValue(xValue)
     if entries.isEmpty, let closest = set.entryForXValue(xValue, closestToY: .nan, rounding: rounding)
@@ -111,8 +106,7 @@ open class ChartHighlighter: NSObject, IHighlighter {
                                               x: CGFloat,
                                               y: CGFloat,
                                               axis: YAxis.AxisDependency?,
-                                              minSelectionDistance: CGFloat) -> Highlight?
-  {
+                                              minSelectionDistance: CGFloat) -> Highlight? {
     var distance = minSelectionDistance
     var closest: Highlight?
 

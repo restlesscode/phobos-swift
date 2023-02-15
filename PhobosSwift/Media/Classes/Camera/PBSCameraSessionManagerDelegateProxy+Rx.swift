@@ -33,6 +33,8 @@ public class RxPBSCameraSessionManagerDelegateProxy: DelegateProxy<PBSCameraSess
   /// Typed parent object.
   public private(set) weak var sessionManager: PBSCameraSessionManager?
 
+  internal private(set) var _didFinishProcessingPhotoPublishSubject: Any?
+
   /// - parameter textview: Parent object for delegate proxy.
   public init(sessionManager: PBSCameraSessionManager) {
     self.sessionManager = sessionManager
@@ -54,7 +56,12 @@ public class RxPBSCameraSessionManagerDelegateProxy: DelegateProxy<PBSCameraSess
   internal private(set) var didFinishProcessingPhotoBufferPublishSubject = PublishSubject<PBSDidFinishProcessingPhotoBufferParam>()
 
   @available(iOS 11.0, *)
-  internal private(set) lazy var didFinishProcessingPhotoPublishSubject = PublishSubject<DidFinishProcessingPhotoParam>()
+  internal var didFinishProcessingPhotoPublishSubject: PublishSubject<DidFinishProcessingPhotoParam> {
+    if _didFinishProcessingPhotoPublishSubject == nil {
+      _didFinishProcessingPhotoPublishSubject = PublishSubject<DidFinishProcessingPhotoParam>()
+    }
+    return _didFinishProcessingPhotoPublishSubject as! PublishSubject<DidFinishProcessingPhotoParam>
+  }
 
   internal private(set) var didOutputMetadataObjectsPublishSubject = PublishSubject<DidOutputMetadataObjectsParam>()
 }

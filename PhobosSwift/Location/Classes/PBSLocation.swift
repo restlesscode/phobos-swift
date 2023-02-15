@@ -107,7 +107,5 @@ open class PBSLocation {
   /// lazy variable alertCtrl
   ///
   /// Should be initialized once
-  static var locationAuthorizationAlertCtrl: UIAlertController = {
-    PBSLocation.makeAlertCtrl(title: Constants.Text.kAllowLocationAccess, message: Constants.Text.kAllowLocationAccessMessage)
-  }()
+  static var locationAuthorizationAlertCtrl: UIAlertController = PBSLocation.makeAlertCtrl(title: Constants.Text.kAllowLocationAccess, message: Constants.Text.kAllowLocationAccessMessage)
 }

@@ -13,12 +13,16 @@ import CoreGraphics
 import Foundation
 
 open class BarChartData: BarLineScatterCandleBubbleChartData {
-  override public init() {
+  public required init() {
     super.init()
   }
 
-  override public init(dataSets: [IChartDataSet]?) {
+  override public init(dataSets: [ChartDataSetProtocol]) {
     super.init(dataSets: dataSets)
+  }
+
+  public required init(arrayLiteral elements: ChartDataSetProtocol...) {
+    super.init(dataSets: elements)
   }
 
   /// The width of the bars on the x-axis, in values (not pixels)
@@ -35,8 +39,7 @@ open class BarChartData: BarLineScatterCandleBubbleChartData {
   ///   - groupSpace: The space between groups of bars in values (not pixels) e.g. 0.8f for bar width 1f
   ///   - barSpace: The space between individual bars in values (not pixels) e.g. 0.1f for bar width 1f
   @objc open func groupBars(fromX: Double, groupSpace: Double, barSpace: Double) {
-    let setCount = _dataSets.count
-    if setCount <= 1 {
+    guard !isEmpty else {
       print("BarData needs to hold at least 2 BarDataSets to allow grouping.", terminator: "\n")
       return
     }
@@ -52,11 +55,11 @@ open class BarChartData: BarLineScatterCandleBubbleChartData {
 
     let interval = groupWidth(groupSpace: groupSpace, barSpace: barSpace)
 
-    for i in stride(from: 0, to: maxEntryCount, by: 1) {
+    for i in 0..<maxEntryCount {
       let start = fromX
       fromX += groupSpaceWidthHalf
 
-      (_dataSets as? [IBarChartDataSet])?.forEach { set in
+      (_dataSets as! [BarChartDataSetProtocol]).forEach { set in
         fromX += barSpaceHalf
         fromX += barWidthHalf
 
@@ -90,6 +93,6 @@ open class BarChartData: BarLineScatterCandleBubbleChartData {
   ///   - groupSpace:
   ///   - barSpace:
   @objc open func groupWidth(groupSpace: Double, barSpace: Double) -> Double {
-    Double(_dataSets.count) * (barWidth + barSpace) + groupSpace
+    Double(count) * (barWidth + barSpace) + groupSpace
   }
 }

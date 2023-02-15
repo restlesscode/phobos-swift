@@ -487,7 +487,7 @@ class FloatingPanelCore: NSObject, UIGestureRecognizerDelegate {
       animator.stopAnimation(true)
       endAttraction(false)
     }
-    if let animator = self.animator {
+    if let animator = animator {
       guard layoutAdapter.offsetFromEdgeMost <= 0 else { return }
       log.debug("a panel animation(interruptible: \(animator.isInterruptible)) interrupted!!!")
       if animator.isInterruptible {

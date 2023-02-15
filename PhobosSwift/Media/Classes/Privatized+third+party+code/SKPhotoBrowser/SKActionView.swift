@@ -59,7 +59,7 @@ class SKActionView: UIView {
     let closeFrame: CGRect = hidden ? closeButton.hideFrame : closeButton.showFrame
     let deleteFrame: CGRect = hidden ? deleteButton.hideFrame : deleteButton.showFrame
     UIView.animate(withDuration: 0.35,
-                   animations: { () -> Void in
+                   animations: { () in
                      let alpha: CGFloat = hidden ? 0.0 : 1.0
 
                      if SKPhotoBrowserOptions.displayCloseButton {
@@ -78,7 +78,7 @@ class SKActionView: UIView {
   }
 
   @objc func deleteButtonPressed(_ sender: UIButton) {
-    guard let browser = self.browser else { return }
+    guard let browser = browser else { return }
 
     browser.delegate?.removePhoto?(browser, index: browser.currentPageIndex) { [weak self] in
       self?.browser?.deleteImage()

@@ -62,7 +62,8 @@ TODO: Add long description of the pod here.
   s.dependency 'RxGesture', '~> 4.0.2'
   s.dependency 'SnapKit', '~> 5.0.1'
   s.dependency 'AlamofireImage', '~> 4.1'
-
+  s.dependency 'SwiftAlgorithms'
+  
   if has_resource_bundles
     s.resource_bundles = {
       "#{pod_name}" => [

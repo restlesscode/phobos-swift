@@ -112,7 +112,7 @@ open class FileNameFilter: FilterProtocol {
   // MARK: - CustomDebugStringConvertible
 
   open var debugDescription: String {
-    var description: String = "\(extractTypeName(self)): " + (inverse ? "Including only matches for: " : "Excluding matches for: ")
+    var description = "\(extractTypeName(self)): " + (inverse ? "Including only matches for: " : "Excluding matches for: ")
     if fileNamesToMatch.count > 5 {
       description += "\n\t- " + fileNamesToMatch.sorted().joined(separator: "\n\t- ")
     } else {

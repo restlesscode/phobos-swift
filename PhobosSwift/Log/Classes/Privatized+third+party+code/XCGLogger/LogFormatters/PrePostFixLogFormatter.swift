@@ -87,7 +87,7 @@ open class PrePostFixLogFormatter: LogFormatterProtocol, CustomDebugStringConver
   // MARK: - CustomDebugStringConvertible
 
   open var debugDescription: String {
-    var description: String = "\(extractTypeName(self)): "
+    var description = "\(extractTypeName(self)): "
     for level in XCGLogger.Level.allCases {
       description += "\n\t- \(level) > \(prefixStrings[level] ?? "None") | \(postfixStrings[level] ?? "None")"
     }

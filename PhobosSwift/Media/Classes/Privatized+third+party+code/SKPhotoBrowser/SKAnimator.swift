@@ -183,7 +183,7 @@ extension SKAnimator {
                      self.backgroundView.alpha = 1.0
                      self.resizableImageView?.frame = finalFrame
                    },
-                   completion: { _ -> Void in
+                   completion: { _ in
                      browser.view.alpha = 1.0
                      browser.view.isHidden = false
                      self.backgroundView.isHidden = true
@@ -203,7 +203,7 @@ extension SKAnimator {
                      self.backgroundView.alpha = 0.0
                      self.resizableImageView?.layer.frame = finalFrame
                    },
-                   completion: { _ -> Void in
+                   completion: { _ in
                      browser.dismissPhotoBrowser(animated: true) {
                        self.resizableImageView?.removeFromSuperview()
                        self.backgroundView.removeFromSuperview()

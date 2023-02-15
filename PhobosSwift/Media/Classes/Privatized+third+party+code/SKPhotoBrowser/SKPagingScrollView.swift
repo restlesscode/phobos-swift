@@ -205,7 +205,7 @@ class SKPagingScrollView: UIScrollView {
     let alpha: CGFloat = hidden ? 0.0 : 1.0
 
     UIView.animate(withDuration: 0.35,
-                   animations: { () -> Void in
+                   animations: { () in
                      captionViews.forEach { $0.alpha = alpha }
                    }, completion: nil)
   }

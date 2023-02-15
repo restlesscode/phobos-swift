@@ -63,7 +63,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     setupBindings()
 
-    guard let window = self.window else { return }
+    guard let window = window else { return }
 
     let splashViewController = SplashDemoViewController {
       window.rootViewController = UINavigationController(rootViewController: MainViewController())

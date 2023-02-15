@@ -989,9 +989,9 @@ public class ProgressHUD: UIView {
     let width = view.frame.size.width
     let height = view.frame.size.height
 
-    let beginTime: Double = 0.5
-    let durationStart: Double = 1.2
-    let durationStop: Double = 0.7
+    let beginTime = 0.5
+    let durationStart = 1.2
+    let durationStop = 0.7
 
     let animationRotation = CABasicAnimation(keyPath: "transform.rotation")
     animationRotation.byValue = 2 * Float.pi

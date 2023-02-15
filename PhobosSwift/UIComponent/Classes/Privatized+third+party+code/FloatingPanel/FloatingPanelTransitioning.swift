@@ -70,7 +70,7 @@ class FloatingPanelPresentationController: UIPresentationController {
 
   private func addFloatingPanel() {
     guard
-      let containerView = self.containerView,
+      let containerView = containerView,
       let fpc = presentedViewController as? FloatingPanelController
     else { fatalError() }
 

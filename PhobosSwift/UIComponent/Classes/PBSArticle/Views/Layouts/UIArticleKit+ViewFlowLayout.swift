@@ -78,7 +78,7 @@ public struct UIArticleKit {
 
     override public func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
       guard let attributes = super.layoutAttributesForElements(in: rect),
-            let collectionView = self.collectionView else {
+            let collectionView = collectionView else {
         return nil
       }
 
@@ -153,7 +153,7 @@ public struct UIArticleKit {
 
 extension UIArticleKit.ViewFlowLayout {
   private func numberCells(cellTypes: [UIArticleKit.DecorationView.CellType], inSection section: Int) -> Int {
-    guard let collectionView = self.collectionView, let delegate = self.delegate else { return 0 }
+    guard let collectionView = collectionView, let delegate = delegate else { return 0 }
 
     let items = collectionView.numberOfItems(inSection: section)
 
@@ -187,7 +187,7 @@ extension UIArticleKit.ViewFlowLayout {
   /// total number of rows for all cells
   /// # `rows` is not equal to the `number` of cells
   public func numberOfRows(inSection section: Int) -> Int {
-    guard let collectionView = self.collectionView else { return 0 }
+    guard let collectionView = collectionView else { return 0 }
 
     let items = collectionView.numberOfItems(inSection: section)
 
@@ -196,7 +196,7 @@ extension UIArticleKit.ViewFlowLayout {
 
   /// row number for an indexpath
   public func row(ofIndexPath indexPath: IndexPath) -> Int {
-    guard let collectionView = self.collectionView, let delegate = self.delegate else { return 0 }
+    guard let collectionView = collectionView, let delegate = delegate else { return 0 }
 
     let items = collectionView.numberOfItems(inSection: indexPath.section)
 

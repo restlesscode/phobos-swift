@@ -80,18 +80,11 @@ open class BarChartDataEntry: ChartDataEntry {
   }
 
   @objc open func sumBelow(stackIndex: Int) -> Double {
-    guard let yVals = _yVals else {
+    guard let yVals = _yVals, yVals.indices.contains(stackIndex) else {
       return 0
     }
 
-    var remainder: Double = 0.0
-    var index = yVals.count - 1
-
-    while index > stackIndex && index >= 0 {
-      remainder += yVals[index]
-      index -= 1
-    }
-
+    let remainder = yVals[stackIndex...].reduce(into: 0.0) { $0 += $1 }
     return remainder
   }
 
@@ -104,6 +97,8 @@ open class BarChartDataEntry: ChartDataEntry {
   @objc open var positiveSum: Double {
     _positiveSum
   }
+
+  var stackSize: Int { yValues?.count ?? 1 }
 
   @objc open func calcPosNegSum() {
     (_negativeSum, _positiveSum) = _yVals?.reduce(into: (0, 0)) { result, y in
@@ -132,7 +127,7 @@ open class BarChartDataEntry: ChartDataEntry {
     _ranges!.reserveCapacity(values.count)
 
     var negRemain = -negativeSum
-    var posRemain: Double = 0.0
+    var posRemain = 0.0
 
     for value in values {
       if value < 0 {
@@ -154,7 +149,7 @@ open class BarChartDataEntry: ChartDataEntry {
   @objc open var yValues: [Double]? {
     get { _yVals }
     set {
-      y = BarChartDataEntry.calcSum(values: newValue)
+      y = BarChartDataEntry.calcSum(values: newValue ?? [])
       _yVals = newValue
       calcPosNegSum()
       calcRanges()
@@ -182,16 +177,7 @@ open class BarChartDataEntry: ChartDataEntry {
   /// - Parameters:
   ///   - vals:
   /// - Returns:
-  private static func calcSum(values: [Double]?) -> Double {
-    guard let values = values
-    else { return 0.0 }
-
-    var sum = 0.0
-
-    for f in values {
-      sum += f
-    }
-
-    return sum
+  private static func calcSum(values: [Double]) -> Double {
+    values.reduce(into: 0, +=)
   }
 }

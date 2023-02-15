@@ -13,15 +13,32 @@ import CoreGraphics
 import Foundation
 
 @objc(BarLineScatterCandleBubbleChartRenderer)
-open class BarLineScatterCandleBubbleRenderer: DataRenderer {
+open class BarLineScatterCandleBubbleRenderer: NSObject, DataRenderer {
+  public let viewPortHandler: ViewPortHandler
+
+  public final var accessibleChartElements: [NSUIAccessibilityElement] = []
+
+  public let animator: Animator
+
   internal var _xBounds = XBounds() // Reusable XBounds object
 
-  override public init(animator: Animator, viewPortHandler: ViewPortHandler) {
-    super.init(animator: animator, viewPortHandler: viewPortHandler)
+  public init(animator: Animator, viewPortHandler: ViewPortHandler) {
+    self.viewPortHandler = viewPortHandler
+    self.animator = animator
+
+    super.init()
   }
 
+  open func drawData(context: CGContext) {}
+
+  open func drawValues(context: CGContext) {}
+
+  open func drawExtras(context: CGContext) {}
+
+  open func drawHighlighted(context: CGContext, indices: [Highlight]) {}
+
   /// Checks if the provided entry object is in bounds for drawing considering the current animation phase.
-  internal func isInBoundsX(entry e: ChartDataEntry, dataSet: IBarLineScatterCandleBubbleChartDataSet) -> Bool
+  internal func isInBoundsX(entry e: ChartDataEntry, dataSet: BarLineScatterCandleBubbleChartDataSetProtocol) -> Bool
   {
     let entryIndex = dataSet.entryIndex(entry: e)
     return Double(entryIndex) < Double(dataSet.entryCount) * animator.phaseX
@@ -30,15 +47,21 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer {
   /// Calculates and returns the x-bounds for the given DataSet in terms of index in their values array.
   /// This includes minimum and maximum visible x, as well as range.
   internal func xBounds(chart: BarLineScatterCandleBubbleChartDataProvider,
-                        dataSet: IBarLineScatterCandleBubbleChartDataSet,
-                        animator: Animator?) -> XBounds
-  {
+                        dataSet: BarLineScatterCandleBubbleChartDataSetProtocol,
+                        animator: Animator?) -> XBounds {
     XBounds(chart: chart, dataSet: dataSet, animator: animator)
   }
 
   /// - Returns: `true` if the DataSet values should be drawn, `false` if not.
-  internal func shouldDrawValues(forDataSet set: IChartDataSet) -> Bool {
+  internal func shouldDrawValues(forDataSet set: ChartDataSetProtocol) -> Bool {
     set.isVisible && (set.isDrawValuesEnabled || set.isDrawIconsEnabled)
+  }
+
+  open func initBuffers() {}
+
+  open func isDrawingValuesAllowed(dataProvider: ChartDataProvider?) -> Bool {
+    guard let data = dataProvider?.data else { return false }
+    return data.entryCount < Int(CGFloat(dataProvider?.maxVisibleCount ?? 0) * viewPortHandler.scaleX)
   }
 
   /// Class representing the bounds of the current viewport in terms of indices in the values array of a DataSet.
@@ -55,17 +78,15 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer {
     public init() {}
 
     public init(chart: BarLineScatterCandleBubbleChartDataProvider,
-                dataSet: IBarLineScatterCandleBubbleChartDataSet,
-                animator: Animator?)
-    {
+                dataSet: BarLineScatterCandleBubbleChartDataSetProtocol,
+                animator: Animator?) {
       set(chart: chart, dataSet: dataSet, animator: animator)
     }
 
     /// Calculates the minimum and maximum x values as well as the range between them.
     open func set(chart: BarLineScatterCandleBubbleChartDataProvider,
-                  dataSet: IBarLineScatterCandleBubbleChartDataSet,
-                  animator: Animator?)
-    {
+                  dataSet: BarLineScatterCandleBubbleChartDataSetProtocol,
+                  animator: Animator?) {
       let phaseX = Swift.max(0.0, Swift.min(1.0, animator?.phaseX ?? 1.0))
 
       let low = chart.lowestVisibleX
@@ -74,17 +95,20 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer {
       let entryFrom = dataSet.entryForXValue(low, closestToY: .nan, rounding: .down)
       let entryTo = dataSet.entryForXValue(high, closestToY: .nan, rounding: .up)
 
-      min = entryFrom == nil ? 0 : dataSet.entryIndex(entry: entryFrom!)
-      max = entryTo == nil ? 0 : dataSet.entryIndex(entry: entryTo!)
-      range = Int(Double(max - min) * phaseX)
+      self.min = entryFrom == nil ? 0 : dataSet.entryIndex(entry: entryFrom!)
+      self.max = entryTo == nil ? 0 : dataSet.entryIndex(entry: entryTo!)
+      range = Int(Double(self.max - self.min) * phaseX)
     }
+  }
+
+  public func createAccessibleHeader(usingChart chart: ChartViewBase, andData data: ChartData, withDefaultDescription defaultDescription: String) -> NSUIAccessibilityElement {
+    AccessibleHeader.create(usingChart: chart, andData: data, withDefaultDescription: defaultDescription)
   }
 }
 
 extension BarLineScatterCandleBubbleRenderer.XBounds: RangeExpression {
   public func relative<C>(to collection: C) -> Swift.Range<Int>
-    where C: Collection, Bound == C.Index
-  {
+    where C: Collection, Bound == C.Index {
     Swift.Range<Int>(min...min + range)
   }
 
@@ -107,12 +131,12 @@ extension BarLineScatterCandleBubbleRenderer.XBounds: Sequence {
   }
 
   public func makeIterator() -> Iterator {
-    Iterator(min: min, max: min + range)
+    Iterator(min: self.min, max: self.min + range)
   }
 }
 
 extension BarLineScatterCandleBubbleRenderer.XBounds: CustomDebugStringConvertible {
   public var debugDescription: String {
-    "min:\(min), max:\(max), range:\(range)"
+    "min:\(self.min), max:\(self.max), range:\(range)"
   }
 }

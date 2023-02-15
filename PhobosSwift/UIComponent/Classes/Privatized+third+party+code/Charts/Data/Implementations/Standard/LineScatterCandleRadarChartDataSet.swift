@@ -11,7 +11,7 @@
 
 import Foundation
 
-open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDataSet, ILineScatterCandleRadarChartDataSet
+open class LineScatterCandleRadarChartDataSet: BarLineScatterCandleBubbleChartDataSet, LineScatterCandleRadarChartDataSetProtocol
 {
   // MARK: - Data functions and accessors
 

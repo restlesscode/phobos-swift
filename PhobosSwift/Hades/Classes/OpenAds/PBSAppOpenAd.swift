@@ -83,7 +83,7 @@ public class PBSAppOpenAd: PBSFullScreenPresentingAd {
   }
 
   private func wasLoadTimeLessThanNHoursAgo(n: Int) -> Bool {
-    guard let lastLoadTime = self.lastLoadTime else {
+    guard let lastLoadTime = lastLoadTime else {
       return true
     }
     let timeIntervalBetweenNowAndLoadTime: TimeInterval = Date().timeIntervalSince(lastLoadTime)

@@ -38,7 +38,7 @@ public class PBSRefreshTokenUtil {
   public func append(host: String, block: @escaping PBSRefreshToken) {
     refreshTokenBlocks.updateValue(block, forKey: host)
   }
-    
+
   public func append(host: String, accessTokenPair: (key: String, value: String)) {
     accessTokenPairs.updateValue(accessTokenPair, forKey: host)
   }

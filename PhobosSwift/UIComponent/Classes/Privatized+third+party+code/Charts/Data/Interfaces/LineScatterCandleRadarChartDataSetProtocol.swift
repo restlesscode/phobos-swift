@@ -1,5 +1,5 @@
 //
-//  ILineScatterCandleRadarChartDataSet.swift
+//  LineScatterCandleRadarChartDataSetProtocol.swift
 //  Charts
 //
 //  Copyright 2015 Daniel Cohen Gindi & Philipp Jahoda
@@ -12,7 +12,8 @@
 import Foundation
 
 @objc
-public protocol ILineScatterCandleRadarChartDataSet: IBarLineScatterCandleBubbleChartDataSet {
+public protocol LineScatterCandleRadarChartDataSetProtocol: BarLineScatterCandleBubbleChartDataSetProtocol
+{
   // MARK: - Data functions and accessors
 
   // MARK: - Styling functions and accessors

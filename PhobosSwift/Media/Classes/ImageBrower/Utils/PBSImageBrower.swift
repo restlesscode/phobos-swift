@@ -82,14 +82,10 @@ extension PBSImageBrower {
     }()
 
     /// white always
-    public static let white: UIColor = {
-      UIColor.white
-    }()
+    public static let white: UIColor = .white
 
     /// black always
-    public static let black: UIColor = {
-      UIColor.black
-    }()
+    public static let black: UIColor = .black
 
     /// day = black, dark = white
     public static let blackWhite: UIColor = {
@@ -132,9 +128,7 @@ extension PBSImageBrower {
     }()
 
     /// grey216 always
-    public static let grey216: UIColor = {
-      UIColor.pbs.color(R: 216, G: 216, B: 216)
-    }()
+    public static let grey216: UIColor = UIColor.pbs.color(R: 216, G: 216, B: 216)
 
     /// replace color
     public static let porscheRed: UIColor = {
@@ -228,9 +222,7 @@ extension PBSImageBrower {
     }()
 
     /// grey2 always
-    public static let grey2: UIColor = {
-      UIColor.pbs.color(hexString: "#C9CACB")
-    }()
+    public static let grey2: UIColor = UIColor.pbs.color(hexString: "#C9CACB")
 
     /// grey4 always
     public static let grey4: UIColor = {

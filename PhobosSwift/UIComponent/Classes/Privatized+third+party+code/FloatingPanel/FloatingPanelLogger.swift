@@ -3,9 +3,7 @@
 import Foundation
 import os.log
 
-var log = {
-  FloatingPanelLogger()
-}()
+var log = FloatingPanelLogger()
 
 struct FloatingPanelLogger {
   private let osLog: OSLog
@@ -45,7 +43,7 @@ struct FloatingPanelLogger {
     }
   }
 
-  typealias Hook = ((String, Level) -> Void)
+  typealias Hook = (String, Level) -> Void
   var hook: Hook?
 
   fileprivate init() {

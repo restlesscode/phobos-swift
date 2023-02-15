@@ -40,13 +40,13 @@ class PBSRouterAppDelegateSwizzler: NSObject, UIApplicationDelegate {
   }
 
   func unload() {
-    if let interceptorID = self.interceptorID {
+    if let interceptorID = interceptorID {
       PBSAppDelegateSwizzler.unregisterAppDelegateInterceptor(withID: interceptorID)
     }
   }
 
   public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-    if let router = self.router {
+    if let router = router {
       // Try opening the URL first
       if router.open(url.host ?? "" + url.relativePath) == true {
         PBSLogger.logger.debug(message: "Open: \(url)", context: "Router")

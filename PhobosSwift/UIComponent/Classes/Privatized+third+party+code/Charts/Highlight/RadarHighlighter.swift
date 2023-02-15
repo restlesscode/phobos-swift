@@ -15,23 +15,17 @@ import Foundation
 @objc(RadarChartHighlighter)
 open class RadarHighlighter: PieRadarHighlighter {
   override open func closestHighlight(index: Int, x: CGFloat, y: CGFloat) -> Highlight? {
-    guard let chart = self.chart as? RadarChartView else { return nil }
+    guard let chart = chart as? RadarChartView else { return nil }
 
     let highlights = getHighlights(forIndex: index)
 
     let distanceToCenter = Double(chart.distanceToCenter(x: x, y: y) / chart.factor)
 
-    var closest: Highlight?
-    var distance = Double.greatestFiniteMagnitude
-
-    for high in highlights {
-      let cdistance = abs(high.y - distanceToCenter)
-      if cdistance < distance {
-        closest = high
-        distance = cdistance
-      }
+    func closestToCenter(lhs: Highlight, rhs: Highlight) -> Bool {
+      abs(lhs.y - distanceToCenter) < abs(rhs.y - distanceToCenter)
     }
 
+    let closest = highlights.min(by: closestToCenter(lhs:rhs:))
     return closest
   }
 
@@ -43,7 +37,7 @@ open class RadarHighlighter: PieRadarHighlighter {
     var vals = [Highlight]()
 
     guard
-      let chart = self.chart as? RadarChartView,
+      let chart = chart as? RadarChartView,
       let chartData = chart.data
     else { return vals }
 
@@ -52,11 +46,8 @@ open class RadarHighlighter: PieRadarHighlighter {
     let sliceangle = chart.sliceAngle
     let factor = chart.factor
 
-    for i in chartData.dataSets.indices {
-      guard
-        let dataSet = chartData.getDataSetByIndex(i),
-        let entry = dataSet.entryForIndex(index)
-      else { continue }
+    for (i, dataSet) in chartData.indexed() {
+      guard let entry = dataSet.entryForIndex(index) else { continue }
 
       let y = (entry.y - chart.chartYMin)
 

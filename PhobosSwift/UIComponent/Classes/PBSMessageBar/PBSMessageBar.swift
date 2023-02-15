@@ -194,7 +194,7 @@ public class PBSMessageBar: NSObject {
       alertView?.removeFromSuperview()
       alertViewCtrl?.removeFromParent()
       alertViewCtrl = nil
-    } else if let alertViewCtrl = self.alertViewCtrl {
+    } else if let alertViewCtrl = alertViewCtrl {
       let alertView = alertViewCtrl.view!
       UIView.animate(withDuration: animated ? 0.5 : 0, animations: {
         alertView.frame = CGRect(x: alertView.frame.origin.x, y: -alertView.frame.height, width: alertView.frame.width, height: alertView.frame.height)

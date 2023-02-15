@@ -17,11 +17,11 @@ open class TransformerHorizontalBarChart: Transformer {
   /// Prepares the matrix that contains all offsets.
   override open func prepareMatrixOffset(inverted: Bool) {
     if !inverted {
-      _matrixOffset = CGAffineTransform(translationX: _viewPortHandler.offsetLeft, y: _viewPortHandler.chartHeight - _viewPortHandler.offsetBottom)
+      matrixOffset = CGAffineTransform(translationX: viewPortHandler.offsetLeft, y: viewPortHandler.chartHeight - viewPortHandler.offsetBottom)
     } else {
-      _matrixOffset = CGAffineTransform(scaleX: -1.0, y: 1.0)
-      _matrixOffset = _matrixOffset.translatedBy(x: -(_viewPortHandler.chartWidth - _viewPortHandler.offsetRight),
-                                                 y: _viewPortHandler.chartHeight - _viewPortHandler.offsetBottom)
+      matrixOffset = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        .translatedBy(x: -(viewPortHandler.chartWidth - viewPortHandler.offsetRight),
+                      y: viewPortHandler.chartHeight - viewPortHandler.offsetBottom)
     }
   }
 }

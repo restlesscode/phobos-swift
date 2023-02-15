@@ -13,14 +13,17 @@ import CoreGraphics
 import Foundation
 
 @objc(ChartLegendRenderer)
-open class LegendRenderer: Renderer {
+open class LegendRenderer: NSObject, Renderer {
+  @objc public let viewPortHandler: ViewPortHandler
+
   /// the legend object this renderer renders
   @objc open var legend: Legend?
 
   @objc public init(viewPortHandler: ViewPortHandler, legend: Legend?) {
-    super.init(viewPortHandler: viewPortHandler)
-
+    self.viewPortHandler = viewPortHandler
     self.legend = legend
+
+    super.init()
   }
 
   /// Prepares the legend and calculates all needed forms, labels and colors.
@@ -31,104 +34,89 @@ open class LegendRenderer: Renderer {
       var entries: [LegendEntry] = []
 
       // loop for building up the colors and labels used in the legend
-      for i in 0..<data.dataSetCount {
-        guard let dataSet = data.getDataSetByIndex(i) else { continue }
-
+      for dataSet in data {
         let clrs: [NSUIColor] = dataSet.colors
         let entryCount = dataSet.entryCount
 
         // if we have a barchart with stacked bars
-        if dataSet is IBarChartDataSet &&
-          (dataSet as! IBarChartDataSet).isStacked {
-          let bds = dataSet as! IBarChartDataSet
+        if dataSet is BarChartDataSetProtocol &&
+          (dataSet as! BarChartDataSetProtocol).isStacked {
+          let bds = dataSet as! BarChartDataSetProtocol
           let sLabels = bds.stackLabels
           let minEntries = min(clrs.count, bds.stackSize)
 
           for j in 0..<minEntries {
             let label: String?
-            if !sLabels.isEmpty {
+            if !sLabels.isEmpty && minEntries > 0 {
               let labelIndex = j % minEntries
               label = sLabels.indices.contains(labelIndex) ? sLabels[labelIndex] : nil
             } else {
               label = nil
             }
 
-            entries.append(
-              LegendEntry(label: label,
-                          form: dataSet.form,
-                          formSize: dataSet.formSize,
-                          formLineWidth: dataSet.formLineWidth,
-                          formLineDashPhase: dataSet.formLineDashPhase,
-                          formLineDashLengths: dataSet.formLineDashLengths,
-                          formColor: clrs[j])
-            )
+            let entry = LegendEntry(label: label)
+            entry.form = dataSet.form
+            entry.formSize = dataSet.formSize
+            entry.formLineWidth = dataSet.formLineWidth
+            entry.formLineDashPhase = dataSet.formLineDashPhase
+            entry.formLineDashLengths = dataSet.formLineDashLengths
+            entry.formColor = clrs[j]
+
+            entries.append(entry)
           }
 
           if dataSet.label != nil {
             // add the legend description label
+            let entry = LegendEntry(label: dataSet.label)
+            entry.form = .none
 
-            entries.append(
-              LegendEntry(label: dataSet.label,
-                          form: .none,
-                          formSize: CGFloat.nan,
-                          formLineWidth: CGFloat.nan,
-                          formLineDashPhase: 0.0,
-                          formLineDashLengths: nil,
-                          formColor: nil)
-            )
+            entries.append(entry)
           }
-        } else if dataSet is IPieChartDataSet {
-          let pds = dataSet as! IPieChartDataSet
+        } else if dataSet is PieChartDataSetProtocol {
+          let pds = dataSet as! PieChartDataSetProtocol
 
           for j in 0..<min(clrs.count, entryCount) {
-            entries.append(
-              LegendEntry(label: (pds.entryForIndex(j) as? PieChartDataEntry)?.label,
-                          form: dataSet.form,
-                          formSize: dataSet.formSize,
-                          formLineWidth: dataSet.formLineWidth,
-                          formLineDashPhase: dataSet.formLineDashPhase,
-                          formLineDashLengths: dataSet.formLineDashLengths,
-                          formColor: clrs[j])
-            )
+            let entry = LegendEntry(label: (pds.entryForIndex(j) as? PieChartDataEntry)?.label)
+            entry.form = dataSet.form
+            entry.formSize = dataSet.formSize
+            entry.formLineWidth = dataSet.formLineWidth
+            entry.formLineDashPhase = dataSet.formLineDashPhase
+            entry.formLineDashLengths = dataSet.formLineDashLengths
+            entry.formColor = clrs[j]
+
+            entries.append(entry)
           }
 
           if dataSet.label != nil {
             // add the legend description label
+            let entry = LegendEntry(label: dataSet.label)
+            entry.form = .none
 
-            entries.append(
-              LegendEntry(label: dataSet.label,
-                          form: .none,
-                          formSize: CGFloat.nan,
-                          formLineWidth: CGFloat.nan,
-                          formLineDashPhase: 0.0,
-                          formLineDashLengths: nil,
-                          formColor: nil)
-            )
+            entries.append(entry)
           }
-        } else if dataSet is ICandleChartDataSet &&
-          (dataSet as! ICandleChartDataSet).decreasingColor != nil
-        {
-          let candleDataSet = dataSet as! ICandleChartDataSet
+        } else if dataSet is CandleChartDataSetProtocol &&
+          (dataSet as! CandleChartDataSetProtocol).decreasingColor != nil {
+          let candleDataSet = dataSet as! CandleChartDataSetProtocol
 
-          entries.append(
-            LegendEntry(label: nil,
-                        form: dataSet.form,
-                        formSize: dataSet.formSize,
-                        formLineWidth: dataSet.formLineWidth,
-                        formLineDashPhase: dataSet.formLineDashPhase,
-                        formLineDashLengths: dataSet.formLineDashLengths,
-                        formColor: candleDataSet.decreasingColor)
-          )
+          let decreasingEntry = LegendEntry(label: nil)
+          decreasingEntry.form = dataSet.form
+          decreasingEntry.formSize = dataSet.formSize
+          decreasingEntry.formLineWidth = dataSet.formLineWidth
+          decreasingEntry.formLineDashPhase = dataSet.formLineDashPhase
+          decreasingEntry.formLineDashLengths = dataSet.formLineDashLengths
+          decreasingEntry.formColor = candleDataSet.decreasingColor
 
-          entries.append(
-            LegendEntry(label: dataSet.label,
-                        form: dataSet.form,
-                        formSize: dataSet.formSize,
-                        formLineWidth: dataSet.formLineWidth,
-                        formLineDashPhase: dataSet.formLineDashPhase,
-                        formLineDashLengths: dataSet.formLineDashLengths,
-                        formColor: candleDataSet.increasingColor)
-          )
+          entries.append(decreasingEntry)
+
+          let increasingEntry = LegendEntry(label: dataSet.label)
+          increasingEntry.form = dataSet.form
+          increasingEntry.formSize = dataSet.formSize
+          increasingEntry.formLineWidth = dataSet.formLineWidth
+          increasingEntry.formLineDashPhase = dataSet.formLineDashPhase
+          increasingEntry.formLineDashLengths = dataSet.formLineDashLengths
+          increasingEntry.formColor = candleDataSet.increasingColor
+
+          entries.append(increasingEntry)
         } else { // all others
           for j in 0..<min(clrs.count, entryCount) {
             let label: String?
@@ -140,15 +128,15 @@ open class LegendRenderer: Renderer {
               label = dataSet.label
             }
 
-            entries.append(
-              LegendEntry(label: label,
-                          form: dataSet.form,
-                          formSize: dataSet.formSize,
-                          formLineWidth: dataSet.formLineWidth,
-                          formLineDashPhase: dataSet.formLineDashPhase,
-                          formLineDashLengths: dataSet.formLineDashLengths,
-                          formColor: clrs[j])
-            )
+            let entry = LegendEntry(label: label)
+            entry.form = dataSet.form
+            entry.formSize = dataSet.formSize
+            entry.formLineWidth = dataSet.formLineWidth
+            entry.formLineDashPhase = dataSet.formLineDashPhase
+            entry.formLineDashLengths = dataSet.formLineDashLengths
+            entry.formColor = clrs[j]
+
+            entries.append(entry)
           }
         }
       }
@@ -261,24 +249,22 @@ open class LegendRenderer: Renderer {
         posY = (viewPortHandler.chartHeight - legend.neededHeight) / 2.0 + yoffset
       }
 
-      var lineIndex: Int = 0
+      var lineIndex = 0
 
-      for i in 0..<entries.count {
+      for i in entries.indices {
         let e = entries[i]
         let drawingForm = e.form != .none
         let formSize = e.formSize.isNaN ? defaultFormSize : e.formSize
 
-        if i < calculatedLabelBreakPoints.count &&
-          calculatedLabelBreakPoints[i]
-        {
+        if i < calculatedLabelBreakPoints.endIndex &&
+          calculatedLabelBreakPoints[i] {
           posX = originPosX
           posY += labelLineHeight + yEntrySpace
         }
 
         if posX == originPosX &&
           horizontalAlignment == .center &&
-          lineIndex < calculatedLineSizes.count
-        {
+          lineIndex < calculatedLineSizes.endIndex {
           posX += (direction == .rightToLeft
             ? calculatedLineSizes[lineIndex].width
             : -calculatedLineSizes[lineIndex].width) / 2.0
@@ -317,7 +303,7 @@ open class LegendRenderer: Renderer {
                     y: posY,
                     label: e.label!,
                     font: labelFont,
-                    textColor: labelTextColor)
+                    textColor: e.labelColor ?? labelTextColor)
 
           if direction == .leftToRight {
             posX += calculatedLabelSizes[i].width
@@ -355,7 +341,7 @@ open class LegendRenderer: Renderer {
         posY = viewPortHandler.chartHeight / 2.0 - legend.neededHeight / 2.0 + legend.yOffset
       }
 
-      for i in 0..<entries.count {
+      for i in entries.indices {
         let e = entries[i]
         let drawingForm = e.form != .none
         let formSize = e.formSize.isNaN ? defaultFormSize : e.formSize
@@ -392,10 +378,10 @@ open class LegendRenderer: Renderer {
           }
 
           if !wasStacked {
-            drawLabel(context: context, x: posX, y: posY, label: e.label!, font: labelFont, textColor: labelTextColor)
+            drawLabel(context: context, x: posX, y: posY, label: e.label!, font: labelFont, textColor: e.labelColor ?? labelTextColor)
           } else {
             posY += labelLineHeight + yEntrySpace
-            drawLabel(context: context, x: posX, y: posY, label: e.label!, font: labelFont, textColor: labelTextColor)
+            drawLabel(context: context, x: posX, y: posY, label: e.label!, font: labelFont, textColor: e.labelColor ?? labelTextColor)
           }
 
           // make a step down
@@ -416,8 +402,7 @@ open class LegendRenderer: Renderer {
                            x: CGFloat,
                            y: CGFloat,
                            entry: LegendEntry,
-                           legend: Legend)
-  {
+                           legend: Legend) {
     guard
       let formColor = entry.formColor,
       formColor != NSUIColor.clear
@@ -480,6 +465,6 @@ open class LegendRenderer: Renderer {
   /// Draws the provided label at the given position.
   @objc open func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor)
   {
-    ChartUtils.drawText(context: context, text: label, point: CGPoint(x: x, y: y), align: .left, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: textColor])
+    context.drawText(label, at: CGPoint(x: x, y: y), align: .left, attributes: [.font: font, .foregroundColor: textColor])
   }
 }

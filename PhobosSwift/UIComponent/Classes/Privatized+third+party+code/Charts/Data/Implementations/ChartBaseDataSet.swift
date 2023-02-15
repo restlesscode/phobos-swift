@@ -12,7 +12,7 @@
 import CoreGraphics
 import Foundation
 
-open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
+open class ChartBaseDataSet: NSObject, ChartDataSetProtocol, NSCopying {
   override public required init() {
     super.init()
 
@@ -21,7 +21,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
     valueColors.append(.labelOrBlack)
   }
 
-  @objc public init(label: String?) {
+  @objc public init(label: String) {
     super.init()
 
     // default color
@@ -72,14 +72,12 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
 
   open func entryForXValue(_ x: Double,
                            closestToY y: Double,
-                           rounding: ChartDataSetRounding) -> ChartDataEntry?
-  {
+                           rounding: ChartDataSetRounding) -> ChartDataEntry? {
     fatalError("entryForXValue(x, closestToY, rounding) is not implemented in ChartBaseDataSet")
   }
 
   open func entryForXValue(_ x: Double,
-                           closestToY y: Double) -> ChartDataEntry?
-  {
+                           closestToY y: Double) -> ChartDataEntry? {
     fatalError("entryForXValue(x, closestToY) is not implemented in ChartBaseDataSet")
   }
 
@@ -89,8 +87,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
 
   open func entryIndex(x xValue: Double,
                        closestToY y: Double,
-                       rounding: ChartDataSetRounding) -> Int
-  {
+                       rounding: ChartDataSetRounding) -> Int {
     fatalError("entryIndex(x, closestToY, rounding) is not implemented in ChartBaseDataSet")
   }
 
@@ -232,27 +229,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
   open var isHighlightEnabled: Bool { highlightEnabled }
 
   /// Custom formatter that is used instead of the auto-formatter if set
-  internal var _valueFormatter: IValueFormatter?
-
-  /// Custom formatter that is used instead of the auto-formatter if set
-  open var valueFormatter: IValueFormatter? {
-    get {
-      if needsFormatter {
-        return ChartUtils.defaultValueFormatter()
-      }
-
-      return _valueFormatter
-    }
-    set {
-      if newValue == nil { return }
-
-      _valueFormatter = newValue
-    }
-  }
-
-  open var needsFormatter: Bool {
-    _valueFormatter == nil
-  }
+  open lazy var valueFormatter: ValueFormatter = DefaultValueFormatter()
 
   /// Sets/get a single color for value text.
   /// Setting the color clears the colors array and adds a single color.
@@ -277,7 +254,10 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
   }
 
   /// the font for the value-text labels
-  open var valueFont = NSUIFont.systemFont(ofSize: 7.0)
+  open var valueFont: NSUIFont = NSUIFont.systemFont(ofSize: 7.0)
+
+  /// The rotation angle (in degrees) for value-text labels
+  open var valueLabelAngle: CGFloat = .init(0.0)
 
   /// The form to draw for this dataset in the legend.
   open var form = Legend.Form.default
@@ -285,12 +265,12 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
   /// The form size to draw for this dataset in the legend.
   ///
   /// Return `NaN` to use the default legend form size.
-  open var formSize = CGFloat.nan
+  open var formSize: CGFloat = .nan
 
   /// The line width for drawing the form of this dataset in the legend
   ///
   /// Return `NaN` to use the default legend form line width.
-  open var formLineWidth = CGFloat.nan
+  open var formLineWidth: CGFloat = .nan
 
   /// Line dash configuration for legend shapes that consist of lines.
   ///
@@ -361,7 +341,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
     copy.label = label
     copy.axisDependency = axisDependency
     copy.highlightEnabled = highlightEnabled
-    copy._valueFormatter = _valueFormatter
+    copy.valueFormatter = valueFormatter
     copy.valueFont = valueFont
     copy.form = form
     copy.formSize = formSize
@@ -369,7 +349,7 @@ open class ChartBaseDataSet: NSObject, IChartDataSet, NSCopying {
     copy.formLineDashPhase = formLineDashPhase
     copy.formLineDashLengths = formLineDashLengths
     copy.drawValuesEnabled = drawValuesEnabled
-    copy.drawValuesEnabled = drawValuesEnabled
+    copy.drawIconsEnabled = drawIconsEnabled
     copy.iconsOffset = iconsOffset
     copy.visible = visible
 

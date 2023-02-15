@@ -129,7 +129,7 @@ open class AutoRotatingFileDestination: FileDestination {
     }
 
     let filePath: String = writeToFileURL.path
-    let logFileName: String = "\(baseFileName).\(fileExtension)"
+    let logFileName = "\(baseFileName).\(fileExtension)"
     if let logFileNameRange: Range = filePath.range(of: logFileName, options: .backwards),
        logFileNameRange.upperBound >= filePath.endIndex {
       let archiveFolderPath = String(filePath[filePath.startIndex..<logFileNameRange.lowerBound])

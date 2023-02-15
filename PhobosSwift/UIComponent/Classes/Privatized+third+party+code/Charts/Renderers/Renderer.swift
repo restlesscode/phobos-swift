@@ -13,12 +13,7 @@ import CoreGraphics
 import Foundation
 
 @objc(ChartRenderer)
-open class Renderer: NSObject {
+public protocol Renderer {
   /// the component that handles the drawing area of the chart and it's offsets
-  @objc public let viewPortHandler: ViewPortHandler
-
-  @objc public init(viewPortHandler: ViewPortHandler) {
-    self.viewPortHandler = viewPortHandler
-    super.init()
-  }
+  var viewPortHandler: ViewPortHandler { get }
 }

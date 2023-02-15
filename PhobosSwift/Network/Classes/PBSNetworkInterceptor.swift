@@ -72,7 +72,7 @@ extension URLRequest {
 
     var cURL = "curl "
     var header = ""
-    var data: String = ""
+    var data = ""
 
     if let httpHeaders = allHTTPHeaderFields, httpHeaders.keys.count > 0 {
       for (key, value) in httpHeaders {

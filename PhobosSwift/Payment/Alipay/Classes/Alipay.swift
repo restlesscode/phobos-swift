@@ -48,7 +48,7 @@ extension PBSPayment {
     }
 
     public func pay(orderString: String) {
-      guard let appScheme = self.appScheme else {
+      guard let appScheme = appScheme else {
         fatalError("请在设置中，对AppURLScheme进行设置")
       }
       AlipaySDK.defaultService()?.payOrder(orderString, fromScheme: appScheme, callback: { [weak self] resultDict in

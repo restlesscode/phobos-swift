@@ -12,7 +12,7 @@
 import Foundation
 
 @objc(ChartDefaultAxisValueFormatter)
-open class DefaultAxisValueFormatter: NSObject, IAxisValueFormatter {
+open class DefaultAxisValueFormatter: NSObject, AxisValueFormatter {
   public typealias Block = (_ value: Double,
                             _ axis: AxisBase?) -> String
 
@@ -77,8 +77,7 @@ open class DefaultAxisValueFormatter: NSObject, IAxisValueFormatter {
   }
 
   open func stringForValue(_ value: Double,
-                           axis: AxisBase?) -> String
-  {
+                           axis: AxisBase?) -> String {
     if let block = block {
       return block(value, axis)
     } else {

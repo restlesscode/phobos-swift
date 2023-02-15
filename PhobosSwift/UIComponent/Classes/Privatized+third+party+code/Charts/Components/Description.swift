@@ -42,7 +42,7 @@ open class Description: ComponentBase {
   open var position: CGPoint?
 
   /// The text alignment of the description text. Default RIGHT.
-  @objc open var textAlign = NSTextAlignment.right
+  @objc open var textAlign: TextAlignment = .right
 
   /// Font object used for drawing the description text.
   @objc open var font: NSUIFont

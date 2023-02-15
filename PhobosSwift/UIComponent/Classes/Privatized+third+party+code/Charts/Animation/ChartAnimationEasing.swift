@@ -47,7 +47,7 @@ public enum ChartEasingOption: Int {
   case easeInOutBounce
 }
 
-public typealias ChartEasingFunctionBlock = ((_ elapsed: TimeInterval, _ duration: TimeInterval) -> Double)
+public typealias ChartEasingFunctionBlock = (_ elapsed: TimeInterval, _ duration: TimeInterval) -> Double
 
 internal func easingFunctionFromOption(_ easing: ChartEasingOption) -> ChartEasingFunctionBlock {
   switch easing {
@@ -320,7 +320,7 @@ internal struct EasingFunctions {
     let s: TimeInterval = 1.70158
     var position: TimeInterval = elapsed / duration
     position -= 1.0
-    return Double(position * position * ((s + 1.0) * position + s) + 1.0)
+    return Double(position * position * ((s + Double(1.0)) * position + s) + Double(1.0))
   }
 
   internal static let EaseInOutBack = { (elapsed: TimeInterval, duration: TimeInterval) -> Double in
